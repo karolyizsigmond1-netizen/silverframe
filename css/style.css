@@ -596,11 +596,11 @@ button { font-family: inherit; cursor: pointer; }
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
-    flex: 0 0 60px;
+    flex: 0 0 44px;
     transition: flex 0.7s var(--ease-dramatic);
 }
 .img-accordion-item.active {
-    flex: 1 1 420px;
+    flex: 1 1 380px;
 }
 .img-accordion-item img {
     position: absolute;
@@ -649,18 +649,26 @@ button { font-family: inherit; cursor: pointer; }
     color: var(--text-body);
 }
 
-@media (max-width: 900px) {
-    .img-accordion { height: 400px; gap: 0.5rem; }
-    .img-accordion-item { flex: 0 0 40px; border-radius: 0.75rem; }
-    .img-accordion-item.active { flex: 1 1 280px; }
+@media (max-width: 1100px) {
+    .img-accordion { height: 420px; gap: 0.5rem; }
+    .img-accordion-item { flex: 0 0 36px; }
+    .img-accordion-item.active { flex: 1 1 300px; }
     .img-accordion-item.active .img-accordion-caption { font-size: 1.2rem; }
+    .img-accordion-item:not(.active) .img-accordion-caption { font-size: 0.85rem; bottom: 4.5rem; }
+}
+@media (max-width: 768px) {
+    .img-accordion { height: 380px; gap: 0.4rem; }
+    .img-accordion-item { flex: 0 0 28px; border-radius: 0.75rem; }
+    .img-accordion-item.active { flex: 1 1 220px; }
+    .img-accordion-item:not(.active) .img-accordion-caption { font-size: 0.75rem; bottom: 3.5rem; }
+    .img-accordion-item.active .img-accordion-caption { font-size: 1rem; bottom: 1.2rem; }
 }
 @media (max-width: 550px) {
-    .img-accordion { height: 350px; gap: 0.4rem; }
-    .img-accordion-item { flex: 0 0 32px; border-radius: 0.5rem; }
-    .img-accordion-item.active { flex: 1 1 200px; }
-    .img-accordion-item:not(.active) .img-accordion-caption { bottom: 4rem; font-size: 0.8rem; }
-    .img-accordion-item.active .img-accordion-caption { font-size: 1rem; bottom: 1.2rem; }
+    .img-accordion { height: 320px; gap: 0.3rem; flex-wrap: wrap; }
+    .img-accordion-item { flex: 0 0 24px; border-radius: 0.5rem; }
+    .img-accordion-item.active { flex: 1 1 160px; }
+    .img-accordion-item:not(.active) .img-accordion-caption { font-size: 0.65rem; bottom: 3rem; }
+    .img-accordion-item.active .img-accordion-caption { font-size: 0.9rem; bottom: 1rem; }
 }
 
 /* ═══════════════════════════════════════════
