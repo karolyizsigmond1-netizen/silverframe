@@ -178,4 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const servicesLink = document.querySelector('.nav-dropdown > a');
         if (servicesLink) servicesLink.classList.add('active');
     }
+    // Mark Portfolio as active when on any portfolio subpage
+    const isPortfolioPage = path.includes('/portfolio/');
+    if (isPortfolioPage) {
+        document.querySelectorAll('.header-nav > a, .mobile-nav > a').forEach(a => {
+            if (a.getAttribute('href') && a.getAttribute('href').includes('portfolio.html')) {
+                a.classList.add('active');
+            }
+        });
+    }
 });
