@@ -770,6 +770,63 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     .portfolio-highlight-item.portfolio-highlight-wide { grid-column: span 1; aspect-ratio: 4/3; }
 }
 
+/* ── Portfolio Category Buttons ── */
+.portfolio-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.portfolio-cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 0.5rem;
+    transition: all 0.4s var(--ease-smooth);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+.portfolio-cat-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.portfolio-cat-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    min-width: 1.5rem;
+    transition: color 0.3s;
+}
+.portfolio-cat-btn:hover .portfolio-cat-num { color: var(--accent); }
+.portfolio-cat-name {
+    flex: 1;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+.portfolio-cat-btn svg {
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.3s var(--ease-smooth);
+    color: var(--accent);
+}
+.portfolio-cat-btn:hover svg {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+    .portfolio-cat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+    .portfolio-cat-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .portfolio-cat-btn { padding: 1rem 1.2rem; }
+}
+
 /* ═══════════════════════════════════════════
    PORTFOLIO PAGE — GALLERY
    ═══════════════════════════════════════════ */
