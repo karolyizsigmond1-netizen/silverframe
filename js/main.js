@@ -141,6 +141,28 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
     }
 
+    // ── Image Accordion ──
+    const accordion = document.querySelector('.img-accordion');
+    if (accordion) {
+        const items = accordion.querySelectorAll('.img-accordion-item');
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                items.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+        // Touch support
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (!item.classList.contains('active')) {
+                    e.preventDefault();
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
     // ── Active nav link ──
     const path = location.pathname;
     const currentPage = path.split('/').pop() || 'index.html';

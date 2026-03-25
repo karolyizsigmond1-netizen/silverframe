@@ -579,7 +579,92 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 900px) { .about-content { grid-template-columns: 1fr; gap: 3rem; } }
 
 /* ═══════════════════════════════════════════
-   PORTFOLIO PAGE
+   PORTFOLIO PAGE — IMAGE ACCORDION
+   ═══════════════════════════════════════════ */
+.accordion-section { padding-bottom: 0; }
+
+.img-accordion {
+    display: flex;
+    gap: 0.75rem;
+    height: 500px;
+    width: 100%;
+    justify-content: center;
+}
+.img-accordion-item {
+    position: relative;
+    height: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    flex: 0 0 60px;
+    transition: flex 0.7s var(--ease-dramatic);
+}
+.img-accordion-item.active {
+    flex: 1 1 420px;
+}
+.img-accordion-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: filter 0.5s;
+}
+.img-accordion-item.active img {
+    filter: grayscale(0%);
+}
+.img-accordion-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 12, 16, 0.4);
+    transition: background 0.5s;
+}
+.img-accordion-item.active .img-accordion-overlay {
+    background: linear-gradient(to top, rgba(11, 12, 16, 0.7) 0%, transparent 50%);
+}
+.img-accordion-caption {
+    position: absolute;
+    color: var(--text-primary);
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: all 0.5s var(--ease-dramatic);
+}
+/* Active: horizontal at bottom center */
+.img-accordion-item.active .img-accordion-caption {
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    font-size: 1.4rem;
+}
+/* Inactive: vertical, rotated */
+.img-accordion-item:not(.active) .img-accordion-caption {
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+    font-size: 1rem;
+    color: var(--text-body);
+}
+
+@media (max-width: 900px) {
+    .img-accordion { height: 400px; gap: 0.5rem; }
+    .img-accordion-item { flex: 0 0 40px; border-radius: 0.75rem; }
+    .img-accordion-item.active { flex: 1 1 280px; }
+    .img-accordion-item.active .img-accordion-caption { font-size: 1.2rem; }
+}
+@media (max-width: 550px) {
+    .img-accordion { height: 350px; gap: 0.4rem; }
+    .img-accordion-item { flex: 0 0 32px; border-radius: 0.5rem; }
+    .img-accordion-item.active { flex: 1 1 200px; }
+    .img-accordion-item:not(.active) .img-accordion-caption { bottom: 4rem; font-size: 0.8rem; }
+    .img-accordion-item.active .img-accordion-caption { font-size: 1rem; bottom: 1.2rem; }
+}
+
+/* ═══════════════════════════════════════════
+   PORTFOLIO PAGE — GALLERY
    ═══════════════════════════════════════════ */
 .portfolio-filters {
     display: flex; gap: 2rem; justify-content: center;
