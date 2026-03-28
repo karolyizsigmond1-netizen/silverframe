@@ -636,11 +636,8 @@ body {
     right: 6px;
     display: flex;
     gap: 4px;
-    opacity: 0;
-    transition: opacity 0.15s;
+    z-index: 10;
 }
-
-.gallery-card:hover .gallery-card-actions { opacity: 1; }
 
 .gallery-card-actions .btn-icon {
     background: rgba(0,0,0,0.75);

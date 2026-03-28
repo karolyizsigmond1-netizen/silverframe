@@ -557,7 +557,11 @@
 
         // Remove array item (with confirm)
         container.querySelectorAll('[data-remove-array]').forEach(btn => {
-            btn.addEventListener('click', async () => {
+            // Prevent drag from starting when clicking delete
+            btn.addEventListener('mousedown', e => e.stopPropagation());
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 const confirmed = await confirmAction('Biztosan törli?', 'Ez a művelet nem vonható vissza.');
                 if (!confirmed) return;
                 const arrPath = btn.dataset.removeArray;
@@ -573,7 +577,9 @@
 
         // Move up
         container.querySelectorAll('[data-move-up]').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('mousedown', e => e.stopPropagation());
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const arrPath = btn.dataset.moveUp;
                 const index = parseInt(btn.dataset.index);
                 const arr = getByPath(contentData, arrPath);
@@ -704,6 +710,8 @@
             const arrayPath = grid.dataset.arrayPath;
             grid.querySelectorAll(':scope > .gallery-card').forEach(card => {
                 card.addEventListener('dragstart', e => {
+                    // Don't drag when interacting with buttons or inputs
+                    if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
                     // Check if file drag
                     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) return;
                     dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
