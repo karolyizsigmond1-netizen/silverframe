@@ -6,6 +6,7 @@
     let dirty = false;
     let currentPage = null;
     let uploadCallback = null;
+    let dragState = null; // { arrayPath, fromIndex }
 
     const $ = s => document.querySelector(s);
     const $$ = s => document.querySelectorAll(s);
@@ -61,6 +62,7 @@
         buildSidebar();
         bindTopbar();
         bindUploadModal();
+        bindConfirmModal();
         await loadContent();
     }
 
@@ -116,11 +118,7 @@
         const btn = $('#save-btn');
         const badge = $('#unsaved-badge');
         btn.disabled = !dirty;
-        if (dirty) {
-            badge.classList.remove('hidden');
-        } else {
-            badge.classList.add('hidden');
-        }
+        badge.classList.toggle('hidden', !dirty);
     }
 
     // ── Sidebar ──
@@ -172,6 +170,7 @@
     // ── Render editor for a page ──
     function renderEditor(pageId) {
         const area = $('#editor-area');
+        const scrollTop = area.scrollTop;
         if (!contentData) { area.innerHTML = '<p>Tartalom betöltése...</p>'; return; }
 
         const data = getByPath(contentData, pageId);
@@ -187,7 +186,14 @@
             area.innerHTML = renderGenericPageEditor(data, pageId);
         }
 
-        bindFieldEvents(area, pageId);
+        bindFieldEvents(area);
+        initDragReorder(area);
+        initFileDropOnImages(area);
+        initFileDropOnGalleryCards(area);
+        initImageLightbox(area);
+        initCollapsible(area);
+
+        area.scrollTop = scrollTop;
     }
 
     // ── Field renderers ──
@@ -208,14 +214,16 @@
 
     function imageField(label, path, value) {
         const src = value || '';
-        const prefix = (currentPage && (currentPage.startsWith('servicePages.') || currentPage.startsWith('portfolioPages.'))) ? '../' : '';
-        const previewSrc = src ? (src.startsWith('http') ? src : prefix + src) : '';
+        const previewSrc = src ? (src.startsWith('http') ? src : '/' + src) : '';
         return `<div class="field-group">
             <label class="field-label">${label}</label>
-            <div class="image-field">
+            <div class="image-field" data-drop-upload="true" data-upload-target="${path}">
                 <input class="field-input" type="text" data-path="${path}" value="${esc(src)}">
                 <button class="btn-upload" data-upload-for="${path}">Feltöltés</button>
-                ${previewSrc ? `<img class="image-preview" src="/${src}" alt="Preview">` : ''}
+                ${previewSrc
+                    ? `<img class="image-preview" src="${previewSrc}" alt="Preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none">&#128247;</div>`
+                    : `<div class="image-placeholder">&#128247;</div>`}
+                <div class="drop-label">Ejtse ide a képet</div>
             </div>
         </div>`;
     }
@@ -237,16 +245,17 @@
 
         // Service categories
         html += '<div class="field-section"><div class="field-section-title">Szolgáltatás kategóriák</div>';
-        html += '<div class="array-list">';
+        html += '<div class="array-list" data-array-path="serviceCategories">';
         if (contentData.serviceCategories) {
             contentData.serviceCategories.forEach((cat, i) => {
-                html += `<div class="array-item">
+                html += `<div class="array-item" draggable="false" data-index="${i}">
+                    <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
                     <div class="array-item-header">
                         <span class="array-item-number">#${i + 1}</span>
                     </div>
-                    ${textField('Név', `serviceCategories.${i}.name`, cat.name)}
-                    ${textField('Link', `serviceCategories.${i}.href`, cat.href)}
-                    ${imageField('Kép', `serviceCategories.${i}.img`, cat.img)}
+                    ${textField('Név', 'serviceCategories.' + i + '.name', cat.name)}
+                    ${textField('Link', 'serviceCategories.' + i + '.href', cat.href)}
+                    ${imageField('Kép', 'serviceCategories.' + i + '.img', cat.img)}
                 </div>`;
             });
         }
@@ -254,15 +263,13 @@
         return html;
     }
 
-    // ── Generic page editor (index, about, portfolio, services, contact) ──
+    // ── Generic page editor ──
     function renderGenericPageEditor(data, pageId) {
         let html = '';
         html += '<div class="field-section"><div class="field-section-title">Oldal beállítások</div>';
         if (data.title !== undefined) html += textField('Oldal cím (title)', pageId + '.title', data.title);
         if (data.metaDesc !== undefined) html += textareaField('Meta leírás', pageId + '.metaDesc', data.metaDesc);
         html += '</div>';
-
-        // Render all remaining keys
         html += renderObjectFields(data, pageId, ['title', 'metaDesc']);
         return html;
     }
@@ -291,13 +298,15 @@
         html += textField('Címke', pageId + '.introLabel', data.introLabel);
         html += textField('Cím', pageId + '.introTitle', data.introTitle);
         if (data.introDesc && Array.isArray(data.introDesc)) {
-            html += '<div class="field-group"><label class="field-label">Bekezdések</label><div class="array-list" data-array-path="' + pageId + '.introDesc">';
+            html += '<div class="field-group"><label class="field-label">Bekezdések</label>';
+            html += '<div class="array-list" data-array-path="' + pageId + '.introDesc">';
             data.introDesc.forEach((p, i) => {
-                html += `<div class="array-item">
+                html += `<div class="array-item" draggable="false" data-index="${i}">
+                    <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
                     <div class="array-item-header">
                         <span class="array-item-number">Bekezdés #${i + 1}</span>
                         <div class="array-item-actions">
-                            <button class="btn-icon danger" data-remove-array="${pageId}.introDesc" data-index="${i}" title="Törlés">✕</button>
+                            <button class="btn-icon danger" data-remove-array="${pageId}.introDesc" data-index="${i}" title="Törlés">&#10005;</button>
                         </div>
                     </div>
                     <textarea class="field-textarea" data-path="${pageId}.introDesc.${i}">${esc(p)}</textarea>
@@ -316,19 +325,18 @@
         // Packages
         if (data.packages && data.packages.length > 0) {
             html += '<div class="field-section"><div class="field-section-title">Csomagok</div>';
-            html += '<div class="array-list">';
+            html += '<div class="array-list" data-array-path="' + pageId + '.packages">';
             data.packages.forEach((pkg, pi) => {
-                html += `<div class="array-item">
+                html += `<div class="array-item" draggable="false" data-index="${pi}">
+                    <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
                     <div class="array-item-header">
                         <span class="array-item-number">Csomag #${pi + 1}</span>
                         <div class="array-item-actions">
-                            <button class="btn-icon" data-move-up="${pageId}.packages" data-index="${pi}" title="Fel">↑</button>
-                            <button class="btn-icon" data-move-down="${pageId}.packages" data-index="${pi}" title="Le">↓</button>
-                            <button class="btn-icon danger" data-remove-array="${pageId}.packages" data-index="${pi}" title="Törlés">✕</button>
+                            <button class="btn-icon danger" data-remove-array="${pageId}.packages" data-index="${pi}" title="Törlés">&#10005;</button>
                         </div>
                     </div>
-                    ${textField('Csomag neve', `${pageId}.packages.${pi}.name`, pkg.name)}
-                    ${textareaField('Csomag leírás', `${pageId}.packages.${pi}.desc`, pkg.desc)}
+                    ${textField('Csomag neve', pageId + '.packages.' + pi + '.name', pkg.name)}
+                    ${textareaField('Csomag leírás', pageId + '.packages.' + pi + '.desc', pkg.desc)}
                     <div class="nested-array">
                         <label class="field-label">Elemek</label>`;
                 if (pkg.items) {
@@ -337,11 +345,11 @@
                             <div class="array-item-header">
                                 <span class="array-item-number">Elem #${ii + 1}</span>
                                 <div class="array-item-actions">
-                                    <button class="btn-icon danger" data-remove-array="${pageId}.packages.${pi}.items" data-index="${ii}" title="Törlés">✕</button>
+                                    <button class="btn-icon danger" data-remove-array="${pageId}.packages.${pi}.items" data-index="${ii}" title="Törlés">&#10005;</button>
                                 </div>
                             </div>
-                            ${textField('Elem cím', `${pageId}.packages.${pi}.items.${ii}.title`, item.title)}
-                            ${textField('Elem leírás', `${pageId}.packages.${pi}.items.${ii}.desc`, item.desc)}
+                            ${textField('Elem cím', pageId + '.packages.' + pi + '.items.' + ii + '.title', item.title)}
+                            ${textField('Elem leírás', pageId + '.packages.' + pi + '.items.' + ii + '.desc', item.desc)}
                         </div>`;
                     });
                 }
@@ -396,12 +404,10 @@
         html += textField('Breadcrumb', pageId + '.breadcrumb', data.breadcrumb);
         html += '</div>';
 
-        // Gallery
         if (data.gallery) {
             html += renderGallerySection(data.gallery, pageId + '.gallery');
         }
 
-        // CTA
         html += '<div class="field-section"><div class="field-section-title">CTA szekció</div>';
         if (data.ctaLabel !== undefined) html += textField('CTA címke', pageId + '.ctaLabel', data.ctaLabel);
         if (data.ctaTitle !== undefined) html += textField('CTA cím', pageId + '.ctaTitle', data.ctaTitle);
@@ -414,16 +420,23 @@
 
     // ── Gallery section ──
     function renderGallerySection(gallery, basePath) {
-        let html = '<div class="field-section"><div class="field-section-title">Galéria</div>';
-        html += '<div class="gallery-grid">';
+        let html = '<div class="field-section"><div class="field-section-title">Galéria (' + gallery.length + ' kép)</div>';
+        html += '<div class="gallery-grid" data-array-path="' + basePath + '">';
         gallery.forEach((img, i) => {
             const src = img.src || '';
-            html += `<div class="gallery-card">
-                <img src="/${src}" alt="${esc(img.alt || '')}" onerror="this.style.display='none'">
-                <div class="gallery-card-actions">
-                    <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">↑</button>
-                    <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Törlés">✕</button>
+            const previewSrc = src ? (src.startsWith('http') ? src : '/' + src) : '';
+            html += `<div class="gallery-card" draggable="true" data-index="${i}" data-src-path="${basePath}.${i}.src">
+                <span class="gallery-card-index">${i + 1}</span>
+                <div class="gallery-img-wrap">
+                    ${previewSrc
+                        ? `<img src="${previewSrc}" alt="${esc(img.alt || '')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="gallery-placeholder" style="display:none">Nincs kép</div>`
+                        : `<div class="gallery-placeholder">Nincs kép</div>`}
                 </div>
+                <div class="gallery-card-actions">
+                    <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">&#8593;</button>
+                    <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Törlés">&#10005;</button>
+                </div>
+                <div class="card-drop-label">Ejtse ide a képet</div>
                 <div class="gallery-card-body">
                     <input class="field-input" type="text" data-path="${basePath}.${i}.src" value="${esc(src)}" placeholder="Kép elérési út">
                     <input class="field-input" type="text" data-path="${basePath}.${i}.alt" value="${esc(img.alt || '')}" placeholder="Alt szöveg">
@@ -461,11 +474,12 @@
                 if (val.length > 0 && typeof val[0] === 'string') {
                     html += '<div class="array-list" data-array-path="' + path + '">';
                     val.forEach((item, i) => {
-                        html += `<div class="array-item">
+                        html += `<div class="array-item" draggable="false" data-index="${i}">
+                            <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
                             <div class="array-item-header">
                                 <span class="array-item-number">#${i + 1}</span>
                                 <div class="array-item-actions">
-                                    <button class="btn-icon danger" data-remove-array="${path}" data-index="${i}">✕</button>
+                                    <button class="btn-icon danger" data-remove-array="${path}" data-index="${i}">&#10005;</button>
                                 </div>
                             </div>
                             <textarea class="field-textarea" data-path="${path}.${i}">${esc(item)}</textarea>
@@ -475,21 +489,21 @@
                     html += `<button class="btn-add" data-add-array="${path}" data-template="string">+ Hozzáadás</button>`;
                 } else if (val.length > 0 && typeof val[0] === 'object') {
                     if (val[0].src !== undefined) {
-                        // Gallery-like
-                        html += renderGallerySection(val, path).replace(/<div class="field-section">.*?<\/div>/, '').replace(/<\/div>$/, '');
+                        html += renderGallerySection(val, path).replace(/^<div class="field-section">.*?<\/div>/, '').replace(/<\/div>$/, '');
                     } else {
-                        html += '<div class="array-list">';
+                        html += '<div class="array-list" data-array-path="' + path + '">';
                         val.forEach((item, i) => {
-                            html += `<div class="array-item">
+                            html += `<div class="array-item" draggable="false" data-index="${i}">
+                                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
                                 <div class="array-item-header">
                                     <span class="array-item-number">#${i + 1}</span>
                                     <div class="array-item-actions">
-                                        <button class="btn-icon danger" data-remove-array="${path}" data-index="${i}">✕</button>
+                                        <button class="btn-icon danger" data-remove-array="${path}" data-index="${i}">&#10005;</button>
                                     </div>
                                 </div>`;
                             for (const k of Object.keys(item)) {
                                 if (typeof item[k] === 'string') {
-                                    html += textField(k, `${path}.${i}.${k}`, item[k]);
+                                    html += textField(k, path + '.' + i + '.' + k, item[k]);
                                 }
                             }
                             html += '</div>';
@@ -510,7 +524,6 @@
                             html += textField(k, p, v);
                         }
                     } else if (Array.isArray(v)) {
-                        // Render nested arrays recursively
                         html += renderObjectFields({ [k]: v }, path, []);
                     }
                 }
@@ -521,7 +534,7 @@
     }
 
     // ── Bind field change events ──
-    function bindFieldEvents(container, pageId) {
+    function bindFieldEvents(container) {
         // Text inputs and textareas
         container.querySelectorAll('[data-path]').forEach(el => {
             el.addEventListener('input', () => {
@@ -542,9 +555,11 @@
             });
         });
 
-        // Remove array item
+        // Remove array item (with confirm)
         container.querySelectorAll('[data-remove-array]').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
+                const confirmed = await confirmAction('Biztosan törli?', 'Ez a művelet nem vonható vissza.');
+                if (!confirmed) return;
                 const arrPath = btn.dataset.removeArray;
                 const index = parseInt(btn.dataset.index);
                 const arr = getByPath(contentData, arrPath);
@@ -599,7 +614,6 @@
                         break;
                     case 'galleryItem':
                         newItem = { src: '', alt: '' };
-                        // Check if existing items have title/subtitle
                         if (arr.length > 0 && arr[0].title !== undefined) {
                             newItem.title = '';
                             newItem.subtitle = '';
@@ -622,7 +636,271 @@
         });
     }
 
-    // ── Upload modal ──
+    // ══════════════════════════════════════
+    // ── DRAG & DROP REORDER ──
+    // ══════════════════════════════════════
+
+    function initDragReorder(container) {
+        // Array lists (vertical drag)
+        container.querySelectorAll('.array-list[data-array-path]').forEach(list => {
+            const arrayPath = list.dataset.arrayPath;
+            list.querySelectorAll(':scope > .array-item').forEach(item => {
+                const handle = item.querySelector('.drag-handle');
+                if (!handle) return;
+
+                // Only allow drag from the handle
+                handle.addEventListener('mousedown', () => { item.draggable = true; });
+                item.addEventListener('dragend', () => { item.draggable = false; });
+
+                item.addEventListener('dragstart', e => {
+                    if (!item.draggable) { e.preventDefault(); return; }
+                    // Check if this is a file drag - don't interfere
+                    if (e.dataTransfer.types.includes('Files')) return;
+                    dragState = { arrayPath, fromIndex: parseInt(item.dataset.index) };
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', item.dataset.index);
+                    requestAnimationFrame(() => item.classList.add('dragging'));
+                });
+
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('dragging');
+                    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                    dragState = null;
+                });
+
+                item.addEventListener('dragover', e => {
+                    if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    list.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                    item.classList.add('drag-over');
+                });
+
+                item.addEventListener('dragleave', () => {
+                    item.classList.remove('drag-over');
+                });
+
+                item.addEventListener('drop', e => {
+                    e.preventDefault();
+                    item.classList.remove('drag-over');
+                    if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    const fromIndex = dragState.fromIndex;
+                    const toIndex = parseInt(item.dataset.index);
+                    if (fromIndex === toIndex) return;
+
+                    const arr = getByPath(contentData, arrayPath);
+                    if (!arr) return;
+                    const moved = arr.splice(fromIndex, 1)[0];
+                    arr.splice(toIndex, 0, moved);
+                    setDirty(true);
+                    dragState = null;
+                    renderEditor(currentPage);
+                });
+            });
+        });
+
+        // Gallery grids (grid drag)
+        container.querySelectorAll('.gallery-grid[data-array-path]').forEach(grid => {
+            const arrayPath = grid.dataset.arrayPath;
+            grid.querySelectorAll(':scope > .gallery-card').forEach(card => {
+                card.addEventListener('dragstart', e => {
+                    // Check if file drag
+                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) return;
+                    dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', card.dataset.index);
+                    requestAnimationFrame(() => card.classList.add('dragging'));
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                    grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                    dragState = null;
+                });
+
+                card.addEventListener('dragover', e => {
+                    // If files are being dragged, let the file drop handler deal with it
+                    if (e.dataTransfer.types.includes('Files')) return;
+                    if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                    card.classList.add('drag-over');
+                });
+
+                card.addEventListener('dragleave', () => {
+                    card.classList.remove('drag-over');
+                });
+
+                card.addEventListener('drop', e => {
+                    // If files, don't handle here (file drop handler will)
+                    if (e.dataTransfer.types.includes('Files')) return;
+                    e.preventDefault();
+                    card.classList.remove('drag-over');
+                    if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    const fromIndex = dragState.fromIndex;
+                    const toIndex = parseInt(card.dataset.index);
+                    if (fromIndex === toIndex) return;
+
+                    const arr = getByPath(contentData, arrayPath);
+                    if (!arr) return;
+                    const moved = arr.splice(fromIndex, 1)[0];
+                    arr.splice(toIndex, 0, moved);
+                    setDirty(true);
+                    dragState = null;
+                    renderEditor(currentPage);
+                });
+            });
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── FILE DROP ON IMAGE FIELDS ──
+    // ══════════════════════════════════════
+
+    function initFileDropOnImages(container) {
+        container.querySelectorAll('[data-drop-upload]').forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                if (!e.dataTransfer.types.includes('Files')) return;
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.add('drop-active');
+            });
+
+            zone.addEventListener('dragleave', e => {
+                if (zone.contains(e.relatedTarget)) return;
+                zone.classList.remove('drop-active');
+            });
+
+            zone.addEventListener('drop', async e => {
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.remove('drop-active');
+                const files = e.dataTransfer.files;
+                if (!files.length || !files[0].type.startsWith('image/')) return;
+                const targetPath = zone.dataset.uploadTarget;
+                await uploadAndSet(files[0], targetPath);
+            });
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── FILE DROP ON GALLERY CARDS ──
+    // ══════════════════════════════════════
+
+    function initFileDropOnGalleryCards(container) {
+        container.querySelectorAll('.gallery-card[data-src-path]').forEach(card => {
+            card.addEventListener('dragover', e => {
+                if (!e.dataTransfer.types.includes('Files')) return;
+                e.preventDefault();
+                e.stopPropagation();
+                card.classList.add('file-drop-active');
+            });
+
+            card.addEventListener('dragleave', e => {
+                if (card.contains(e.relatedTarget)) return;
+                card.classList.remove('file-drop-active');
+            });
+
+            card.addEventListener('drop', async e => {
+                if (!e.dataTransfer.types.includes('Files')) return;
+                e.preventDefault();
+                e.stopPropagation();
+                card.classList.remove('file-drop-active');
+                const files = e.dataTransfer.files;
+                if (!files.length || !files[0].type.startsWith('image/')) return;
+                const targetPath = card.dataset.srcPath;
+                await uploadAndSet(files[0], targetPath);
+            });
+        });
+    }
+
+    // ── Shared upload helper ──
+    async function uploadAndSet(file, targetPath) {
+        const formData = new FormData();
+        formData.append('images', file, file.name);
+        try {
+            toast('Feltöltés...', 'info');
+            const res = await fetch('/api/upload', { method: 'POST', body: formData });
+            const data = await res.json();
+            if (data.success && data.files && data.files.length > 0) {
+                setByPath(contentData, targetPath, data.files[0].url);
+                setDirty(true);
+                renderEditor(currentPage);
+                toast('Kép feltöltve!', 'success');
+            }
+        } catch (err) {
+            toast('Feltöltési hiba: ' + err.message, 'error');
+        }
+    }
+
+    // ══════════════════════════════════════
+    // ── IMAGE LIGHTBOX ──
+    // ══════════════════════════════════════
+
+    function initImageLightbox(container) {
+        container.querySelectorAll('.image-preview, .gallery-img-wrap img').forEach(img => {
+            img.addEventListener('click', e => {
+                if (!img.src || img.style.display === 'none') return;
+                e.stopPropagation();
+                const overlay = document.createElement('div');
+                overlay.className = 'image-lightbox';
+                const bigImg = document.createElement('img');
+                bigImg.src = img.src;
+                overlay.appendChild(bigImg);
+                overlay.addEventListener('click', () => overlay.remove());
+                document.addEventListener('keydown', function handler(ev) {
+                    if (ev.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', handler); }
+                });
+                document.body.appendChild(overlay);
+            });
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── COLLAPSIBLE SECTIONS ──
+    // ══════════════════════════════════════
+
+    function initCollapsible(container) {
+        container.querySelectorAll('.field-section-title').forEach(title => {
+            title.addEventListener('click', e => {
+                // Don't collapse if clicking a button inside the title
+                if (e.target.closest('button')) return;
+                title.parentElement.classList.toggle('collapsed');
+            });
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── CONFIRM MODAL ──
+    // ══════════════════════════════════════
+
+    let confirmResolve = null;
+
+    function bindConfirmModal() {
+        const modal = $('#confirm-modal');
+        const yesBtn = $('#confirm-yes');
+        const noBtn = $('#confirm-no');
+        const backdrop = modal.querySelector('.modal-backdrop');
+
+        yesBtn.addEventListener('click', () => { modal.classList.add('hidden'); if (confirmResolve) confirmResolve(true); });
+        noBtn.addEventListener('click', () => { modal.classList.add('hidden'); if (confirmResolve) confirmResolve(false); });
+        backdrop.addEventListener('click', () => { modal.classList.add('hidden'); if (confirmResolve) confirmResolve(false); });
+    }
+
+    function confirmAction(title, message) {
+        return new Promise(resolve => {
+            confirmResolve = resolve;
+            $('#confirm-title').textContent = title;
+            $('#confirm-message').textContent = message;
+            $('#confirm-modal').classList.remove('hidden');
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── UPLOAD MODAL ──
+    // ══════════════════════════════════════
+
     function bindUploadModal() {
         const modal = $('#image-upload-modal');
         const zone = $('#upload-zone');
@@ -631,8 +909,6 @@
         const confirmBtn = $('#upload-confirm');
         const cancelBtn = $('#upload-cancel');
         const backdrop = modal.querySelector('.modal-backdrop');
-
-        let uploadedFiles = [];
 
         cancelBtn.addEventListener('click', closeUploadModal);
         backdrop.addEventListener('click', closeUploadModal);
@@ -659,7 +935,6 @@
                 const res = await fetch('/api/upload', { method: 'POST', body: formData });
                 const data = await res.json();
                 if (data.success && data.files) {
-                    uploadedFiles = data.files;
                     preview.innerHTML = '';
                     data.files.forEach((f, i) => {
                         const img = document.createElement('img');

@@ -16,7 +16,7 @@
         </div>
         <nav id="sidebar-nav"></nav>
         <div class="sidebar-footer">
-            <a href="/" target="_blank" class="preview-link">🔗 Weboldal megtekintése</a>
+            <a href="/" target="_blank" class="preview-link">&#128279; Weboldal megtekintése</a>
         </div>
     </aside>
 
@@ -32,7 +32,8 @@
             <div class="welcome-screen">
                 <h2>Üdvözöljük az admin felületen</h2>
                 <p>Válasszon egy oldalt a bal oldali menüből a szerkesztéshez.</p>
-                <p>Szerkesztés után kattintson a <strong>Mentés</strong> gombra a változtatások elmentéséhez és az oldal újrageneálásához.</p>
+                <p>Szerkesztés után kattintson a <strong>Mentés</strong> gombra.</p>
+                <p style="margin-top:16px;color:var(--accent);font-size:0.85rem">Képeket húzza a kép mezőkre vagy a galéria kártyákra</p>
             </div>
         </div>
     </main>
@@ -51,6 +52,18 @@
             <div class="modal-actions">
                 <button class="btn-cancel" id="upload-cancel">Mégse</button>
                 <button class="btn-save" id="upload-confirm" disabled>Kiválasztás</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-confirm">
+            <h3 id="confirm-title">Biztosan törli?</h3>
+            <p id="confirm-message"></p>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="confirm-no">Mégse</button>
+                <button class="btn-save btn-danger" id="confirm-yes">Törlés</button>
             </div>
         </div>
     </div>

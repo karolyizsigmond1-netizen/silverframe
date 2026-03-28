@@ -97,8 +97,9 @@ const server = http.createServer((req, res) => {
     }
 
     // Static file serving
-    let filePath = req.url === '/' ? '/index.html' : req.url.split('?')[0];
-    filePath = path.join(ROOT, decodeURIComponent(filePath));
+    let urlPath = req.url.split('?')[0];
+    if (urlPath.endsWith('/')) urlPath += 'index.html';
+    let filePath = path.join(ROOT, decodeURIComponent(urlPath));
 
     // Security: prevent directory traversal
     if (!filePath.startsWith(ROOT)) {
