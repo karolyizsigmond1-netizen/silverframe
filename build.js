@@ -14,6 +14,13 @@ function btn(href, text, solid = false) {
   return `<a href="${href}" class="btn${solid ? ' btn-solid' : ''}"><span>${text}</span>${arrowSvg}</a>`;
 }
 
+// Prefix local image paths for subpages (services/, portfolio/)
+function imgSrc(src, prefix) {
+  if (!src) return '';
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  return prefix + src;
+}
+
 function fonts() {
   return `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">`;
@@ -142,9 +149,9 @@ function ctaBanner(label, title, href, btnText, solid = true) {
         </section>`;
 }
 
-function pageHero(bgImage, label, title, breadcrumbHtml) {
+function pageHero(bgImage, label, title, breadcrumbHtml, prefix) {
   return `        <section class="page-hero">
-            <div class="page-hero-bg" style="background-image:url('${bgImage}')"></div>
+            <div class="page-hero-bg" style="background-image:url('${imgSrc(bgImage, prefix || '')}')"></div>
             <div class="page-hero-content">
                 <span class="page-hero-label">${label}</span>
                 <h1 class="page-hero-title">${title}</h1>
@@ -499,7 +506,7 @@ ${headerHtml(prefix, null, id)}
 ${mobileNavHtml(prefix)}
 
     <main>
-${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../services.html">Szolgáltatások</a> <span>/</span> ${s.breadcrumb}`)}
+${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../services.html">Szolgáltatások</a> <span>/</span> ${s.breadcrumb}`, prefix)}
 
         <section class="section service-detail">
             <div class="container">
@@ -510,7 +517,7 @@ ${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főol
 ${s.introDesc.map(p => `                        <p class="section-desc">${p}</p>`).join('\n')}
                     </div>
                     <div class="service-detail-img">
-                        <img src="${s.introImage.src}" alt="${s.introImage.alt}" width="700" height="933" loading="lazy">
+                        <img src="${imgSrc(s.introImage.src, prefix)}" alt="${s.introImage.alt}" width="700" height="933" loading="lazy">
                     </div>
                 </div>
 
@@ -525,7 +532,7 @@ ${pkg.items.map((item, i) => `                        <div class="service-includ
                 <div class="service-gallery reveal">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
-${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${img.src}" alt="${img.alt}" width="500" height="667" loading="lazy"></div>`).join('\n')}
+${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}" alt="${img.alt}" width="500" height="667" loading="lazy"></div>`).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
                         <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
@@ -569,13 +576,13 @@ ${boilerplate()}
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció"><a href="../index.html">Főoldal</a><a href="../about.html">Rólam</a><a href="../portfolio.html">Portfólió</a><a href="../services.html">Szolgáltatások</a><a href="../contact.html">Kapcsolat</a></nav>
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Portfólió</a> <span>/</span> ${p.breadcrumb}`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Portfólió</a> <span>/</span> ${p.breadcrumb}`, prefix)}
 
         <section class="section">
             <div class="container">
                 <div class="masonry reveal">
 ${p.gallery.map(img => `                    <article class="masonry-item">
-                        <img src="${img.src}" alt="${img.alt}" width="600" height="900" loading="lazy">
+                        <img src="${imgSrc(img.src, prefix)}" alt="${img.alt}" width="600" height="900" loading="lazy">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
                     </article>`).join('\n')}
                 </div>
