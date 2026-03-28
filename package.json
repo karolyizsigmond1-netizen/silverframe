@@ -1,0 +1,11 @@
+{
+  "name": "silverframe-admin",
+  "version": "1.0.0",
+  "description": "Silverframe Studio admin panel & build system",
+  "scripts": {
+    "build": "node build.js",
+    "admin": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}

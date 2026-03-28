@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silverframe Studio – Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <h1>Silverframe</h1>
+            <span class="subtitle">Admin Panel</span>
+        </div>
+        <nav id="sidebar-nav"></nav>
+        <div class="sidebar-footer">
+            <a href="/" target="_blank" class="preview-link">🔗 Weboldal megtekintése</a>
+        </div>
+    </aside>
+
+    <main id="main">
+        <header id="topbar">
+            <h2 id="page-title">Válassz oldalt a szerkesztéshez</h2>
+            <div class="topbar-actions">
+                <span id="unsaved-badge" class="hidden">Módosítva</span>
+                <button id="save-btn" class="btn-save" disabled>Mentés</button>
+            </div>
+        </header>
+        <div id="editor-area">
+            <div class="welcome-screen">
+                <h2>Üdvözöljük az admin felületen</h2>
+                <p>Válasszon egy oldalt a bal oldali menüből a szerkesztéshez.</p>
+                <p>Szerkesztés után kattintson a <strong>Mentés</strong> gombra a változtatások elmentéséhez és az oldal újrageneálásához.</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+
+    <div id="image-upload-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <h3>Kép feltöltése</h3>
+            <div class="upload-zone" id="upload-zone">
+                <p>Húzza ide a képet vagy kattintson a tallózáshoz</p>
+                <input type="file" id="upload-input" accept="image/*" multiple>
+            </div>
+            <div id="upload-preview"></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="upload-cancel">Mégse</button>
+                <button class="btn-save" id="upload-confirm" disabled>Kiválasztás</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
