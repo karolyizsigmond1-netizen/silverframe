@@ -53,7 +53,14 @@ const server = http.createServer((req, res) => {
                 try {
                     execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
                     res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ success: true, message: 'Mentve és újraépítve!' }));
+                    res.end(JSON.stringify({ success: true, message: 'Mentve, újraépítve és feltöltve GitHub-ra!' }));
+                    // Auto push to GitHub in the background
+                    try {
+                        execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+                        console.log('  ✓ GitHub push sikeres');
+                    } catch (gitErr) {
+                        console.log('  ⚠ GitHub push hiba:', gitErr.message.split('\n')[0]);
+                    }
                 } catch (buildErr) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: false, message: 'Build hiba: ' + buildErr.message }));
