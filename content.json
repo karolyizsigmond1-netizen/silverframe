@@ -11,18 +11,90 @@
     "copyright": "2026"
   },
   "serviceCategories": [
-    { "id": "portfolio-model", "name": "Portfólió / Modell", "num": "01", "portfolioId": "portrait", "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" },
-    { "id": "maternity", "name": "Kismama", "num": "02", "portfolioId": "maternity", "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80" },
-    { "id": "boudoir", "name": "Boudoir", "num": "03", "portfolioId": "boudoir", "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" },
-    { "id": "family", "name": "Családi", "num": "04", "portfolioId": "family", "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80" },
-    { "id": "couple", "name": "Páros", "num": "05", "portfolioId": "couple", "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80" },
-    { "id": "business", "name": "Üzleti portré", "num": "06", "portfolioId": "business", "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" },
-    { "id": "real-estate", "name": "Ingatlan", "num": "07", "portfolioId": "real-estate", "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" },
-    { "id": "wedding", "name": "Esküvő", "num": "08", "portfolioId": "wedding", "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" },
-    { "id": "wedding-creative", "name": "Esküvői kreatív", "num": "09", "portfolioId": "wedding-creative", "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" },
-    { "id": "event", "name": "Rendezvény", "num": "10", "portfolioId": "event", "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" },
-    { "id": "pet", "name": "Kisállat", "num": "11", "portfolioId": "pet", "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" },
-    { "id": "product", "name": "Termékfotó", "num": "12", "portfolioId": "product", "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" }
+    {
+      "id": "portfolio-model",
+      "name": "Portfólió / Modell",
+      "num": "01",
+      "portfolioId": "portrait",
+      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80"
+    },
+    {
+      "id": "maternity",
+      "name": "Kismama",
+      "num": "02",
+      "portfolioId": "maternity",
+      "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80"
+    },
+    {
+      "id": "boudoir",
+      "name": "Boudoir",
+      "num": "03",
+      "portfolioId": "boudoir",
+      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80"
+    },
+    {
+      "id": "family",
+      "name": "Családi",
+      "num": "04",
+      "portfolioId": "family",
+      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80"
+    },
+    {
+      "id": "couple",
+      "name": "Páros",
+      "num": "05",
+      "portfolioId": "couple",
+      "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80"
+    },
+    {
+      "id": "business",
+      "name": "Üzleti portré",
+      "num": "06",
+      "portfolioId": "business",
+      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
+    },
+    {
+      "id": "real-estate",
+      "name": "Ingatlan",
+      "num": "07",
+      "portfolioId": "real-estate",
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+    },
+    {
+      "id": "wedding",
+      "name": "Esküvő",
+      "num": "08",
+      "portfolioId": "wedding",
+      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80"
+    },
+    {
+      "id": "wedding-creative",
+      "name": "Esküvői kreatív",
+      "num": "09",
+      "portfolioId": "wedding-creative",
+      "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80"
+    },
+    {
+      "id": "event",
+      "name": "Rendezvény",
+      "num": "10",
+      "portfolioId": "event",
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
+    },
+    {
+      "id": "pet",
+      "name": "Kisállat",
+      "num": "11",
+      "portfolioId": "pet",
+      "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80"
+    },
+    {
+      "id": "product",
+      "name": "Termékfotó",
+      "num": "12",
+      "portfolioId": "product",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"
+    }
   ],
   "pages": {
     "index": {
@@ -38,29 +110,89 @@
       "servicesLabel": "Szolgáltatások",
       "servicesTitle": "Mivel foglalkozom",
       "serviceCards": [
-        { "href": "services/portfolio-model.html", "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80", "alt": "Portfólió és modell fotózás", "title": "Portfólió / Modell", "desc": "Professzionális portfóliók" },
-        { "href": "services/wedding.html", "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80", "alt": "Esküvői fotózás", "title": "Esküvő", "desc": "Esküvői fotózás" },
-        { "href": "services/boudoir.html", "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80", "alt": "Boudoir fotózás", "title": "Boudoir", "desc": "Intim & Magabiztos" }
+        {
+          "href": "services/portfolio-model.html",
+          "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
+          "alt": "Portfólió és modell fotózás",
+          "title": "Portfólió / Modell",
+          "desc": "Professzionális portfóliók"
+        },
+        {
+          "href": "services/wedding.html",
+          "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+          "alt": "Esküvői fotózás",
+          "title": "Esküvő",
+          "desc": "Esküvői fotózás"
+        },
+        {
+          "href": "services/boudoir.html",
+          "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",
+          "alt": "Boudoir fotózás",
+          "title": "Boudoir",
+          "desc": "Intim & Magabiztos"
+        }
       ],
       "galleryLabel": "Válogatott munkák",
       "galleryTitle": "A portfólióból",
       "galleryImages": [
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80", "alt": "Férfi portré arany fényben" },
-        { "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80", "alt": "Tájkép hajnalban" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80", "alt": "Divat portré" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&q=80", "alt": "Szabadtéri portré meleg tónusokban" },
-        { "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80", "alt": "Tájfotó" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80", "alt": "Stúdió portré" },
-        { "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80", "alt": "Ködös erdő" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80", "alt": "Természetes fényű portré" }
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "alt": "Férfi portré arany fényben"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+          "alt": "Tájkép hajnalban"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80",
+          "alt": "Divat portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&q=80",
+          "alt": "Szabadtéri portré meleg tónusokban"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80",
+          "alt": "Tájfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80",
+          "alt": "Stúdió portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
+          "alt": "Ködös erdő"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80",
+          "alt": "Természetes fényű portré"
+        }
       ],
       "testimonials": [
-        { "text": "Istvánnal fotózni fantasztikus élmény volt! Már az első pillanattól kezdve laza és barátságos volt, így teljesen elfelejtettük a feszengést. A képek pedig… egyszerűen csodásak!", "author": "— Anna, Szeged" },
-        { "text": "Nagyon profi, ugyanakkor közvetlen és emberközeli fotós. Pontosan azt kapjuk, amit elképzeltünk, sőt, még annál is többet!", "author": "— Péter, Budapest" },
-        { "text": "Kismama fotózásra mentem Istvánhoz, és teljesen lenyűgözött, ahogy minden apró részletre figyelt. A hangulat oldott volt, a képek pedig tényleg művésziek és érzelmesek.", "author": "— Dóra, Szeged" },
-        { "text": "Páros fotózásra jöttünk, és már az első perctől kezdve természetesen éreztük magunkat. A képek pont azt adják vissza, amit a valóságban éreztünk.", "author": "— Gábor és Eszter, Szeged" },
-        { "text": "Üzleti portrét készíttettem, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.", "author": "— Luca, Szeged" },
-        { "text": "Boudoir fotózásra mentem, és bár eleinte izgultam, István minden pillanatban megnyugtatott. A képek érzékiek, elegánsak.", "author": "— Réka, Szeged" }
+        {
+          "text": "Istvánnal fotózni fantasztikus élmény volt! Már az első pillanattól kezdve laza és barátságos volt, így teljesen elfelejtettük a feszengést. A képek pedig… egyszerűen csodásak!",
+          "author": "— Anna, Szeged"
+        },
+        {
+          "text": "Nagyon profi, ugyanakkor közvetlen és emberközeli fotós. Pontosan azt kapjuk, amit elképzeltünk, sőt, még annál is többet!",
+          "author": "— Péter, Budapest"
+        },
+        {
+          "text": "Kismama fotózásra mentem Istvánhoz, és teljesen lenyűgözött, ahogy minden apró részletre figyelt. A hangulat oldott volt, a képek pedig tényleg művésziek és érzelmesek.",
+          "author": "— Dóra, Szeged"
+        },
+        {
+          "text": "Páros fotózásra jöttünk, és már az első perctől kezdve természetesen éreztük magunkat. A képek pont azt adják vissza, amit a valóságban éreztünk.",
+          "author": "— Gábor és Eszter, Szeged"
+        },
+        {
+          "text": "Üzleti portrét készíttettem, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.",
+          "author": "— Luca, Szeged"
+        },
+        {
+          "text": "Boudoir fotózásra mentem, és bár eleinte izgultam, István minden pillanatban megnyugtatott. A képek érzékiek, elegánsak.",
+          "author": "— Réka, Szeged"
+        }
       ],
       "ctaLabel": "Készen állsz?",
       "ctaTitle": "Alkossunk együtt<br>valami maradandót"
@@ -82,13 +214,22 @@
       "approachText": "Szeretem a képeket utólag nézegetni, az arcokat, mozdulatokat, és azon gondolkodni, hogy milyen történetek szövődtek abban a kattanásnyi pillanatban.",
       "philosophyTitle": "Filozófiám",
       "philosophyTexts": [
-        "Imádom, amikor valaki azt mondja: \u201eRólam úgysem lehet jó képet csinálni.\u201d De dehogynem! Mindenkiből kihozható a legjobb oldal.",
+        "Imádom, amikor valaki azt mondja: „Rólam úgysem lehet jó képet csinálni.” De dehogynem! Mindenkiből kihozható a legjobb oldal.",
         "Amikor eljössz hozzám, 100%-ban rád figyelek. A történeteidből kibogozom, ki vagy, mit szeretnél, és miért jöttél — és mindezt képekben adom vissza."
       ],
       "stats": [
-        { "num": "10+", "label": "Év tapasztalat" },
-        { "num": "500+", "label": "Elégedett ügyfél" },
-        { "num": "12", "label": "Szolgáltatás" }
+        {
+          "num": "10+",
+          "label": "Év tapasztalat"
+        },
+        {
+          "num": "500+",
+          "label": "Elégedett ügyfél"
+        },
+        {
+          "num": "12",
+          "label": "Szolgáltatás"
+        }
       ],
       "ctaLabel": "Dolgozzunk együtt",
       "ctaTitle": "Van egy ötleted?<br>Beszéljük meg!"
@@ -103,20 +244,74 @@
       "accordionTitle": "Minden műfajban<br>otthon vagyok",
       "accordionHint": "Kattints egy kategóriára a válogatott munkák megtekintéséhez.",
       "stats": [
-        { "num": "500+", "label": "Projekt" },
-        { "num": "12", "label": "Kategória" },
-        { "num": "10+", "label": "Év tapasztalat" },
-        { "num": "100%", "label": "Szenvedély" }
+        {
+          "num": "500+",
+          "label": "Projekt"
+        },
+        {
+          "num": "12",
+          "label": "Kategória"
+        },
+        {
+          "num": "10+",
+          "label": "Év tapasztalat"
+        },
+        {
+          "num": "100%",
+          "label": "Szenvedély"
+        }
       ],
       "highlightsLabel": "Kiemelt munkák",
       "highlightsTitle": "Néhány kedvenc<br>a portfólióból",
       "highlights": [
-        { "href": "portfolio/portrait.html", "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=80", "alt": "Portré fotózás", "cat": "Portfólió / Modell", "title": "Stúdió portré", "wide": true },
-        { "href": "portfolio/wedding.html", "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80", "alt": "Esküvői fotózás", "cat": "Esküvő", "title": "Az első tánc", "wide": false },
-        { "href": "portfolio/pet.html", "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80", "alt": "Kisállat fotózás", "cat": "Kisállat", "title": "Legjobb barát", "wide": false },
-        { "href": "portfolio/couple.html", "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80", "alt": "Páros fotózás", "cat": "Páros", "title": "Összetartozás", "wide": false },
-        { "href": "portfolio/product.html", "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=80", "alt": "Termékfotózás", "cat": "Termékfotó", "title": "Fejhallgató kampány", "wide": true },
-        { "href": "portfolio/family.html", "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80", "alt": "Családi fotózás", "cat": "Családi", "title": "Vasárnap délután", "wide": false }
+        {
+          "href": "portfolio/portrait.html",
+          "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=80",
+          "alt": "Portré fotózás",
+          "cat": "Portfólió / Modell",
+          "title": "Stúdió portré",
+          "wide": true
+        },
+        {
+          "href": "portfolio/wedding.html",
+          "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
+          "alt": "Esküvői fotózás",
+          "cat": "Esküvő",
+          "title": "Az első tánc",
+          "wide": false
+        },
+        {
+          "href": "portfolio/pet.html",
+          "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
+          "alt": "Kisállat fotózás",
+          "cat": "Kisállat",
+          "title": "Legjobb barát",
+          "wide": false
+        },
+        {
+          "href": "portfolio/couple.html",
+          "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
+          "alt": "Páros fotózás",
+          "cat": "Páros",
+          "title": "Összetartozás",
+          "wide": false
+        },
+        {
+          "href": "portfolio/product.html",
+          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=80",
+          "alt": "Termékfotózás",
+          "cat": "Termékfotó",
+          "title": "Fejhallgató kampány",
+          "wide": true
+        },
+        {
+          "href": "portfolio/family.html",
+          "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
+          "alt": "Családi fotózás",
+          "cat": "Családi",
+          "title": "Vasárnap délután",
+          "wide": false
+        }
       ],
       "ctaLabel": "Tetszik, amit látsz?",
       "ctaTitle": "Alkossunk együtt<br>valami különlegeset"
@@ -170,43 +365,94 @@
       "breadcrumb": "Portfólió / Modell",
       "introLabel": "Mire számíthatsz",
       "introTitle": "A te víziód,<br>a mi szakértelmünk",
-      "introDesc": ["Ha szeretnél egy erős portfóliót, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.", "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&q=80", "alt": "Modell portfólió fotózás" },
+      "introDesc": [
+        "Ha szeretnél egy erős portfóliót, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
+        "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."
+      ],
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&q=80",
+        "alt": "Modell portfólió fotózás"
+      },
       "packages": [
         {
           "name": "Start csomag — 70.000 Ft",
           "desc": "Ha csak néhány igazán jó képre van szükséged.",
           "items": [
-            { "title": "50 perc fotózás", "desc": "Stúdió vagy szabadtéri fotózás, a te választásod szerint." },
-            { "title": "2 szett ruha", "desc": "Két különböző öltözet a változatos végeredményért." },
-            { "title": "20 retusált fotó", "desc": "Professzionálisan retusált képek digitális átadással." },
-            { "title": "Digitális galéria", "desc": "Online galéria a képek megtekintéséhez és letöltéséhez." }
+            {
+              "title": "50 perc fotózás",
+              "desc": "Stúdió vagy szabadtéri fotózás, a te választásod szerint."
+            },
+            {
+              "title": "2 szett ruha",
+              "desc": "Két különböző öltözet a változatos végeredményért."
+            },
+            {
+              "title": "20 retusált fotó",
+              "desc": "Professzionálisan retusált képek digitális átadással."
+            },
+            {
+              "title": "Digitális galéria",
+              "desc": "Online galéria a képek megtekintéséhez és letöltéséhez."
+            }
           ]
         },
         {
           "name": "Prémium csomag — 95.000 Ft",
           "desc": "Ha a maximumot szeretnéd kihozni a fotózásból.",
           "items": [
-            { "title": "70–90 perc fotózás", "desc": "Szabadtéren vagy stúdióban, bőven van idő kísérletezni." },
-            { "title": "3 szett ruha", "desc": "Három különböző stílus a maximális változatosságért." },
-            { "title": "30 retusált fotó", "desc": "Professzionálisan retusált képek digitális átadással." },
-            { "title": "Személyre szabott", "desc": "A fotózás nálam nem feszengős — inkább egy laza folyamat." }
+            {
+              "title": "70–90 perc fotózás",
+              "desc": "Szabadtéren vagy stúdióban, bőven van idő kísérletezni."
+            },
+            {
+              "title": "3 szett ruha",
+              "desc": "Három különböző stílus a maximális változatosságért."
+            },
+            {
+              "title": "30 retusált fotó",
+              "desc": "Professzionálisan retusált képek digitális átadással."
+            },
+            {
+              "title": "Személyre szabott",
+              "desc": "A fotózás nálam nem feszengős — inkább egy laza folyamat."
+            }
           ]
         }
       ],
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80", "alt": "Portfólió fotó" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80", "alt": "Modell teszt fotó" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Természetes fényű portré" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80", "alt": "Közeli portré" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "Férfi modell portfólió" },
-        { "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80", "alt": "Editorial portfólió fotó" }
+        {
+          "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
+          "alt": "Portfólió fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
+          "alt": "Modell teszt fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Természetes fényű portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
+          "alt": "Közeli portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
+          "alt": "Férfi modell portfólió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
+          "alt": "Editorial portfólió fotó"
+        }
       ],
       "ctaLabel": "Építsd a portfóliódat!",
       "ctaTitle": "Alkossunk olyan képeket,<br>amik ajtókat nyitnak",
       "ctaButton": "Időpontfoglalás",
-      "prevService": null, "prevTitle": "Áttekintés", "prevLabel": "Összes szolgáltatás",
-      "nextService": "maternity", "nextTitle": "Kismama"
+      "prevService": null,
+      "prevTitle": "Áttekintés",
+      "prevLabel": "Összes szolgáltatás",
+      "nextService": "maternity",
+      "nextTitle": "Kismama"
     },
     "maternity": {
       "title": "Kismama Fotózás — Silverframe Studio | Szeged",
@@ -218,33 +464,94 @@
       "breadcrumb": "Kismama",
       "introLabel": "Az új élet csodája",
       "introTitle": "A várandósság<br>szépségének megörökítése",
-      "introDesc": ["Egy várandós nő szépsége és az új élet csodája önmagában is lenyűgöző — én pedig ezt szeretem megörökíteni.", "Ha szeretnéd, az apukát is bevonhatjuk — akár röviden, akár a teljes fotózás alatt."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&q=80", "alt": "Kismama fotózás természetes fényben" },
+      "introDesc": [
+        "Egy várandós nő szépsége és az új élet csodája önmagában is lenyűgöző — én pedig ezt szeretem megörökíteni.",
+        "Ha szeretnéd, az apukát is bevonhatjuk — akár röviden, akár a teljes fotózás alatt."
+      ],
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&q=80",
+        "alt": "Kismama fotózás természetes fényben"
+      },
       "packages": [
-        { "name": "Alap csomag — 70.000 Ft", "desc": "", "items": [
-          { "title": "60 perc fotózás", "desc": "Nyugodt, kényelmes tempóban, stúdióban vagy szabadtéren." },
-          { "title": "20 retusált kép", "desc": "Professzionálisan retusált képek digitális átadással." },
-          { "title": "+2-3 hangulat fotó", "desc": "Kiscipős, ultrahang és más hangulatos részletek." },
-          { "title": "Digitális galéria", "desc": "Online galéria a képek megtekintéséhez és letöltéséhez." }
-        ]},
-        { "name": "Prémium csomag — 90.000 Ft", "desc": "Ez a csomag azoknak való, akik minden pillanatot szeretnének megörökíteni.", "items": [
-          { "title": "60 perc fotózás", "desc": "Nyugodt, kényelmes tempóban, több helyszínen is." },
-          { "title": "30 retusált kép", "desc": "Professzionálisan retusált képek a legszebb pillanatokról." },
-          { "title": "+100 nyers kép", "desc": "Digitálisan átadva, hogy minden fontos pillanat a kezedben legyen." },
-          { "title": "Teljes élmény", "desc": "Tökéletes választás, ha szeretnéd megőrizni a kis élet első jeleit." }
-        ]}
+        {
+          "name": "Alap csomag — 70.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "60 perc fotózás",
+              "desc": "Nyugodt, kényelmes tempóban, stúdióban vagy szabadtéren."
+            },
+            {
+              "title": "20 retusált kép",
+              "desc": "Professzionálisan retusált képek digitális átadással."
+            },
+            {
+              "title": "+2-3 hangulat fotó",
+              "desc": "Kiscipős, ultrahang és más hangulatos részletek."
+            },
+            {
+              "title": "Digitális galéria",
+              "desc": "Online galéria a képek megtekintéséhez és letöltéséhez."
+            }
+          ]
+        },
+        {
+          "name": "Prémium csomag — 90.000 Ft",
+          "desc": "Ez a csomag azoknak való, akik minden pillanatot szeretnének megörökíteni.",
+          "items": [
+            {
+              "title": "60 perc fotózás",
+              "desc": "Nyugodt, kényelmes tempóban, több helyszínen is."
+            },
+            {
+              "title": "30 retusált kép",
+              "desc": "Professzionálisan retusált képek a legszebb pillanatokról."
+            },
+            {
+              "title": "+100 nyers kép",
+              "desc": "Digitálisan átadva, hogy minden fontos pillanat a kezedben legyen."
+            },
+            {
+              "title": "Teljes élmény",
+              "desc": "Tökéletes választás, ha szeretnéd megőrizni a kis élet első jeleit."
+            }
+          ]
+        }
       ],
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=500&q=80", "alt": "Kismama portré" },
-        { "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80", "alt": "Kismama fotózás szabadtéren" },
-        { "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80", "alt": "Várandós anyuka portré" },
-        { "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80", "alt": "Stúdió kismama fotózás" },
-        { "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80", "alt": "Kismama ruhás fotózás" },
-        { "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80", "alt": "Természetes fényű kismama" }
+        {
+          "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=500&q=80",
+          "alt": "Kismama portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80",
+          "alt": "Kismama fotózás szabadtéren"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80",
+          "alt": "Várandós anyuka portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
+          "alt": "Stúdió kismama fotózás"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80",
+          "alt": "Kismama ruhás fotózás"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80",
+          "alt": "Természetes fényű kismama"
+        }
       ],
-      "ctaLabel": "Babát vársz?", "ctaTitle": "Örökítsd meg ezt<br>a gyönyörű időszakot", "ctaButton": "Időpontfoglalás",
-      "prevService": "portfolio-model", "prevTitle": "Portfólió / Modell", "prevLabel": "Előző",
-      "nextService": "boudoir", "nextTitle": "Boudoir"
+      "ctaLabel": "Babát vársz?",
+      "ctaTitle": "Örökítsd meg ezt<br>a gyönyörű időszakot",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "portfolio-model",
+      "prevTitle": "Portfólió / Modell",
+      "prevLabel": "Előző",
+      "nextService": "boudoir",
+      "nextTitle": "Boudoir"
     },
     "boudoir": {
       "title": "Boudoir / Glamour Fotózás — Silverframe Studio | Szeged",
@@ -256,284 +563,838 @@
       "breadcrumb": "Boudoir",
       "introLabel": "Nőiesség & Magabiztosság",
       "introTitle": "Éld át a nőiességet<br>és a magabiztosságot",
-      "introDesc": ["Ez a fotózás nem csak képekről szól — hanem rólad, az erőről, nőiességről és azokról az oldalaidról, amiket talán még nem láttál magadon igazán.", "A Boudoir / Glamour fotózás elegáns, intimebb stílusú portrékat ad, amelyek egyszerre érzéki, nőies és művészi."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80", "alt": "Boudoir fotózás" },
+      "introDesc": [
+        "Ez a fotózás nem csak képekről szól — hanem rólad, az erőről, nőiességről és azokról az oldalaidról, amiket talán még nem láttál magadon igazán.",
+        "A Boudoir / Glamour fotózás elegáns, intimebb stílusú portrékat ad, amelyek egyszerre érzéki, nőies és művészi."
+      ],
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80",
+        "alt": "Boudoir fotózás"
+      },
       "packages": [
-        { "name": "Alap csomag — 80.000 Ft", "desc": "", "items": [
-          { "title": "60 perc fotózás", "desc": "Intim, nyugodt tempójú fotózás stúdióban." },
-          { "title": "3 fehérnemű szett", "desc": "Három különböző fehérnemű szett a változatos végeredményért." },
-          { "title": "15 retusált fotó", "desc": "Professzionálisan retusált képek digitális átadással." },
-          { "title": "Bizalmas galéria", "desc": "Privát online galéria a képek biztonságos megtekintéséhez." }
-        ]},
-        { "name": "Prémium csomag — 150.000 Ft", "desc": "Ezt a csomagot azoknak ajánljuk, akik nagyon sok fotót szeretnének!", "items": [
-          { "title": "Hosszabb fotózás", "desc": "Több helyszín, több szett, hogy minden oldaladat megmutathasd." },
-          { "title": "Minden fotó átadva", "desc": "Nem kell választanod — MINDEN fotó átadásra kerül." },
-          { "title": "20 db retusált kép", "desc": "Különleges retusálás kérésed szerint." },
-          { "title": "Teljes élmény", "desc": "Az élmény teljes, a képek pedig egyszerre érzéki, nőies és művészi." }
-        ]}
+        {
+          "name": "Alap csomag — 80.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "60 perc fotózás",
+              "desc": "Intim, nyugodt tempójú fotózás stúdióban."
+            },
+            {
+              "title": "3 fehérnemű szett",
+              "desc": "Három különböző fehérnemű szett a változatos végeredményért."
+            },
+            {
+              "title": "15 retusált fotó",
+              "desc": "Professzionálisan retusált képek digitális átadással."
+            },
+            {
+              "title": "Bizalmas galéria",
+              "desc": "Privát online galéria a képek biztonságos megtekintéséhez."
+            }
+          ]
+        },
+        {
+          "name": "Prémium csomag — 150.000 Ft",
+          "desc": "Ezt a csomagot azoknak ajánljuk, akik nagyon sok fotót szeretnének!",
+          "items": [
+            {
+              "title": "Hosszabb fotózás",
+              "desc": "Több helyszín, több szett, hogy minden oldaladat megmutathasd."
+            },
+            {
+              "title": "Minden fotó átadva",
+              "desc": "Nem kell választanod — MINDEN fotó átadásra kerül."
+            },
+            {
+              "title": "20 db retusált kép",
+              "desc": "Különleges retusálás kérésed szerint."
+            },
+            {
+              "title": "Teljes élmény",
+              "desc": "Az élmény teljes, a képek pedig egyszerre érzéki, nőies és művészi."
+            }
+          ]
+        }
       ],
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80", "alt": "Boudoir fotó" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80", "alt": "Glamour portré" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Elegáns portré" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80", "alt": "Boudoir részlet" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80", "alt": "Nőies portré" },
-        { "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80", "alt": "Glamour fotózás" }
+        {
+          "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",
+          "alt": "Boudoir fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
+          "alt": "Glamour portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Elegáns portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
+          "alt": "Boudoir részlet"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80",
+          "alt": "Nőies portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
+          "alt": "Glamour fotózás"
+        }
       ],
-      "ctaLabel": "Fedezd fel magad!", "ctaTitle": "Megmutatjuk a<br>legszebb oldalad", "ctaButton": "Időpontfoglalás",
-      "prevService": "maternity", "prevTitle": "Kismama", "prevLabel": "Előző",
-      "nextService": "family", "nextTitle": "Családi"
+      "ctaLabel": "Fedezd fel magad!",
+      "ctaTitle": "Megmutatjuk a<br>legszebb oldalad",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "maternity",
+      "prevTitle": "Kismama",
+      "prevLabel": "Előző",
+      "nextService": "family",
+      "nextTitle": "Családi"
     },
     "family": {
       "title": "Családi Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Családi fotózás Szegeden 60.000 Ft-tól. Természetes, vidám családi portrék szabadtéren.",
       "ogImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 04", "heroTitle": "Családi fotózás", "breadcrumb": "Családi",
-      "introLabel": "Együtt a család", "introTitle": "A családi pillanatok<br>örökre megmaradnak",
-      "introDesc": ["A családi pillanatok gyorsan elszaladnak, de a képeken örökké megmaradnak.", "Legyen szó a kicsik játékáról, a nagyobb gyerekek mosolyáról, vagy arról, hogy együtt vagytok a pároddal."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=700&q=80", "alt": "Családi fotózás" },
-      "packages": [{ "name": "Családi csomag — 60.000 Ft", "desc": "", "items": [
-        { "title": "60 perc fotózás", "desc": "Szabadtéri fotózás, természetes környezetben." },
-        { "title": "30 kidolgozott kép", "desc": "Professzionálisan kidolgozott képek digitális átadással." },
-        { "title": "Rugalmas helyszín", "desc": "Otthon, parkban, a természetben." },
-        { "title": "Spontán pillanatok", "desc": "Semmi erőltetett pózolás, csak ti és az igazi érzelmek." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&q=80", "alt": "Családi fotó" },
-        { "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80", "alt": "Családi pillanat" },
-        { "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80", "alt": "Család a természetben" },
-        { "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80", "alt": "Gyerekfotó" },
-        { "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80", "alt": "Családi ölelés" },
-        { "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80", "alt": "Család szabadtéren" }
+      "heroLabel": "Szolgáltatások / 04",
+      "heroTitle": "Családi fotózás",
+      "breadcrumb": "Családi",
+      "introLabel": "Együtt a család",
+      "introTitle": "A családi pillanatok<br>örökre megmaradnak",
+      "introDesc": [
+        "A családi pillanatok gyorsan elszaladnak, de a képeken örökké megmaradnak.",
+        "Legyen szó a kicsik játékáról, a nagyobb gyerekek mosolyáról, vagy arról, hogy együtt vagytok a pároddal."
       ],
-      "ctaLabel": "Családi fotózás", "ctaTitle": "Örökítsd meg a<br>közös pillanatokat", "ctaButton": "Időpontfoglalás",
-      "prevService": "boudoir", "prevTitle": "Boudoir", "prevLabel": "Előző",
-      "nextService": "couple", "nextTitle": "Páros"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=700&q=80",
+        "alt": "Családi fotózás"
+      },
+      "packages": [
+        {
+          "name": "Családi csomag — 60.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "60 perc fotózás",
+              "desc": "Szabadtéri fotózás, természetes környezetben."
+            },
+            {
+              "title": "30 kidolgozott kép",
+              "desc": "Professzionálisan kidolgozott képek digitális átadással."
+            },
+            {
+              "title": "Rugalmas helyszín",
+              "desc": "Otthon, parkban, a természetben."
+            },
+            {
+              "title": "Spontán pillanatok",
+              "desc": "Semmi erőltetett pózolás, csak ti és az igazi érzelmek."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&q=80",
+          "alt": "Családi fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80",
+          "alt": "Családi pillanat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80",
+          "alt": "Család a természetben"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80",
+          "alt": "Gyerekfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
+          "alt": "Családi ölelés"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80",
+          "alt": "Család szabadtéren"
+        }
+      ],
+      "ctaLabel": "Családi fotózás",
+      "ctaTitle": "Örökítsd meg a<br>közös pillanatokat",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "boudoir",
+      "prevTitle": "Boudoir",
+      "prevLabel": "Előző",
+      "nextService": "couple",
+      "nextTitle": "Páros"
     },
     "couple": {
       "title": "Páros / Jegyes Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Páros és jegyes fotózás Szegeden 70.000 Ft. 60 perc fotózás, 20 retusált fotó.",
       "ogImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 05", "heroTitle": "Páros / Jegyes", "breadcrumb": "Páros",
-      "introLabel": "Szerelem minden képkockában", "introTitle": "A szerelem a legszebb<br>történet",
-      "introDesc": ["Imádok olyan pillanatokat megörökíteni, amikor két ember egymásra figyel.", "Nincs pózolás, nincs túlbonyolított beállítás — csak ti, az érzések, a nevetés."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=700&q=80", "alt": "Páros fotózás" },
-      "packages": [{ "name": "Páros csomag — 70.000 Ft", "desc": "", "items": [
-        { "title": "60 perc fotózás", "desc": "Romantikus fotózás szabadtéren vagy stúdióban." },
-        { "title": "20 retusált fotó", "desc": "Professzionálisan retusált képek digitális átadással." },
-        { "title": "2 szett ruha", "desc": "Két különböző öltözet a változatos végeredményért." },
-        { "title": "Természetes pillanatok", "desc": "Nincs erőltetett pózolás — csak ti és az igazi érzések." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80", "alt": "Páros fotó" },
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80", "alt": "Jegyes fotózás" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", "alt": "Romantikus pillanat" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "Páros a természetben" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Szerelmes pár" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80", "alt": "Páros portré" }
+      "heroLabel": "Szolgáltatások / 05",
+      "heroTitle": "Páros / Jegyes",
+      "breadcrumb": "Páros",
+      "introLabel": "Szerelem minden képkockában",
+      "introTitle": "A szerelem a legszebb<br>történet",
+      "introDesc": [
+        "Imádok olyan pillanatokat megörökíteni, amikor két ember egymásra figyel.",
+        "Nincs pózolás, nincs túlbonyolított beállítás — csak ti, az érzések, a nevetés."
       ],
-      "ctaLabel": "Szerelmes fotózás", "ctaTitle": "Örökítsétek meg a<br>közös pillanataitokat", "ctaButton": "Időpontfoglalás",
-      "prevService": "family", "prevTitle": "Családi", "prevLabel": "Előző",
-      "nextService": "business", "nextTitle": "Üzleti portré"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=700&q=80",
+        "alt": "Páros fotózás"
+      },
+      "packages": [
+        {
+          "name": "Páros csomag — 70.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "60 perc fotózás",
+              "desc": "Romantikus fotózás szabadtéren vagy stúdióban."
+            },
+            {
+              "title": "20 retusált fotó",
+              "desc": "Professzionálisan retusált képek digitális átadással."
+            },
+            {
+              "title": "2 szett ruha",
+              "desc": "Két különböző öltözet a változatos végeredményért."
+            },
+            {
+              "title": "Természetes pillanatok",
+              "desc": "Nincs erőltetett pózolás — csak ti és az igazi érzések."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80",
+          "alt": "Páros fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+          "alt": "Jegyes fotózás"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
+          "alt": "Romantikus pillanat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
+          "alt": "Páros a természetben"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Szerelmes pár"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80",
+          "alt": "Páros portré"
+        }
+      ],
+      "ctaLabel": "Szerelmes fotózás",
+      "ctaTitle": "Örökítsétek meg a<br>közös pillanataitokat",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "family",
+      "prevTitle": "Családi",
+      "prevLabel": "Előző",
+      "nextService": "business",
+      "nextTitle": "Üzleti portré"
     },
     "business": {
       "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
       "ogImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 06", "heroTitle": "Üzleti portré", "breadcrumb": "Üzleti portré",
-      "introLabel": "Profi megjelenés", "introTitle": "Hiteles, profi képek<br>amikre büszke lehetsz",
-      "introDesc": ["Mindenkinek jól jön egy profi üzleti portré — akár önéletrajzhoz, weboldalhoz, LinkedInhez.", "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80", "alt": "Üzleti portré fotózás" },
+      "heroLabel": "Szolgáltatások / 06",
+      "heroTitle": "Üzleti portré",
+      "breadcrumb": "Üzleti portré",
+      "introLabel": "Profi megjelenés",
+      "introTitle": "Hiteles, profi képek<br>amikre büszke lehetsz",
+      "introDesc": [
+        "Mindenkinek jól jön egy profi üzleti portré — akár önéletrajzhoz, weboldalhoz, LinkedInhez.",
+        "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."
+      ],
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80",
+        "alt": "Üzleti portré fotózás"
+      },
       "packages": [
-        { "name": "Üzleti portré csomag — 60.000 Ft", "desc": "", "items": [
-          { "title": "30 perc fotózás", "desc": "Gyors, hatékony fotózás stúdióban vagy irodai környezetben." },
-          { "title": "5 db retusált kép", "desc": "Korrigált és szükség esetén retusált képek." },
-          { "title": "1 szett ruha", "desc": "Elegáns üzleti vagy laza, barátságos stílus." },
-          { "title": "Digitális átadás", "desc": "Online galéria a képek letöltéséhez." }
-        ]},
-        { "name": "Munkahelyi portfólió — 60.000 Ft", "desc": "Egy cég első benyomása ma már legtöbbször online történik.", "items": [
-          { "title": "30 perc fotózás", "desc": "Szabadtéri vagy irodai környezetben." },
-          { "title": "20 kidolgozott kép", "desc": "Csapatportrék, munkafolyamatok, irodai környezet." },
-          { "title": "Valódi helyzetek", "desc": "Nem beállított képek, hanem a céged hangulatát visszaadó fotók." },
-          { "title": "Marketing anyag", "desc": "Egységes, profi vizuális anyag weboldalra, social médiára." }
-        ]}
+        {
+          "name": "Üzleti portré csomag — 60.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "30 perc fotózás",
+              "desc": "Gyors, hatékony fotózás stúdióban vagy irodai környezetben."
+            },
+            {
+              "title": "5 db retusált kép",
+              "desc": "Korrigált és szükség esetén retusált képek."
+            },
+            {
+              "title": "1 szett ruha",
+              "desc": "Elegáns üzleti vagy laza, barátságos stílus."
+            },
+            {
+              "title": "Digitális átadás",
+              "desc": "Online galéria a képek letöltéséhez."
+            }
+          ]
+        },
+        {
+          "name": "Munkahelyi portfólió — 60.000 Ft",
+          "desc": "Egy cég első benyomása ma már legtöbbször online történik.",
+          "items": [
+            {
+              "title": "30 perc fotózás",
+              "desc": "Szabadtéri vagy irodai környezetben."
+            },
+            {
+              "title": "20 kidolgozott kép",
+              "desc": "Csapatportrék, munkafolyamatok, irodai környezet."
+            },
+            {
+              "title": "Valódi helyzetek",
+              "desc": "Nem beállított képek, hanem a céged hangulatát visszaadó fotók."
+            },
+            {
+              "title": "Marketing anyag",
+              "desc": "Egységes, profi vizuális anyag weboldalra, social médiára."
+            }
+          ]
+        }
       ],
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80", "alt": "Üzleti portré" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", "alt": "Vállalati fotó" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "LinkedIn portré" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Profi portré" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80", "alt": "Üzleti fotó" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80", "alt": "Céges portré" }
+        {
+          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
+          "alt": "Üzleti portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
+          "alt": "Vállalati fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
+          "alt": "LinkedIn portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Profi portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
+          "alt": "Üzleti fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
+          "alt": "Céges portré"
+        }
       ],
-      "ctaLabel": "Emeld a márkád!", "ctaTitle": "Profi képek, amik<br>tényleg téged mutatnak", "ctaButton": "Időpontfoglalás",
-      "prevService": "couple", "prevTitle": "Páros", "prevLabel": "Előző",
-      "nextService": "real-estate", "nextTitle": "Ingatlan"
+      "ctaLabel": "Emeld a márkád!",
+      "ctaTitle": "Profi képek, amik<br>tényleg téged mutatnak",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "couple",
+      "prevTitle": "Páros",
+      "prevLabel": "Előző",
+      "nextService": "real-estate",
+      "nextTitle": "Ingatlan"
     },
     "real-estate": {
       "title": "Ingatlan Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Ingatlan fotózás Szegeden 50.000 Ft. 30 perc fotózás, 20 kidolgozott kép.",
       "ogImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 07", "heroTitle": "Ingatlan fotózás", "breadcrumb": "Ingatlan",
-      "introLabel": "Az első benyomás számít", "introTitle": "Egy jó kép nem csak<br>megmutat — elad",
-      "introDesc": ["Az első benyomás ma már szinte mindig online történik. Ha a fotók nem elég jók, a vevő egyszerűen továbbgörget.", "A célom, hogy az ingatlan a lehető legjobb formáját mutassa."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80", "alt": "Ingatlan fotózás" },
-      "packages": [{ "name": "Ingatlan csomag — 50.000 Ft", "desc": "", "items": [
-        { "title": "30 perc fotózás", "desc": "Hatékony, professzionális helyszíni fotózás." },
-        { "title": "20 kidolgozott kép", "desc": "Professzionálisan kidolgozott, hirdetésre kész képek." },
-        { "title": "Belső & külső", "desc": "Beltéri és kültéri fotók egyaránt készülnek." },
-        { "title": "Gyors átadás", "desc": "A képek rövid időn belül digitálisan átadásra kerülnek." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&q=80", "alt": "Ingatlan fotó" },
-        { "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80", "alt": "Ház fotózás" },
-        { "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80", "alt": "Beltéri fotó" },
-        { "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500&q=80", "alt": "Lakás fotó" },
-        { "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=80", "alt": "Konyha fotó" },
-        { "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=500&q=80", "alt": "Nappali fotó" }
+      "heroLabel": "Szolgáltatások / 07",
+      "heroTitle": "Ingatlan fotózás",
+      "breadcrumb": "Ingatlan",
+      "introLabel": "Az első benyomás számít",
+      "introTitle": "Egy jó kép nem csak<br>megmutat — elad",
+      "introDesc": [
+        "Az első benyomás ma már szinte mindig online történik. Ha a fotók nem elég jók, a vevő egyszerűen továbbgörget.",
+        "A célom, hogy az ingatlan a lehető legjobb formáját mutassa."
       ],
-      "ctaLabel": "Gyorsabban eladnád?", "ctaTitle": "Profi képek, amik<br>eladják az ingatlant", "ctaButton": "Időpontfoglalás",
-      "prevService": "business", "prevTitle": "Üzleti portré", "prevLabel": "Előző",
-      "nextService": "wedding", "nextTitle": "Esküvő"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+        "alt": "Ingatlan fotózás"
+      },
+      "packages": [
+        {
+          "name": "Ingatlan csomag — 50.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "30 perc fotózás",
+              "desc": "Hatékony, professzionális helyszíni fotózás."
+            },
+            {
+              "title": "20 kidolgozott kép",
+              "desc": "Professzionálisan kidolgozott, hirdetésre kész képek."
+            },
+            {
+              "title": "Belső & külső",
+              "desc": "Beltéri és kültéri fotók egyaránt készülnek."
+            },
+            {
+              "title": "Gyors átadás",
+              "desc": "A képek rövid időn belül digitálisan átadásra kerülnek."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&q=80",
+          "alt": "Ingatlan fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
+          "alt": "Ház fotózás"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80",
+          "alt": "Beltéri fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500&q=80",
+          "alt": "Lakás fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=80",
+          "alt": "Konyha fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=500&q=80",
+          "alt": "Nappali fotó"
+        }
+      ],
+      "ctaLabel": "Gyorsabban eladnád?",
+      "ctaTitle": "Profi képek, amik<br>eladják az ingatlant",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "business",
+      "prevTitle": "Üzleti portré",
+      "prevLabel": "Előző",
+      "nextService": "wedding",
+      "nextTitle": "Esküvő"
     },
     "wedding": {
       "title": "Esküvői Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Esküvői fotózás Szegeden. Dokumentarista stílusú esküvői fotózás. Kérj egyedi ajánlatot!",
       "ogImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 08", "heroTitle": "Esküvői fotózás", "breadcrumb": "Esküvő",
-      "introLabel": "A nagy nap", "introTitle": "Minden pillanat<br>örök emlék",
-      "introDesc": ["Az esküvő napja az élet egyik legszebb és legizgalmasabb eseménye. Dokumentarista stílusú fotózásommal megörökítem a nagy nap minden fontos pillanatát.", "Nem zavarom az eseményt, hanem a háttérben dolgozva kapom el azokat a helyzeteket, amik igazán számítanak."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80", "alt": "Esküvői fotózás" },
-      "packages": [{ "name": "Mit tartalmaz — Egyedi ajánlat", "desc": "Minden esküvő egyedi, ezért az árazás is személyre szabott.", "items": [
-        { "title": "Egyeztetés", "desc": "Személyes találkozó a részletek és elvárások megbeszélésére." },
-        { "title": "Egész napos fotózás", "desc": "A készülődéstől a vacsora utáni táncig, végig ott vagyok." },
-        { "title": "300+ szerkesztett kép", "desc": "Professzionálisan szerkesztett képek digitális galériában." },
-        { "title": "Egyedi esküvői album", "desc": "Opcionálisan rendelhető, egyedi tervezésű fotóalbum." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80", "alt": "Esküvői fotó" },
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80", "alt": "Esküvői pár" },
-        { "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80", "alt": "Esküvői részlet" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", "alt": "Esküvői pillanat" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Menyasszony" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "Esküvői portré" }
+      "heroLabel": "Szolgáltatások / 08",
+      "heroTitle": "Esküvői fotózás",
+      "breadcrumb": "Esküvő",
+      "introLabel": "A nagy nap",
+      "introTitle": "Minden pillanat<br>örök emlék",
+      "introDesc": [
+        "Az esküvő napja az élet egyik legszebb és legizgalmasabb eseménye. Dokumentarista stílusú fotózásommal megörökítem a nagy nap minden fontos pillanatát.",
+        "Nem zavarom az eseményt, hanem a háttérben dolgozva kapom el azokat a helyzeteket, amik igazán számítanak."
       ],
-      "ctaLabel": "Készültök a nagy napra?", "ctaTitle": "Örökítsük meg együtt<br>a legszebb napotokat", "ctaButton": "Ajánlatkérés",
-      "prevService": "real-estate", "prevTitle": "Ingatlan", "prevLabel": "Előző",
-      "nextService": "wedding-creative", "nextTitle": "Esküvői kreatív"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
+        "alt": "Esküvői fotózás"
+      },
+      "packages": [
+        {
+          "name": "Mit tartalmaz — Egyedi ajánlat",
+          "desc": "Minden esküvő egyedi, ezért az árazás is személyre szabott.",
+          "items": [
+            {
+              "title": "Egyeztetés",
+              "desc": "Személyes találkozó a részletek és elvárások megbeszélésére."
+            },
+            {
+              "title": "Egész napos fotózás",
+              "desc": "A készülődéstől a vacsora utáni táncig, végig ott vagyok."
+            },
+            {
+              "title": "300+ szerkesztett kép",
+              "desc": "Professzionálisan szerkesztett képek digitális galériában."
+            },
+            {
+              "title": "Egyedi esküvői album",
+              "desc": "Opcionálisan rendelhető, egyedi tervezésű fotóalbum."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/1774723218982-tengerparti_esk_v__karolyifoto__5_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723250182-tengerparti_esk_v__karolyifoto__8_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723258796-tengerparti_esk_v__karolyifoto__18_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723264456-www.karolyifoto.hu__25_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723268615-www.karolyifoto.hu__3_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723272943-tengerparti_esk_v__karolyifoto__17_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723275759-www.karolyifoto.hu__6_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723278879-www.karolyifoto.hu__9_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723280292-www.karolyifoto.hu__10_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723282859-www.karolyifoto.hu__16_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723286902-www.karolyifoto.hu__15_of_25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1774723288750-www.karolyifoto.hu__11_of_25_.jpg",
+          "alt": ""
+        }
+      ],
+      "ctaLabel": "Készültök a nagy napra?",
+      "ctaTitle": "Örökítsük meg együtt<br>a legszebb napotokat",
+      "ctaButton": "Ajánlatkérés",
+      "prevService": "real-estate",
+      "prevTitle": "Ingatlan",
+      "prevLabel": "Előző",
+      "nextService": "wedding-creative",
+      "nextTitle": "Esküvői kreatív"
     },
     "wedding-creative": {
       "title": "Esküvői Kreatív Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Esküvői kreatív fotózás Szegeden 70.000 Ft. 90 perc szabadtéri fotózás, 50 kidolgozott kép.",
       "ogImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 09", "heroTitle": "Esküvői kreatív", "breadcrumb": "Esküvői kreatív",
-      "introLabel": "Ahol igazán lehet alkotni", "introTitle": "A kreatív fotózás<br>csak rólatok szól",
-      "introDesc": ["Az esküvő napja sokszor rohanós. A kreatív fotózás viszont szólhat csak rólatok.", "Akár az esküvő napján, akár egy külön napon készítjük el, itt nincs kapkodás, nincs időnyomás."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=700&q=80", "alt": "Esküvői kreatív fotózás" },
-      "packages": [{ "name": "Esküvői kreatív csomag — 70.000 Ft", "desc": "", "items": [
-        { "title": "90 perc fotózás", "desc": "Szabadtéri fotózás természetben, városi környezetben, vagy fontos helyszínen." },
-        { "title": "50 kidolgozott kép", "desc": "Professzionálisan kidolgozott képek digitális átadással." },
-        { "title": "Nincs időnyomás", "desc": "Lehet természetben, városi környezetben, vagy egy számotokra fontos helyszínen." },
-        { "title": "Személyes hangulat", "desc": "A lényeg, hogy rólatok szóljon." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80", "alt": "Esküvői kreatív fotó" },
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80", "alt": "Kreatív esküvői pár" },
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80", "alt": "Esküvői portré" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", "alt": "Kreatív pillanat" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Művészi esküvői kép" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "Esküvői kreatív portré" }
+      "heroLabel": "Szolgáltatások / 09",
+      "heroTitle": "Esküvői kreatív",
+      "breadcrumb": "Esküvői kreatív",
+      "introLabel": "Ahol igazán lehet alkotni",
+      "introTitle": "A kreatív fotózás<br>csak rólatok szól",
+      "introDesc": [
+        "Az esküvő napja sokszor rohanós. A kreatív fotózás viszont szólhat csak rólatok.",
+        "Akár az esküvő napján, akár egy külön napon készítjük el, itt nincs kapkodás, nincs időnyomás."
       ],
-      "ctaLabel": "Alkossunk együtt!", "ctaTitle": "Művészi képek,<br>amikben ott vagytok", "ctaButton": "Időpontfoglalás",
-      "prevService": "wedding", "prevTitle": "Esküvő", "prevLabel": "Előző",
-      "nextService": "event", "nextTitle": "Rendezvény"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=700&q=80",
+        "alt": "Esküvői kreatív fotózás"
+      },
+      "packages": [
+        {
+          "name": "Esküvői kreatív csomag — 70.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "90 perc fotózás",
+              "desc": "Szabadtéri fotózás természetben, városi környezetben, vagy fontos helyszínen."
+            },
+            {
+              "title": "50 kidolgozott kép",
+              "desc": "Professzionálisan kidolgozott képek digitális átadással."
+            },
+            {
+              "title": "Nincs időnyomás",
+              "desc": "Lehet természetben, városi környezetben, vagy egy számotokra fontos helyszínen."
+            },
+            {
+              "title": "Személyes hangulat",
+              "desc": "A lényeg, hogy rólatok szóljon."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80",
+          "alt": "Esküvői kreatív fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+          "alt": "Kreatív esküvői pár"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80",
+          "alt": "Esküvői portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
+          "alt": "Kreatív pillanat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Művészi esküvői kép"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
+          "alt": "Esküvői kreatív portré"
+        },
+        {
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "ctaLabel": "Alkossunk együtt!",
+      "ctaTitle": "Művészi képek,<br>amikben ott vagytok",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "wedding",
+      "prevTitle": "Esküvő",
+      "prevLabel": "Előző",
+      "nextService": "event",
+      "nextTitle": "Rendezvény"
     },
     "event": {
       "title": "Rendezvény Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Rendezvény fotózás Szegeden. Céges események, konferenciák professzionális fotózása.",
       "ogImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 10", "heroTitle": "Rendezvény fotózás", "breadcrumb": "Rendezvény",
-      "introLabel": "Minden pillanat számít", "introTitle": "Egy rendezvény gyorsan<br>véget ér — a képek megmaradnak",
-      "introDesc": ["Legyen szó céges eseményről, konferenciáról, csapatépítőről vagy privát rendezvényről, a cél, hogy minden fontos pillanat meg legyen örökítve.", "A fotózás során nem zavarom az eseményt, hanem a háttérben dolgozva kapom el azokat a helyzeteket, amik igazán számítanak."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80", "alt": "Rendezvény fotózás" },
-      "packages": [{ "name": "Mit tartalmaz — Egyedi ajánlat", "desc": "Minden rendezvény más, ezért az árazás is személyre szabott.", "items": [
-        { "title": "Háttérben dolgozom", "desc": "Nem zavarom az eseményt, természetes helyzeteket kapok el." },
-        { "title": "Csoportképek", "desc": "Beállítottabb képek is készülnek, ha szükség van rá." },
-        { "title": "Gyors átadás", "desc": "A képek rövid időn belül digitálisan átadásra kerülnek." },
-        { "title": "Marketing kész", "desc": "Képek, amiket weboldalon, social médiában használhatsz." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80", "alt": "Rendezvény fotó" },
-        { "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80", "alt": "Céges esemény" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80", "alt": "Konferencia fotó" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80", "alt": "Esemény részlet" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80", "alt": "Gála fotó" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80", "alt": "Ünnepség fotó" }
+      "heroLabel": "Szolgáltatások / 10",
+      "heroTitle": "Rendezvény fotózás",
+      "breadcrumb": "Rendezvény",
+      "introLabel": "Minden pillanat számít",
+      "introTitle": "Egy rendezvény gyorsan<br>véget ér — a képek megmaradnak",
+      "introDesc": [
+        "Legyen szó céges eseményről, konferenciáról, csapatépítőről vagy privát rendezvényről, a cél, hogy minden fontos pillanat meg legyen örökítve.",
+        "A fotózás során nem zavarom az eseményt, hanem a háttérben dolgozva kapom el azokat a helyzeteket, amik igazán számítanak."
       ],
-      "ctaLabel": "Rendezvényed lesz?", "ctaTitle": "Örökítsük meg együtt<br>az eseményed hangulatát", "ctaButton": "Ajánlatkérés",
-      "prevService": "wedding-creative", "prevTitle": "Esküvői kreatív", "prevLabel": "Előző",
-      "nextService": "pet", "nextTitle": "Kisállat"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80",
+        "alt": "Rendezvény fotózás"
+      },
+      "packages": [
+        {
+          "name": "Mit tartalmaz — Egyedi ajánlat",
+          "desc": "Minden rendezvény más, ezért az árazás is személyre szabott.",
+          "items": [
+            {
+              "title": "Háttérben dolgozom",
+              "desc": "Nem zavarom az eseményt, természetes helyzeteket kapok el."
+            },
+            {
+              "title": "Csoportképek",
+              "desc": "Beállítottabb képek is készülnek, ha szükség van rá."
+            },
+            {
+              "title": "Gyors átadás",
+              "desc": "A képek rövid időn belül digitálisan átadásra kerülnek."
+            },
+            {
+              "title": "Marketing kész",
+              "desc": "Képek, amiket weboldalon, social médiában használhatsz."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80",
+          "alt": "Rendezvény fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
+          "alt": "Céges esemény"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
+          "alt": "Konferencia fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
+          "alt": "Esemény részlet"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
+          "alt": "Gála fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
+          "alt": "Ünnepség fotó"
+        }
+      ],
+      "ctaLabel": "Rendezvényed lesz?",
+      "ctaTitle": "Örökítsük meg együtt<br>az eseményed hangulatát",
+      "ctaButton": "Ajánlatkérés",
+      "prevService": "wedding-creative",
+      "prevTitle": "Esküvői kreatív",
+      "prevLabel": "Előző",
+      "nextService": "pet",
+      "nextTitle": "Kisállat"
     },
     "pet": {
       "title": "Kisállat Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Kisállat fotózás Szegeden 45.000 Ft-tól. Kutyák, macskák professzionális fotózása.",
       "ogImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 11", "heroTitle": "Kisállat fotózás", "breadcrumb": "Kisállat",
-      "introLabel": "A leghűségesebb társak", "introTitle": "Mert ők is<br>a család részei",
-      "introDesc": ["A kisállatod nem csak háziállat — családtag, legjobb barát, és sokszor a nap fénypontja.", "A fotózás során türelmesen dolgozom, alkalmazkodom a kedvenced ritmusához."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&q=80", "alt": "Kisállat fotózás" },
-      "packages": [{ "name": "Kisállat csomag — 45.000 Ft", "desc": "", "items": [
-        { "title": "45 perc fotózás", "desc": "Stúdióban vagy szabadtéren, a kedvenced tempójában." },
-        { "title": "15 kidolgozott kép", "desc": "Professzionálisan kidolgozott képek digitális átadással." },
-        { "title": "Gazdi is jöhet", "desc": "Közös képek a gazdival, ha szeretnéd." },
-        { "title": "Türelmes megközelítés", "desc": "Alkalmazkodom a kedvencedhez — szünetekkel, játékkal." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80", "alt": "Kutya portré" },
-        { "src": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=500&q=80", "alt": "Macska fotó" },
-        { "src": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&q=80", "alt": "Kutyák a parkban" },
-        { "src": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=500&q=80", "alt": "Golden retriever portré" },
-        { "src": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=500&q=80", "alt": "Macska portré" },
-        { "src": "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=500&q=80", "alt": "Kutya szabadtéren" }
+      "heroLabel": "Szolgáltatások / 11",
+      "heroTitle": "Kisállat fotózás",
+      "breadcrumb": "Kisállat",
+      "introLabel": "A leghűségesebb társak",
+      "introTitle": "Mert ők is<br>a család részei",
+      "introDesc": [
+        "A kisállatod nem csak háziállat — családtag, legjobb barát, és sokszor a nap fénypontja.",
+        "A fotózás során türelmesen dolgozom, alkalmazkodom a kedvenced ritmusához."
       ],
-      "ctaLabel": "Kedvenced is megérdemli!", "ctaTitle": "Örökítsd meg<br>a leghűségesebb társadat", "ctaButton": "Időpontfoglalás",
-      "prevService": "event", "prevTitle": "Rendezvény", "prevLabel": "Előző",
-      "nextService": "product", "nextTitle": "Termékfotó"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&q=80",
+        "alt": "Kisállat fotózás"
+      },
+      "packages": [
+        {
+          "name": "Kisállat csomag — 45.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "45 perc fotózás",
+              "desc": "Stúdióban vagy szabadtéren, a kedvenced tempójában."
+            },
+            {
+              "title": "15 kidolgozott kép",
+              "desc": "Professzionálisan kidolgozott képek digitális átadással."
+            },
+            {
+              "title": "Gazdi is jöhet",
+              "desc": "Közös képek a gazdival, ha szeretnéd."
+            },
+            {
+              "title": "Türelmes megközelítés",
+              "desc": "Alkalmazkodom a kedvencedhez — szünetekkel, játékkal."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80",
+          "alt": "Kutya portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=500&q=80",
+          "alt": "Macska fotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&q=80",
+          "alt": "Kutyák a parkban"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=500&q=80",
+          "alt": "Golden retriever portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=500&q=80",
+          "alt": "Macska portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=500&q=80",
+          "alt": "Kutya szabadtéren"
+        }
+      ],
+      "ctaLabel": "Kedvenced is megérdemli!",
+      "ctaTitle": "Örökítsd meg<br>a leghűségesebb társadat",
+      "ctaButton": "Időpontfoglalás",
+      "prevService": "event",
+      "prevTitle": "Rendezvény",
+      "prevLabel": "Előző",
+      "nextService": "product",
+      "nextTitle": "Termékfotó"
     },
     "product": {
       "title": "Termékfotózás — Silverframe Studio | Szeged",
       "metaDesc": "Termékfotózás Szegeden 55.000 Ft-tól. Professzionális termékfotók webshophoz.",
       "ogImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&q=80",
-      "heroLabel": "Szolgáltatások / 12", "heroTitle": "Termékfotózás", "breadcrumb": "Termékfotó",
-      "introLabel": "A termék, ami elad", "introTitle": "Egy jó termékfotó<br>többet mond ezer szónál",
-      "introDesc": ["Az online vásárlás világában a termékfotó az első benyomás, ami alapján a vevő dönt.", "Legyen szó webshop termékfotóról, katalógusképről vagy lifestyle fotóról."],
-      "introImage": { "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80", "alt": "Termékfotózás" },
-      "packages": [{ "name": "Termékfotó csomag — 55.000 Ft", "desc": "", "items": [
-        { "title": "10 termék fotózása", "desc": "Fehér háttéren vagy egyedi beállításban, igény szerint." },
-        { "title": "30 kidolgozott kép", "desc": "Professzionálisan szerkesztett, webshop-kész képek." },
-        { "title": "Lifestyle opció", "desc": "Hangulatos, életképszerű fotók kontextusba helyezve." },
-        { "title": "Gyors átadás", "desc": "A képek rövid időn belül digitálisan átadásra kerülnek." }
-      ]}],
-      "gallery": [
-        { "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80", "alt": "Termékfotó fejhallgató" },
-        { "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80", "alt": "Óra termékfotó" },
-        { "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80", "alt": "Napszemüveg termékfotó" },
-        { "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&q=80", "alt": "Kozmetikai termékfotó" },
-        { "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&q=80", "alt": "Cipő termékfotó" },
-        { "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80", "alt": "Parfüm termékfotó" }
+      "heroLabel": "Szolgáltatások / 12",
+      "heroTitle": "Termékfotózás",
+      "breadcrumb": "Termékfotó",
+      "introLabel": "A termék, ami elad",
+      "introTitle": "Egy jó termékfotó<br>többet mond ezer szónál",
+      "introDesc": [
+        "Az online vásárlás világában a termékfotó az első benyomás, ami alapján a vevő dönt.",
+        "Legyen szó webshop termékfotóról, katalógusképről vagy lifestyle fotóról."
       ],
-      "ctaLabel": "Profi képek kellenek?", "ctaTitle": "Termékfotók, amik<br>eladják magukat", "ctaButton": "Ajánlatkérés",
-      "prevService": "pet", "prevTitle": "Kisállat", "prevLabel": "Előző",
-      "nextService": null, "nextTitle": "Áttekintés", "nextLabel": "Összes szolgáltatás"
+      "introImage": {
+        "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80",
+        "alt": "Termékfotózás"
+      },
+      "packages": [
+        {
+          "name": "Termékfotó csomag — 55.000 Ft",
+          "desc": "",
+          "items": [
+            {
+              "title": "10 termék fotózása",
+              "desc": "Fehér háttéren vagy egyedi beállításban, igény szerint."
+            },
+            {
+              "title": "30 kidolgozott kép",
+              "desc": "Professzionálisan szerkesztett, webshop-kész képek."
+            },
+            {
+              "title": "Lifestyle opció",
+              "desc": "Hangulatos, életképszerű fotók kontextusba helyezve."
+            },
+            {
+              "title": "Gyors átadás",
+              "desc": "A képek rövid időn belül digitálisan átadásra kerülnek."
+            }
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
+          "alt": "Termékfotó fejhallgató"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80",
+          "alt": "Óra termékfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80",
+          "alt": "Napszemüveg termékfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&q=80",
+          "alt": "Kozmetikai termékfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&q=80",
+          "alt": "Cipő termékfotó"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80",
+          "alt": "Parfüm termékfotó"
+        }
+      ],
+      "ctaLabel": "Profi képek kellenek?",
+      "ctaTitle": "Termékfotók, amik<br>eladják magukat",
+      "ctaButton": "Ajánlatkérés",
+      "prevService": "pet",
+      "prevTitle": "Kisállat",
+      "prevLabel": "Előző",
+      "nextService": null,
+      "nextTitle": "Áttekintés",
+      "nextLabel": "Összes szolgáltatás"
     }
   },
   "portfolioPages": {
@@ -541,185 +1402,625 @@
       "title": "Portfólió / Modell Galéria — Silverframe Studio",
       "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
       "heroImage": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Portfólió / Modell", "breadcrumb": "Portfólió / Modell",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Portfólió / Modell",
+      "breadcrumb": "Portfólió / Modell",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80", "alt": "Portré stúdió világítás", "title": "Stúdió portré I", "subtitle": "Portfólió / Stúdió" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Természetes fényű portré", "title": "Természetes fény", "subtitle": "Portfólió / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Férfi portré", "title": "Az Építész", "subtitle": "Portfólió / Környezeti" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80", "alt": "Közeli portré", "title": "Csendes erő", "subtitle": "Portfólió / Közeli" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "Arany óra portré", "title": "Arany óra", "subtitle": "Portfólió / Természetes fény" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80", "alt": "Editorial portré", "title": "Minimalista", "subtitle": "Portfólió / Editorial" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80", "alt": "Divat portré", "title": "Elegancia", "subtitle": "Portfólió / Divat" },
-        { "src": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80", "alt": "Modell fotózás", "title": "Mozgásban", "subtitle": "Modell / Divat" },
-        { "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80", "alt": "Utcai modell fotó", "title": "Városi portré", "subtitle": "Modell / Utcai" }
+        {
+          "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
+          "alt": "Portré stúdió világítás",
+          "title": "Stúdió portré I",
+          "subtitle": "Portfólió / Stúdió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Természetes fényű portré",
+          "title": "Természetes fény",
+          "subtitle": "Portfólió / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Férfi portré",
+          "title": "Az Építész",
+          "subtitle": "Portfólió / Környezeti"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
+          "alt": "Közeli portré",
+          "title": "Csendes erő",
+          "subtitle": "Portfólió / Közeli"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "Arany óra portré",
+          "title": "Arany óra",
+          "subtitle": "Portfólió / Természetes fény"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80",
+          "alt": "Editorial portré",
+          "title": "Minimalista",
+          "subtitle": "Portfólió / Editorial"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
+          "alt": "Divat portré",
+          "title": "Elegancia",
+          "subtitle": "Portfólió / Divat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80",
+          "alt": "Modell fotózás",
+          "title": "Mozgásban",
+          "subtitle": "Modell / Divat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80",
+          "alt": "Utcai modell fotó",
+          "title": "Városi portré",
+          "subtitle": "Modell / Utcai"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/portfolio-model.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/portfolio-model.html"
     },
     "maternity": {
-      "title": "Kismama Galéria — Silverframe Studio", "metaDesc": "Kismama fotózás galéria.",
+      "title": "Kismama Galéria — Silverframe Studio",
+      "metaDesc": "Kismama fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Kismama", "breadcrumb": "Kismama",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Kismama",
+      "breadcrumb": "Kismama",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80", "alt": "Kismama portré", "title": "Várakozás", "subtitle": "Kismama / Stúdió" },
-        { "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=80", "alt": "Kismama szabadtéren", "title": "Természetben", "subtitle": "Kismama / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80", "alt": "Várandós portré", "title": "Új élet", "subtitle": "Kismama / Portré" },
-        { "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80", "alt": "Stúdió kismama", "title": "Ölelés", "subtitle": "Kismama / Stúdió" },
-        { "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=600&q=80", "alt": "Kismama ruhás", "title": "Elegancia", "subtitle": "Kismama / Elegáns" },
-        { "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&q=80", "alt": "Természetes fényű kismama", "title": "Fény", "subtitle": "Kismama / Természetes" }
+        {
+          "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80",
+          "alt": "Kismama portré",
+          "title": "Várakozás",
+          "subtitle": "Kismama / Stúdió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=80",
+          "alt": "Kismama szabadtéren",
+          "title": "Természetben",
+          "subtitle": "Kismama / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80",
+          "alt": "Várandós portré",
+          "title": "Új élet",
+          "subtitle": "Kismama / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80",
+          "alt": "Stúdió kismama",
+          "title": "Ölelés",
+          "subtitle": "Kismama / Stúdió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=600&q=80",
+          "alt": "Kismama ruhás",
+          "title": "Elegancia",
+          "subtitle": "Kismama / Elegáns"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&q=80",
+          "alt": "Természetes fényű kismama",
+          "title": "Fény",
+          "subtitle": "Kismama / Természetes"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/maternity.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/maternity.html"
     },
     "boudoir": {
-      "title": "Boudoir Galéria — Silverframe Studio", "metaDesc": "Boudoir fotózás galéria.",
+      "title": "Boudoir Galéria — Silverframe Studio",
+      "metaDesc": "Boudoir fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Boudoir", "breadcrumb": "Boudoir",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Boudoir",
+      "breadcrumb": "Boudoir",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80", "alt": "Boudoir fotó", "title": "Magabiztosság", "subtitle": "Boudoir / Elegáns" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80", "alt": "Glamour portré", "title": "Glamour", "subtitle": "Boudoir / Stúdió" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Elegáns portré", "title": "Erő", "subtitle": "Boudoir / Portré" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80", "alt": "Boudoir részlet", "title": "Részletek", "subtitle": "Boudoir / Közeli" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80", "alt": "Nőies portré", "title": "Nőiesség", "subtitle": "Boudoir / Művészi" },
-        { "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80", "alt": "Glamour fotózás", "title": "Szépség", "subtitle": "Glamour / Editorial" }
+        {
+          "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80",
+          "alt": "Boudoir fotó",
+          "title": "Magabiztosság",
+          "subtitle": "Boudoir / Elegáns"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
+          "alt": "Glamour portré",
+          "title": "Glamour",
+          "subtitle": "Boudoir / Stúdió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Elegáns portré",
+          "title": "Erő",
+          "subtitle": "Boudoir / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
+          "alt": "Boudoir részlet",
+          "title": "Részletek",
+          "subtitle": "Boudoir / Közeli"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80",
+          "alt": "Nőies portré",
+          "title": "Nőiesség",
+          "subtitle": "Boudoir / Művészi"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80",
+          "alt": "Glamour fotózás",
+          "title": "Szépség",
+          "subtitle": "Glamour / Editorial"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/boudoir.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/boudoir.html"
     },
     "family": {
-      "title": "Családi Galéria — Silverframe Studio", "metaDesc": "Családi fotózás galéria.",
+      "title": "Családi Galéria — Silverframe Studio",
+      "metaDesc": "Családi fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Családi", "breadcrumb": "Családi",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Családi",
+      "breadcrumb": "Családi",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80", "alt": "Családi fotó", "title": "Együtt", "subtitle": "Családi / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=80", "alt": "Családi pillanat", "title": "Pillanat", "subtitle": "Családi / Természetes" },
-        { "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=600&q=80", "alt": "Család a természetben", "title": "Természetben", "subtitle": "Családi / Park" },
-        { "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&q=80", "alt": "Gyerekfotó", "title": "Gyerekkor", "subtitle": "Családi / Portré" },
-        { "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80", "alt": "Családi ölelés", "title": "Ölelés", "subtitle": "Családi / Érzelem" },
-        { "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80", "alt": "Család szabadtéren", "title": "Séta", "subtitle": "Családi / Szabadtéri" }
+        {
+          "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
+          "alt": "Családi fotó",
+          "title": "Együtt",
+          "subtitle": "Családi / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=80",
+          "alt": "Családi pillanat",
+          "title": "Pillanat",
+          "subtitle": "Családi / Természetes"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=600&q=80",
+          "alt": "Család a természetben",
+          "title": "Természetben",
+          "subtitle": "Családi / Park"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&q=80",
+          "alt": "Gyerekfotó",
+          "title": "Gyerekkor",
+          "subtitle": "Családi / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80",
+          "alt": "Családi ölelés",
+          "title": "Ölelés",
+          "subtitle": "Családi / Érzelem"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80",
+          "alt": "Család szabadtéren",
+          "title": "Séta",
+          "subtitle": "Családi / Szabadtéri"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/family.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/family.html"
     },
     "couple": {
-      "title": "Páros Galéria — Silverframe Studio", "metaDesc": "Páros fotózás galéria.",
+      "title": "Páros Galéria — Silverframe Studio",
+      "metaDesc": "Páros fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Páros", "breadcrumb": "Páros",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Páros",
+      "breadcrumb": "Páros",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80", "alt": "Páros fotó", "title": "Szerelem", "subtitle": "Páros / Természetes" },
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80", "alt": "Jegyes fotó", "title": "Jegyesek", "subtitle": "Páros / Romantikus" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Romantikus", "title": "Pillanat", "subtitle": "Páros / Spontán" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "Páros természetben", "title": "Séta", "subtitle": "Páros / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Szerelmes pár", "title": "Összhang", "subtitle": "Páros / Portré" },
-        { "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80", "alt": "Páros portré", "title": "Együtt", "subtitle": "Páros / Stúdió" }
+        {
+          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
+          "alt": "Páros fotó",
+          "title": "Szerelem",
+          "subtitle": "Páros / Természetes"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
+          "alt": "Jegyes fotó",
+          "title": "Jegyesek",
+          "subtitle": "Páros / Romantikus"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Romantikus",
+          "title": "Pillanat",
+          "subtitle": "Páros / Spontán"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "Páros természetben",
+          "title": "Séta",
+          "subtitle": "Páros / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Szerelmes pár",
+          "title": "Összhang",
+          "subtitle": "Páros / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80",
+          "alt": "Páros portré",
+          "title": "Együtt",
+          "subtitle": "Páros / Stúdió"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk nektek is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/couple.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk nektek is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/couple.html"
     },
     "business": {
-      "title": "Üzleti Portré Galéria — Silverframe Studio", "metaDesc": "Üzleti portré galéria.",
+      "title": "Üzleti Portré Galéria — Silverframe Studio",
+      "metaDesc": "Üzleti portré galéria.",
       "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Üzleti portré", "breadcrumb": "Üzleti portré",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Üzleti portré",
+      "breadcrumb": "Üzleti portré",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80", "alt": "Üzleti portré", "title": "Profi megjelenés", "subtitle": "Üzleti / Stúdió" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Vállalati fotó", "title": "Vezetői portré", "subtitle": "Üzleti / Irodai" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "LinkedIn portré", "title": "LinkedIn kész", "subtitle": "Üzleti / Online" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Profi portré", "title": "Magabiztosság", "subtitle": "Üzleti / Portré" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80", "alt": "Üzleti fotó", "title": "Csapat", "subtitle": "Vállalati / Csoportkép" },
-        { "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80", "alt": "Céges portré", "title": "Branding", "subtitle": "Üzleti / Marketing" }
+        {
+          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
+          "alt": "Üzleti portré",
+          "title": "Profi megjelenés",
+          "subtitle": "Üzleti / Stúdió"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Vállalati fotó",
+          "title": "Vezetői portré",
+          "subtitle": "Üzleti / Irodai"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "LinkedIn portré",
+          "title": "LinkedIn kész",
+          "subtitle": "Üzleti / Online"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Profi portré",
+          "title": "Magabiztosság",
+          "subtitle": "Üzleti / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
+          "alt": "Üzleti fotó",
+          "title": "Csapat",
+          "subtitle": "Vállalati / Csoportkép"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
+          "alt": "Céges portré",
+          "title": "Branding",
+          "subtitle": "Üzleti / Marketing"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/business.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk neked is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/business.html"
     },
     "real-estate": {
-      "title": "Ingatlan Galéria — Silverframe Studio", "metaDesc": "Ingatlan fotózás galéria.",
+      "title": "Ingatlan Galéria — Silverframe Studio",
+      "metaDesc": "Ingatlan fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Ingatlan", "breadcrumb": "Ingatlan",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Ingatlan",
+      "breadcrumb": "Ingatlan",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80", "alt": "Ingatlan fotó", "title": "Modern ház", "subtitle": "Ingatlan / Kültéri" },
-        { "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", "alt": "Ház fotó", "title": "Villa", "subtitle": "Ingatlan / Homlokzat" },
-        { "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", "alt": "Beltéri fotó", "title": "Nappali", "subtitle": "Ingatlan / Beltéri" },
-        { "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80", "alt": "Lakás fotó", "title": "Kert", "subtitle": "Ingatlan / Kültéri" },
-        { "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80", "alt": "Konyha fotó", "title": "Konyha", "subtitle": "Ingatlan / Beltéri" },
-        { "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=600&q=80", "alt": "Nappali fotó", "title": "Tér és fény", "subtitle": "Ingatlan / Design" }
+        {
+          "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+          "alt": "Ingatlan fotó",
+          "title": "Modern ház",
+          "subtitle": "Ingatlan / Kültéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+          "alt": "Ház fotó",
+          "title": "Villa",
+          "subtitle": "Ingatlan / Homlokzat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80",
+          "alt": "Beltéri fotó",
+          "title": "Nappali",
+          "subtitle": "Ingatlan / Beltéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80",
+          "alt": "Lakás fotó",
+          "title": "Kert",
+          "subtitle": "Ingatlan / Kültéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80",
+          "alt": "Konyha fotó",
+          "title": "Konyha",
+          "subtitle": "Ingatlan / Beltéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=600&q=80",
+          "alt": "Nappali fotó",
+          "title": "Tér és fény",
+          "subtitle": "Ingatlan / Design"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk az<br>ingatlanodról is ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/real-estate.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk az<br>ingatlanodról is ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/real-estate.html"
     },
     "wedding": {
-      "title": "Esküvői Galéria — Silverframe Studio", "metaDesc": "Esküvői fotózás galéria.",
+      "title": "Esküvői Galéria — Silverframe Studio",
+      "metaDesc": "Esküvői fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Esküvő", "breadcrumb": "Esküvő",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Esküvő",
+      "breadcrumb": "Esküvő",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80", "alt": "Esküvői fotó", "title": "Az első tánc", "subtitle": "Esküvő / Ceremónia" },
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80", "alt": "Esküvői pár", "title": "Boldogság", "subtitle": "Esküvő / Portré" },
-        { "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80", "alt": "Esküvői részlet", "title": "Részletek", "subtitle": "Esküvő / Dekoráció" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Esküvői pillanat", "title": "Vőlegény", "subtitle": "Esküvő / Portré" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Menyasszony", "title": "Menyasszony", "subtitle": "Esküvő / Készülődés" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "Esküvői portré", "title": "Összetartozás", "subtitle": "Esküvő / Kreatív" }
+        {
+          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
+          "alt": "Esküvői fotó",
+          "title": "Az első tánc",
+          "subtitle": "Esküvő / Ceremónia"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
+          "alt": "Esküvői pár",
+          "title": "Boldogság",
+          "subtitle": "Esküvő / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
+          "alt": "Esküvői részlet",
+          "title": "Részletek",
+          "subtitle": "Esküvő / Dekoráció"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Esküvői pillanat",
+          "title": "Vőlegény",
+          "subtitle": "Esküvő / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Menyasszony",
+          "title": "Menyasszony",
+          "subtitle": "Esküvő / Készülődés"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "Esküvői portré",
+          "title": "Összetartozás",
+          "subtitle": "Esküvő / Kreatív"
+        },
+        {
+          "src": "uploads/1774723629244-tengerparti_esk_v__karolyifoto__5_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Örökítsük meg együtt<br>a nagy napotokat",
-      "ctaButton": "Ajánlatkérés", "ctaLink": "services/wedding.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Örökítsük meg együtt<br>a nagy napotokat",
+      "ctaButton": "Ajánlatkérés",
+      "ctaLink": "services/wedding.html"
     },
     "wedding-creative": {
-      "title": "Esküvői Kreatív Galéria — Silverframe Studio", "metaDesc": "Esküvői kreatív fotózás galéria.",
+      "title": "Esküvői Kreatív Galéria — Silverframe Studio",
+      "metaDesc": "Esküvői kreatív fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Esküvői kreatív", "breadcrumb": "Esküvői kreatív",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Esküvői kreatív",
+      "breadcrumb": "Esküvői kreatív",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80", "alt": "Kreatív esküvői", "title": "Művészi pillanat", "subtitle": "Kreatív / Editorial" },
-        { "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80", "alt": "Kreatív pár", "title": "Összenézés", "subtitle": "Kreatív / Portré" },
-        { "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80", "alt": "Esküvői portré", "title": "Fény és árnyék", "subtitle": "Kreatív / Művészi" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Kreatív pillanat", "title": "Természetben", "subtitle": "Kreatív / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Művészi kép", "title": "Elegancia", "subtitle": "Kreatív / Elegáns" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "Kreatív portré", "title": "Együtt", "subtitle": "Kreatív / Portré" }
+        {
+          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
+          "alt": "Kreatív esküvői",
+          "title": "Művészi pillanat",
+          "subtitle": "Kreatív / Editorial"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
+          "alt": "Kreatív pár",
+          "title": "Összenézés",
+          "subtitle": "Kreatív / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
+          "alt": "Esküvői portré",
+          "title": "Fény és árnyék",
+          "subtitle": "Kreatív / Művészi"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Kreatív pillanat",
+          "title": "Természetben",
+          "subtitle": "Kreatív / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Művészi kép",
+          "title": "Elegancia",
+          "subtitle": "Kreatív / Elegáns"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "Kreatív portré",
+          "title": "Együtt",
+          "subtitle": "Kreatív / Portré"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk nektek is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/wedding-creative.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk nektek is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/wedding-creative.html"
     },
     "event": {
-      "title": "Rendezvény Galéria — Silverframe Studio", "metaDesc": "Rendezvény fotózás galéria.",
+      "title": "Rendezvény Galéria — Silverframe Studio",
+      "metaDesc": "Rendezvény fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Rendezvény", "breadcrumb": "Rendezvény",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Rendezvény",
+      "breadcrumb": "Rendezvény",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80", "alt": "Rendezvény fotó", "title": "Konferencia", "subtitle": "Rendezvény / Céges" },
-        { "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80", "alt": "Céges esemény", "title": "Networking", "subtitle": "Rendezvény / Üzleti" },
-        { "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "alt": "Konferencia", "title": "Előadás", "subtitle": "Rendezvény / Konferencia" },
-        { "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80", "alt": "Esemény részlet", "title": "Részletek", "subtitle": "Rendezvény / Dekoráció" },
-        { "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80", "alt": "Gála fotó", "title": "Gála", "subtitle": "Rendezvény / Elegáns" },
-        { "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", "alt": "Ünnepség", "title": "Ünneplés", "subtitle": "Rendezvény / Privát" }
+        {
+          "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+          "alt": "Rendezvény fotó",
+          "title": "Konferencia",
+          "subtitle": "Rendezvény / Céges"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
+          "alt": "Céges esemény",
+          "title": "Networking",
+          "subtitle": "Rendezvény / Üzleti"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+          "alt": "Konferencia",
+          "title": "Előadás",
+          "subtitle": "Rendezvény / Konferencia"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
+          "alt": "Esemény részlet",
+          "title": "Részletek",
+          "subtitle": "Rendezvény / Dekoráció"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
+          "alt": "Gála fotó",
+          "title": "Gála",
+          "subtitle": "Rendezvény / Elegáns"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+          "alt": "Ünnepség",
+          "title": "Ünneplés",
+          "subtitle": "Rendezvény / Privát"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Örökítsük meg együtt<br>az eseményed hangulatát",
-      "ctaButton": "Ajánlatkérés", "ctaLink": "services/event.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Örökítsük meg együtt<br>az eseményed hangulatát",
+      "ctaButton": "Ajánlatkérés",
+      "ctaLink": "services/event.html"
     },
     "pet": {
-      "title": "Kisállat Galéria — Silverframe Studio", "metaDesc": "Kisállat fotózás galéria.",
+      "title": "Kisállat Galéria — Silverframe Studio",
+      "metaDesc": "Kisállat fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Kisállat", "breadcrumb": "Kisállat",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Kisállat",
+      "breadcrumb": "Kisállat",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80", "alt": "Kutya portré", "title": "Legjobb barát", "subtitle": "Kisállat / Portré" },
-        { "src": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80", "alt": "Macska fotó", "title": "Cica pillantás", "subtitle": "Kisállat / Macska" },
-        { "src": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80", "alt": "Kutyák a parkban", "title": "Játék", "subtitle": "Kisállat / Szabadtéri" },
-        { "src": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&q=80", "alt": "Golden retriever", "title": "Hűség", "subtitle": "Kisállat / Portré" },
-        { "src": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&q=80", "alt": "Macska portré", "title": "Titokzatos", "subtitle": "Kisállat / Macska" },
-        { "src": "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=600&q=80", "alt": "Kutya szabadtéren", "title": "Szabadság", "subtitle": "Kisállat / Szabadtéri" }
+        {
+          "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
+          "alt": "Kutya portré",
+          "title": "Legjobb barát",
+          "subtitle": "Kisállat / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80",
+          "alt": "Macska fotó",
+          "title": "Cica pillantás",
+          "subtitle": "Kisállat / Macska"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80",
+          "alt": "Kutyák a parkban",
+          "title": "Játék",
+          "subtitle": "Kisállat / Szabadtéri"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&q=80",
+          "alt": "Golden retriever",
+          "title": "Hűség",
+          "subtitle": "Kisállat / Portré"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&q=80",
+          "alt": "Macska portré",
+          "title": "Titokzatos",
+          "subtitle": "Kisállat / Macska"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=600&q=80",
+          "alt": "Kutya szabadtéren",
+          "title": "Szabadság",
+          "subtitle": "Kisállat / Szabadtéri"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk a kedvencedről is<br>ilyen képeket",
-      "ctaButton": "Csomag részletek", "ctaLink": "services/pet.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk a kedvencedről is<br>ilyen képeket",
+      "ctaButton": "Csomag részletek",
+      "ctaLink": "services/pet.html"
     },
     "product": {
-      "title": "Termékfotó Galéria — Silverframe Studio", "metaDesc": "Termékfotózás galéria.",
+      "title": "Termékfotó Galéria — Silverframe Studio",
+      "metaDesc": "Termékfotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&q=80",
-      "heroLabel": "Portfólió", "heroTitle": "Termékfotó", "breadcrumb": "Termékfotó",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Termékfotó",
+      "breadcrumb": "Termékfotó",
       "gallery": [
-        { "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80", "alt": "Fejhallgató", "title": "Fejhallgató", "subtitle": "Termék / Lifestyle" },
-        { "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80", "alt": "Óra", "title": "Klasszikus óra", "subtitle": "Termék / Fehér háttér" },
-        { "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "alt": "Napszemüveg", "title": "Napszemüveg", "subtitle": "Termék / Lifestyle" },
-        { "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=600&q=80", "alt": "Kozmetika", "title": "Kozmetika", "subtitle": "Termék / Szépségápolás" },
-        { "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80", "alt": "Cipő", "title": "Sneaker", "subtitle": "Termék / Divat" },
-        { "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&q=80", "alt": "Parfüm", "title": "Parfüm", "subtitle": "Termék / Luxus" }
+        {
+          "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
+          "alt": "Fejhallgató",
+          "title": "Fejhallgató",
+          "subtitle": "Termék / Lifestyle"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80",
+          "alt": "Óra",
+          "title": "Klasszikus óra",
+          "subtitle": "Termék / Fehér háttér"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80",
+          "alt": "Napszemüveg",
+          "title": "Napszemüveg",
+          "subtitle": "Termék / Lifestyle"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=600&q=80",
+          "alt": "Kozmetika",
+          "title": "Kozmetika",
+          "subtitle": "Termék / Szépségápolás"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80",
+          "alt": "Cipő",
+          "title": "Sneaker",
+          "subtitle": "Termék / Divat"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&q=80",
+          "alt": "Parfüm",
+          "title": "Parfüm",
+          "subtitle": "Termék / Luxus"
+        }
       ],
-      "ctaLabel": "Tetszik, amit látsz?", "ctaTitle": "Készítsünk a termékeidről is<br>ilyen képeket",
-      "ctaButton": "Ajánlatkérés", "ctaLink": "services/product.html"
+      "ctaLabel": "Tetszik, amit látsz?",
+      "ctaTitle": "Készítsünk a termékeidről is<br>ilyen képeket",
+      "ctaButton": "Ajánlatkérés",
+      "ctaLink": "services/product.html"
     }
   }
 }
