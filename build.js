@@ -21,6 +21,11 @@ function imgSrc(src, prefix) {
   return prefix + src;
 }
 
+function bodyTag() {
+  const cls = g.buttonStyle === 'rounded' ? ' class="rounded-buttons"' : '';
+  return `<body${cls}>`;
+}
+
 function fonts() {
   return `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">`;
@@ -174,7 +179,7 @@ function buildIndex() {
   }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80', 'css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 
     <!-- Preloader -->
@@ -190,7 +195,11 @@ ${mobileNavHtml('')}
 
     <main>
         <section class="home-hero" aria-label="Bemutatkozás">
-            <div class="home-hero-bg" role="img" aria-label="Professzionális fotózás"></div>
+            <div class="home-hero-slideshow">
+${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80']).map((img, i) =>
+  `                <div class="home-hero-slide${i === 0 ? ' active' : ''}" style="background-image:url('${img}')"></div>`
+).join('\n')}
+            </div>
             <div class="home-hero-overlay"></div>
             <div class="home-hero-content">
                 <p class="home-hero-sub">${p.heroSub}</p>
@@ -278,6 +287,19 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 ${footerHtml('')}
 ${lightboxHtml()}
     <script src="js/main.js"></script>
+    <script>
+    (function(){
+        var slides = document.querySelectorAll('.home-hero-slide');
+        if (slides.length < 2) return;
+        var current = 0;
+        var interval = ${p.heroInterval || 5} * 1000;
+        setInterval(function(){
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, interval);
+    })();
+    </script>
 </body>
 </html>`;
 }
@@ -287,7 +309,7 @@ function buildAbout() {
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Person", "name": g.photographer, "jobTitle": "Fotós", "description": `Professzionális fotós Szegeden — ${g.siteName}`, "url": g.baseUrl + "/about.html", "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" } }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', null, 'css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'about', null)}
 ${mobileNavHtml('')}
@@ -334,7 +356,7 @@ function buildPortfolio() {
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Portfólió`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": g.baseUrl + "/portfolio.html" });
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', null, 'css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'portfolio', null)}
 ${mobileNavHtml('')}
@@ -397,7 +419,7 @@ function buildServices() {
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Service", "provider": { "@type": "ProfessionalService", "name": g.siteName }, "serviceType": "Fotózás", "areaServed": { "@type": "Place", "name": `${g.city}, Magyarország` }, "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Fotózási Szolgáltatások", "itemListElement": cats.map(c => ({ "@type": "Offer", "itemOffered": { "@type": "Service", "name": c.name + " Fotózás" } })) } }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', null, 'css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'services', null)}
 ${mobileNavHtml('')}
@@ -443,7 +465,7 @@ function buildContact() {
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "ContactPage", "name": `Kapcsolat — ${g.siteName}`, "url": g.baseUrl + "/contact.html", "mainEntity": { "@type": "ProfessionalService", "name": g.siteName, "email": g.email, "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" } } }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', null, 'css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'contact', null)}
 ${mobileNavHtml('')}
@@ -500,7 +522,7 @@ function buildServicePage(id) {
   }
 
   return `${headHtml(s.title, s.metaDesc, `${g.baseUrl}/services/${id}.html`, s.title, s.metaDesc, 'website', `${g.baseUrl}/services/${id}.html`, s.ogImage, '../css/style.css', jsonLd)}
-<body>
+${bodyTag()}
 ${boilerplate()}
 ${headerHtml(prefix, null, id)}
 ${mobileNavHtml(prefix)}
@@ -562,7 +584,7 @@ function buildPortfolioPage(id) {
   const prefix = '../';
 
   return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', '')}
-<body>
+${bodyTag()}
 ${boilerplate()}
     <header class="header" role="banner">
         <a href="../index.html" class="header-logo">${g.siteName}</a>

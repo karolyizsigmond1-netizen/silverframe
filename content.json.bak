@@ -8,7 +8,8 @@
     "facebook": "#",
     "baseUrl": "https://www.silverframestudio.com",
     "footerDesc": "Professzionális fotózás Szegeden. Minden pillanat számít.",
-    "copyright": "2026"
+    "copyright": "2026",
+    "buttonStyle": "rounded"
   },
   "serviceCategories": [
     {
@@ -103,6 +104,13 @@
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
+      "heroImages": [
+        "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80",
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=80",
+        "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+      ],
+      "heroInterval": 5,
       "introImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80",
       "introLabel": "Rólam",
       "introTitle": "Történetek<br>fénnyel elmesélve",
@@ -1659,6 +1667,18 @@
           "alt": "Páros portré",
           "title": "Együtt",
           "subtitle": "Páros / Stúdió"
+        },
+        {
+          "src": "uploads/1774723218982-tengerparti_esk_v__karolyifoto__5_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1774723250182-tengerparti_esk_v__karolyifoto__8_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",

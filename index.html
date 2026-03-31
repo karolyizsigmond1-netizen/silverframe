@@ -35,7 +35,7 @@
 }
     </script>
 </head>
-<body>
+<body class="rounded-buttons">
     <div class="grain"></div><div class="cursor-dot"></div><div class="cursor-ring"></div>
 
     <!-- Preloader -->
@@ -84,7 +84,12 @@
 
     <main>
         <section class="home-hero" aria-label="Bemutatkozás">
-            <div class="home-hero-bg" role="img" aria-label="Professzionális fotózás"></div>
+            <div class="home-hero-slideshow">
+                <div class="home-hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80')"></div>
+                <div class="home-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=80')"></div>
+                <div class="home-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')"></div>
+                <div class="home-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80')"></div>
+            </div>
             <div class="home-hero-overlay"></div>
             <div class="home-hero-content">
                 <p class="home-hero-sub">Professzionális Fotózás Szegeden</p>
@@ -100,7 +105,7 @@
         <section class="section" aria-label="A fotósról">
             <div class="container intro-strip">
                 <div class="intro-img-wrap reveal">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80" alt="Silverframe Studio portré természetes fényben" width="700" height="933" loading="lazy">
+                    <img src="uploads/5e03198477d5-Karel_3.jpg" alt="Silverframe Studio portré természetes fényben" width="700" height="933" loading="lazy">
                 </div>
                 <div class="intro-text reveal reveal-delay-1">
                     <span class="section-label">Rólam</span>
@@ -285,5 +290,18 @@
         <img src="" alt="">
     </div>
     <script src="js/main.js"></script>
+    <script>
+    (function(){
+        var slides = document.querySelectorAll('.home-hero-slide');
+        if (slides.length < 2) return;
+        var current = 0;
+        var interval = 5 * 1000;
+        setInterval(function(){
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, interval);
+    })();
+    </script>
 </body>
 </html>

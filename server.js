@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 
 const PORT = 3000;
@@ -73,13 +74,12 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // API: Upload image
+    // API: Upload image (with deduplication)
     if (req.method === 'POST' && req.url === '/api/upload') {
         const chunks = [];
         req.on('data', chunk => chunks.push(chunk));
         req.on('end', () => {
             const buffer = Buffer.concat(chunks);
-            // Parse multipart form data (simple parser)
             const boundary = req.headers['content-type'].split('boundary=')[1];
             if (!boundary) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -90,16 +90,101 @@ const server = http.createServer((req, res) => {
             const results = [];
             for (const part of parts) {
                 if (part.filename) {
-                    const ext = path.extname(part.filename).toLowerCase();
-                    const safeName = Date.now() + '-' + part.filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-                    const filePath = path.join(UPLOADS_DIR, safeName);
-                    fs.writeFileSync(filePath, part.data);
-                    results.push({ original: part.filename, url: 'uploads/' + safeName });
+                    // Hash file content to detect duplicates
+                    const hash = crypto.createHash('md5').update(part.data).digest('hex').substring(0, 12);
+                    const ext = path.extname(part.filename).toLowerCase() || '.jpg';
+
+                    // Check if a file with the same hash already exists
+                    const existing = findExistingByHash(hash, ext);
+                    if (existing) {
+                        results.push({ original: part.filename, url: 'uploads/' + existing, reused: true });
+                    } else {
+                        const safeName = hash + '-' + part.filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+                        const filePath = path.join(UPLOADS_DIR, safeName);
+                        fs.writeFileSync(filePath, part.data);
+                        results.push({ original: part.filename, url: 'uploads/' + safeName });
+                    }
+                }
+            }
+            const reusedCount = results.filter(r => r.reused).length;
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, files: results, reusedCount }));
+        });
+        return;
+    }
+
+    // API: Cleanup uploads — remove files not referenced in content.json
+    if (req.method === 'POST' && req.url === '/api/cleanup-uploads') {
+        try {
+            const content = fs.readFileSync(CONTENT_FILE, 'utf-8');
+            const allUploads = fs.readdirSync(UPLOADS_DIR);
+            // Find all "uploads/xxx" references in content.json
+            const referenced = new Set();
+            const matches = content.match(/uploads\/[^"\\]+/g) || [];
+            for (const m of matches) {
+                referenced.add(m.replace('uploads/', ''));
+            }
+            let removed = 0;
+            const removedFiles = [];
+            for (const file of allUploads) {
+                if (!referenced.has(file)) {
+                    fs.unlinkSync(path.join(UPLOADS_DIR, file));
+                    removedFiles.push(file);
+                    removed++;
                 }
             }
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, files: results }));
-        });
+            res.end(JSON.stringify({ success: true, removed, removedFiles, kept: referenced.size }));
+        } catch (e) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+    }
+
+    // API: Deduplicate uploads — merge identical files, update content.json
+    if (req.method === 'POST' && req.url === '/api/dedup-uploads') {
+        try {
+            let content = fs.readFileSync(CONTENT_FILE, 'utf-8');
+            const allUploads = fs.readdirSync(UPLOADS_DIR);
+
+            // Hash all existing files
+            const hashMap = {}; // hash → first filename
+            const dupes = []; // { duplicate, keepAs }
+            for (const file of allUploads) {
+                const filePath = path.join(UPLOADS_DIR, file);
+                const data = fs.readFileSync(filePath);
+                const hash = crypto.createHash('md5').update(data).digest('hex').substring(0, 12);
+                if (hashMap[hash]) {
+                    dupes.push({ duplicate: file, keepAs: hashMap[hash] });
+                } else {
+                    hashMap[hash] = file;
+                }
+            }
+
+            // Replace references and delete duplicates
+            let replaced = 0;
+            for (const { duplicate, keepAs } of dupes) {
+                const oldRef = 'uploads/' + duplicate;
+                const newRef = 'uploads/' + keepAs;
+                if (content.includes(oldRef)) {
+                    content = content.split(oldRef).join(newRef);
+                    replaced++;
+                }
+                fs.unlinkSync(path.join(UPLOADS_DIR, duplicate));
+            }
+
+            // Save updated content.json
+            if (replaced > 0) {
+                fs.writeFileSync(CONTENT_FILE, content, 'utf-8');
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, duplicatesRemoved: dupes.length, referencesUpdated: replaced }));
+        } catch (e) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: e.message }));
+        }
         return;
     }
 
@@ -126,6 +211,19 @@ const server = http.createServer((req, res) => {
         }
     });
 });
+
+// Check if a file with matching hash prefix already exists in uploads
+function findExistingByHash(hash, ext) {
+    try {
+        const files = fs.readdirSync(UPLOADS_DIR);
+        for (const file of files) {
+            if (file.startsWith(hash) && path.extname(file).toLowerCase() === ext) {
+                return file;
+            }
+        }
+    } catch (e) {}
+    return null;
+}
 
 // Simple multipart parser
 function parseMultipart(buffer, boundary) {

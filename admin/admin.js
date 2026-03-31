@@ -57,12 +57,27 @@
         }
     ];
 
+    // ── Page ID → site URL mapping ──
+    function getPageUrl(pageId) {
+        if (!pageId) return '/';
+        if (pageId === 'global' || pageId === 'pages.index') return '/';
+        if (pageId === 'pages.about') return '/about.html';
+        if (pageId === 'pages.portfolio') return '/portfolio.html';
+        if (pageId === 'pages.services') return '/services.html';
+        if (pageId === 'pages.contact') return '/contact.html';
+        if (pageId.startsWith('servicePages.')) return '/services/' + pageId.split('.')[1] + '.html';
+        if (pageId.startsWith('portfolioPages.')) return '/portfolio/' + pageId.split('.')[1] + '.html';
+        return '/';
+    }
+
     // ── Init ──
     async function init() {
         buildSidebar();
         bindTopbar();
         bindUploadModal();
         bindConfirmModal();
+        bindToolButtons();
+        bindImageEditor();
         await loadContent();
     }
 
@@ -152,6 +167,56 @@
         $('#save-btn').addEventListener('click', saveContent);
     }
 
+    // ── Tool buttons (dedup & cleanup) ──
+    function bindToolButtons() {
+        $('#btn-dedup').addEventListener('click', async () => {
+            const confirmed = await confirmAction(
+                'Duplikátumok törlése',
+                'Az azonos tartalmú képek közül csak egy marad meg, a hivatkozások automatikusan frissülnek.'
+            );
+            if (!confirmed) return;
+            try {
+                toast('Duplikátumok keresése...', 'info');
+                const res = await fetch('/api/dedup-uploads', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    if (data.duplicatesRemoved === 0) {
+                        toast('Nincsenek duplikátumok!', 'info');
+                    } else {
+                        toast(`${data.duplicatesRemoved} duplikátum törölve, ${data.referencesUpdated} hivatkozás frissítve!`, 'success');
+                        // Reload content since references may have changed
+                        await loadContent();
+                        if (currentPage) renderEditor(currentPage);
+                    }
+                }
+            } catch (e) {
+                toast('Hiba: ' + e.message, 'error');
+            }
+        });
+
+        $('#btn-cleanup').addEventListener('click', async () => {
+            const confirmed = await confirmAction(
+                'Nem használt képek törlése',
+                'Minden kép törlődik az uploads mappából, amit a content.json nem használ. Ez nem vonható vissza!'
+            );
+            if (!confirmed) return;
+            try {
+                toast('Nem használt képek keresése...', 'info');
+                const res = await fetch('/api/cleanup-uploads', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    if (data.removed === 0) {
+                        toast('Nincs nem használt kép!', 'info');
+                    } else {
+                        toast(`${data.removed} nem használt kép törölve! (${data.kept} megtartva)`, 'success');
+                    }
+                }
+            } catch (e) {
+                toast('Hiba: ' + e.message, 'error');
+            }
+        });
+    }
+
     // ── Resolve nested path ──
     function getByPath(obj, path) {
         return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
@@ -190,25 +255,36 @@
         initDragReorder(area);
         initFileDropOnImages(area);
         initFileDropOnGalleryCards(area);
+        initBulkUploadZones(area);
         initImageLightbox(area);
         initCollapsible(area);
+        initShowOnSite(area);
+        initImageEditButtons(area);
 
         area.scrollTop = scrollTop;
     }
 
     // ── Field renderers ──
     function textField(label, path, value, hint) {
+        const val = value || '';
         return `<div class="field-group">
-            <label class="field-label">${label}</label>
-            <input class="field-input" type="text" data-path="${path}" value="${esc(value || '')}">
+            <div class="field-label-row">
+                <label class="field-label">${label}</label>
+                <button class="btn-show-on-site" data-show-text="${esc(val)}" title="Megjelenítés az oldalon">&#128065;</button>
+            </div>
+            <input class="field-input" type="text" data-path="${path}" value="${esc(val)}">
             ${hint ? `<div class="field-hint">${hint}</div>` : ''}
         </div>`;
     }
 
     function textareaField(label, path, value, tall) {
+        const val = value || '';
         return `<div class="field-group">
-            <label class="field-label">${label}</label>
-            <textarea class="field-textarea${tall ? ' tall' : ''}" data-path="${path}">${esc(value || '')}</textarea>
+            <div class="field-label-row">
+                <label class="field-label">${label}</label>
+                <button class="btn-show-on-site" data-show-text="${esc(val)}" title="Megjelenítés az oldalon">&#128065;</button>
+            </div>
+            <textarea class="field-textarea${tall ? ' tall' : ''}" data-path="${path}">${esc(val)}</textarea>
         </div>`;
     }
 
@@ -221,7 +297,7 @@
                 <input class="field-input" type="text" data-path="${path}" value="${esc(src)}">
                 <button class="btn-upload" data-upload-for="${path}">Feltöltés</button>
                 ${previewSrc
-                    ? `<img class="image-preview" src="${previewSrc}" alt="Preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none">&#128247;</div>`
+                    ? `<img class="image-preview" src="${previewSrc}" alt="Preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none">&#128247;</div><button class="btn-edit-image" data-edit-src="${esc(previewSrc)}" data-edit-target="${path}" title="Szerkesztés (vágás/átméretezés)">&#9998;</button>`
                     : `<div class="image-placeholder">&#128247;</div>`}
                 <div class="drop-label">Ejtse ide a képet</div>
             </div>
@@ -230,6 +306,26 @@
 
     function esc(str) {
         return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function selectField(label, path, value, options) {
+        const opts = options.map(o => {
+            const val = typeof o === 'string' ? o : o.value;
+            const text = typeof o === 'string' ? o : o.label;
+            return `<option value="${esc(val)}"${val === value ? ' selected' : ''}>${esc(text)}</option>`;
+        }).join('');
+        return `<div class="field-group">
+            <label class="field-label">${label}</label>
+            <select class="field-select" data-path="${path}">${opts}</select>
+        </div>`;
+    }
+
+    function numberField(label, path, value, hint) {
+        return `<div class="field-group">
+            <label class="field-label">${label}</label>
+            <input class="field-input" type="number" data-path="${path}" value="${value || ''}" min="1" max="60">
+            ${hint ? `<div class="field-hint">${hint}</div>` : ''}
+        </div>`;
     }
 
     // ── Global editor ──
@@ -241,6 +337,14 @@
         html += textField('Facebook URL', 'global.facebook', data.facebook);
         html += textField('Instagram URL', 'global.instagram', data.instagram);
         html += textField('Cím', 'global.address', data.address);
+        html += '</div>';
+
+        // Design settings
+        html += '<div class="field-section"><div class="field-section-title">Dizájn beállítások</div>';
+        html += selectField('Gomb stílus', 'global.buttonStyle', data.buttonStyle || 'square', [
+            { value: 'square', label: 'Szögletes (alapértelmezett)' },
+            { value: 'rounded', label: 'Lekerekített' }
+        ]);
         html += '</div>';
 
         // Service categories
@@ -418,7 +522,7 @@
         return html;
     }
 
-    // ── Gallery section ──
+    // ── Gallery section with bulk upload ──
     function renderGallerySection(gallery, basePath) {
         let html = '<div class="field-section"><div class="field-section-title">Galéria (' + gallery.length + ' kép)</div>';
         html += '<div class="gallery-grid" data-array-path="' + basePath + '">';
@@ -433,6 +537,7 @@
                         : `<div class="gallery-placeholder">Nincs kép</div>`}
                 </div>
                 <div class="gallery-card-actions">
+                    ${previewSrc ? `<button class="btn-icon" data-edit-src="${esc(previewSrc)}" data-edit-target="${basePath}.${i}.src" title="Szerkesztés">&#9998;</button>` : ''}
                     <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">&#8593;</button>
                     <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Törlés">&#10005;</button>
                 </div>
@@ -446,7 +551,16 @@
             </div>`;
         });
         html += '</div>';
-        html += `<button class="btn-add" data-add-array="${basePath}" data-template="galleryItem" style="margin-top:12px">+ Kép hozzáadása</button>`;
+
+        // Bulk upload drop zone
+        html += `<div class="bulk-upload-zone" data-bulk-upload="${basePath}">
+            <div class="bulk-upload-icon">&#128247;</div>
+            <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
+            <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
+            <input type="file" class="bulk-upload-input" accept="image/*" multiple>
+        </div>`;
+
+        html += `<button class="btn-add" data-add-array="${basePath}" data-template="galleryItem" style="margin-top:12px">+ Kép hozzáadása (üres)</button>`;
         html += '</div>';
         return html;
     }
@@ -461,7 +575,9 @@
 
             if (val === null || val === undefined) continue;
 
-            if (typeof val === 'string') {
+            if (typeof val === 'number') {
+                html += '<div class="field-section">' + numberField(key, path, val) + '</div>';
+            } else if (typeof val === 'string') {
                 if (key.toLowerCase().includes('image') || key.toLowerCase().includes('img') || key.toLowerCase().includes('src')) {
                     html += '<div class="field-section">' + imageField(key, path, val) + '</div>';
                 } else if (val.length > 100) {
@@ -472,6 +588,7 @@
             } else if (Array.isArray(val)) {
                 html += '<div class="field-section"><div class="field-section-title">' + key + '</div>';
                 if (val.length > 0 && typeof val[0] === 'string') {
+                    const isImageArray = key.toLowerCase().includes('image') || key.toLowerCase().includes('img');
                     html += '<div class="array-list" data-array-path="' + path + '">';
                     val.forEach((item, i) => {
                         html += `<div class="array-item" draggable="false" data-index="${i}">
@@ -482,7 +599,7 @@
                                     <button class="btn-icon danger" data-remove-array="${path}" data-index="${i}">&#10005;</button>
                                 </div>
                             </div>
-                            <textarea class="field-textarea" data-path="${path}.${i}">${esc(item)}</textarea>
+                            ${isImageArray ? imageField('Kép', path + '.' + i, item) : `<textarea class="field-textarea" data-path="${path}.${i}">${esc(item)}</textarea>`}
                         </div>`;
                     });
                     html += '</div>';
@@ -535,12 +652,24 @@
 
     // ── Bind field change events ──
     function bindFieldEvents(container) {
-        // Text inputs and textareas
+        // Text inputs, textareas, selects, and number inputs
         container.querySelectorAll('[data-path]').forEach(el => {
-            el.addEventListener('input', () => {
-                setByPath(contentData, el.dataset.path, el.value);
+            const handler = () => {
+                let val = el.value;
+                // Convert number inputs to actual numbers
+                if (el.type === 'number') val = parseFloat(val) || 0;
+                setByPath(contentData, el.dataset.path, val);
                 setDirty(true);
-            });
+                // Update the show-on-site button text for this field
+                const row = el.closest('.field-group');
+                if (row) {
+                    const btn = row.querySelector('.btn-show-on-site');
+                    if (btn) btn.dataset.showText = el.value;
+                }
+            };
+            el.addEventListener('input', handler);
+            // Selects also need change event
+            if (el.tagName === 'SELECT') el.addEventListener('change', handler);
         });
 
         // Upload buttons
@@ -557,7 +686,6 @@
 
         // Remove array item (with confirm)
         container.querySelectorAll('[data-remove-array]').forEach(btn => {
-            // Prevent drag from starting when clicking delete
             btn.addEventListener('mousedown', e => e.stopPropagation());
             btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
@@ -643,24 +771,183 @@
     }
 
     // ══════════════════════════════════════
+    // ── SHOW ON SITE (highlight text) ──
+    // ══════════════════════════════════════
+
+    function initShowOnSite(container) {
+        container.querySelectorAll('.btn-show-on-site').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const text = btn.dataset.showText || '';
+                if (!text.trim()) {
+                    toast('Nincs szöveg a megjelenítéshez', 'info');
+                    return;
+                }
+                showOnSite(text);
+            });
+        });
+    }
+
+    let previewWindow = null;
+
+    function showOnSite(rawText) {
+        const url = getPageUrl(currentPage);
+        // Strip HTML tags for search
+        const searchText = rawText.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, '').trim();
+        if (!searchText) {
+            toast('Nincs szöveg a megjelenítéshez', 'info');
+            return;
+        }
+
+        // Open or reuse preview window
+        previewWindow = window.open(url, 'silverframe-preview');
+        if (!previewWindow) {
+            toast('A felugró ablak blokkolva van. Engedélyezze a böngészőben!', 'error');
+            return;
+        }
+
+        // Wait for page to load then highlight
+        let attempts = 0;
+        const maxAttempts = 50; // 10 seconds max
+        const checker = setInterval(() => {
+            attempts++;
+            if (attempts > maxAttempts) {
+                clearInterval(checker);
+                return;
+            }
+            try {
+                if (previewWindow.document.readyState === 'complete') {
+                    clearInterval(checker);
+                    // Small delay for rendering
+                    setTimeout(() => highlightTextInWindow(previewWindow, searchText), 300);
+                }
+            } catch (e) {
+                clearInterval(checker);
+                toast('Nem sikerült elérni az oldalt', 'error');
+            }
+        }, 200);
+    }
+
+    function highlightTextInWindow(win, searchText) {
+        try {
+            // Remove any previous highlights
+            win.document.querySelectorAll('.admin-highlight').forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(win.document.createTextNode(el.textContent), el);
+                parent.normalize();
+            });
+
+            // Inject highlight style if not present
+            if (!win.document.getElementById('admin-highlight-style')) {
+                const style = win.document.createElement('style');
+                style.id = 'admin-highlight-style';
+                style.textContent = `
+                    .admin-highlight {
+                        background: #ffeb3b !important;
+                        color: #000 !important;
+                        padding: 2px 6px;
+                        border-radius: 4px;
+                        outline: 3px solid #ffeb3b;
+                        animation: adminHighlightPulse 2s ease-in-out 3;
+                    }
+                    @keyframes adminHighlightPulse {
+                        0%, 100% { outline-color: #ffeb3b; box-shadow: 0 0 0 0 rgba(255,235,59,0.4); }
+                        50% { outline-color: #ff9800; box-shadow: 0 0 20px 4px rgba(255,152,0,0.3); }
+                    }
+                `;
+                win.document.head.appendChild(style);
+            }
+
+            // Search for text using TreeWalker
+            const body = win.document.body;
+            const walker = win.document.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function (node) {
+                    // Skip script/style
+                    if (node.parentElement && (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            // Try exact match first, then partial
+            let found = false;
+            const searchLower = searchText.toLowerCase();
+
+            // First pass: try to find the full text
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                const text = node.textContent;
+                const idx = text.toLowerCase().indexOf(searchLower);
+                if (idx !== -1) {
+                    const range = win.document.createRange();
+                    range.setStart(node, idx);
+                    range.setEnd(node, idx + searchText.length);
+                    const span = win.document.createElement('span');
+                    span.className = 'admin-highlight';
+                    range.surroundContents(span);
+                    span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    found = true;
+                    break;
+                }
+            }
+
+            // If not found, try first 30 chars
+            if (!found && searchText.length > 30) {
+                const shortSearch = searchText.substring(0, 30).toLowerCase();
+                const walker2 = win.document.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
+                    acceptNode: function (node) {
+                        if (node.parentElement && (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+                while (walker2.nextNode()) {
+                    const node = walker2.currentNode;
+                    const text = node.textContent;
+                    const idx = text.toLowerCase().indexOf(shortSearch);
+                    if (idx !== -1) {
+                        const range = win.document.createRange();
+                        const endIdx = Math.min(idx + searchText.length, text.length);
+                        range.setStart(node, idx);
+                        range.setEnd(node, endIdx);
+                        const span = win.document.createElement('span');
+                        span.className = 'admin-highlight';
+                        range.surroundContents(span);
+                        span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                toast('Szöveg nem található az oldalon (lehet, hogy még nincs mentve)', 'info');
+            }
+        } catch (e) {
+            toast('Hiba a kiemelés során: ' + e.message, 'error');
+        }
+    }
+
+    // ══════════════════════════════════════
     // ── DRAG & DROP REORDER ──
     // ══════════════════════════════════════
 
     function initDragReorder(container) {
-        // Array lists (vertical drag)
+        // Array lists (vertical drag via handle)
         container.querySelectorAll('.array-list[data-array-path]').forEach(list => {
             const arrayPath = list.dataset.arrayPath;
             list.querySelectorAll(':scope > .array-item').forEach(item => {
                 const handle = item.querySelector('.drag-handle');
                 if (!handle) return;
 
-                // Only allow drag from the handle
                 handle.addEventListener('mousedown', () => { item.draggable = true; });
                 item.addEventListener('dragend', () => { item.draggable = false; });
 
                 item.addEventListener('dragstart', e => {
                     if (!item.draggable) { e.preventDefault(); return; }
-                    // Check if this is a file drag - don't interfere
                     if (e.dataTransfer.types.includes('Files')) return;
                     dragState = { arrayPath, fromIndex: parseInt(item.dataset.index) };
                     e.dataTransfer.effectAllowed = 'move';
@@ -705,14 +992,12 @@
             });
         });
 
-        // Gallery grids (grid drag)
+        // Gallery grids (direct card drag)
         container.querySelectorAll('.gallery-grid[data-array-path]').forEach(grid => {
             const arrayPath = grid.dataset.arrayPath;
             grid.querySelectorAll(':scope > .gallery-card').forEach(card => {
                 card.addEventListener('dragstart', e => {
-                    // Don't drag when interacting with buttons or inputs
                     if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
-                    // Check if file drag
                     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) return;
                     dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
                     e.dataTransfer.effectAllowed = 'move';
@@ -727,7 +1012,6 @@
                 });
 
                 card.addEventListener('dragover', e => {
-                    // If files are being dragged, let the file drop handler deal with it
                     if (e.dataTransfer.types.includes('Files')) return;
                     if (!dragState || dragState.arrayPath !== arrayPath) return;
                     e.preventDefault();
@@ -741,7 +1025,6 @@
                 });
 
                 card.addEventListener('drop', e => {
-                    // If files, don't handle here (file drop handler will)
                     if (e.dataTransfer.types.includes('Files')) return;
                     e.preventDefault();
                     card.classList.remove('drag-over');
@@ -823,7 +1106,97 @@
         });
     }
 
-    // ── Shared upload helper ──
+    // ══════════════════════════════════════
+    // ── BULK UPLOAD FOR GALLERIES ──
+    // ══════════════════════════════════════
+
+    function initBulkUploadZones(container) {
+        container.querySelectorAll('.bulk-upload-zone[data-bulk-upload]').forEach(zone => {
+            const arrayPath = zone.dataset.bulkUpload;
+            const input = zone.querySelector('.bulk-upload-input');
+
+            // Click to open file picker
+            zone.addEventListener('click', (e) => {
+                if (e.target === input) return;
+                input.click();
+            });
+
+            // File input change
+            input.addEventListener('change', () => {
+                if (input.files.length > 0) {
+                    bulkUploadFiles(Array.from(input.files), arrayPath);
+                }
+                input.value = '';
+            });
+
+            // Drag over
+            zone.addEventListener('dragover', e => {
+                if (!e.dataTransfer.types.includes('Files')) return;
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.add('bulk-drag-active');
+            });
+
+            zone.addEventListener('dragleave', e => {
+                if (zone.contains(e.relatedTarget)) return;
+                zone.classList.remove('bulk-drag-active');
+            });
+
+            // Drop multiple files
+            zone.addEventListener('drop', async e => {
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.remove('bulk-drag-active');
+                const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                if (files.length === 0) return;
+                await bulkUploadFiles(files, arrayPath);
+            });
+        });
+    }
+
+    async function bulkUploadFiles(files, arrayPath) {
+        const arr = getByPath(contentData, arrayPath);
+        if (!arr) return;
+
+        // Determine if gallery items have title/subtitle
+        const hasTitle = arr.length > 0 && arr[0].title !== undefined;
+
+        toast(`${files.length} kép feltöltése...`, 'info');
+
+        const formData = new FormData();
+        for (const f of files) {
+            formData.append('images', f, f.name);
+        }
+
+        try {
+            const res = await fetch('/api/upload', { method: 'POST', body: formData });
+            const data = await res.json();
+            if (data.success && data.files) {
+                let added = 0;
+                let reused = 0;
+                for (const uploaded of data.files) {
+                    const newItem = { src: uploaded.url, alt: '' };
+                    if (hasTitle) {
+                        newItem.title = '';
+                        newItem.subtitle = '';
+                    }
+                    arr.push(newItem);
+                    added++;
+                    if (uploaded.reused) reused++;
+                }
+                setDirty(true);
+                renderEditor(currentPage);
+                const msg = reused > 0
+                    ? `${added} kép hozzáadva (${reused} már létezett, újrahasználva)!`
+                    : `${added} kép sikeresen feltöltve!`;
+                toast(msg, 'success');
+            }
+        } catch (err) {
+            toast('Feltöltési hiba: ' + err.message, 'error');
+        }
+    }
+
+    // ── Shared upload helper (single file) ──
     async function uploadAndSet(file, targetPath) {
         const formData = new FormData();
         formData.append('images', file, file.name);
@@ -835,7 +1208,7 @@
                 setByPath(contentData, targetPath, data.files[0].url);
                 setDirty(true);
                 renderEditor(currentPage);
-                toast('Kép feltöltve!', 'success');
+                toast(data.files[0].reused ? 'Meglévő kép újrahasználva!' : 'Kép feltöltve!', 'success');
             }
         } catch (err) {
             toast('Feltöltési hiba: ' + err.message, 'error');
@@ -872,7 +1245,6 @@
     function initCollapsible(container) {
         container.querySelectorAll('.field-section-title').forEach(title => {
             title.addEventListener('click', e => {
-                // Don't collapse if clicking a button inside the title
                 if (e.target.closest('button')) return;
                 title.parentElement.classList.toggle('collapsed');
             });
@@ -981,6 +1353,521 @@
     function closeUploadModal() {
         $('#image-upload-modal').classList.add('hidden');
         uploadCallback = null;
+    }
+
+    // ══════════════════════════════════════
+    // ── IMAGE EDITOR (Crop & Resize) ──
+    // ══════════════════════════════════════
+
+    let editorState = {
+        img: null,           // loaded Image element
+        targetPath: null,    // content.json path to update
+        mode: 'crop',        // 'crop' or 'resize'
+        aspect: null,        // null=free, or number like 1, 4/3, 16/9
+        lockRatio: true,     // for resize mode
+        // Crop rectangle (in image coordinates)
+        cropX: 0, cropY: 0, cropW: 0, cropH: 0,
+        // Canvas display scale
+        scale: 1,
+        // Mouse state
+        dragging: false,
+        dragType: null,      // 'new', 'move', 'nw','ne','sw','se','n','s','e','w'
+        dragStartX: 0, dragStartY: 0,
+        dragStartCrop: null,
+    };
+
+    function initImageEditButtons(container) {
+        container.querySelectorAll('[data-edit-src]').forEach(btn => {
+            btn.addEventListener('mousedown', e => e.stopPropagation());
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                e.preventDefault();
+                const src = btn.dataset.editSrc;
+                const target = btn.dataset.editTarget;
+                openImageEditor(src, target);
+            });
+        });
+    }
+
+    function openImageEditor(src, targetPath) {
+        const modal = $('#image-editor-modal');
+        const canvas = $('#editor-canvas');
+
+        editorState.targetPath = targetPath;
+        editorState.mode = 'crop';
+        editorState.aspect = null;
+        editorState.lockRatio = true;
+
+        // Reset mode buttons
+        $$('.editor-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === 'crop'));
+        $$('.aspect-btn').forEach(b => b.classList.toggle('active', b.dataset.aspect === 'free'));
+        $('#crop-aspect-group').classList.remove('hidden');
+        $('#resize-controls').classList.add('hidden');
+        $('#editor-preview-row').classList.add('hidden');
+
+        // Load image
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            editorState.img = img;
+            // Set crop to full image
+            editorState.cropX = 0;
+            editorState.cropY = 0;
+            editorState.cropW = img.naturalWidth;
+            editorState.cropH = img.naturalHeight;
+
+            // Fit canvas to container
+            const wrap = $('#editor-canvas-wrap');
+            const maxW = wrap.clientWidth - 4;
+            const maxH = Math.min(window.innerHeight * 0.55, 600);
+            editorState.scale = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight, 1);
+            canvas.width = Math.round(img.naturalWidth * editorState.scale);
+            canvas.height = Math.round(img.naturalHeight * editorState.scale);
+
+            // Resize fields
+            $('#resize-w').value = img.naturalWidth;
+            $('#resize-h').value = img.naturalHeight;
+
+            // Info
+            $('#editor-original-size').textContent = `Eredeti: ${img.naturalWidth} × ${img.naturalHeight}`;
+            updateCropInfo();
+
+            drawEditor();
+            modal.classList.remove('hidden');
+        };
+        img.onerror = () => {
+            toast('Nem sikerült betölteni a képet (külső URL?)', 'error');
+        };
+        img.src = src;
+    }
+
+    function drawEditor() {
+        const { img, scale, cropX, cropY, cropW, cropH, mode } = editorState;
+        if (!img) return;
+        const canvas = $('#editor-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Clear and draw image
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        if (mode === 'crop') {
+            // Dark overlay outside crop
+            ctx.fillStyle = 'rgba(0,0,0,0.55)';
+            const sx = cropX * scale, sy = cropY * scale;
+            const sw = cropW * scale, sh = cropH * scale;
+
+            // Top
+            ctx.fillRect(0, 0, canvas.width, sy);
+            // Bottom
+            ctx.fillRect(0, sy + sh, canvas.width, canvas.height - sy - sh);
+            // Left
+            ctx.fillRect(0, sy, sx, sh);
+            // Right
+            ctx.fillRect(sx + sw, sy, canvas.width - sx - sw, sh);
+
+            // Crop border
+            ctx.strokeStyle = '#c9a96e';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(sx, sy, sw, sh);
+
+            // Rule of thirds lines
+            ctx.strokeStyle = 'rgba(201,169,110,0.3)';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 2; i++) {
+                ctx.beginPath();
+                ctx.moveTo(sx + (sw * i / 3), sy);
+                ctx.lineTo(sx + (sw * i / 3), sy + sh);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(sx, sy + (sh * i / 3));
+                ctx.lineTo(sx + sw, sy + (sh * i / 3));
+                ctx.stroke();
+            }
+
+            // Corner handles
+            ctx.fillStyle = '#c9a96e';
+            const hs = 8;
+            const corners = [
+                [sx, sy], [sx + sw, sy],
+                [sx, sy + sh], [sx + sw, sy + sh]
+            ];
+            for (const [cx, cy] of corners) {
+                ctx.fillRect(cx - hs / 2, cy - hs / 2, hs, hs);
+            }
+            // Edge handles
+            const edges = [
+                [sx + sw / 2, sy], [sx + sw / 2, sy + sh],
+                [sx, sy + sh / 2], [sx + sw, sy + sh / 2]
+            ];
+            for (const [cx, cy] of edges) {
+                ctx.fillRect(cx - hs / 2, cy - hs / 2, hs, hs);
+            }
+        }
+    }
+
+    function updateCropInfo() {
+        const { cropW, cropH } = editorState;
+        $('#editor-crop-size').textContent = `Kijelölés: ${Math.round(cropW)} × ${Math.round(cropH)}`;
+    }
+
+    function updatePreview() {
+        const { img, mode, cropX, cropY, cropW, cropH } = editorState;
+        if (!img || mode !== 'crop') return;
+        const previewRow = $('#editor-preview-row');
+        const pc = $('#editor-preview-canvas');
+        const pctx = pc.getContext('2d');
+
+        if (cropW < 2 || cropH < 2) {
+            previewRow.classList.add('hidden');
+            return;
+        }
+
+        previewRow.classList.remove('hidden');
+        const maxPW = 200, maxPH = 120;
+        const ps = Math.min(maxPW / cropW, maxPH / cropH, 1);
+        pc.width = Math.round(cropW * ps);
+        pc.height = Math.round(cropH * ps);
+        pctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, pc.width, pc.height);
+    }
+
+    function bindImageEditor() {
+        const modal = $('#image-editor-modal');
+        const canvas = $('#editor-canvas');
+
+        // Close
+        $('#editor-cancel').addEventListener('click', () => modal.classList.add('hidden'));
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+
+        // Reset
+        $('#editor-reset').addEventListener('click', () => {
+            if (!editorState.img) return;
+            editorState.cropX = 0;
+            editorState.cropY = 0;
+            editorState.cropW = editorState.img.naturalWidth;
+            editorState.cropH = editorState.img.naturalHeight;
+            $('#resize-w').value = editorState.img.naturalWidth;
+            $('#resize-h').value = editorState.img.naturalHeight;
+            updateCropInfo();
+            drawEditor();
+            updatePreview();
+        });
+
+        // Mode buttons
+        $$('.editor-mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $$('.editor-mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                editorState.mode = btn.dataset.mode;
+                $('#crop-aspect-group').classList.toggle('hidden', btn.dataset.mode !== 'crop');
+                $('#resize-controls').classList.toggle('hidden', btn.dataset.mode !== 'resize');
+                $('#editor-preview-row').classList.toggle('hidden', btn.dataset.mode !== 'crop');
+                drawEditor();
+            });
+        });
+
+        // Aspect ratio buttons
+        $$('.aspect-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $$('.aspect-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const val = btn.dataset.aspect;
+                if (val === 'free') {
+                    editorState.aspect = null;
+                } else {
+                    const [w, h] = val.split(':').map(Number);
+                    editorState.aspect = w / h;
+                    // Adjust current crop to match aspect
+                    constrainCropToAspect();
+                    drawEditor();
+                    updateCropInfo();
+                    updatePreview();
+                }
+            });
+        });
+
+        // Resize inputs
+        const rw = $('#resize-w');
+        const rh = $('#resize-h');
+        const lockBtn = $('#resize-lock');
+
+        lockBtn.addEventListener('click', () => {
+            editorState.lockRatio = !editorState.lockRatio;
+            lockBtn.style.color = editorState.lockRatio ? 'var(--accent)' : 'var(--text-dim)';
+        });
+
+        rw.addEventListener('input', () => {
+            if (!editorState.img) return;
+            const w = parseInt(rw.value) || 1;
+            if (editorState.lockRatio) {
+                const ratio = editorState.img.naturalHeight / editorState.img.naturalWidth;
+                rh.value = Math.round(w * ratio);
+            }
+        });
+
+        rh.addEventListener('input', () => {
+            if (!editorState.img) return;
+            const h = parseInt(rh.value) || 1;
+            if (editorState.lockRatio) {
+                const ratio = editorState.img.naturalWidth / editorState.img.naturalHeight;
+                rw.value = Math.round(h * ratio);
+            }
+        });
+
+        // ── Crop mouse handlers ──
+        canvas.addEventListener('mousedown', e => {
+            if (editorState.mode !== 'crop') return;
+            const rect = canvas.getBoundingClientRect();
+            const mx = (e.clientX - rect.left);
+            const my = (e.clientY - rect.top);
+            const s = editorState.scale;
+
+            // Check if near a handle
+            const handle = getHandle(mx, my);
+            if (handle) {
+                editorState.dragging = true;
+                editorState.dragType = handle;
+            } else if (isInsideCrop(mx, my)) {
+                editorState.dragging = true;
+                editorState.dragType = 'move';
+            } else {
+                editorState.dragging = true;
+                editorState.dragType = 'new';
+                editorState.cropX = mx / s;
+                editorState.cropY = my / s;
+                editorState.cropW = 0;
+                editorState.cropH = 0;
+            }
+            editorState.dragStartX = mx;
+            editorState.dragStartY = my;
+            editorState.dragStartCrop = {
+                x: editorState.cropX, y: editorState.cropY,
+                w: editorState.cropW, h: editorState.cropH
+            };
+        });
+
+        canvas.addEventListener('mousemove', e => {
+            if (editorState.mode !== 'crop') return;
+            const rect = canvas.getBoundingClientRect();
+            const mx = (e.clientX - rect.left);
+            const my = (e.clientY - rect.top);
+
+            // Update cursor
+            if (!editorState.dragging) {
+                const handle = getHandle(mx, my);
+                if (handle === 'nw' || handle === 'se') canvas.style.cursor = 'nwse-resize';
+                else if (handle === 'ne' || handle === 'sw') canvas.style.cursor = 'nesw-resize';
+                else if (handle === 'n' || handle === 's') canvas.style.cursor = 'ns-resize';
+                else if (handle === 'e' || handle === 'w') canvas.style.cursor = 'ew-resize';
+                else if (isInsideCrop(mx, my)) canvas.style.cursor = 'move';
+                else canvas.style.cursor = 'crosshair';
+                return;
+            }
+
+            const s = editorState.scale;
+            const dx = (mx - editorState.dragStartX) / s;
+            const dy = (my - editorState.dragStartY) / s;
+            const sc = editorState.dragStartCrop;
+            const imgW = editorState.img.naturalWidth;
+            const imgH = editorState.img.naturalHeight;
+
+            if (editorState.dragType === 'move') {
+                editorState.cropX = clamp(sc.x + dx, 0, imgW - sc.w);
+                editorState.cropY = clamp(sc.y + dy, 0, imgH - sc.h);
+            } else if (editorState.dragType === 'new') {
+                let newW = dx;
+                let newH = dy;
+                if (editorState.aspect) {
+                    newH = Math.abs(newW) / editorState.aspect * Math.sign(newH || 1);
+                }
+                editorState.cropW = Math.abs(newW);
+                editorState.cropH = Math.abs(newH);
+                if (newW < 0) editorState.cropX = sc.x + newW;
+                else editorState.cropX = sc.x;
+                if (newH < 0) editorState.cropY = sc.y + (editorState.aspect ? -Math.abs(newH) : newH);
+                else editorState.cropY = editorState.aspect ? sc.y : sc.y;
+                // Clamp to image bounds
+                editorState.cropX = clamp(editorState.cropX, 0, imgW);
+                editorState.cropY = clamp(editorState.cropY, 0, imgH);
+                editorState.cropW = Math.min(editorState.cropW, imgW - editorState.cropX);
+                editorState.cropH = Math.min(editorState.cropH, imgH - editorState.cropY);
+            } else {
+                // Handle resize
+                resizeCropByHandle(editorState.dragType, dx, dy, sc, imgW, imgH);
+            }
+
+            updateCropInfo();
+            drawEditor();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            if (editorState.dragging) {
+                editorState.dragging = false;
+                // Normalize negative sizes
+                if (editorState.cropW < 0) {
+                    editorState.cropX += editorState.cropW;
+                    editorState.cropW = -editorState.cropW;
+                }
+                if (editorState.cropH < 0) {
+                    editorState.cropY += editorState.cropH;
+                    editorState.cropH = -editorState.cropH;
+                }
+                updatePreview();
+            }
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            if (editorState.dragging) {
+                editorState.dragging = false;
+                updatePreview();
+            }
+        });
+
+        // ── Apply / Save ──
+        $('#editor-apply').addEventListener('click', async () => {
+            if (!editorState.img) return;
+            const { img, mode, cropX, cropY, cropW, cropH } = editorState;
+
+            let outW, outH, sx, sy, sw, sh;
+
+            if (mode === 'crop') {
+                sx = Math.round(cropX);
+                sy = Math.round(cropY);
+                sw = Math.round(cropW);
+                sh = Math.round(cropH);
+                outW = sw;
+                outH = sh;
+                if (outW < 1 || outH < 1) {
+                    toast('A kijelölés túl kicsi', 'error');
+                    return;
+                }
+            } else {
+                // Resize: use full image, scale to target
+                sx = 0; sy = 0;
+                sw = img.naturalWidth;
+                sh = img.naturalHeight;
+                outW = parseInt($('#resize-w').value) || img.naturalWidth;
+                outH = parseInt($('#resize-h').value) || img.naturalHeight;
+            }
+
+            // Render to offscreen canvas
+            const offscreen = document.createElement('canvas');
+            offscreen.width = outW;
+            offscreen.height = outH;
+            const octx = offscreen.getContext('2d');
+            octx.drawImage(img, sx, sy, sw, sh, 0, 0, outW, outH);
+
+            // Convert to blob
+            offscreen.toBlob(async (blob) => {
+                if (!blob) {
+                    toast('Hiba a kép feldolgozásakor', 'error');
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('images', blob, 'edited-' + Date.now() + '.jpg');
+
+                try {
+                    toast('Szerkesztett kép feltöltése...', 'info');
+                    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (data.success && data.files && data.files.length > 0) {
+                        setByPath(contentData, editorState.targetPath, data.files[0].url);
+                        setDirty(true);
+                        modal.classList.add('hidden');
+                        renderEditor(currentPage);
+                        toast(`Kép elmentve (${outW}×${outH})!`, 'success');
+                    }
+                } catch (err) {
+                    toast('Feltöltési hiba: ' + err.message, 'error');
+                }
+            }, 'image/jpeg', 0.92);
+        });
+    }
+
+    function getHandle(mx, my) {
+        const s = editorState.scale;
+        const { cropX, cropY, cropW, cropH } = editorState;
+        const sx = cropX * s, sy = cropY * s;
+        const sw = cropW * s, sh = cropH * s;
+        const r = 10; // hit radius
+
+        const pts = {
+            'nw': [sx, sy], 'n': [sx + sw / 2, sy], 'ne': [sx + sw, sy],
+            'w': [sx, sy + sh / 2], 'e': [sx + sw, sy + sh / 2],
+            'sw': [sx, sy + sh], 's': [sx + sw / 2, sy + sh], 'se': [sx + sw, sy + sh]
+        };
+
+        for (const [name, [px, py]] of Object.entries(pts)) {
+            if (Math.abs(mx - px) < r && Math.abs(my - py) < r) return name;
+        }
+        return null;
+    }
+
+    function isInsideCrop(mx, my) {
+        const s = editorState.scale;
+        const { cropX, cropY, cropW, cropH } = editorState;
+        const sx = cropX * s, sy = cropY * s;
+        return mx >= sx && mx <= sx + cropW * s && my >= sy && my <= sy + cropH * s;
+    }
+
+    function resizeCropByHandle(handle, dx, dy, sc, imgW, imgH) {
+        let { x, y, w, h } = { x: sc.x, y: sc.y, w: sc.w, h: sc.h };
+
+        if (handle.includes('e')) { w = sc.w + dx; }
+        if (handle.includes('w')) { x = sc.x + dx; w = sc.w - dx; }
+        if (handle.includes('s')) { h = sc.h + dy; }
+        if (handle.includes('n')) { y = sc.y + dy; h = sc.h - dy; }
+
+        // Enforce aspect ratio
+        if (editorState.aspect) {
+            if (handle === 'n' || handle === 's') {
+                w = h * editorState.aspect;
+            } else {
+                h = w / editorState.aspect;
+            }
+            if (handle.includes('n')) y = sc.y + sc.h - h;
+            if (handle.includes('w')) x = sc.x + sc.w - w;
+        }
+
+        // Minimum size
+        if (w < 10) w = 10;
+        if (h < 10) h = 10;
+
+        // Clamp to image
+        x = clamp(x, 0, imgW - 10);
+        y = clamp(y, 0, imgH - 10);
+        w = Math.min(w, imgW - x);
+        h = Math.min(h, imgH - y);
+
+        editorState.cropX = x;
+        editorState.cropY = y;
+        editorState.cropW = w;
+        editorState.cropH = h;
+    }
+
+    function constrainCropToAspect() {
+        const { img, aspect, cropX, cropY, cropW, cropH } = editorState;
+        if (!aspect || !img) return;
+        const imgW = img.naturalWidth;
+        const imgH = img.naturalHeight;
+
+        // Keep center, adjust width or height to match aspect
+        const cx = cropX + cropW / 2;
+        const cy = cropY + cropH / 2;
+        let newW = cropW;
+        let newH = cropW / aspect;
+        if (newH > cropH) {
+            newH = cropH;
+            newW = cropH * aspect;
+        }
+        editorState.cropW = Math.min(newW, imgW);
+        editorState.cropH = Math.min(newH, imgH);
+        editorState.cropX = clamp(cx - editorState.cropW / 2, 0, imgW - editorState.cropW);
+        editorState.cropY = clamp(cy - editorState.cropH / 2, 0, imgH - editorState.cropH);
+    }
+
+    function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
     }
 
     // ── Toast notifications ──

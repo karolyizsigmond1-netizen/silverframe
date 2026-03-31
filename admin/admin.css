@@ -116,6 +116,32 @@ body {
 
 .preview-link:hover { color: var(--accent); }
 
+.sidebar-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.btn-tool {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.76rem;
+    font-family: var(--sans);
+    text-align: left;
+    transition: all 0.15s;
+}
+
+.btn-tool:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+}
+
 /* === Main === */
 #main {
     flex: 1;
@@ -283,6 +309,17 @@ body {
 
 .field-group:last-child { margin-bottom: 0; }
 
+.field-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.field-label-row .field-label {
+    margin-bottom: 0;
+}
+
 .field-label {
     display: block;
     font-size: 0.78rem;
@@ -291,6 +328,31 @@ body {
     color: var(--text-dim);
     margin-bottom: 6px;
     font-weight: 500;
+}
+
+/* Show on site button */
+.btn-show-on-site {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.btn-show-on-site:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
 }
 
 .field-input,
@@ -819,6 +881,208 @@ body {
     font-size: 0.72rem;
     color: var(--text-dim);
     margin-top: 4px;
+}
+
+/* === Bulk Upload Zone === */
+.bulk-upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 16px;
+    position: relative;
+}
+
+.bulk-upload-zone:hover,
+.bulk-upload-zone.bulk-drag-active {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+}
+
+.bulk-upload-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    opacity: 0.5;
+}
+
+.bulk-upload-zone:hover .bulk-upload-icon,
+.bulk-upload-zone.bulk-drag-active .bulk-upload-icon {
+    opacity: 1;
+}
+
+.bulk-upload-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.bulk-upload-hint {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
+
+.bulk-upload-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* === Image Editor Modal === */
+.modal-editor {
+    max-width: 900px;
+    width: 95%;
+    max-height: 92vh;
+}
+
+.editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.editor-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toolbar-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.toolbar-sep {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+.toolbar-input {
+    width: 80px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 8px;
+    font-size: 0.82rem;
+    font-family: var(--sans);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.toolbar-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.editor-mode-btn,
+.aspect-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.76rem;
+    font-family: var(--sans);
+    transition: all 0.15s;
+}
+
+.editor-mode-btn:hover,
+.aspect-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.editor-mode-btn.active,
+.aspect-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.editor-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.editor-canvas-wrap {
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    max-height: 55vh;
+    cursor: crosshair;
+}
+
+.editor-canvas-wrap canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 55vh;
+}
+
+.editor-preview-row {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.editor-preview-row canvas {
+    max-width: 200px;
+    max-height: 120px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+}
+
+/* Edit button on images */
+.btn-edit-image {
+    background: rgba(0,0,0,0.75);
+    border: none;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: all 0.15s;
+    padding: 0;
+}
+
+.btn-edit-image:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.image-field .btn-edit-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 3;
 }
 
 /* === Responsive === */

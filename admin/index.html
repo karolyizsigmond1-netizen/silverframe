@@ -17,6 +17,10 @@
         <nav id="sidebar-nav"></nav>
         <div class="sidebar-footer">
             <a href="/" target="_blank" class="preview-link">&#128279; Weboldal megtekintése</a>
+            <div class="sidebar-tools">
+                <button id="btn-dedup" class="btn-tool" title="Duplikált képek törlése az uploads mappából">&#128465; Duplikátumok törlése</button>
+                <button id="btn-cleanup" class="btn-tool" title="Nem használt képek törlése az uploads mappából">&#128465; Nem használt képek törlése</button>
+            </div>
         </div>
     </aside>
 
@@ -64,6 +68,58 @@
             <div class="modal-actions">
                 <button class="btn-cancel" id="confirm-no">Mégse</button>
                 <button class="btn-save btn-danger" id="confirm-yes">Törlés</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Editor Modal -->
+    <div id="image-editor-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-editor">
+            <h3>Kép szerkesztése</h3>
+
+            <div class="editor-toolbar">
+                <div class="editor-toolbar-group">
+                    <label class="toolbar-label">Mód:</label>
+                    <button class="editor-mode-btn active" data-mode="crop">Vágás</button>
+                    <button class="editor-mode-btn" data-mode="resize">Átméretezés</button>
+                </div>
+                <div class="editor-toolbar-group" id="crop-aspect-group">
+                    <label class="toolbar-label">Arány:</label>
+                    <button class="aspect-btn active" data-aspect="free">Szabad</button>
+                    <button class="aspect-btn" data-aspect="1:1">1:1</button>
+                    <button class="aspect-btn" data-aspect="4:3">4:3</button>
+                    <button class="aspect-btn" data-aspect="16:9">16:9</button>
+                    <button class="aspect-btn" data-aspect="3:2">3:2</button>
+                </div>
+                <div class="editor-toolbar-group hidden" id="resize-controls">
+                    <label class="toolbar-label">Szélesség:</label>
+                    <input type="number" id="resize-w" class="toolbar-input" min="1" max="10000">
+                    <span class="toolbar-sep">&times;</span>
+                    <label class="toolbar-label">Magasság:</label>
+                    <input type="number" id="resize-h" class="toolbar-input" min="1" max="10000">
+                    <button class="btn-icon" id="resize-lock" title="Arány zárolása" style="font-size:1rem;width:32px;height:32px;">&#128279;</button>
+                </div>
+            </div>
+
+            <div class="editor-info" id="editor-info">
+                <span id="editor-original-size"></span>
+                <span id="editor-crop-size"></span>
+            </div>
+
+            <div class="editor-canvas-wrap" id="editor-canvas-wrap">
+                <canvas id="editor-canvas"></canvas>
+            </div>
+
+            <div class="editor-preview-row hidden" id="editor-preview-row">
+                <label class="toolbar-label">Előnézet:</label>
+                <canvas id="editor-preview-canvas"></canvas>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" id="editor-cancel">Mégse</button>
+                <button class="btn-save" id="editor-reset">Visszaállítás</button>
+                <button class="btn-save" id="editor-apply">Mentés és feltöltés</button>
             </div>
         </div>
     </div>

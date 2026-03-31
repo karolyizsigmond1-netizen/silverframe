@@ -244,6 +244,31 @@ button { font-family: inherit; cursor: pointer; }
 }
 .btn-solid::before { background: var(--text-primary); }
 
+/* ── Rounded button style ── */
+.rounded-buttons .btn {
+    border-radius: 100px;
+}
+.rounded-buttons .btn::before {
+    border-radius: 100px;
+}
+.rounded-buttons .btn-solid {
+    border-radius: 100px;
+}
+.rounded-buttons .header-cta {
+    border-radius: 100px;
+}
+.rounded-buttons .t-dot {
+    border-radius: 50%;
+}
+.rounded-buttons .form-group input,
+.rounded-buttons .form-group select,
+.rounded-buttons .form-group textarea {
+    border-radius: 12px;
+}
+.rounded-buttons .form-btn {
+    border-radius: 100px;
+}
+
 /* ═══════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════ */
@@ -304,16 +329,24 @@ button { font-family: inherit; cursor: pointer; }
     align-items: center; justify-content: center;
     position: relative; overflow: hidden;
 }
-.home-hero-bg {
+.home-hero-slideshow {
     position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80') center/cover no-repeat;
-    transform: scale(1.15);
-    animation: heroZoom 14s var(--ease-smooth) 1.8s forwards;
 }
-@keyframes heroZoom { to { transform: scale(1); } }
+.home-hero-slide {
+    position: absolute; inset: 0;
+    background: center/cover no-repeat;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity 1.5s ease, transform 8s ease-out;
+}
+.home-hero-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
 .home-hero-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(11,12,16,0.75) 0%, rgba(11,12,16,0.3) 50%, rgba(11,12,16,0.7) 100%);
+    z-index: 1;
 }
 .home-hero-content {
     position: relative; z-index: 2;
@@ -343,9 +376,10 @@ button { font-family: inherit; cursor: pointer; }
 
 .home-hero .btn { opacity: 0; animation: fadeUp 1s var(--ease-dramatic) 2.5s forwards; }
 .home-hero-scroll {
-    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 2.5rem; left: 0; right: 0;
     display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
     opacity: 0; animation: fadeUp 1s var(--ease-dramatic) 3s forwards;
+    z-index: 2;
 }
 .home-hero-scroll span {
     font-size: 0.6rem; letter-spacing: 0.3em;
