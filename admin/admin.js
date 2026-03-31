@@ -194,6 +194,8 @@
             }
         });
 
+        $('#btn-rename').addEventListener('click', () => openRenameModal());
+
         $('#btn-cleanup').addEventListener('click', async () => {
             const confirmed = await confirmAction(
                 'Nem használt képek törlése',
@@ -1868,6 +1870,222 @@
 
     function clamp(val, min, max) {
         return Math.max(min, Math.min(max, val));
+    }
+
+    // ══════════════════════════════════════
+    // ── BATCH RENAME TOOL ──
+    // ══════════════════════════════════════
+
+    let renameFiles = []; // { file: File, preview: dataUrl }
+
+    function openRenameModal() {
+        renameFiles = [];
+        const modal = $('#rename-modal');
+        modal.classList.remove('hidden');
+        $('#rename-file-list').innerHTML = '';
+        $('#rename-genre').value = '';
+        $('#rename-start').value = '1';
+        $('#rename-apply').disabled = true;
+        $$('.rename-genre-btn').forEach(b => b.classList.remove('active'));
+        updateRenamePreview();
+        bindRenameModal();
+    }
+
+    let renameModalBound = false;
+
+    function bindRenameModal() {
+        if (renameModalBound) return;
+        renameModalBound = true;
+
+        const modal = $('#rename-modal');
+        const dropZone = $('#rename-drop-zone');
+        const fileInput = $('#rename-file-input');
+        const genreInput = $('#rename-genre');
+        const startInput = $('#rename-start');
+
+        // Close
+        $('#rename-cancel').addEventListener('click', () => modal.classList.add('hidden'));
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+
+        // File drop zone
+        dropZone.addEventListener('click', e => {
+            if (e.target === fileInput) return;
+            fileInput.click();
+        });
+
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add('drag-active');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-active');
+            addRenameFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+        });
+
+        fileInput.addEventListener('change', () => {
+            addRenameFiles(Array.from(fileInput.files));
+            fileInput.value = '';
+        });
+
+        // Genre quick buttons
+        $('#rename-genre-buttons').addEventListener('click', e => {
+            const btn = e.target.closest('.rename-genre-btn');
+            if (!btn) return;
+            $$('.rename-genre-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            genreInput.value = btn.dataset.genre;
+            updateRenamePreview();
+        });
+
+        // Text input for genre
+        genreInput.addEventListener('input', () => {
+            // Deselect quick buttons if user types custom
+            const val = genreInput.value.trim().toLowerCase();
+            $$('.rename-genre-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.genre === val);
+            });
+            updateRenamePreview();
+        });
+
+        // Start number
+        startInput.addEventListener('input', () => updateRenamePreview());
+
+        // Apply
+        $('#rename-apply').addEventListener('click', executeRename);
+    }
+
+    function addRenameFiles(files) {
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            // Read preview
+            const reader = new FileReader();
+            reader.onload = e => {
+                renameFiles.push({ file, preview: e.target.result });
+                renderRenameFileList();
+                updateRenamePreview();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function renderRenameFileList() {
+        const list = $('#rename-file-list');
+        list.innerHTML = renameFiles.map((rf, i) => `
+            <div class="rename-file-item">
+                <img src="${rf.preview}" alt="">
+                <span>${rf.file.name}</span>
+                <button class="remove-file" data-remove-rename="${i}" title="Eltávolítás">&times;</button>
+            </div>
+        `).join('');
+
+        // Bind remove buttons
+        list.querySelectorAll('[data-remove-rename]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.dataset.removeRename);
+                renameFiles.splice(idx, 1);
+                renderRenameFileList();
+                updateRenamePreview();
+            });
+        });
+    }
+
+    function getRenameList() {
+        const genre = $('#rename-genre').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+        const start = parseInt($('#rename-start').value) || 1;
+        if (!genre || renameFiles.length === 0) return [];
+
+        return renameFiles.map((rf, i) => {
+            const num = String(start + i).padStart(3, '0');
+            const ext = rf.file.name.includes('.') ? '.' + rf.file.name.split('.').pop().toLowerCase() : '.jpg';
+            const newName = `silverframe_${genre}_${num}${ext}`;
+            return { file: rf.file, original: rf.file.name, newName };
+        });
+    }
+
+    function updateRenamePreview() {
+        const preview = $('#rename-preview');
+        const list = getRenameList();
+
+        if (list.length === 0) {
+            preview.innerHTML = '<span class="rename-preview-empty">Válasszon képeket és műfajt az előnézet megjelenítéséhez</span>';
+            $('#rename-apply').disabled = true;
+            return;
+        }
+
+        preview.innerHTML = list.map(item => `
+            <div class="rename-preview-item">
+                <span class="rename-preview-old">${item.original}</span>
+                <span class="rename-preview-arrow">→</span>
+                <span class="rename-preview-new">${item.newName}</span>
+            </div>
+        `).join('');
+
+        $('#rename-apply').disabled = false;
+    }
+
+    async function executeRename() {
+        const list = getRenameList();
+        if (list.length === 0) return;
+
+        const applyBtn = $('#rename-apply');
+        applyBtn.disabled = true;
+        applyBtn.textContent = 'Feltöltés...';
+
+        try {
+            // Step 1: Upload all files
+            const formData = new FormData();
+            for (const item of list) {
+                formData.append('images', item.file, item.file.name);
+            }
+
+            toast(`${list.length} kép feltöltése...`, 'info');
+            const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+            const uploadData = await uploadRes.json();
+
+            if (!uploadData.success || !uploadData.files) {
+                toast('Feltöltési hiba', 'error');
+                return;
+            }
+
+            // Step 2: Rename uploaded files
+            const renameOps = uploadData.files.map((uploaded, i) => ({
+                oldUrl: uploaded.url,
+                newName: list[i].newName
+            }));
+
+            applyBtn.textContent = 'Átnevezés...';
+            const renameRes = await fetch('/api/batch-rename', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ files: renameOps })
+            });
+            const renameData = await renameRes.json();
+
+            if (renameData.success) {
+                const successCount = renameData.results.filter(r => r.success).length;
+                const errorCount = renameData.results.filter(r => r.error).length;
+
+                if (errorCount > 0) {
+                    toast(`${successCount} kép átnevezve, ${errorCount} hiba`, 'info');
+                } else {
+                    toast(`${successCount} kép sikeresen feltöltve és átnevezve!`, 'success');
+                }
+
+                // Reload content and close
+                await loadContent();
+                if (currentPage) renderEditor(currentPage);
+                $('#rename-modal').classList.add('hidden');
+            } else {
+                toast('Átnevezési hiba: ' + (renameData.error || 'ismeretlen'), 'error');
+            }
+        } catch (e) {
+            toast('Hiba: ' + e.message, 'error');
+        } finally {
+            applyBtn.textContent = 'Átnevezés és feltöltés';
+            applyBtn.disabled = false;
+        }
     }
 
     // ── Toast notifications ──

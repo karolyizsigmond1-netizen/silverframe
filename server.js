@@ -188,6 +188,74 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // API: Batch rename uploaded files
+    if (req.method === 'POST' && req.url === '/api/batch-rename') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+            try {
+                const { files } = JSON.parse(body);
+                // files = [{ oldUrl: "uploads/abc.jpg", newName: "silverframe_portrait_001.jpg" }, ...]
+                let content = fs.readFileSync(CONTENT_FILE, 'utf-8');
+                const results = [];
+                let updated = 0;
+
+                for (const { oldUrl, newName } of files) {
+                    const oldFile = oldUrl.replace('uploads/', '');
+                    const oldPath = path.join(UPLOADS_DIR, oldFile);
+                    const newPath = path.join(UPLOADS_DIR, newName);
+
+                    if (!fs.existsSync(oldPath)) {
+                        results.push({ oldUrl, error: 'Fájl nem található' });
+                        continue;
+                    }
+                    // Don't overwrite existing files
+                    if (fs.existsSync(newPath) && oldPath !== newPath) {
+                        results.push({ oldUrl, error: 'Már létezik ilyen nevű fájl' });
+                        continue;
+                    }
+
+                    fs.renameSync(oldPath, newPath);
+                    // Update all references in content.json
+                    const oldRef = 'uploads/' + oldFile;
+                    const newRef = 'uploads/' + newName;
+                    if (content.includes(oldRef)) {
+                        content = content.split(oldRef).join(newRef);
+                        updated++;
+                    }
+                    results.push({ oldUrl, newUrl: 'uploads/' + newName, success: true });
+                }
+
+                // Save updated content
+                fs.writeFileSync(CONTENT_FILE, content, 'utf-8');
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, results, referencesUpdated: updated }));
+            } catch (e) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: e.message }));
+            }
+        });
+        return;
+    }
+
+    // API: List all uploaded files
+    if (req.method === 'GET' && req.url === '/api/uploads') {
+        try {
+            const files = fs.readdirSync(UPLOADS_DIR).map(f => {
+                const stat = fs.statSync(path.join(UPLOADS_DIR, f));
+                return { name: f, url: 'uploads/' + f, size: stat.size, modified: stat.mtime };
+            });
+            files.sort((a, b) => new Date(b.modified) - new Date(a.modified));
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, files }));
+        } catch (e) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+    }
+
     // Static file serving
     let urlPath = req.url.split('?')[0];
     if (urlPath.endsWith('/')) urlPath += 'index.html';

@@ -18,6 +18,7 @@
         <div class="sidebar-footer">
             <a href="/" target="_blank" class="preview-link">&#128279; Weboldal megtekintése</a>
             <div class="sidebar-tools">
+                <button id="btn-rename" class="btn-tool btn-tool-accent" title="Képek feltöltése és egységes átnevezése">&#127912; Képek átnevezése</button>
                 <button id="btn-dedup" class="btn-tool" title="Duplikált képek törlése az uploads mappából">&#128465; Duplikátumok törlése</button>
                 <button id="btn-cleanup" class="btn-tool" title="Nem használt képek törlése az uploads mappából">&#128465; Nem használt képek törlése</button>
             </div>
@@ -120,6 +121,93 @@
                 <button class="btn-cancel" id="editor-cancel">Mégse</button>
                 <button class="btn-save" id="editor-reset">Visszaállítás</button>
                 <button class="btn-save" id="editor-apply">Mentés és feltöltés</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Rename Modal -->
+    <div id="rename-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-rename">
+            <h3>&#127912; Képek átnevezése</h3>
+
+            <div class="rename-help">
+                <p><strong>Hogyan működik?</strong></p>
+                <p>1. Válasszon képeket (húzza ide vagy kattintson a tallózáshoz)</p>
+                <p>2. Adja meg a műfajt (pl. "portrait", "wedding", "boudoir")</p>
+                <p>3. Állítsa be a kezdő számot (ha már vannak képei ebben a műfajban, válasszon nagyobb számot, hogy ne ütközzenek a nevek)</p>
+                <p>4. Kattintson az "Átnevezés és feltöltés" gombra</p>
+                <p class="rename-help-example">
+                    <strong>Eredmény példa:</strong><br>
+                    silverframe_portrait_001.jpg<br>
+                    silverframe_portrait_002.jpg<br>
+                    silverframe_portrait_003.jpg
+                </p>
+            </div>
+
+            <!-- Step 1: Upload images -->
+            <div class="rename-step">
+                <div class="rename-step-num">1</div>
+                <div class="rename-step-content">
+                    <label class="rename-step-label">Képek kiválasztása</label>
+                    <div class="rename-drop-zone" id="rename-drop-zone">
+                        <div class="rename-drop-icon">&#128247;</div>
+                        <div>Húzza ide a képeket vagy kattintson</div>
+                        <div class="rename-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <input type="file" id="rename-file-input" accept="image/*" multiple>
+                    </div>
+                    <div id="rename-file-list" class="rename-file-list"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: Genre -->
+            <div class="rename-step">
+                <div class="rename-step-num">2</div>
+                <div class="rename-step-content">
+                    <label class="rename-step-label">Műfaj / kategória</label>
+                    <p class="rename-step-desc">Válasszon a listából vagy írjon be sajátot. Ez lesz a fájlnévben a "silverframe_" után.</p>
+                    <div class="rename-genre-buttons" id="rename-genre-buttons">
+                        <button class="rename-genre-btn" data-genre="portrait">Portrait</button>
+                        <button class="rename-genre-btn" data-genre="wedding">Wedding</button>
+                        <button class="rename-genre-btn" data-genre="boudoir">Boudoir</button>
+                        <button class="rename-genre-btn" data-genre="family">Family</button>
+                        <button class="rename-genre-btn" data-genre="couple">Couple</button>
+                        <button class="rename-genre-btn" data-genre="maternity">Maternity</button>
+                        <button class="rename-genre-btn" data-genre="business">Business</button>
+                        <button class="rename-genre-btn" data-genre="event">Event</button>
+                        <button class="rename-genre-btn" data-genre="real-estate">Real Estate</button>
+                        <button class="rename-genre-btn" data-genre="pet">Pet</button>
+                        <button class="rename-genre-btn" data-genre="product">Product</button>
+                    </div>
+                    <input type="text" id="rename-genre" class="field-input" placeholder="Pl. portrait, wedding, boudoir..." style="margin-top:8px">
+                </div>
+            </div>
+
+            <!-- Step 3: Starting number -->
+            <div class="rename-step">
+                <div class="rename-step-num">3</div>
+                <div class="rename-step-content">
+                    <label class="rename-step-label">Kezdő szám</label>
+                    <p class="rename-step-desc">Ha már vannak "silverframe_portrait" képei (pl. 001-010), állítsa 11-re, hogy ne ütközzenek.</p>
+                    <input type="number" id="rename-start" class="field-input" value="1" min="1" max="9999" style="width:120px">
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="rename-step">
+                <div class="rename-step-num">&#10003;</div>
+                <div class="rename-step-content">
+                    <label class="rename-step-label">Előnézet</label>
+                    <p class="rename-step-desc">Így fognak kinézni a fájlnevek:</p>
+                    <div id="rename-preview" class="rename-preview">
+                        <span class="rename-preview-empty">Válasszon képeket és műfajt az előnézet megjelenítéséhez</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" id="rename-cancel">Mégse</button>
+                <button class="btn-save" id="rename-apply" disabled>Átnevezés és feltöltés</button>
             </div>
         </div>
     </div>
