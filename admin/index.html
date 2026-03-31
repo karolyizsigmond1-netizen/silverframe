@@ -19,6 +19,7 @@
             <a href="/" target="_blank" class="preview-link">&#128279; Weboldal megtekintése</a>
             <div class="sidebar-tools">
                 <button id="btn-rename" class="btn-tool btn-tool-accent" title="Képek feltöltése és egységes átnevezése">&#127912; Képek átnevezése</button>
+                <button id="btn-collections" class="btn-tool btn-tool-accent" title="Mentett gyűjtemények böngészése">&#128193; Gyűjtemények</button>
                 <button id="btn-dedup" class="btn-tool" title="Duplikált képek törlése az uploads mappából">&#128465; Duplikátumok törlése</button>
                 <button id="btn-cleanup" class="btn-tool" title="Nem használt képek törlése az uploads mappából">&#128465; Nem használt képek törlése</button>
             </div>
@@ -193,6 +194,42 @@
                 </div>
             </div>
 
+            <!-- Step 4: Save destination -->
+            <div class="rename-step">
+                <div class="rename-step-num">4</div>
+                <div class="rename-step-content">
+                    <label class="rename-step-label">Hova mentse?</label>
+                    <p class="rename-step-desc">Választhat egyet vagy mindkettőt:</p>
+                    <div class="rename-dest-options">
+                        <label class="rename-dest-option">
+                            <input type="checkbox" id="rename-dest-upload" checked>
+                            <span class="rename-dest-check"></span>
+                            <div>
+                                <strong>Feltöltés a weboldalra</strong>
+                                <p>A képek bekerülnek az uploads mappába, használhatók a galériákban</p>
+                            </div>
+                        </label>
+                        <label class="rename-dest-option">
+                            <input type="checkbox" id="rename-dest-collection">
+                            <span class="rename-dest-check"></span>
+                            <div>
+                                <strong>Mentés gyűjteménybe</strong>
+                                <p>A képek egy gyűjteménybe kerülnek, amit bármikor elővehet később</p>
+                                <input type="text" id="rename-collection-name" class="field-input" placeholder="Gyűjtemény neve (pl. 2026 Tavasz)" style="margin-top:6px;display:none">
+                            </div>
+                        </label>
+                        <label class="rename-dest-option">
+                            <input type="checkbox" id="rename-dest-download">
+                            <span class="rename-dest-check"></span>
+                            <div>
+                                <strong>Letöltés a számítógépre</strong>
+                                <p>Az átnevezett képek letöltődnek a gépére (Letöltések mappa)</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <!-- Preview -->
             <div class="rename-step">
                 <div class="rename-step-num">&#10003;</div>
@@ -207,7 +244,29 @@
 
             <div class="modal-actions">
                 <button class="btn-cancel" id="rename-cancel">Mégse</button>
-                <button class="btn-save" id="rename-apply" disabled>Átnevezés és feltöltés</button>
+                <button class="btn-save" id="rename-apply" disabled>Indítás</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collections Browser Modal -->
+    <div id="collections-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-collections">
+            <h3>&#128193; Gyűjtemények</h3>
+            <p class="collections-desc">Válasszon egy gyűjteményt a képek megtekintéséhez. Innen húzhatja a képeket közvetlenül a galéria kártyákra, vagy a gombokkal adhatja hozzá az aktuális oldalhoz.</p>
+
+            <div class="collections-layout">
+                <div class="collections-sidebar" id="collections-sidebar">
+                    <div class="collections-loading">Betöltés...</div>
+                </div>
+                <div class="collections-content" id="collections-content">
+                    <div class="collections-empty">Válasszon egy gyűjteményt a bal oldalon</div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" id="collections-close">Bezárás</button>
             </div>
         </div>
     </div>

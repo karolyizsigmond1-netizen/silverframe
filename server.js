@@ -256,6 +256,94 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // API: Get collections
+    if (req.method === 'GET' && req.url === '/api/collections') {
+        try {
+            const colFile = path.join(ROOT, 'uploads', 'collections.json');
+            if (fs.existsSync(colFile)) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(fs.readFileSync(colFile, 'utf-8'));
+            } else {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ collections: [] }));
+            }
+        } catch (e) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+    }
+
+    // API: Save to collection
+    if (req.method === 'POST' && req.url === '/api/collections/save') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+            try {
+                const { name, files } = JSON.parse(body);
+                // files = [{ url, newName }]
+                const colFile = path.join(ROOT, 'uploads', 'collections.json');
+                let data = { collections: [] };
+                if (fs.existsSync(colFile)) {
+                    data = JSON.parse(fs.readFileSync(colFile, 'utf-8'));
+                }
+                // Find or create collection
+                let col = data.collections.find(c => c.name === name);
+                if (!col) {
+                    col = { name, created: new Date().toISOString(), files: [] };
+                    data.collections.push(col);
+                }
+                // Add files (avoid duplicates)
+                for (const f of files) {
+                    if (!col.files.find(cf => cf.url === f.url)) {
+                        col.files.push({ url: f.url, name: f.newName || f.url.split('/').pop(), added: new Date().toISOString() });
+                    }
+                }
+                col.updated = new Date().toISOString();
+                fs.writeFileSync(colFile, JSON.stringify(data, null, 2), 'utf-8');
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, collection: col }));
+            } catch (e) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: e.message }));
+            }
+        });
+        return;
+    }
+
+    // API: Delete collection or remove items from collection
+    if (req.method === 'POST' && req.url === '/api/collections/delete') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+            try {
+                const { name, fileUrl } = JSON.parse(body);
+                const colFile = path.join(ROOT, 'uploads', 'collections.json');
+                if (!fs.existsSync(colFile)) {
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                    return;
+                }
+                const data = JSON.parse(fs.readFileSync(colFile, 'utf-8'));
+                if (fileUrl) {
+                    // Remove single file from collection
+                    const col = data.collections.find(c => c.name === name);
+                    if (col) col.files = col.files.filter(f => f.url !== fileUrl);
+                } else {
+                    // Delete entire collection
+                    data.collections = data.collections.filter(c => c.name !== name);
+                }
+                fs.writeFileSync(colFile, JSON.stringify(data, null, 2), 'utf-8');
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true }));
+            } catch (e) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: e.message }));
+            }
+        });
+        return;
+    }
+
     // Static file serving
     let urlPath = req.url.split('?')[0];
     if (urlPath.endsWith('/')) urlPath += 'index.html';

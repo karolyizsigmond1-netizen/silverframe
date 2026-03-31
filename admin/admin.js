@@ -217,6 +217,8 @@
                 toast('Hiba: ' + e.message, 'error');
             }
         });
+
+        $('#btn-collections').addEventListener('click', () => openCollections());
     }
 
     // ── Resolve nested path ──
@@ -1952,6 +1954,11 @@
         // Start number
         startInput.addEventListener('input', () => updateRenamePreview());
 
+        // Show/hide collection name input
+        $('#rename-dest-collection').addEventListener('change', e => {
+            $('#rename-collection-name').style.display = e.target.checked ? 'block' : 'none';
+        });
+
         // Apply
         $('#rename-apply').addEventListener('click', executeRename);
     }
@@ -2029,63 +2036,273 @@
         const list = getRenameList();
         if (list.length === 0) return;
 
-        const applyBtn = $('#rename-apply');
-        applyBtn.disabled = true;
-        applyBtn.textContent = 'Feltöltés...';
+        const destUpload = $('#rename-dest-upload').checked;
+        const destCollection = $('#rename-dest-collection').checked;
+        const destDownload = $('#rename-dest-download').checked;
 
-        try {
-            // Step 1: Upload all files
-            const formData = new FormData();
-            for (const item of list) {
-                formData.append('images', item.file, item.file.name);
-            }
+        if (!destUpload && !destCollection && !destDownload) {
+            toast('Válasszon legalább egy mentési célhelyet!', 'error');
+            return;
+        }
 
-            toast(`${list.length} kép feltöltése...`, 'info');
-            const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
-            const uploadData = await uploadRes.json();
-
-            if (!uploadData.success || !uploadData.files) {
-                toast('Feltöltési hiba', 'error');
+        if (destCollection) {
+            const colName = $('#rename-collection-name').value.trim();
+            if (!colName) {
+                toast('Adja meg a gyűjtemény nevét!', 'error');
+                $('#rename-collection-name').focus();
                 return;
             }
+        }
 
-            // Step 2: Rename uploaded files
-            const renameOps = uploadData.files.map((uploaded, i) => ({
-                oldUrl: uploaded.url,
-                newName: list[i].newName
-            }));
+        const applyBtn = $('#rename-apply');
+        applyBtn.disabled = true;
+        applyBtn.textContent = 'Feldolgozás...';
 
-            applyBtn.textContent = 'Átnevezés...';
-            const renameRes = await fetch('/api/batch-rename', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ files: renameOps })
-            });
-            const renameData = await renameRes.json();
+        try {
+            let uploadedFiles = []; // { url, newName }
 
-            if (renameData.success) {
-                const successCount = renameData.results.filter(r => r.success).length;
-                const errorCount = renameData.results.filter(r => r.error).length;
-
-                if (errorCount > 0) {
-                    toast(`${successCount} kép átnevezve, ${errorCount} hiba`, 'info');
-                } else {
-                    toast(`${successCount} kép sikeresen feltöltve és átnevezve!`, 'success');
+            // ── Upload to server if needed ──
+            if (destUpload || destCollection) {
+                const formData = new FormData();
+                for (const item of list) {
+                    formData.append('images', item.file, item.file.name);
                 }
 
-                // Reload content and close
-                await loadContent();
-                if (currentPage) renderEditor(currentPage);
-                $('#rename-modal').classList.add('hidden');
-            } else {
-                toast('Átnevezési hiba: ' + (renameData.error || 'ismeretlen'), 'error');
+                applyBtn.textContent = 'Feltöltés...';
+                toast(`${list.length} kép feltöltése...`, 'info');
+                const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+                const uploadData = await uploadRes.json();
+
+                if (!uploadData.success || !uploadData.files) {
+                    toast('Feltöltési hiba', 'error');
+                    return;
+                }
+
+                // Rename uploaded files
+                const renameOps = uploadData.files.map((uploaded, i) => ({
+                    oldUrl: uploaded.url,
+                    newName: list[i].newName
+                }));
+
+                applyBtn.textContent = 'Átnevezés...';
+                const renameRes = await fetch('/api/batch-rename', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ files: renameOps })
+                });
+                const renameData = await renameRes.json();
+
+                if (renameData.success) {
+                    uploadedFiles = renameData.results
+                        .filter(r => r.success)
+                        .map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() }));
+
+                    const successCount = renameData.results.filter(r => r.success).length;
+                    if (destUpload) {
+                        toast(`${successCount} kép feltöltve és átnevezve!`, 'success');
+                    }
+                }
             }
+
+            // ── Save to collection ──
+            if (destCollection && uploadedFiles.length > 0) {
+                const colName = $('#rename-collection-name').value.trim();
+                applyBtn.textContent = 'Mentés gyűjteménybe...';
+                const colRes = await fetch('/api/collections/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: colName, files: uploadedFiles })
+                });
+                const colData = await colRes.json();
+                if (colData.success) {
+                    toast(`Gyűjteménybe mentve: "${colName}" (${uploadedFiles.length} kép)`, 'success');
+                }
+            }
+
+            // ── Download to computer ──
+            if (destDownload) {
+                applyBtn.textContent = 'Letöltés...';
+                toast('Képek letöltése...', 'info');
+                for (const item of list) {
+                    await downloadRenamedFile(item.file, item.newName);
+                    // Small delay between downloads so browser doesn't block them
+                    await new Promise(r => setTimeout(r, 200));
+                }
+                toast(`${list.length} kép letöltve!`, 'success');
+            }
+
+            // Reload and close
+            await loadContent();
+            if (currentPage) renderEditor(currentPage);
+            $('#rename-modal').classList.add('hidden');
+
         } catch (e) {
             toast('Hiba: ' + e.message, 'error');
         } finally {
-            applyBtn.textContent = 'Átnevezés és feltöltés';
+            applyBtn.textContent = 'Indítás';
             applyBtn.disabled = false;
         }
+    }
+
+    function downloadRenamedFile(file, newName) {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const a = document.createElement('a');
+                a.href = reader.result;
+                a.download = newName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                resolve();
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── COLLECTIONS BROWSER ──
+    // ══════════════════════════════════════
+
+    let collectionsData = null;
+    let collectionsBound = false;
+
+    function openCollections() {
+        const modal = $('#collections-modal');
+        modal.classList.remove('hidden');
+        bindCollectionsModal();
+        loadCollections();
+    }
+
+    function bindCollectionsModal() {
+        if (collectionsBound) return;
+        collectionsBound = true;
+
+        const modal = $('#collections-modal');
+        $('#collections-close').addEventListener('click', () => modal.classList.add('hidden'));
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+    }
+
+    async function loadCollections() {
+        const sidebar = $('#collections-sidebar');
+        sidebar.innerHTML = '<div class="collections-loading">Betöltés...</div>';
+        $('#collections-content').innerHTML = '<div class="collections-empty">Válasszon egy gyűjteményt a bal oldalon</div>';
+
+        try {
+            const res = await fetch('/api/collections');
+            collectionsData = await res.json();
+
+            if (!collectionsData.collections || collectionsData.collections.length === 0) {
+                sidebar.innerHTML = '<div class="collections-empty" style="font-size:0.78rem;padding:16px;text-align:center">Még nincsenek gyűjtemények.<br><br>Használja a "Képek átnevezése" eszközt és válassza a "Mentés gyűjteménybe" opciót.</div>';
+                return;
+            }
+
+            sidebar.innerHTML = collectionsData.collections.map(col => `
+                <div class="collections-sidebar-item" data-col-name="${esc(col.name)}">
+                    <div>
+                        <div>${esc(col.name)}</div>
+                        <span class="col-count">${col.files.length} kép</span>
+                    </div>
+                    <button class="col-delete" data-delete-col="${esc(col.name)}" title="Gyűjtemény törlése">&times;</button>
+                </div>
+            `).join('');
+
+            // Bind click
+            sidebar.querySelectorAll('.collections-sidebar-item').forEach(item => {
+                item.addEventListener('click', e => {
+                    if (e.target.closest('.col-delete')) return;
+                    sidebar.querySelectorAll('.collections-sidebar-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    showCollection(item.dataset.colName);
+                });
+            });
+
+            // Bind delete
+            sidebar.querySelectorAll('[data-delete-col]').forEach(btn => {
+                btn.addEventListener('click', async e => {
+                    e.stopPropagation();
+                    const name = btn.dataset.deleteCol;
+                    const confirmed = await confirmAction('Gyűjtemény törlése', `Biztosan törli a "${name}" gyűjteményt? (A képek megmaradnak az uploads mappában.)`);
+                    if (!confirmed) return;
+                    await fetch('/api/collections/delete', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name })
+                    });
+                    toast(`"${name}" gyűjtemény törölve`, 'success');
+                    loadCollections();
+                });
+            });
+        } catch (e) {
+            sidebar.innerHTML = '<div class="collections-empty">Hiba a betöltésnél</div>';
+        }
+    }
+
+    function showCollection(name) {
+        const content = $('#collections-content');
+        const col = collectionsData.collections.find(c => c.name === name);
+        if (!col || col.files.length === 0) {
+            content.innerHTML = '<div class="collections-empty">Üres gyűjtemény</div>';
+            return;
+        }
+
+        content.innerHTML = '<div class="collections-grid">' + col.files.map(f => {
+            const src = f.url.startsWith('http') ? f.url : '/' + f.url;
+            return `
+                <div class="collection-item" draggable="true" data-collection-url="${esc(f.url)}">
+                    <img src="${src}" alt="${esc(f.name)}" onerror="this.style.display='none'">
+                    <div class="collection-item-name" title="${esc(f.name)}">${esc(f.name)}</div>
+                    <div class="collection-item-actions">
+                        <button title="Másolás az aktuális oldalra" data-col-use="${esc(f.url)}">&#10010;</button>
+                        <button class="danger" title="Eltávolítás a gyűjteményből" data-col-remove="${esc(f.url)}" data-col-parent="${esc(name)}">&times;</button>
+                    </div>
+                </div>
+            `;
+        }).join('') + '</div>';
+
+        // Bind drag for use in gallery
+        content.querySelectorAll('.collection-item[draggable]').forEach(item => {
+            item.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text/plain', item.dataset.collectionUrl);
+                e.dataTransfer.effectAllowed = 'copy';
+            });
+        });
+
+        // Bind "use" button — copy URL to clipboard and show toast
+        content.querySelectorAll('[data-col-use]').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const url = btn.dataset.colUse;
+                navigator.clipboard.writeText(url).then(() => {
+                    toast('Kép elérési út másolva! Illessze be egy kép mezőbe.', 'success');
+                });
+            });
+        });
+
+        // Bind remove from collection
+        content.querySelectorAll('[data-col-remove]').forEach(btn => {
+            btn.addEventListener('click', async e => {
+                e.stopPropagation();
+                const fileUrl = btn.dataset.colRemove;
+                const parentName = btn.dataset.colParent;
+                await fetch('/api/collections/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: parentName, fileUrl })
+                });
+                // Refresh
+                await loadCollections();
+                // Re-select the same collection
+                const sidebar = $('#collections-sidebar');
+                const item = sidebar.querySelector(`[data-col-name="${parentName}"]`);
+                if (item) {
+                    item.classList.add('active');
+                    showCollection(parentName);
+                } else {
+                    $('#collections-content').innerHTML = '<div class="collections-empty">Válasszon egy gyűjteményt a bal oldalon</div>';
+                }
+            });
+        });
     }
 
     // ── Toast notifications ──
