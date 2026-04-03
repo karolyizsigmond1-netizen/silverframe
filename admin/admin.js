@@ -219,6 +219,8 @@
         });
 
         $('#btn-collections').addEventListener('click', () => openCollections());
+
+        $('#btn-batch-process').addEventListener('click', () => openBatchProcess());
     }
 
     // ── Resolve nested path ──
@@ -2303,6 +2305,490 @@
                 }
             });
         });
+    }
+
+    // ══════════════════════════════════════
+    // ── BATCH PROCESS TOOL ──
+    // ══════════════════════════════════════
+
+    let batchFiles = []; // { file: File, preview: dataUrl, origW: number, origH: number }
+    let batchModalBound = false;
+
+    function openBatchProcess() {
+        batchFiles = [];
+        const modal = $('#batch-process-modal');
+        modal.classList.remove('hidden');
+        $('#batch-file-list').innerHTML = '';
+        $('#batch-preview').innerHTML = '<span class="batch-preview-empty">Válasszon képeket a feldolgozás előnézetéhez</span>';
+        $('#batch-apply').disabled = true;
+        $('#batch-progress').classList.add('hidden');
+        // Reset tabs to "resolution"
+        $$('.batch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'resolution'));
+        $$('.batch-tab-panel').forEach(p => p.classList.remove('active'));
+        $('#batch-panel-resolution').classList.add('active');
+        // Reset size buttons — select Full HD in resolution tab
+        $$('.batch-size-btn').forEach(b => b.classList.remove('active'));
+        const fullHdBtn = document.querySelector('#batch-panel-resolution .batch-size-btn[data-w="1920"]');
+        if (fullHdBtn) fullHdBtn.classList.add('active');
+        updateResolutionInfo();
+        // Reset mode
+        $$('.batch-mode-option').forEach(o => o.classList.remove('active'));
+        $$('.batch-mode-option')[0].classList.add('active');
+        document.querySelector('input[name="batch-mode"][value="cover"]').checked = true;
+        // Reset quality
+        $('#batch-quality').value = 90;
+        $('#batch-quality-val').textContent = '90%';
+        // Reset destination
+        document.querySelector('input[name="batch-dest"][value="uploads"]').checked = true;
+        $('#batch-gallery-select').classList.add('hidden');
+        // Populate gallery dropdown
+        populateBatchGallerySelect();
+        bindBatchModal();
+    }
+
+    function updateResolutionInfo() {
+        const { w, h } = getBatchTargetSize();
+        const megapixels = ((w * h) / 1000000).toFixed(1);
+        $('#batch-res-label').innerHTML = `Kimeneti méret: <strong>${w} × ${h} px</strong>  (${megapixels} MP)`;
+    }
+
+    function populateBatchGallerySelect() {
+        const select = $('#batch-gallery-target');
+        if (!contentData) { select.innerHTML = '<option>Nincs elérhető galéria</option>'; return; }
+        let options = '';
+        // Service pages galleries
+        if (contentData.servicePages) {
+            for (const key of Object.keys(contentData.servicePages)) {
+                const page = contentData.servicePages[key];
+                if (page.gallery) {
+                    const navItem = NAV.flatMap(g => g.items).find(i => i.id === 'servicePages.' + key);
+                    const label = navItem ? navItem.title : key;
+                    options += `<option value="servicePages.${key}.gallery">${label} (szolgáltatás)</option>`;
+                }
+            }
+        }
+        // Portfolio pages galleries
+        if (contentData.portfolioPages) {
+            for (const key of Object.keys(contentData.portfolioPages)) {
+                const page = contentData.portfolioPages[key];
+                if (page.gallery) {
+                    const navItem = NAV.flatMap(g => g.items).find(i => i.id === 'portfolioPages.' + key);
+                    const label = navItem ? navItem.title : key;
+                    options += `<option value="portfolioPages.${key}.gallery">${label} (portfólió)</option>`;
+                }
+            }
+        }
+        select.innerHTML = options || '<option>Nincs elérhető galéria</option>';
+    }
+
+    function bindBatchModal() {
+        if (batchModalBound) return;
+        batchModalBound = true;
+
+        const modal = $('#batch-process-modal');
+        const dropZone = $('#batch-drop-zone');
+        const fileInput = $('#batch-file-input');
+
+        // Close
+        $('#batch-cancel').addEventListener('click', () => modal.classList.add('hidden'));
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+
+        // File drop zone
+        dropZone.addEventListener('click', e => {
+            if (e.target === fileInput) return;
+            fileInput.click();
+        });
+
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-active'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-active');
+            addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+        });
+
+        fileInput.addEventListener('change', () => {
+            addBatchFiles(Array.from(fileInput.files));
+            fileInput.value = '';
+        });
+
+        // Tab bar
+        $('#batch-tab-bar').addEventListener('click', e => {
+            const tab = e.target.closest('.batch-tab');
+            if (!tab) return;
+            $$('.batch-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            $$('.batch-tab-panel').forEach(p => p.classList.remove('active'));
+            const panel = $(`#batch-panel-${tab.dataset.tab}`);
+            if (panel) panel.classList.add('active');
+            // If switching to custom tab, no preset is active
+            if (tab.dataset.tab === 'custom') {
+                $$('.batch-size-btn').forEach(b => b.classList.remove('active'));
+            }
+            updateResolutionInfo();
+            updateBatchPreview();
+        });
+
+        // Size preset clicks (works across both resolution & usecase panels)
+        $$('.batch-tab-panel.batch-size-presets').forEach(panel => {
+            panel.addEventListener('click', e => {
+                const btn = e.target.closest('.batch-size-btn');
+                if (!btn) return;
+                // Deselect all buttons in ALL panels
+                $$('.batch-size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateResolutionInfo();
+                updateBatchPreview();
+            });
+        });
+
+        // Custom size inputs
+        $('#batch-custom-w').addEventListener('input', () => { updateResolutionInfo(); updateBatchPreview(); });
+        $('#batch-custom-h').addEventListener('input', () => { updateResolutionInfo(); updateBatchPreview(); });
+
+        // Mode options
+        $$('.batch-mode-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                $$('.batch-mode-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                opt.querySelector('input[type="radio"]').checked = true;
+                updateBatchPreview();
+            });
+        });
+
+        // Quality slider
+        $('#batch-quality').addEventListener('input', e => {
+            $('#batch-quality-val').textContent = e.target.value + '%';
+        });
+
+        // Destination options
+        $$('.batch-dest-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                const radio = opt.querySelector('input[type="radio"]');
+                radio.checked = true;
+                $('#batch-gallery-select').classList.toggle('hidden', radio.value !== 'gallery');
+            });
+        });
+
+        // Apply
+        $('#batch-apply').addEventListener('click', executeBatchProcess);
+    }
+
+    function addBatchFiles(files) {
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            const reader = new FileReader();
+            reader.onload = e => {
+                // Get original dimensions
+                const img = new Image();
+                img.onload = () => {
+                    batchFiles.push({
+                        file,
+                        preview: e.target.result,
+                        origW: img.naturalWidth,
+                        origH: img.naturalHeight
+                    });
+                    renderBatchFileList();
+                    updateBatchPreview();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function renderBatchFileList() {
+        const list = $('#batch-file-list');
+        list.innerHTML = batchFiles.map((bf, i) => `
+            <div class="batch-file-item">
+                <img src="${bf.preview}" alt="">
+                <div class="batch-file-info">
+                    <span class="batch-file-name">${bf.file.name}</span>
+                    <span class="batch-file-size">${bf.origW}×${bf.origH} · ${(bf.file.size / 1024).toFixed(0)} KB</span>
+                </div>
+                <button class="remove-file" data-remove-batch="${i}" title="Eltávolítás">&times;</button>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('[data-remove-batch]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                batchFiles.splice(parseInt(btn.dataset.removeBatch), 1);
+                renderBatchFileList();
+                updateBatchPreview();
+            });
+        });
+    }
+
+    function getBatchTargetSize() {
+        // Check if custom tab is active
+        const activeTab = document.querySelector('.batch-tab.active');
+        if (activeTab && activeTab.dataset.tab === 'custom') {
+            return {
+                w: parseInt($('#batch-custom-w').value) || 1200,
+                h: parseInt($('#batch-custom-h').value) || 800
+            };
+        }
+        // Otherwise use the selected preset button
+        const activeBtn = document.querySelector('.batch-size-btn.active');
+        if (activeBtn) {
+            return {
+                w: parseInt(activeBtn.dataset.w),
+                h: parseInt(activeBtn.dataset.h)
+            };
+        }
+        return { w: 1920, h: 1080 };
+    }
+
+    function getBatchMode() {
+        const checked = document.querySelector('input[name="batch-mode"]:checked');
+        return checked ? checked.value : 'cover';
+    }
+
+    function updateBatchPreview() {
+        const preview = $('#batch-preview');
+        updateResolutionInfo();
+
+        if (batchFiles.length === 0) {
+            preview.innerHTML = '<span class="batch-preview-empty">Válasszon képeket a feldolgozás előnézetéhez</span>';
+            $('#batch-apply').disabled = true;
+            return;
+        }
+
+        const { w, h } = getBatchTargetSize();
+        const mode = getBatchMode();
+        const modeName = mode === 'cover' ? 'Kitöltés' : mode === 'fit' ? 'Beillesztés' : 'Nyújtás';
+
+        preview.innerHTML = batchFiles.map((bf, i) => {
+            const scaleRatio = Math.max(w / bf.origW, h / bf.origH);
+            const scaleLabel = scaleRatio > 1 ? `&#8593; ${(scaleRatio).toFixed(1)}×` : `&#8595; ${(1 / scaleRatio).toFixed(1)}×`;
+            return `
+                <div class="batch-preview-item">
+                    <img src="${bf.preview}" alt="${bf.file.name}">
+                    <div class="batch-preview-name" title="${bf.file.name}">${bf.file.name}</div>
+                    <div class="batch-preview-dims">${bf.origW}×${bf.origH} → ${w}×${h} (${scaleLabel} ${modeName})</div>
+                </div>
+            `;
+        }).join('');
+
+        $('#batch-apply').disabled = false;
+    }
+
+    // Step-down resize for high-quality downscaling:
+    // Halves the image repeatedly until close to target, then does a final draw.
+    // This avoids the blurry/pixelated result of a single large downscale.
+    function stepDownResize(source, targetW, targetH) {
+        let currentW = source.naturalWidth || source.width;
+        let currentH = source.naturalHeight || source.height;
+        let current = source;
+
+        // Keep halving while both dimensions are > 2× target
+        while (currentW / 2 > targetW && currentH / 2 > targetH) {
+            const stepCanvas = document.createElement('canvas');
+            stepCanvas.width = Math.round(currentW / 2);
+            stepCanvas.height = Math.round(currentH / 2);
+            const stepCtx = stepCanvas.getContext('2d');
+            stepCtx.imageSmoothingEnabled = true;
+            stepCtx.imageSmoothingQuality = 'high';
+            stepCtx.drawImage(current, 0, 0, stepCanvas.width, stepCanvas.height);
+            current = stepCanvas;
+            currentW = stepCanvas.width;
+            currentH = stepCanvas.height;
+        }
+
+        // Final draw to exact target size
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = targetW;
+        finalCanvas.height = targetH;
+        const finalCtx = finalCanvas.getContext('2d');
+        finalCtx.imageSmoothingEnabled = true;
+        finalCtx.imageSmoothingQuality = 'high';
+        finalCtx.drawImage(current, 0, 0, targetW, targetH);
+        return finalCanvas;
+    }
+
+    function processImageOnCanvas(imgElement, targetW, targetH, mode) {
+        const canvas = document.createElement('canvas');
+        canvas.width = targetW;
+        canvas.height = targetH;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        const srcW = imgElement.naturalWidth;
+        const srcH = imgElement.naturalHeight;
+
+        if (mode === 'stretch') {
+            // Stretch to exact dimensions via step-down
+            const resized = stepDownResize(imgElement, targetW, targetH);
+            ctx.drawImage(resized, 0, 0);
+        } else if (mode === 'cover') {
+            // Cover: crop source to match target aspect, then resize
+            const targetAspect = targetW / targetH;
+            const srcAspect = srcW / srcH;
+            let cropX = 0, cropY = 0, cropW = srcW, cropH = srcH;
+            if (srcAspect > targetAspect) {
+                // Source is wider — crop sides
+                cropW = Math.round(srcH * targetAspect);
+                cropX = Math.round((srcW - cropW) / 2);
+            } else {
+                // Source is taller — crop top/bottom
+                cropH = Math.round(srcW / targetAspect);
+                cropY = Math.round((srcH - cropH) / 2);
+            }
+            // Draw cropped region to intermediate canvas at source resolution
+            const cropCanvas = document.createElement('canvas');
+            cropCanvas.width = cropW;
+            cropCanvas.height = cropH;
+            const cropCtx = cropCanvas.getContext('2d');
+            cropCtx.drawImage(imgElement, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+            // Then step-down resize to target
+            const resized = stepDownResize(cropCanvas, targetW, targetH);
+            ctx.drawImage(resized, 0, 0);
+        } else {
+            // Fit: scale to fit inside, center with black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, targetW, targetH);
+            const scale = Math.min(targetW / srcW, targetH / srcH);
+            const scaledW = Math.round(srcW * scale);
+            const scaledH = Math.round(srcH * scale);
+            // Step-down resize the image to the fitted size
+            const resized = stepDownResize(imgElement, scaledW, scaledH);
+            const offsetX = Math.round((targetW - scaledW) / 2);
+            const offsetY = Math.round((targetH - scaledH) / 2);
+            ctx.drawImage(resized, offsetX, offsetY);
+        }
+
+        return canvas;
+    }
+
+    async function executeBatchProcess() {
+        if (batchFiles.length === 0) return;
+
+        const { w, h } = getBatchTargetSize();
+        const mode = getBatchMode();
+        const quality = parseInt($('#batch-quality').value) / 100;
+        const dest = document.querySelector('input[name="batch-dest"]:checked').value;
+
+        const applyBtn = $('#batch-apply');
+        applyBtn.disabled = true;
+        applyBtn.textContent = 'Feldolgozás...';
+
+        const progressEl = $('#batch-progress');
+        const progressFill = $('#batch-progress-fill');
+        const progressText = $('#batch-progress-text');
+        progressEl.classList.remove('hidden');
+        progressFill.style.width = '0%';
+
+        try {
+            const processedBlobs = [];
+            const total = batchFiles.length;
+
+            // Step 1: Process each image on canvas
+            for (let i = 0; i < total; i++) {
+                const bf = batchFiles[i];
+                progressText.textContent = `Feldolgozás: ${i + 1} / ${total}`;
+                progressFill.style.width = ((i + 1) / total * 50) + '%';
+
+                // Load image
+                const img = await new Promise((resolve, reject) => {
+                    const el = new Image();
+                    el.onload = () => resolve(el);
+                    el.onerror = reject;
+                    el.src = bf.preview;
+                });
+
+                // Process
+                const canvas = processImageOnCanvas(img, w, h, mode);
+
+                // Convert to blob
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/jpeg', quality);
+                });
+
+                const ext = bf.file.name.includes('.') ? '.' + bf.file.name.split('.').pop().toLowerCase() : '.jpg';
+                const cleanName = bf.file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+                const outputName = cleanName + '_' + w + 'x' + h + (ext === '.png' ? '.jpg' : ext);
+
+                processedBlobs.push({ blob, name: outputName });
+            }
+
+            // Step 2: Upload all processed images
+            progressText.textContent = 'Feltöltés...';
+            progressFill.style.width = '60%';
+
+            const formData = new FormData();
+            for (const pb of processedBlobs) {
+                formData.append('images', pb.blob, pb.name);
+            }
+
+            const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+            const uploadData = await uploadRes.json();
+
+            if (!uploadData.success || !uploadData.files) {
+                toast('Feltöltési hiba!', 'error');
+                return;
+            }
+
+            progressFill.style.width = '85%';
+
+            // Step 3: If destination is gallery, add to gallery
+            if (dest === 'gallery') {
+                const galleryPath = $('#batch-gallery-target').value;
+                if (galleryPath) {
+                    const arr = getByPath(contentData, galleryPath);
+                    if (arr && Array.isArray(arr)) {
+                        const hasTitle = arr.length > 0 && arr[0].title !== undefined;
+                        for (const uploaded of uploadData.files) {
+                            const newItem = { src: uploaded.url, alt: '' };
+                            if (hasTitle) { newItem.title = ''; newItem.subtitle = ''; }
+                            arr.push(newItem);
+                        }
+                        setDirty(true);
+                        if (currentPage) renderEditor(currentPage);
+                    }
+                }
+            }
+
+            progressFill.style.width = '100%';
+            progressText.textContent = 'Kész!';
+
+            const reused = uploadData.files.filter(f => f.reused).length;
+            let msg = `${uploadData.files.length} kép feldolgozva és feltöltve (${w}×${h})!`;
+            if (reused > 0) msg += ` (${reused} már létezett)`;
+            if (dest === 'gallery') {
+                const galleryPath = $('#batch-gallery-target').value;
+                const navItem = NAV.flatMap(g => g.items).find(i => galleryPath.startsWith(i.id));
+                msg += ` Hozzáadva: ${navItem ? navItem.title : galleryPath}`;
+            }
+            toast(msg, 'success');
+
+            // Show result URLs
+            const preview = $('#batch-preview');
+            preview.innerHTML = uploadData.files.map(f => {
+                const src = '/' + f.url;
+                return `
+                    <div class="batch-preview-item">
+                        <img src="${src}" alt="">
+                        <div class="batch-preview-name" title="${f.url}">${f.url.split('/').pop()}</div>
+                        <div class="batch-preview-dims">${w}×${h} · Feltöltve &#10003;</div>
+                    </div>
+                `;
+            }).join('');
+
+            await loadContent();
+            if (currentPage) renderEditor(currentPage);
+
+            // Don't auto-close — let user see results
+            applyBtn.textContent = 'Kész! Bezáráshoz kattintson a Mégse gombra';
+
+        } catch (e) {
+            toast('Hiba: ' + e.message, 'error');
+        } finally {
+            applyBtn.disabled = false;
+            setTimeout(() => {
+                applyBtn.textContent = '⚡ Feldolgozás és feltöltés';
+            }, 5000);
+        }
     }
 
     // ── Toast notifications ──

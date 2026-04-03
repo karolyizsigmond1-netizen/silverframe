@@ -18,6 +18,7 @@
         <div class="sidebar-footer">
             <a href="/" target="_blank" class="preview-link">&#128279; Weboldal megtekintése</a>
             <div class="sidebar-tools">
+                <button id="btn-batch-process" class="btn-tool btn-tool-accent" title="Képek feltöltése és automatikus átméretezése">&#128248; Képek feldolgozása</button>
                 <button id="btn-rename" class="btn-tool btn-tool-accent" title="Képek feltöltése és egységes átnevezése">&#127912; Képek átnevezése</button>
                 <button id="btn-collections" class="btn-tool btn-tool-accent" title="Mentett gyűjtemények böngészése">&#128193; Gyűjtemények</button>
                 <button id="btn-dedup" class="btn-tool" title="Duplikált képek törlése az uploads mappából">&#128465; Duplikátumok törlése</button>
@@ -267,6 +268,232 @@
 
             <div class="modal-actions">
                 <button class="btn-cancel" id="collections-close">Bezárás</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Process Modal -->
+    <div id="batch-process-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-batch">
+            <h3>&#128248; Képek feldolgozása</h3>
+
+            <div class="batch-help">
+                <p><strong>Hogyan működik?</strong></p>
+                <p>Töltsön fel képeket, válasszon méretet, és a rendszer automatikusan átméretezi és/vagy megvágja őket. A kész képek azonnal használhatók bárhol az oldalon (galériák, hero képek, stb.)</p>
+            </div>
+
+            <!-- Step 1: Upload images -->
+            <div class="batch-step">
+                <div class="batch-step-num">1</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Képek kiválasztása</label>
+                    <div class="batch-drop-zone" id="batch-drop-zone">
+                        <div class="batch-drop-icon">&#128247;</div>
+                        <div>Húzza ide a képeket vagy kattintson</div>
+                        <div class="batch-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <input type="file" id="batch-file-input" accept="image/*" multiple>
+                    </div>
+                    <div id="batch-file-list" class="batch-file-list"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: Resolution -->
+            <div class="batch-step">
+                <div class="batch-step-num">2</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Felbontás kiválasztása</label>
+
+                    <div class="batch-tab-bar" id="batch-tab-bar">
+                        <button class="batch-tab active" data-tab="resolution">Felbontás</button>
+                        <button class="batch-tab" data-tab="usecase">Felhasználás</button>
+                        <button class="batch-tab" data-tab="custom">Egyéni</button>
+                    </div>
+
+                    <!-- Resolution presets -->
+                    <div class="batch-size-presets batch-tab-panel active" id="batch-panel-resolution">
+                        <button class="batch-size-btn" data-w="7680" data-h="4320">
+                            <span class="batch-size-name">8K UHD</span>
+                            <span class="batch-size-dim">7680 × 4320</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="3840" data-h="2160">
+                            <span class="batch-size-name">4K UHD</span>
+                            <span class="batch-size-dim">3840 × 2160</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="2560" data-h="1440">
+                            <span class="batch-size-name">2K QHD</span>
+                            <span class="batch-size-dim">2560 × 1440</span>
+                        </button>
+                        <button class="batch-size-btn active" data-w="1920" data-h="1080">
+                            <span class="batch-size-name">Full HD</span>
+                            <span class="batch-size-dim">1920 × 1080</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="1280" data-h="720">
+                            <span class="batch-size-name">HD</span>
+                            <span class="batch-size-dim">1280 × 720</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="854" data-h="480">
+                            <span class="batch-size-name">SD 480p</span>
+                            <span class="batch-size-dim">854 × 480</span>
+                        </button>
+                    </div>
+
+                    <!-- Use-case presets -->
+                    <div class="batch-size-presets batch-tab-panel" id="batch-panel-usecase">
+                        <button class="batch-size-btn" data-w="1920" data-h="1080">
+                            <span class="batch-size-name">Hero kép</span>
+                            <span class="batch-size-dim">1920 × 1080</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="1200" data-h="800">
+                            <span class="batch-size-name">Galéria</span>
+                            <span class="batch-size-dim">1200 × 800</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="800" data-h="1200">
+                            <span class="batch-size-name">Portré</span>
+                            <span class="batch-size-dim">800 × 1200</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="1080" data-h="1080">
+                            <span class="batch-size-name">Négyzet</span>
+                            <span class="batch-size-dim">1080 × 1080</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="1600" data-h="1067">
+                            <span class="batch-size-name">Webes (3:2)</span>
+                            <span class="batch-size-dim">1600 × 1067</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="400" data-h="400">
+                            <span class="batch-size-name">Bélyegkép</span>
+                            <span class="batch-size-dim">400 × 400</span>
+                        </button>
+                        <button class="batch-size-btn" data-w="1200" data-h="630">
+                            <span class="batch-size-name">OG / Social</span>
+                            <span class="batch-size-dim">1200 × 630</span>
+                        </button>
+                    </div>
+
+                    <!-- Custom inputs -->
+                    <div class="batch-tab-panel" id="batch-panel-custom">
+                        <div class="batch-custom-inputs">
+                            <label class="toolbar-label">Szélesség:</label>
+                            <input type="number" id="batch-custom-w" class="field-input" value="1200" min="50" max="10000" style="width:100px">
+                            <span style="color:var(--text-dim);margin:0 6px">×</span>
+                            <label class="toolbar-label">Magasság:</label>
+                            <input type="number" id="batch-custom-h" class="field-input" value="800" min="50" max="10000" style="width:100px">
+                            <span style="color:var(--text-dim);margin-left:6px;font-size:0.8rem">px</span>
+                        </div>
+                    </div>
+
+                    <div class="batch-resolution-info" id="batch-resolution-info">
+                        <span id="batch-res-label">Kimeneti méret: <strong>1920 × 1080 px</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Mode -->
+            <div class="batch-step">
+                <div class="batch-step-num">3</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Átméretezési mód</label>
+                    <div class="batch-mode-options">
+                        <label class="batch-mode-option active" data-mode="cover">
+                            <input type="radio" name="batch-mode" value="cover" checked>
+                            <div class="batch-mode-icon">
+                                <div class="mode-icon-cover"></div>
+                            </div>
+                            <div>
+                                <strong>Kitöltés és vágás</strong>
+                                <p>A kép kitölti a teljes területet, a kilógó rész levágódik. Nincs üres hely.</p>
+                            </div>
+                        </label>
+                        <label class="batch-mode-option" data-mode="fit">
+                            <input type="radio" name="batch-mode" value="fit">
+                            <div class="batch-mode-icon">
+                                <div class="mode-icon-fit"></div>
+                            </div>
+                            <div>
+                                <strong>Beillesztés</strong>
+                                <p>A kép beleférjen a méretbe, megtartva az arányait. Lehet üres (fehér) szegély.</p>
+                            </div>
+                        </label>
+                        <label class="batch-mode-option" data-mode="stretch">
+                            <input type="radio" name="batch-mode" value="stretch">
+                            <div class="batch-mode-icon">
+                                <div class="mode-icon-stretch"></div>
+                            </div>
+                            <div>
+                                <strong>Nyújtás</strong>
+                                <p>A kép a pontos méretre nyúlik. Az arányok torzulhatnak.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Quality -->
+            <div class="batch-step">
+                <div class="batch-step-num">4</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Minőség</label>
+                    <div class="batch-quality-row">
+                        <input type="range" id="batch-quality" min="10" max="100" value="90" class="batch-quality-slider">
+                        <span id="batch-quality-val" class="batch-quality-val">90%</span>
+                    </div>
+                    <p class="batch-step-desc">Alacsonyabb = kisebb fájlméret, magasabb = jobb minőség. Ajánlott: 80-92%</p>
+                </div>
+            </div>
+
+            <!-- Step 5: Where to use -->
+            <div class="batch-step">
+                <div class="batch-step-num">5</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Hova kerüljenek?</label>
+                    <p class="batch-step-desc">A feldolgozott képek feltöltődnek az oldalra. Ezután válassza ki, hova szeretné őket beilleszteni:</p>
+                    <div class="batch-dest-options">
+                        <label class="batch-dest-option">
+                            <input type="radio" name="batch-dest" value="uploads" checked>
+                            <span class="batch-dest-check"></span>
+                            <div>
+                                <strong>Feltöltés (uploads mappa)</strong>
+                                <p>A képek feltöltődnek és bárhol használhatók az admin felületen</p>
+                            </div>
+                        </label>
+                        <label class="batch-dest-option">
+                            <input type="radio" name="batch-dest" value="gallery">
+                            <span class="batch-dest-check"></span>
+                            <div>
+                                <strong>Hozzáadás egy galériához</strong>
+                                <p>A képek egyből bekerülnek a kiválasztott galéria végére</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="batch-gallery-select hidden" id="batch-gallery-select">
+                        <label class="toolbar-label">Galéria:</label>
+                        <select id="batch-gallery-target" class="field-select"></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="batch-step">
+                <div class="batch-step-num">&#10003;</div>
+                <div class="batch-step-content">
+                    <label class="batch-step-label">Előnézet</label>
+                    <div id="batch-preview" class="batch-preview">
+                        <span class="batch-preview-empty">Válasszon képeket a feldolgozás előnézetéhez</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress bar -->
+            <div id="batch-progress" class="batch-progress hidden">
+                <div class="batch-progress-bar">
+                    <div class="batch-progress-fill" id="batch-progress-fill"></div>
+                </div>
+                <span class="batch-progress-text" id="batch-progress-text">0 / 0</span>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" id="batch-cancel">Mégse</button>
+                <button class="btn-save" id="batch-apply" disabled>&#9889; Feldolgozás és feltöltés</button>
             </div>
         </div>
     </div>
