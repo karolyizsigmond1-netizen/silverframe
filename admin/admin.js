@@ -1164,6 +1164,13 @@
         const arr = getByPath(contentData, arrayPath);
         if (!arr) return;
 
+        // Ask if they want to resize first
+        const wantResize = await askResizePrompt(files.length);
+        if (wantResize) {
+            openBatchProcessWith(files, { type: 'gallery', path: arrayPath });
+            return;
+        }
+
         // Determine if gallery items have title/subtitle
         const hasTitle = arr.length > 0 && arr[0].title !== undefined;
 
@@ -1202,8 +1209,111 @@
         }
     }
 
+    // ══════════════════════════════════════
+    // ── RESIZE PROMPT (before upload) ──
+    // ══════════════════════════════════════
+
+    function askResizePrompt(fileCount) {
+        return new Promise(resolve => {
+            const yesBtn = $('#confirm-yes');
+            const noBtn = $('#confirm-no');
+            // Save original state
+            const origYesText = yesBtn.textContent;
+            const origYesClass = yesBtn.className;
+            const origNoText = noBtn.textContent;
+            // Custom text
+            $('#confirm-title').textContent = 'Átméretezés?';
+            $('#confirm-message').textContent = `${fileCount} kép kiválasztva. Szeretné átméretezni a képeket feltöltés előtt?`;
+            yesBtn.textContent = '✓ Igen, átméretezés';
+            yesBtn.className = 'btn-save';
+            noBtn.textContent = 'Nem, feltöltés így';
+            confirmResolve = (val) => {
+                // Restore
+                yesBtn.textContent = origYesText;
+                yesBtn.className = origYesClass;
+                noBtn.textContent = origNoText;
+                resolve(val);
+            };
+            $('#confirm-modal').classList.remove('hidden');
+        });
+    }
+
+    // Get a human-readable label for a content.json path
+    function getTargetLabel(path) {
+        // Try to match nav items
+        const parts = path.replace(/\.gallery$/, '').replace(/\.src$/, '');
+        const navItem = NAV.flatMap(g => g.items).find(i => parts.startsWith(i.id));
+        if (navItem) {
+            if (path.includes('.gallery')) return navItem.title + ' galéria';
+            if (path.includes('.heroImage')) return navItem.title + ' hero kép';
+            return navItem.title;
+        }
+        return path;
+    }
+
+    // State for "return target" — when batch process was opened from an upload context
+    let batchReturnTarget = null; // { type: 'gallery'|'field', path: string }
+
+    function openBatchProcessWith(files, target) {
+        batchReturnTarget = target;
+        openBatchProcess();
+        // Pre-load files
+        for (const file of files) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    batchFiles.push({
+                        file,
+                        preview: e.target.result,
+                        origW: img.naturalWidth,
+                        origH: img.naturalHeight
+                    });
+                    renderBatchFileList();
+                    updateBatchPreview();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        // Show target banner
+        const banner = $('#batch-target-banner');
+        const label = getTargetLabel(target.path);
+        $('#batch-target-name').textContent = label;
+        banner.classList.remove('hidden');
+        // Auto-select gallery destination if target is a gallery
+        if (target.type === 'gallery') {
+            const galleryRadio = document.querySelector('input[name="batch-dest"][value="gallery"]');
+            if (galleryRadio) {
+                galleryRadio.checked = true;
+                $('#batch-gallery-select').classList.remove('hidden');
+                $('#batch-collection-select-wrap').classList.add('hidden');
+                // Try to select the right gallery in the dropdown
+                const select = $('#batch-gallery-target');
+                for (const opt of select.options) {
+                    if (opt.value === target.path) { select.value = target.path; break; }
+                }
+            }
+        }
+    }
+
     // ── Shared upload helper (single file) ──
     async function uploadAndSet(file, targetPath) {
+        // Ask if they want to resize first
+        const wantResize = await askResizePrompt(1);
+        if (wantResize) {
+            // Determine target type
+            const isGallery = targetPath.includes('.gallery.');
+            if (isGallery) {
+                // Extract gallery array path (e.g. servicePages.x.gallery from servicePages.x.gallery.0.src)
+                const galleryPath = targetPath.replace(/\.\d+\.src$/, '');
+                openBatchProcessWith([file], { type: 'gallery', path: galleryPath });
+            } else {
+                openBatchProcessWith([file], { type: 'field', path: targetPath });
+            }
+            return;
+        }
+        // Normal upload
         const formData = new FormData();
         formData.append('images', file, file.name);
         try {
@@ -2556,6 +2666,10 @@
         document.querySelector('input[name="batch-dest"][value="gallery"]').checked = true;
         $('#batch-gallery-select').classList.remove('hidden');
         $('#batch-collection-select-wrap').classList.add('hidden');
+        // Reset target banner (only shown when opened from upload context)
+        if (!batchReturnTarget) {
+            $('#batch-target-banner').classList.add('hidden');
+        }
         // Populate gallery dropdown
         populateBatchGallerySelect();
         bindBatchModal();
@@ -2603,6 +2717,13 @@
         const modal = $('#batch-process-modal');
         const dropZone = $('#batch-drop-zone');
         const fileInput = $('#batch-file-input');
+
+        // Target banner "Módosítás" button — clears the auto-target so user can choose freely
+        $('#batch-target-change').addEventListener('click', () => {
+            batchReturnTarget = null;
+            $('#batch-target-banner').classList.add('hidden');
+            toast('Célhely feloldva — válasszon szabadon', 'info');
+        });
 
         // Close
         $('#batch-cancel').addEventListener('click', () => modal.classList.add('hidden'));
@@ -3096,9 +3217,14 @@
 
             progressFill.style.width = '85%';
 
-            // Step 3: If destination is gallery, add to gallery
-            if (dest === 'gallery') {
-                const galleryPath = $('#batch-gallery-target').value;
+            // Step 3: Handle return target (from upload context) or manual destination
+            if (batchReturnTarget && batchReturnTarget.type === 'field' && uploadData.files.length > 0) {
+                // Single field — set the first processed image
+                setByPath(contentData, batchReturnTarget.path, uploadData.files[0].url);
+                setDirty(true);
+                if (currentPage) renderEditor(currentPage);
+            } else if (dest === 'gallery') {
+                const galleryPath = batchReturnTarget ? batchReturnTarget.path : $('#batch-gallery-target').value;
                 if (galleryPath) {
                     const arr = getByPath(contentData, galleryPath);
                     if (arr && Array.isArray(arr)) {
@@ -3133,7 +3259,9 @@
             const reused = uploadData.files.filter(f => f.reused).length;
             let msg = `${uploadData.files.length} kép feldolgozva és feltöltve (${w}×${h})!`;
             if (reused > 0) msg += ` (${reused} már létezett)`;
-            if (dest === 'gallery') {
+            if (batchReturnTarget) {
+                msg += ` → ${getTargetLabel(batchReturnTarget.path)}`;
+            } else if (dest === 'gallery') {
                 const galleryPath = $('#batch-gallery-target').value;
                 const navItem = NAV.flatMap(g => g.items).find(i => galleryPath.startsWith(i.id));
                 msg += ` Hozzáadva: ${navItem ? navItem.title : galleryPath}`;
@@ -3142,6 +3270,8 @@
                 const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
                 msg += ` Gyűjteménybe mentve: "${colName}"`;
             }
+            // Clear return target
+            batchReturnTarget = null;
             toast(msg, 'success');
 
             // Show result URLs
