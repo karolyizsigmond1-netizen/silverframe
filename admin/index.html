@@ -269,7 +269,17 @@
         <div class="modal-backdrop"></div>
         <div class="modal-content modal-collections">
             <h3>&#128193; Gyűjtemények</h3>
-            <p class="collections-desc">Válasszon egy gyűjteményt a képek megtekintéséhez. Innen húzhatja a képeket közvetlenül a galéria kártyákra, vagy a gombokkal adhatja hozzá az aktuális oldalhoz.</p>
+            <p class="collections-desc">Válasszon képeket, majd adja hozzá egy galériához vagy küldje a feldolgozóba.</p>
+
+            <div class="collections-toolbar hidden" id="collections-toolbar">
+                <button class="btn-tool" id="col-select-all">Összes kijelölése</button>
+                <div class="col-toolbar-sep"></div>
+                <select id="col-gallery-target" class="field-select"></select>
+                <button class="btn-save" id="col-add-to-gallery">Hozzáadás a galériához</button>
+                <div class="col-toolbar-sep"></div>
+                <button class="btn-tool" id="col-send-to-batch">Küldés feldolgozóba</button>
+                <span class="col-selected-count" id="col-selected-count">0 kijelölve</span>
+            </div>
 
             <div class="collections-layout">
                 <div class="collections-sidebar" id="collections-sidebar">

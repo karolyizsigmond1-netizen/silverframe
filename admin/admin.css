@@ -1545,8 +1545,68 @@ body {
 .collections-desc {
     font-size: 0.8rem;
     color: var(--text-dim);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     line-height: 1.5;
+}
+
+.collections-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.collections-toolbar.hidden { display: none; }
+
+.col-toolbar-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 4px;
+}
+
+.col-selected-count {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.collections-toolbar .field-select {
+    max-width: 220px;
+    font-size: 0.8rem;
+    padding: 5px 8px;
+}
+
+.collection-item.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+.collection-item.selected::after {
+    content: '\2713';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: var(--accent);
+    color: var(--bg);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.collection-item {
+    position: relative;
 }
 
 .collections-layout {

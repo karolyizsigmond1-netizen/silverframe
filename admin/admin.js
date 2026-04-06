@@ -2507,12 +2507,115 @@
         const modal = $('#collections-modal');
         $('#collections-close').addEventListener('click', () => modal.classList.add('hidden'));
         modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+
+        // Select all button
+        $('#col-select-all').addEventListener('click', () => {
+            const items = $$('#collections-content .collection-item');
+            const allSelected = [...items].every(i => i.classList.contains('selected'));
+            items.forEach(i => i.classList.toggle('selected', !allSelected));
+            $('#col-select-all').textContent = allSelected ? 'Összes kijelölése' : 'Kijelölés törlése';
+            updateColSelectedCount();
+        });
+
+        // Add to gallery button
+        $('#col-add-to-gallery').addEventListener('click', async () => {
+            const selected = $$('#collections-content .collection-item.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'error'); return; }
+            const galleryPath = $('#col-gallery-target').value;
+            if (!galleryPath) { toast('Válasszon galériát!', 'error'); return; }
+
+            const arr = getByPath(contentData, galleryPath);
+            if (!arr || !Array.isArray(arr)) { toast('Galéria nem található!', 'error'); return; }
+
+            const hasTitle = arr.length > 0 && arr[0].title !== undefined;
+            selected.forEach(item => {
+                const url = item.dataset.collectionUrl;
+                const newItem = { src: url, alt: '' };
+                if (hasTitle) { newItem.title = ''; newItem.subtitle = ''; }
+                arr.push(newItem);
+            });
+
+            setDirty(true);
+            await saveContent();
+            if (currentPage) renderEditor(currentPage);
+
+            const navItem = NAV.flatMap(g => g.items).find(i => galleryPath.startsWith(i.id));
+            const label = navItem ? navItem.title : galleryPath;
+            toast(`${selected.length} kép hozzáadva: ${label}`, 'success');
+
+            // Deselect
+            selected.forEach(i => i.classList.remove('selected'));
+            updateColSelectedCount();
+        });
+
+        // Send to batch process
+        $('#col-send-to-batch').addEventListener('click', () => {
+            const selected = $$('#collections-content .collection-item.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'error'); return; }
+
+            // Close collections modal
+            modal.classList.add('hidden');
+
+            // Open batch process and load selected images
+            openBatchProcess();
+            for (const item of selected) {
+                const url = item.dataset.collectionUrl;
+                const name = url.split('/').pop();
+                const src = url.startsWith('http') ? url : '/' + url;
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    batchFiles.push({
+                        serverUrl: url,
+                        name,
+                        preview: src,
+                        origW: img.naturalWidth,
+                        origH: img.naturalHeight
+                    });
+                    renderBatchFileList();
+                    generateSmartPresets();
+                    updateBatchPreview();
+                };
+                img.src = src;
+            }
+            toast(`${selected.length} kép betöltve a feldolgozóba`, 'success');
+        });
+    }
+
+    function updateColSelectedCount() {
+        const count = $$('#collections-content .collection-item.selected').length;
+        $('#col-selected-count').textContent = count + ' kijelölve';
+    }
+
+    function populateColGalleryDropdown() {
+        const select = $('#col-gallery-target');
+        if (!contentData) { select.innerHTML = '<option value="">Nincs galéria</option>'; return; }
+        let options = '';
+        if (contentData.servicePages) {
+            for (const key of Object.keys(contentData.servicePages)) {
+                if (contentData.servicePages[key].gallery) {
+                    const navItem = NAV.flatMap(g => g.items).find(i => i.id === 'servicePages.' + key);
+                    options += `<option value="servicePages.${key}.gallery">${navItem ? navItem.title : key}</option>`;
+                }
+            }
+        }
+        if (contentData.portfolioPages) {
+            for (const key of Object.keys(contentData.portfolioPages)) {
+                if (contentData.portfolioPages[key].gallery) {
+                    const navItem = NAV.flatMap(g => g.items).find(i => i.id === 'portfolioPages.' + key);
+                    options += `<option value="portfolioPages.${key}.gallery">${navItem ? navItem.title : key}</option>`;
+                }
+            }
+        }
+        select.innerHTML = options || '<option value="">Nincs galéria</option>';
     }
 
     async function loadCollections() {
         const sidebar = $('#collections-sidebar');
         sidebar.innerHTML = '<div class="collections-loading">Betöltés...</div>';
         $('#collections-content').innerHTML = '<div class="collections-empty">Válasszon egy gyűjteményt a bal oldalon</div>';
+        $('#collections-toolbar').classList.add('hidden');
+        populateColGalleryDropdown();
 
         try {
             const res = await fetch('/api/collections');
@@ -2569,39 +2672,34 @@
         const col = collectionsData.collections.find(c => c.name === name);
         if (!col || col.files.length === 0) {
             content.innerHTML = '<div class="collections-empty">Üres gyűjtemény</div>';
+            $('#collections-toolbar').classList.add('hidden');
             return;
         }
+
+        // Show toolbar
+        $('#collections-toolbar').classList.remove('hidden');
+        $('#col-select-all').textContent = 'Összes kijelölése';
+        updateColSelectedCount();
 
         content.innerHTML = '<div class="collections-grid">' + col.files.map(f => {
             const src = f.url.startsWith('http') ? f.url : '/' + f.url;
             return `
-                <div class="collection-item" draggable="true" data-collection-url="${esc(f.url)}">
+                <div class="collection-item" data-collection-url="${esc(f.url)}">
                     <img src="${src}" alt="${esc(f.name)}" onerror="this.style.display='none'">
                     <div class="collection-item-name" title="${esc(f.name)}">${esc(f.name)}</div>
                     <div class="collection-item-actions">
-                        <button title="Másolás az aktuális oldalra" data-col-use="${esc(f.url)}">&#10010;</button>
                         <button class="danger" title="Eltávolítás a gyűjteményből" data-col-remove="${esc(f.url)}" data-col-parent="${esc(name)}">&times;</button>
                     </div>
                 </div>
             `;
         }).join('') + '</div>';
 
-        // Bind drag for use in gallery
-        content.querySelectorAll('.collection-item[draggable]').forEach(item => {
-            item.addEventListener('dragstart', e => {
-                e.dataTransfer.setData('text/plain', item.dataset.collectionUrl);
-                e.dataTransfer.effectAllowed = 'copy';
-            });
-        });
-
-        // Bind "use" button — copy URL to clipboard and show toast
-        content.querySelectorAll('[data-col-use]').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                const url = btn.dataset.colUse;
-                navigator.clipboard.writeText(url).then(() => {
-                    toast('Kép elérési út másolva! Illessze be egy kép mezőbe.', 'success');
-                });
+        // Bind click to select/deselect
+        content.querySelectorAll('.collection-item').forEach(item => {
+            item.addEventListener('click', e => {
+                if (e.target.closest('button')) return;
+                item.classList.toggle('selected');
+                updateColSelectedCount();
             });
         });
 
@@ -3359,6 +3457,15 @@
                         body: JSON.stringify({ name: colName, files: colFiles })
                     });
                 }
+            }
+
+            progressFill.style.width = '95%';
+            progressText.textContent = 'Mentés...';
+
+            // Auto-save if content was modified (gallery or field target)
+            const contentModified = (batchReturnTarget && batchReturnTarget.type === 'field') || dest === 'gallery';
+            if (contentModified && dirty) {
+                await saveContent();
             }
 
             progressFill.style.width = '100%';
