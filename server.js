@@ -55,8 +55,9 @@ const server = http.createServer((req, res) => {
                     execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: true, message: 'Mentve, újraépítve és feltöltve GitHub-ra!' }));
-                    // Auto push to GitHub in the background
+                    // Auto sync with GitHub in the background
                     try {
+                        try { execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
                         execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
                         console.log('  ✓ GitHub push sikeres');
                     } catch (gitErr) {
@@ -410,6 +411,15 @@ function parseMultipart(buffer, boundary) {
         start = end + boundaryBuf.length + 2;
     }
     return parts;
+}
+
+// Auto-pull latest changes from GitHub on startup
+try {
+    console.log('\n  ⏳ GitHub szinkronizálás...');
+    execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+    console.log('  ✓ Legfrissebb verzió letöltve');
+} catch (pullErr) {
+    console.log('  ⚠ Git pull hiba:', pullErr.message.split('\n')[0]);
 }
 
 server.listen(PORT, () => {

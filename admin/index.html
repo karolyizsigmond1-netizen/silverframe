@@ -346,13 +346,19 @@
                     <label class="batch-step-label">Felbontás kiválasztása</label>
 
                     <div class="batch-tab-bar" id="batch-tab-bar">
-                        <button class="batch-tab active" data-tab="resolution">Felbontás</button>
+                        <button class="batch-tab active" data-tab="smart">Ajánlott</button>
+                        <button class="batch-tab" data-tab="resolution">Felbontás</button>
                         <button class="batch-tab" data-tab="usecase">Felhasználás</button>
                         <button class="batch-tab" data-tab="custom">Egyéni</button>
                     </div>
 
+                    <!-- Smart presets (auto-generated from image ratio) -->
+                    <div class="batch-size-presets batch-tab-panel active" id="batch-panel-smart">
+                        <div class="batch-smart-empty">Töltsön fel képeket az ajánlott méretek megjelenítéséhez</div>
+                    </div>
+
                     <!-- Resolution presets -->
-                    <div class="batch-size-presets batch-tab-panel active" id="batch-panel-resolution">
+                    <div class="batch-size-presets batch-tab-panel" id="batch-panel-resolution">
                         <button class="batch-size-btn" data-w="7680" data-h="4320">
                             <span class="batch-size-name">8K UHD</span>
                             <span class="batch-size-dim">7680 × 4320</span>
@@ -365,7 +371,7 @@
                             <span class="batch-size-name">2K QHD</span>
                             <span class="batch-size-dim">2560 × 1440</span>
                         </button>
-                        <button class="batch-size-btn active" data-w="1920" data-h="1080">
+                        <button class="batch-size-btn" data-w="1920" data-h="1080">
                             <span class="batch-size-name">Full HD</span>
                             <span class="batch-size-dim">1920 × 1080</span>
                         </button>
