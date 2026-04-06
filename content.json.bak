@@ -105,13 +105,19 @@
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
       "heroImages": [
-        "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80",
-        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=80",
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+        "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
+        "uploads/8ded7bfc3b12-www.karolyifoto.hu__1_of_25_-topaz-sharpen.jpg",
+        "uploads/10339c4bcb3f-www.karolyifoto.hu__2_of_25_-topaz-sharpen-face.jpg",
+        "uploads/3ed50c54ec9a-www.karolyifoto.hu__14_of_25_-topaz-sharpen-face.jpg",
+        "uploads/9357529c6382-F_B_jegyesfot_z_s_www.karolyifoto__13_.jpg",
+        "uploads/6ffc111da309-karolyifoto_jegyes_fot_z_s__50_.jpg",
+        "uploads/5a130bc9520d-H___G__34_of_118_.jpg",
+        "uploads/ddba102fb087-DSC_0326_copy.jpg",
+        "uploads/de12fb158ae8-karolyifoto_glamour__13_of_240_.jpg",
+        "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg"
       ],
       "heroInterval": 5,
-      "introImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80",
+      "introImage": "uploads/5e03198477d5-Karel_3.jpg",
       "introLabel": "Rólam",
       "introTitle": "Történetek<br>fénnyel elmesélve",
       "introDesc": "Fotósként több mint tíz éve élem át, hogy minden pillanat számít. Amikor fotózom, nem csak látok, hanem érzek is: színeket, hangulatot, örömöt — olyan dolgokat, amiket szavakkal nehéz kifejezni.",
@@ -366,8 +372,8 @@
     "portfolio-model": {
       "title": "Portfólió / Modell Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
-      "ogImage": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1600&q=80",
+      "ogImage": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
+      "heroImage": "uploads/04ae11b30779-edited-1775497562504.jpg",
       "heroLabel": "Szolgáltatások / 01",
       "heroTitle": "Portfólió / Modell",
       "breadcrumb": "Portfólió / Modell",
@@ -378,7 +384,7 @@
         "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&q=80",
+        "src": "uploads/3d71d6695a1d-BGI06401.jpg",
         "alt": "Modell portfólió fotózás"
       },
       "packages": [
@@ -429,28 +435,8 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
-          "alt": "Portfólió fotó"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
-          "alt": "Modell teszt fotó"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Természetes fényű portré"
-        },
-        {
           "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
           "alt": "Közeli portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "Férfi modell portfólió"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
-          "alt": "Editorial portfólió fotó"
         }
       ],
       "ctaLabel": "Építsd a portfóliódat!",
@@ -477,7 +463,7 @@
         "Ha szeretnéd, az apukát is bevonhatjuk — akár röviden, akár a teljes fotózás alatt."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&q=80",
+        "src": "uploads/b1e509ad8aa9-J_M_pocakfot_z_s__25_of_42_.jpg",
         "alt": "Kismama fotózás természetes fényben"
       },
       "packages": [
@@ -528,28 +514,88 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=500&q=80",
-          "alt": "Kismama portré"
+          "src": "uploads/427b9faa86b6-J_M_pocakfot_z_s__10_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80",
-          "alt": "Kismama fotózás szabadtéren"
+          "src": "uploads/3733a6cfec48-J_M_pocakfot_z_s__9_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80",
-          "alt": "Várandós anyuka portré"
+          "src": "uploads/7267932abf6f-J_M_pocakfot_z_s__2_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
-          "alt": "Stúdió kismama fotózás"
+          "src": "uploads/60147bea92ae-J_M_pocakfot_z_s__4_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80",
-          "alt": "Kismama ruhás fotózás"
+          "src": "uploads/607f36bb93bd-J_M_pocakfot_z_s__7_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80",
-          "alt": "Természetes fényű kismama"
+          "src": "uploads/ee55598cfeef-J_M_pocakfot_z_s__8_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/330498c57913-J_M_pocakfot_z_s__14_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d0a147d22f8d-J_M_pocakfot_z_s__17_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/87ad82f1494f-J_M_pocakfot_z_s__19_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0f4e52ff827a-J_M_pocakfot_z_s__23_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b1e509ad8aa9-J_M_pocakfot_z_s__25_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/77b69c9d892b-J_M_pocakfot_z_s__28_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6383f4a2ca06-J_M_pocakfot_z_s__33_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/59226c5b0c95-J_M_pocakfot_z_s__34_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3f66e7c06e30-J_M_pocakfot_z_s__35_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fd5035a1d365-J_M_pocakfot_z_s__37_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1945b9b29572-J_M_pocakfot_z_s__38_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4b63f80481ec-J_M_pocakfot_z_s__40_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f9d88b5d3236-J_M_pocakfot_z_s__41_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7dea530b1616-J_M_pocakfot_z_s__42_of_42_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Babát vársz?",
@@ -565,7 +611,7 @@
       "title": "Boudoir / Glamour Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Boudoir és glamour fotózás Szegeden. Alap csomag 80.000 Ft, Prémium csomag 150.000 Ft.",
       "ogImage": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&q=80",
+      "heroImage": "uploads/2593f90ac8d7-DSC_0092_copy.jpg",
       "heroLabel": "Szolgáltatások / 03",
       "heroTitle": "Boudoir / Glamour",
       "breadcrumb": "Boudoir",
@@ -576,7 +622,7 @@
         "A Boudoir / Glamour fotózás elegáns, intimebb stílusú portrékat ad, amelyek egyszerre érzéki, nőies és művészi."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80",
+        "src": "uploads/25c919f61bac-karolyifoto_glamour__23_of_240_.jpg",
         "alt": "Boudoir fotózás"
       },
       "packages": [
@@ -627,28 +673,268 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",
-          "alt": "Boudoir fotó"
+          "src": "uploads/ddba102fb087-DSC_0326_copy.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
-          "alt": "Glamour portré"
+          "src": "uploads/2593f90ac8d7-DSC_0092_copy.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Elegáns portré"
+          "src": "uploads/7f6e546a1074-DSC_0297_copy.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
-          "alt": "Boudoir részlet"
+          "src": "uploads/1bd31a957bda-DSC_0224_copy.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80",
-          "alt": "Nőies portré"
+          "src": "uploads/c9585cecbcfc-DSC_0194_copy.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
-          "alt": "Glamour fotózás"
+          "src": "uploads/de003f97986b-DSC_0331_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/52761c724c36-DSC_0150_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ca3cedd741ff-DSC_0167_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/62aef420fc79-DSC_0227_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/231bfc1fecb2-DSC_0269_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b059ff914a56-DSC_0282_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2a2b947179e1-14570382_1433141726713124_5213103682742096301_n.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2d27e40bcc66-14633473_1433141993379764_8983894335492529347_o.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fa122218d710-14890327_1433141943379769_3990964068236414048_o.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/61f63b7c6e50-14900328_1433141533379810_8192509737320099154_n.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/00357c7b0607-14902823_1433142276713069_4965971780356596243_o.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7c87a2403ccd-20180408_145607.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/20a219b17b27-20180408_145632_Burst01.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f0753e80808a-DSC_0451_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9d449ec9bbc8-DSC_0463_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d377772ddcc0-DSC_0472_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/25bc29295ca3-DSC_0486_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0541837eac0f-DSC_0491_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/35b144e73f01-DSC_0511_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a12a12e9b1c8-DSC_9628_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5e52e4161e87-DSC_9641_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/85a7f8872fc2-DSC_9642_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bd2f34b4a173-DSC_9648_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e834515476a9-DSC_9686_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/29d71716f546-DSC_9705_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2872eabe4000-DSC_9710_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/91c4f4d56ed4-DSC_9736_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/76ffa326e17e-DSC_9756_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c1dc54c68c97-DSC_9765_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/666029241bc3-DSC_9774_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/de995ce3ce14-DSC_9789_copy.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/92b3468e49ad-karolyifoto_glamour__10_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/de12fb158ae8-karolyifoto_glamour__13_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d6515e5ef1be-karolyifoto_glamour__18_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/88ab5fd2871c-karolyifoto_glamour__20_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/25c919f61bac-karolyifoto_glamour__23_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/66e81841053a-karolyifoto_glamour__26_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1438401e9a07-karolyifoto_glamour__31_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c5bd013b397d-karolyifoto_glamour__36_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5f79c0530408-karolyifoto_glamour__40_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/864690ec7717-karolyifoto_glamour__45_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0213244d47ed-karolyifoto_glamour__55_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/86a181e1945f-karolyifoto_glamour__64_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e4a9069250a2-karolyifoto_glamour__84_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/72fb7473f4de-karolyifoto_glamour__88_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5a133e6c68a9-karolyifoto_glamour__96_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/53a484ee50d1-karolyifoto_glamour__98_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bd9f20cd2b8e-karolyifoto_glamour__106_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6c2c5cb15c16-karolyifoto_glamour__119_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/28f2945486ab-karolyifoto_glamour__127_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/223ded147df0-karolyifoto_glamour__128_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/be19d673baa9-karolyifoto_glamour__138_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6245233b0b57-karolyifoto_glamour__144_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2ffe61a0e3f6-karolyifoto_glamour__151_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5f0e0f0ab387-karolyifoto_glamour__155_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/af46413bee17-karolyifoto_glamour__165_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/53b22f345eed-karolyifoto_glamour__174_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/14c315ef3232-karolyifoto_glamour__181_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/baed4b273482-karolyifoto_glamour__186_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2bf01ad6722a-karolyifoto_glamour__226_of_240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e500cf08f96b-karolyifoto_glamour__229_of_240_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Fedezd fel magad!",
@@ -916,8 +1202,8 @@
     "real-estate": {
       "title": "Ingatlan Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Ingatlan fotózás Szegeden 50.000 Ft. 30 perc fotózás, 20 kidolgozott kép.",
-      "ogImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+      "ogImage": "uploads/923253371b66-_DSC9017_m_solata.jpg",
+      "heroImage": "uploads/ffed4964762c-_DSC9007.jpg",
       "heroLabel": "Szolgáltatások / 07",
       "heroTitle": "Ingatlan fotózás",
       "breadcrumb": "Ingatlan",
@@ -928,7 +1214,7 @@
         "A célom, hogy az ingatlan a lehető legjobb formáját mutassa."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+        "src": "uploads/55982b231bc4-_DSC9018.jpg",
         "alt": "Ingatlan fotózás"
       },
       "packages": [
@@ -1414,6 +1700,12 @@
       "heroTitle": "Portfólió / Modell",
       "breadcrumb": "Portfólió / Modell",
       "gallery": [
+        {
+          "src": "uploads/d02f5261a09f-Amina_Strret_fot_z_s_karolyifoto__57_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
         {
           "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
           "alt": "Portré stúdió világítás",
