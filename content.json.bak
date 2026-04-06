@@ -105,13 +105,19 @@
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
       "heroImages": [
-        "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80",
-        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=80",
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+        "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
+        "uploads/8ded7bfc3b12-www.karolyifoto.hu__1_of_25_-topaz-sharpen.jpg",
+        "uploads/10339c4bcb3f-www.karolyifoto.hu__2_of_25_-topaz-sharpen-face.jpg",
+        "uploads/3ed50c54ec9a-www.karolyifoto.hu__14_of_25_-topaz-sharpen-face.jpg",
+        "uploads/9357529c6382-F_B_jegyesfot_z_s_www.karolyifoto__13_.jpg",
+        "uploads/6ffc111da309-karolyifoto_jegyes_fot_z_s__50_.jpg",
+        "uploads/5a130bc9520d-H___G__34_of_118_.jpg",
+        "uploads/ddba102fb087-DSC_0326_copy.jpg",
+        "uploads/de12fb158ae8-karolyifoto_glamour__13_of_240_.jpg",
+        "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg"
       ],
       "heroInterval": 5,
-      "introImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80",
+      "introImage": "uploads/5e03198477d5-Karel_3.jpg",
       "introLabel": "Rólam",
       "introTitle": "Történetek<br>fénnyel elmesélve",
       "introDesc": "Fotósként több mint tíz éve élem át, hogy minden pillanat számít. Amikor fotózom, nem csak látok, hanem érzek is: színeket, hangulatot, örömöt — olyan dolgokat, amiket szavakkal nehéz kifejezni.",
@@ -477,7 +483,7 @@
         "Ha szeretnéd, az apukát is bevonhatjuk — akár röviden, akár a teljes fotózás alatt."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&q=80",
+        "src": "uploads/d0a147d22f8d-J_M_pocakfot_z_s__17_of_42_.jpg",
         "alt": "Kismama fotózás természetes fényben"
       },
       "packages": [
@@ -528,28 +534,88 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=500&q=80",
-          "alt": "Kismama portré"
+          "src": "uploads/427b9faa86b6-J_M_pocakfot_z_s__10_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80",
-          "alt": "Kismama fotózás szabadtéren"
+          "src": "uploads/3733a6cfec48-J_M_pocakfot_z_s__9_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80",
-          "alt": "Várandós anyuka portré"
+          "src": "uploads/7267932abf6f-J_M_pocakfot_z_s__2_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
-          "alt": "Stúdió kismama fotózás"
+          "src": "uploads/60147bea92ae-J_M_pocakfot_z_s__4_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80",
-          "alt": "Kismama ruhás fotózás"
+          "src": "uploads/607f36bb93bd-J_M_pocakfot_z_s__7_of_42_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80",
-          "alt": "Természetes fényű kismama"
+          "src": "uploads/ee55598cfeef-J_M_pocakfot_z_s__8_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/330498c57913-J_M_pocakfot_z_s__14_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d0a147d22f8d-J_M_pocakfot_z_s__17_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/87ad82f1494f-J_M_pocakfot_z_s__19_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0f4e52ff827a-J_M_pocakfot_z_s__23_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b1e509ad8aa9-J_M_pocakfot_z_s__25_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/77b69c9d892b-J_M_pocakfot_z_s__28_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6383f4a2ca06-J_M_pocakfot_z_s__33_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/59226c5b0c95-J_M_pocakfot_z_s__34_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3f66e7c06e30-J_M_pocakfot_z_s__35_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fd5035a1d365-J_M_pocakfot_z_s__37_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1945b9b29572-J_M_pocakfot_z_s__38_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4b63f80481ec-J_M_pocakfot_z_s__40_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f9d88b5d3236-J_M_pocakfot_z_s__41_of_42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7dea530b1616-J_M_pocakfot_z_s__42_of_42_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Babát vársz?",
@@ -1414,6 +1480,12 @@
       "heroTitle": "Portfólió / Modell",
       "breadcrumb": "Portfólió / Modell",
       "gallery": [
+        {
+          "src": "uploads/d02f5261a09f-Amina_Strret_fot_z_s_karolyifoto__57_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
         {
           "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
           "alt": "Portré stúdió világítás",
