@@ -2553,8 +2553,8 @@
         $('#batch-quality').value = 90;
         $('#batch-quality-val').textContent = '90%';
         // Reset destination
-        document.querySelector('input[name="batch-dest"][value="uploads"]').checked = true;
-        $('#batch-gallery-select').classList.add('hidden');
+        document.querySelector('input[name="batch-dest"][value="gallery"]').checked = true;
+        $('#batch-gallery-select').classList.remove('hidden');
         $('#batch-collection-select-wrap').classList.add('hidden');
         // Populate gallery dropdown
         populateBatchGallerySelect();
