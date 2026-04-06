@@ -1202,8 +1202,8 @@
     "real-estate": {
       "title": "Ingatlan Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Ingatlan fotózás Szegeden 50.000 Ft. 30 perc fotózás, 20 kidolgozott kép.",
-      "ogImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+      "ogImage": "uploads/923253371b66-_DSC9017_m_solata.jpg",
+      "heroImage": "uploads/ffed4964762c-_DSC9007.jpg",
       "heroLabel": "Szolgáltatások / 07",
       "heroTitle": "Ingatlan fotózás",
       "breadcrumb": "Ingatlan",
@@ -1214,7 +1214,7 @@
         "A célom, hogy az ingatlan a lehető legjobb formáját mutassa."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+        "src": "uploads/55982b231bc4-_DSC9018.jpg",
         "alt": "Ingatlan fotózás"
       },
       "packages": [
