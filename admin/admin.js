@@ -25,7 +25,7 @@
         },
         {
             label: 'Szolgáltatás oldalak', items: [
-                { id: 'servicePages.portrait-model', title: 'Portré / Modell' },
+                { id: 'servicePages.portfolio-model', title: 'Portré / Modell' },
                 { id: 'servicePages.maternity', title: 'Kismama' },
                 { id: 'servicePages.boudoir', title: 'Boudoir' },
                 { id: 'servicePages.family', title: 'Család' },
