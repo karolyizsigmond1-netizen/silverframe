@@ -2180,11 +2180,10 @@
         const list = getRenameList();
         if (list.length === 0) return;
 
-        const destUpload = $('#rename-dest-upload').checked;
         const destCollection = $('#rename-dest-collection').checked;
         const destDownload = $('#rename-dest-download').checked;
 
-        if (!destUpload && !destCollection && !destDownload) {
+        if (!destCollection && !destDownload) {
             toast('Válasszon legalább egy mentési célhelyet!', 'error');
             return;
         }
@@ -2210,7 +2209,7 @@
             const serverItems = list.filter(item => item.serverUrl);
 
             // ── Upload local files to server if needed ──
-            if ((destUpload || destCollection) && localItems.length > 0) {
+            if (destCollection && localItems.length > 0) {
                 const formData = new FormData();
                 for (const item of localItems) {
                     formData.append('images', item.file, item.file.name);
