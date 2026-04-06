@@ -301,9 +301,28 @@
                     <label class="batch-step-label">Képek kiválasztása</label>
                     <div class="batch-drop-zone" id="batch-drop-zone">
                         <div class="batch-drop-icon">&#128247;</div>
-                        <div>Húzza ide a képeket vagy kattintson</div>
-                        <div class="batch-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <div>Húzza ide a képeket vagy <strong>mappákat</strong>, vagy kattintson</div>
+                        <div class="batch-drop-hint">Több képet vagy teljes mappát is kiválaszthat</div>
                         <input type="file" id="batch-file-input" accept="image/*" multiple>
+                    </div>
+                    <div class="rename-browse-row">
+                        <button class="btn-tool" id="batch-browse-folder" title="Mappa tallózása">&#128193; Mappa tallózása</button>
+                        <button class="btn-tool btn-tool-accent" id="batch-from-collection" title="Képek kiválasztása meglévő gyűjteményből">&#128193; Gyűjteményből</button>
+                        <input type="file" id="batch-folder-input" webkitdirectory multiple style="display:none">
+                    </div>
+                    <div id="batch-collection-picker" class="rename-collection-picker hidden">
+                        <div class="rename-col-header">
+                            <span>Válasszon gyűjteményt:</span>
+                            <button class="rename-col-close" id="batch-col-close">&times;</button>
+                        </div>
+                        <div class="rename-col-list" id="batch-col-list">
+                            <div class="rename-col-loading">Betöltés...</div>
+                        </div>
+                        <div class="rename-col-images hidden" id="batch-col-images"></div>
+                        <div class="rename-col-actions hidden" id="batch-col-actions">
+                            <button class="btn-tool" id="batch-col-select-all">Összes kijelölése</button>
+                            <button class="btn-tool btn-tool-accent" id="batch-col-add">Kijelöltek hozzáadása</button>
+                        </div>
                     </div>
                     <div id="batch-file-list" class="batch-file-list"></div>
                 </div>

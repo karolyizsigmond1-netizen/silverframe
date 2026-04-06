@@ -2505,6 +2505,7 @@
         $('#batch-preview').innerHTML = '<span class="batch-preview-empty">Válasszon képeket a feldolgozás előnézetéhez</span>';
         $('#batch-apply').disabled = true;
         $('#batch-progress').classList.add('hidden');
+        $('#batch-collection-picker').classList.add('hidden');
         // Reset tabs to "resolution"
         $$('.batch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'resolution'));
         $$('.batch-tab-panel').forEach(p => p.classList.remove('active'));
@@ -2584,15 +2585,73 @@
 
         dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-active'); });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
-        dropZone.addEventListener('drop', e => {
+        dropZone.addEventListener('drop', async e => {
             e.preventDefault();
             dropZone.classList.remove('drag-active');
-            addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            const items = e.dataTransfer.items;
+            if (items && items.length > 0 && items[0].webkitGetAsEntry) {
+                const allFiles = [];
+                const entries = [];
+                for (let i = 0; i < items.length; i++) {
+                    const entry = items[i].webkitGetAsEntry();
+                    if (entry) entries.push(entry);
+                }
+                await collectFilesFromEntries(entries, allFiles);
+                addBatchFiles(allFiles.filter(f => f.type.startsWith('image/')));
+            } else {
+                addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            }
         });
 
         fileInput.addEventListener('change', () => {
             addBatchFiles(Array.from(fileInput.files));
             fileInput.value = '';
+        });
+
+        // Folder browse
+        const batchFolderInput = $('#batch-folder-input');
+        $('#batch-browse-folder').addEventListener('click', () => batchFolderInput.click());
+        batchFolderInput.addEventListener('change', () => {
+            const imgs = Array.from(batchFolderInput.files).filter(f => f.type.startsWith('image/'));
+            if (imgs.length > 0) {
+                addBatchFiles(imgs);
+                toast(`${imgs.length} kép betöltve a mappából`, 'success');
+            } else {
+                toast('Nem található kép a mappában', 'info');
+            }
+            batchFolderInput.value = '';
+        });
+
+        // Collection picker
+        const batchColPicker = $('#batch-collection-picker');
+        $('#batch-from-collection').addEventListener('click', async () => {
+            batchColPicker.classList.toggle('hidden');
+            if (!batchColPicker.classList.contains('hidden')) {
+                await loadBatchCollections();
+            }
+        });
+        $('#batch-col-close').addEventListener('click', () => batchColPicker.classList.add('hidden'));
+        $('#batch-col-select-all').addEventListener('click', () => {
+            const imgs = batchColPicker.querySelectorAll('.rename-col-img');
+            const allSelected = Array.from(imgs).every(i => i.classList.contains('selected'));
+            imgs.forEach(i => i.classList.toggle('selected', !allSelected));
+        });
+        $('#batch-col-add').addEventListener('click', () => {
+            const selected = batchColPicker.querySelectorAll('.rename-col-img.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'info'); return; }
+            for (const el of selected) {
+                const url = el.dataset.url;
+                const name = el.dataset.name;
+                const preview = el.querySelector('img').src;
+                if (batchFiles.some(bf => bf.serverUrl === url)) continue;
+                batchFiles.push({ serverUrl: url, name, preview, file: null, origW: 0, origH: 0 });
+            }
+            // Load dimensions for server images
+            loadBatchServerDimensions();
+            renderBatchFileList();
+            updateBatchPreview();
+            batchColPicker.classList.add('hidden');
+            toast(`${selected.length} kép hozzáadva a gyűjteményből`, 'success');
         });
 
         // Tab bar
@@ -2657,6 +2716,79 @@
         $('#batch-apply').addEventListener('click', executeBatchProcess);
     }
 
+    // Load collections into the batch process inline picker
+    async function loadBatchCollections() {
+        const list = $('#batch-col-list');
+        const imagesDiv = $('#batch-col-images');
+        const actionsDiv = $('#batch-col-actions');
+        list.innerHTML = '<div class="rename-col-loading">Betöltés...</div>';
+        imagesDiv.classList.add('hidden');
+        actionsDiv.classList.add('hidden');
+
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (!data.collections || data.collections.length === 0) {
+                list.innerHTML = '<div class="rename-col-empty">Még nincsenek gyűjtemények.</div>';
+                return;
+            }
+            list.innerHTML = data.collections.map(col =>
+                `<button class="rename-col-btn" data-col-name="${esc(col.name)}">${esc(col.name)}<span class="col-btn-count">(${col.files.length})</span></button>`
+            ).join('');
+            list._colData = data.collections;
+
+            list.querySelectorAll('.rename-col-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    list.querySelectorAll('.rename-col-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const col = list._colData.find(c => c.name === btn.dataset.colName);
+                    showBatchCollectionImages(col);
+                });
+            });
+        } catch (e) {
+            list.innerHTML = '<div class="rename-col-empty">Hiba a betöltésnél</div>';
+        }
+    }
+
+    function showBatchCollectionImages(col) {
+        const imagesDiv = $('#batch-col-images');
+        const actionsDiv = $('#batch-col-actions');
+        if (!col || col.files.length === 0) {
+            imagesDiv.innerHTML = '<div class="rename-col-empty">Üres gyűjtemény</div>';
+            imagesDiv.classList.remove('hidden');
+            actionsDiv.classList.add('hidden');
+            return;
+        }
+        imagesDiv.innerHTML = col.files.map(f => {
+            const src = f.url.startsWith('http') ? f.url : '/' + f.url;
+            return `<div class="rename-col-img" data-url="${esc(f.url)}" data-name="${esc(f.name)}">
+                <img src="${src}" alt="${esc(f.name)}" onerror="this.style.opacity='0.3'">
+                <div class="rename-col-img-name" title="${esc(f.name)}">${esc(f.name)}</div>
+            </div>`;
+        }).join('');
+        imagesDiv.querySelectorAll('.rename-col-img').forEach(img => {
+            img.addEventListener('click', () => img.classList.toggle('selected'));
+        });
+        imagesDiv.classList.remove('hidden');
+        actionsDiv.classList.remove('hidden');
+    }
+
+    // Load original dimensions for server-side images added from collections
+    function loadBatchServerDimensions() {
+        for (const bf of batchFiles) {
+            if (bf.serverUrl && bf.origW === 0) {
+                const img = new Image();
+                img.onload = () => {
+                    bf.origW = img.naturalWidth;
+                    bf.origH = img.naturalHeight;
+                    renderBatchFileList();
+                    updateBatchPreview();
+                };
+                img.src = bf.preview;
+            }
+        }
+    }
+
     function addBatchFiles(files) {
         for (const file of files) {
             if (!file.type.startsWith('image/')) continue;
@@ -2682,16 +2814,19 @@
 
     function renderBatchFileList() {
         const list = $('#batch-file-list');
-        list.innerHTML = batchFiles.map((bf, i) => `
-            <div class="batch-file-item">
+        list.innerHTML = batchFiles.map((bf, i) => {
+            const name = bf.file ? bf.file.name : bf.name;
+            const sizeText = bf.file ? `${(bf.file.size / 1024).toFixed(0)} KB` : 'oldalról';
+            const dims = bf.origW ? `${bf.origW}×${bf.origH}` : '...';
+            return `<div class="batch-file-item">
                 <img src="${bf.preview}" alt="">
                 <div class="batch-file-info">
-                    <span class="batch-file-name">${bf.file.name}</span>
-                    <span class="batch-file-size">${bf.origW}×${bf.origH} · ${(bf.file.size / 1024).toFixed(0)} KB</span>
+                    <span class="batch-file-name">${name}</span>
+                    <span class="batch-file-size">${dims} · ${sizeText}</span>
                 </div>
                 <button class="remove-file" data-remove-batch="${i}" title="Eltávolítás">&times;</button>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         list.querySelectorAll('[data-remove-batch]').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2872,12 +3007,14 @@
                 progressText.textContent = `Feldolgozás: ${i + 1} / ${total}`;
                 progressFill.style.width = ((i + 1) / total * 50) + '%';
 
-                // Load image
+                // Load image (works for both dataURL and server URL)
+                const imgSrc = bf.serverUrl ? (bf.serverUrl.startsWith('http') ? bf.serverUrl : '/' + bf.serverUrl) : bf.preview;
                 const img = await new Promise((resolve, reject) => {
                     const el = new Image();
+                    el.crossOrigin = 'anonymous';
                     el.onload = () => resolve(el);
                     el.onerror = reject;
-                    el.src = bf.preview;
+                    el.src = imgSrc;
                 });
 
                 // Process
@@ -2888,8 +3025,9 @@
                     canvas.toBlob(resolve, 'image/jpeg', quality);
                 });
 
-                const ext = bf.file.name.includes('.') ? '.' + bf.file.name.split('.').pop().toLowerCase() : '.jpg';
-                const cleanName = bf.file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+                const originalName = bf.file ? bf.file.name : bf.name;
+                const ext = originalName.includes('.') ? '.' + originalName.split('.').pop().toLowerCase() : '.jpg';
+                const cleanName = originalName.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
                 const outputName = cleanName + '_' + w + 'x' + h + (ext === '.png' ? '.jpg' : ext);
 
                 processedBlobs.push({ blob, name: outputName });
