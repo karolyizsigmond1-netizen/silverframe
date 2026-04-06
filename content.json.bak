@@ -435,28 +435,8 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
-          "alt": "Portfólió fotó"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
-          "alt": "Modell teszt fotó"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Természetes fényű portré"
-        },
-        {
           "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
           "alt": "Közeli portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "Férfi modell portfólió"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
-          "alt": "Editorial portfólió fotó"
         }
       ],
       "ctaLabel": "Építsd a portfóliódat!",
