@@ -1270,6 +1270,7 @@
                         origH: img.naturalHeight
                     });
                     renderBatchFileList();
+                    generateSmartPresets();
                     updateBatchPreview();
                 };
                 img.src = e.target.result;
@@ -2646,14 +2647,14 @@
         $('#batch-apply').disabled = true;
         $('#batch-progress').classList.add('hidden');
         $('#batch-collection-picker').classList.add('hidden');
-        // Reset tabs to "resolution"
-        $$('.batch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'resolution'));
+        // Reset tabs to "smart" (recommended)
+        $$('.batch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'smart'));
         $$('.batch-tab-panel').forEach(p => p.classList.remove('active'));
-        $('#batch-panel-resolution').classList.add('active');
-        // Reset size buttons — select Full HD in resolution tab
+        $('#batch-panel-smart').classList.add('active');
+        // Reset smart panel
+        $('#batch-panel-smart').innerHTML = '<div class="batch-smart-empty">Töltsön fel képeket az ajánlott méretek megjelenítéséhez</div>';
+        // Reset size buttons
         $$('.batch-size-btn').forEach(b => b.classList.remove('active'));
-        const fullHdBtn = document.querySelector('#batch-panel-resolution .batch-size-btn[data-w="1920"]');
-        if (fullHdBtn) fullHdBtn.classList.add('active');
         updateResolutionInfo();
         // Reset mode
         $$('.batch-mode-option').forEach(o => o.classList.remove('active'));
@@ -2938,6 +2939,7 @@
                     bf.origW = img.naturalWidth;
                     bf.origH = img.naturalHeight;
                     renderBatchFileList();
+                    generateSmartPresets();
                     updateBatchPreview();
                 };
                 img.src = bf.preview;
@@ -2960,12 +2962,117 @@
                         origH: img.naturalHeight
                     });
                     renderBatchFileList();
+                    generateSmartPresets();
                     updateBatchPreview();
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
+    }
+
+    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+    function generateSmartPresets() {
+        const panel = $('#batch-panel-smart');
+        const filesWithDims = batchFiles.filter(bf => bf.origW && bf.origH);
+        if (filesWithDims.length === 0) {
+            panel.innerHTML = '<div class="batch-smart-empty">Töltsön fel képeket az ajánlott méretek megjelenítéséhez</div>';
+            return;
+        }
+
+        // Find dominant aspect ratio (most common among files)
+        const ratioMap = {};
+        for (const bf of filesWithDims) {
+            const g = gcd(bf.origW, bf.origH);
+            const rw = bf.origW / g;
+            const rh = bf.origH / g;
+            const key = `${rw}:${rh}`;
+            if (!ratioMap[key]) ratioMap[key] = { rw, rh, count: 0, maxW: 0, maxH: 0 };
+            ratioMap[key].count++;
+            if (bf.origW > ratioMap[key].maxW) {
+                ratioMap[key].maxW = bf.origW;
+                ratioMap[key].maxH = bf.origH;
+            }
+        }
+
+        // Sort by frequency then by max resolution
+        const ratios = Object.entries(ratioMap)
+            .sort((a, b) => b[1].count - a[1].count || (b[1].maxW * b[1].maxH) - (a[1].maxW * a[1].maxH));
+
+        let html = '';
+        for (const [ratioLabel, info] of ratios) {
+            const { rw, rh, maxW, maxH } = info;
+            // Simplify ratio for display (e.g., 3000:2000 → 3:2)
+            const displayG = gcd(rw, rh);
+            let dw = rw / displayG, dh = rh / displayG;
+            // If ratio numbers are still large, try common approximations
+            if (dw > 50 || dh > 50) {
+                const r = maxW / maxH;
+                const common = [
+                    [16,9],[3,2],[4,3],[5,4],[1,1],[16,10],[21,9],[5,3],[2,3],[3,4],[9,16]
+                ];
+                let best = [dw, dh], bestDiff = Infinity;
+                for (const [cw, ch] of common) {
+                    const diff = Math.abs(r - cw / ch);
+                    if (diff < bestDiff && diff < 0.05) { bestDiff = diff; best = [cw, ch]; }
+                }
+                dw = best[0]; dh = best[1];
+            }
+
+            // Generate presets: percentage steps and standard widths
+            const presets = new Map(); // key: `w×h` → { w, h, label }
+            const aspect = maxW / maxH;
+
+            // Original
+            presets.set(`${maxW}×${maxH}`, { w: maxW, h: maxH, label: 'Eredeti (100%)' });
+
+            // Percentage steps
+            const pcts = [75, 50, 33, 25];
+            for (const pct of pcts) {
+                const pw = Math.round(maxW * pct / 100);
+                const ph = Math.round(maxH * pct / 100);
+                if (pw >= 200 && ph >= 200) {
+                    presets.set(`${pw}×${ph}`, { w: pw, h: ph, label: `${pct}%` });
+                }
+            }
+
+            // Standard widths matching this aspect ratio
+            const stdWidths = [7680, 3840, 2560, 1920, 1280, 800];
+            for (const sw of stdWidths) {
+                const sh = Math.round(sw / aspect);
+                if (sw < maxW && sh >= 200) {
+                    const key = `${sw}×${sh}`;
+                    if (!presets.has(key)) {
+                        // Find a nice label
+                        let lbl = `${sw}px`;
+                        if (sw === 7680) lbl = '8K';
+                        else if (sw === 3840) lbl = '4K';
+                        else if (sw === 2560) lbl = '2K';
+                        else if (sw === 1920) lbl = 'Full HD széles';
+                        else if (sw === 1280) lbl = 'HD széles';
+                        else if (sw === 800) lbl = 'Web';
+                        presets.set(key, { w: sw, h: sh, label: lbl });
+                    }
+                }
+            }
+
+            // Sort by width descending, limit to 8
+            const sorted = [...presets.values()].sort((a, b) => b.w - a.w).slice(0, 8);
+
+            html += `<div class="batch-smart-group">
+                <div class="batch-smart-ratio">${dw}:${dh} arány <span class="batch-smart-ratio-dim">(${maxW}×${maxH} eredeti)</span></div>
+                <div class="batch-smart-grid">`;
+            for (const p of sorted) {
+                html += `<button class="batch-size-btn" data-w="${p.w}" data-h="${p.h}">
+                    <span class="batch-size-name">${p.label}</span>
+                    <span class="batch-size-dim">${p.w} × ${p.h}</span>
+                </button>`;
+            }
+            html += '</div></div>';
+        }
+
+        panel.innerHTML = html;
     }
 
     function renderBatchFileList() {
@@ -2988,6 +3095,7 @@
             btn.addEventListener('click', () => {
                 batchFiles.splice(parseInt(btn.dataset.removeBatch), 1);
                 renderBatchFileList();
+                generateSmartPresets();
                 updateBatchPreview();
             });
         });

@@ -412,6 +412,15 @@ function parseMultipart(buffer, boundary) {
     return parts;
 }
 
+// Auto-pull latest changes from GitHub on startup
+try {
+    console.log('\n  ⏳ GitHub szinkronizálás...');
+    execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+    console.log('  ✓ Legfrissebb verzió letöltve');
+} catch (pullErr) {
+    console.log('  ⚠ Git pull hiba:', pullErr.message.split('\n')[0]);
+}
+
 server.listen(PORT, () => {
     console.log(`\n  Silverframe Studio Admin`);
     console.log(`  =======================`);

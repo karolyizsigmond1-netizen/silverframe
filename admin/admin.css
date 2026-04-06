@@ -1954,6 +1954,41 @@ body {
     color: var(--text-dim);
 }
 
+/* Smart presets */
+#batch-panel-smart.active { display: block; }
+
+.batch-smart-empty {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 24px 12px;
+    font-style: italic;
+}
+
+.batch-smart-group {
+    margin-bottom: 14px;
+}
+
+.batch-smart-ratio {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-family: var(--sans);
+}
+
+.batch-smart-ratio-dim {
+    font-weight: 400;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+}
+
+.batch-smart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 8px;
+}
+
 .batch-custom-inputs {
     display: flex;
     align-items: center;
