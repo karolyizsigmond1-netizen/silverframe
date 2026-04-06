@@ -1880,7 +1880,7 @@
     // ── BATCH RENAME TOOL ──
     // ══════════════════════════════════════
 
-    let renameFiles = []; // { file: File, preview: dataUrl }
+    let renameFiles = []; // { file: File, preview: dataUrl } OR { serverUrl: string, name: string, preview: string }
 
     function openRenameModal() {
         renameFiles = [];
@@ -1963,6 +1963,37 @@
             folderInput.value = '';
         });
 
+        // Collection picker
+        const colPicker = $('#rename-collection-picker');
+        $('#rename-from-collection').addEventListener('click', async () => {
+            colPicker.classList.toggle('hidden');
+            if (!colPicker.classList.contains('hidden')) {
+                await loadRenameCollections();
+            }
+        });
+        $('#rename-col-close').addEventListener('click', () => colPicker.classList.add('hidden'));
+        $('#rename-col-select-all').addEventListener('click', () => {
+            const imgs = colPicker.querySelectorAll('.rename-col-img');
+            const allSelected = Array.from(imgs).every(i => i.classList.contains('selected'));
+            imgs.forEach(i => i.classList.toggle('selected', !allSelected));
+        });
+        $('#rename-col-add').addEventListener('click', () => {
+            const selected = colPicker.querySelectorAll('.rename-col-img.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'info'); return; }
+            for (const el of selected) {
+                const url = el.dataset.url;
+                const name = el.dataset.name;
+                const preview = el.querySelector('img').src;
+                // Avoid duplicates
+                if (renameFiles.some(rf => rf.serverUrl === url)) continue;
+                renameFiles.push({ serverUrl: url, name, preview, file: null });
+            }
+            renderRenameFileList();
+            updateRenamePreview();
+            colPicker.classList.add('hidden');
+            toast(`${selected.length} kép hozzáadva a gyűjteményből`, 'success');
+        });
+
         // Genre quick buttons
         $('#rename-genre-buttons').addEventListener('click', e => {
             const btn = e.target.closest('.rename-genre-btn');
@@ -1995,6 +2026,70 @@
         $('#rename-apply').addEventListener('click', executeRename);
     }
 
+    // Load collections into the rename tool's inline picker
+    async function loadRenameCollections() {
+        const list = $('#rename-col-list');
+        const imagesDiv = $('#rename-col-images');
+        const actionsDiv = $('#rename-col-actions');
+        list.innerHTML = '<div class="rename-col-loading">Betöltés...</div>';
+        imagesDiv.classList.add('hidden');
+        actionsDiv.classList.add('hidden');
+
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (!data.collections || data.collections.length === 0) {
+                list.innerHTML = '<div class="rename-col-empty">Még nincsenek gyűjtemények. Használja a "Mentés gyűjteménybe" opciót az átnevezésnél.</div>';
+                return;
+            }
+            list.innerHTML = data.collections.map(col =>
+                `<button class="rename-col-btn" data-col-name="${esc(col.name)}">${esc(col.name)}<span class="col-btn-count">(${col.files.length})</span></button>`
+            ).join('');
+
+            // Store data for image display
+            list._colData = data.collections;
+
+            list.querySelectorAll('.rename-col-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    list.querySelectorAll('.rename-col-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const col = list._colData.find(c => c.name === btn.dataset.colName);
+                    showRenameCollectionImages(col);
+                });
+            });
+        } catch (e) {
+            list.innerHTML = '<div class="rename-col-empty">Hiba a betöltésnél</div>';
+        }
+    }
+
+    function showRenameCollectionImages(col) {
+        const imagesDiv = $('#rename-col-images');
+        const actionsDiv = $('#rename-col-actions');
+
+        if (!col || col.files.length === 0) {
+            imagesDiv.innerHTML = '<div class="rename-col-empty">Üres gyűjtemény</div>';
+            imagesDiv.classList.remove('hidden');
+            actionsDiv.classList.add('hidden');
+            return;
+        }
+
+        imagesDiv.innerHTML = col.files.map(f => {
+            const src = f.url.startsWith('http') ? f.url : '/' + f.url;
+            return `<div class="rename-col-img" data-url="${esc(f.url)}" data-name="${esc(f.name)}">
+                <img src="${src}" alt="${esc(f.name)}" onerror="this.style.opacity='0.3'">
+                <div class="rename-col-img-name" title="${esc(f.name)}">${esc(f.name)}</div>
+            </div>`;
+        }).join('');
+
+        // Toggle selection on click
+        imagesDiv.querySelectorAll('.rename-col-img').forEach(img => {
+            img.addEventListener('click', () => img.classList.toggle('selected'));
+        });
+
+        imagesDiv.classList.remove('hidden');
+        actionsDiv.classList.remove('hidden');
+    }
+
     // Recursively collect File objects from drag-and-dropped entries (files + folders)
     async function collectFilesFromEntries(entries, result) {
         for (const entry of entries) {
@@ -2025,13 +2120,15 @@
 
     function renderRenameFileList() {
         const list = $('#rename-file-list');
-        list.innerHTML = renameFiles.map((rf, i) => `
-            <div class="rename-file-item">
+        list.innerHTML = renameFiles.map((rf, i) => {
+            const displayName = rf.file ? rf.file.name : rf.name;
+            const badge = rf.serverUrl ? '<span style="font-size:0.6rem;color:var(--accent);margin-left:4px">oldalról</span>' : '';
+            return `<div class="rename-file-item">
                 <img src="${rf.preview}" alt="">
-                <span>${rf.file.name}</span>
+                <span>${displayName}${badge}</span>
                 <button class="remove-file" data-remove-rename="${i}" title="Eltávolítás">&times;</button>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         // Bind remove buttons
         list.querySelectorAll('[data-remove-rename]').forEach(btn => {
@@ -2051,9 +2148,10 @@
 
         return renameFiles.map((rf, i) => {
             const num = String(start + i).padStart(3, '0');
-            const ext = rf.file.name.includes('.') ? '.' + rf.file.name.split('.').pop().toLowerCase() : '.jpg';
+            const originalName = rf.file ? rf.file.name : rf.name;
+            const ext = originalName.includes('.') ? '.' + originalName.split('.').pop().toLowerCase() : '.jpg';
             const newName = `silverframe_${genre}_${num}${ext}`;
-            return { file: rf.file, original: rf.file.name, newName };
+            return { file: rf.file || null, serverUrl: rf.serverUrl || null, original: originalName, newName };
         });
     }
 
@@ -2107,15 +2205,19 @@
         try {
             let uploadedFiles = []; // { url, newName }
 
-            // ── Upload to server if needed ──
-            if (destUpload || destCollection) {
+            // Split list into local files (need upload) and server files (already uploaded)
+            const localItems = list.filter(item => item.file);
+            const serverItems = list.filter(item => item.serverUrl);
+
+            // ── Upload local files to server if needed ──
+            if ((destUpload || destCollection) && localItems.length > 0) {
                 const formData = new FormData();
-                for (const item of list) {
+                for (const item of localItems) {
                     formData.append('images', item.file, item.file.name);
                 }
 
                 applyBtn.textContent = 'Feltöltés...';
-                toast(`${list.length} kép feltöltése...`, 'info');
+                toast(`${localItems.length} kép feltöltése...`, 'info');
                 const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
                 const uploadData = await uploadRes.json();
 
@@ -2127,7 +2229,7 @@
                 // Rename uploaded files
                 const renameOps = uploadData.files.map((uploaded, i) => ({
                     oldUrl: uploaded.url,
-                    newName: list[i].newName
+                    newName: localItems[i].newName
                 }));
 
                 applyBtn.textContent = 'Átnevezés...';
@@ -2139,14 +2241,31 @@
                 const renameData = await renameRes.json();
 
                 if (renameData.success) {
-                    uploadedFiles = renameData.results
-                        .filter(r => r.success)
-                        .map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() }));
+                    const results = renameData.results.filter(r => r.success);
+                    uploadedFiles.push(...results.map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() })));
+                    toast(`${results.length} helyi kép feltöltve és átnevezve!`, 'success');
+                }
+            }
 
-                    const successCount = renameData.results.filter(r => r.success).length;
-                    if (destUpload) {
-                        toast(`${successCount} kép feltöltve és átnevezve!`, 'success');
-                    }
+            // ── Rename server-side files (from collections) ──
+            if (serverItems.length > 0) {
+                const renameOps = serverItems.map(item => ({
+                    oldUrl: item.serverUrl,
+                    newName: item.newName
+                }));
+
+                applyBtn.textContent = 'Átnevezés (oldalon lévő képek)...';
+                const renameRes = await fetch('/api/batch-rename', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ files: renameOps })
+                });
+                const renameData = await renameRes.json();
+
+                if (renameData.success) {
+                    const results = renameData.results.filter(r => r.success);
+                    uploadedFiles.push(...results.map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() })));
+                    toast(`${results.length} gyűjteménybeli kép átnevezve!`, 'success');
                 }
             }
 
@@ -2170,8 +2289,11 @@
                 applyBtn.textContent = 'Letöltés...';
                 toast('Képek letöltése...', 'info');
                 for (const item of list) {
-                    await downloadRenamedFile(item.file, item.newName);
-                    // Small delay between downloads so browser doesn't block them
+                    if (item.file) {
+                        await downloadRenamedFile(item.file, item.newName);
+                    } else if (item.serverUrl) {
+                        await downloadServerFile(item.serverUrl, item.newName);
+                    }
                     await new Promise(r => setTimeout(r, 200));
                 }
                 toast(`${list.length} kép letöltve!`, 'success');
@@ -2204,6 +2326,24 @@
             };
             reader.readAsDataURL(file);
         });
+    }
+
+    async function downloadServerFile(serverUrl, newName) {
+        try {
+            const src = serverUrl.startsWith('http') ? serverUrl : '/' + serverUrl;
+            const res = await fetch(src);
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = newName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (e) {
+            toast('Letöltési hiba: ' + e.message, 'error');
+        }
     }
 
     // ══════════════════════════════════════
