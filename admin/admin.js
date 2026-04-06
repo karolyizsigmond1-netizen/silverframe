@@ -25,7 +25,7 @@
         },
         {
             label: 'Szolgáltatás oldalak', items: [
-                { id: 'servicePages.portrait-model', title: 'Portré / Modell' },
+                { id: 'servicePages.portfolio-model', title: 'Portré / Modell' },
                 { id: 'servicePages.maternity', title: 'Kismama' },
                 { id: 'servicePages.boudoir', title: 'Boudoir' },
                 { id: 'servicePages.family', title: 'Család' },
@@ -1164,6 +1164,13 @@
         const arr = getByPath(contentData, arrayPath);
         if (!arr) return;
 
+        // Ask if they want to resize first
+        const wantResize = await askResizePrompt(files.length);
+        if (wantResize) {
+            openBatchProcessWith(files, { type: 'gallery', path: arrayPath });
+            return;
+        }
+
         // Determine if gallery items have title/subtitle
         const hasTitle = arr.length > 0 && arr[0].title !== undefined;
 
@@ -1202,8 +1209,111 @@
         }
     }
 
+    // ══════════════════════════════════════
+    // ── RESIZE PROMPT (before upload) ──
+    // ══════════════════════════════════════
+
+    function askResizePrompt(fileCount) {
+        return new Promise(resolve => {
+            const yesBtn = $('#confirm-yes');
+            const noBtn = $('#confirm-no');
+            // Save original state
+            const origYesText = yesBtn.textContent;
+            const origYesClass = yesBtn.className;
+            const origNoText = noBtn.textContent;
+            // Custom text
+            $('#confirm-title').textContent = 'Átméretezés?';
+            $('#confirm-message').textContent = `${fileCount} kép kiválasztva. Szeretné átméretezni a képeket feltöltés előtt?`;
+            yesBtn.textContent = '✓ Igen, átméretezés';
+            yesBtn.className = 'btn-save';
+            noBtn.textContent = 'Nem, feltöltés így';
+            confirmResolve = (val) => {
+                // Restore
+                yesBtn.textContent = origYesText;
+                yesBtn.className = origYesClass;
+                noBtn.textContent = origNoText;
+                resolve(val);
+            };
+            $('#confirm-modal').classList.remove('hidden');
+        });
+    }
+
+    // Get a human-readable label for a content.json path
+    function getTargetLabel(path) {
+        // Try to match nav items
+        const parts = path.replace(/\.gallery$/, '').replace(/\.src$/, '');
+        const navItem = NAV.flatMap(g => g.items).find(i => parts.startsWith(i.id));
+        if (navItem) {
+            if (path.includes('.gallery')) return navItem.title + ' galéria';
+            if (path.includes('.heroImage')) return navItem.title + ' hero kép';
+            return navItem.title;
+        }
+        return path;
+    }
+
+    // State for "return target" — when batch process was opened from an upload context
+    let batchReturnTarget = null; // { type: 'gallery'|'field', path: string }
+
+    function openBatchProcessWith(files, target) {
+        batchReturnTarget = target;
+        openBatchProcess();
+        // Pre-load files
+        for (const file of files) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    batchFiles.push({
+                        file,
+                        preview: e.target.result,
+                        origW: img.naturalWidth,
+                        origH: img.naturalHeight
+                    });
+                    renderBatchFileList();
+                    updateBatchPreview();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        // Show target banner
+        const banner = $('#batch-target-banner');
+        const label = getTargetLabel(target.path);
+        $('#batch-target-name').textContent = label;
+        banner.classList.remove('hidden');
+        // Auto-select gallery destination if target is a gallery
+        if (target.type === 'gallery') {
+            const galleryRadio = document.querySelector('input[name="batch-dest"][value="gallery"]');
+            if (galleryRadio) {
+                galleryRadio.checked = true;
+                $('#batch-gallery-select').classList.remove('hidden');
+                $('#batch-collection-select-wrap').classList.add('hidden');
+                // Try to select the right gallery in the dropdown
+                const select = $('#batch-gallery-target');
+                for (const opt of select.options) {
+                    if (opt.value === target.path) { select.value = target.path; break; }
+                }
+            }
+        }
+    }
+
     // ── Shared upload helper (single file) ──
     async function uploadAndSet(file, targetPath) {
+        // Ask if they want to resize first
+        const wantResize = await askResizePrompt(1);
+        if (wantResize) {
+            // Determine target type
+            const isGallery = targetPath.includes('.gallery.');
+            if (isGallery) {
+                // Extract gallery array path (e.g. servicePages.x.gallery from servicePages.x.gallery.0.src)
+                const galleryPath = targetPath.replace(/\.\d+\.src$/, '');
+                openBatchProcessWith([file], { type: 'gallery', path: galleryPath });
+            } else {
+                openBatchProcessWith([file], { type: 'field', path: targetPath });
+            }
+            return;
+        }
+        // Normal upload
         const formData = new FormData();
         formData.append('images', file, file.name);
         try {
@@ -1880,7 +1990,37 @@
     // ── BATCH RENAME TOOL ──
     // ══════════════════════════════════════
 
-    let renameFiles = []; // { file: File, preview: dataUrl }
+    let renameFiles = []; // { file: File, preview: dataUrl } OR { serverUrl: string, name: string, preview: string }
+
+    // Shared: populate a collection dropdown + text input pair
+    async function populateCollectionDropdown(selectEl, textInputEl) {
+        selectEl.innerHTML = '<option value="">+ Új gyűjtemény...</option>';
+        textInputEl.style.display = 'block';
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (data.collections && data.collections.length > 0) {
+                for (const col of data.collections) {
+                    const opt = document.createElement('option');
+                    opt.value = col.name;
+                    opt.textContent = `${col.name} (${col.files.length} kép)`;
+                    selectEl.appendChild(opt);
+                }
+            }
+        } catch (e) { /* ignore */ }
+        // Bind toggle: show text input only when "new" is selected
+        selectEl.onchange = () => {
+            textInputEl.style.display = selectEl.value === '' ? 'block' : 'none';
+        };
+        selectEl.value = '';
+        textInputEl.style.display = 'block';
+    }
+
+    // Get the collection name from a select+input pair
+    function getCollectionName(selectEl, textInputEl) {
+        if (selectEl.value) return selectEl.value;
+        return textInputEl.value.trim();
+    }
 
     function openRenameModal() {
         renameFiles = [];
@@ -1893,6 +2033,7 @@
         $$('.rename-genre-btn').forEach(b => b.classList.remove('active'));
         updateRenamePreview();
         bindRenameModal();
+        populateCollectionDropdown($('#rename-collection-select'), $('#rename-collection-name'));
     }
 
     let renameModalBound = false;
@@ -1911,7 +2052,7 @@
         $('#rename-cancel').addEventListener('click', () => modal.classList.add('hidden'));
         modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
 
-        // File drop zone
+        // File drop zone — click opens file picker
         dropZone.addEventListener('click', e => {
             if (e.target === fileInput) return;
             fileInput.click();
@@ -1922,15 +2063,76 @@
             dropZone.classList.add('drag-active');
         });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
-        dropZone.addEventListener('drop', e => {
+
+        // Drop handler — supports both files and folders
+        dropZone.addEventListener('drop', async e => {
             e.preventDefault();
             dropZone.classList.remove('drag-active');
-            addRenameFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            const items = e.dataTransfer.items;
+            if (items && items.length > 0 && items[0].webkitGetAsEntry) {
+                // Use entry API to read folders recursively
+                const allFiles = [];
+                const entries = [];
+                for (let i = 0; i < items.length; i++) {
+                    const entry = items[i].webkitGetAsEntry();
+                    if (entry) entries.push(entry);
+                }
+                await collectFilesFromEntries(entries, allFiles);
+                addRenameFiles(allFiles.filter(f => f.type.startsWith('image/')));
+            } else {
+                // Fallback: plain file list
+                addRenameFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            }
         });
 
         fileInput.addEventListener('change', () => {
             addRenameFiles(Array.from(fileInput.files));
             fileInput.value = '';
+        });
+
+        // Folder browse button
+        const folderInput = $('#rename-folder-input');
+        $('#rename-browse-folder').addEventListener('click', () => folderInput.click());
+        folderInput.addEventListener('change', () => {
+            const imgs = Array.from(folderInput.files).filter(f => f.type.startsWith('image/'));
+            if (imgs.length > 0) {
+                addRenameFiles(imgs);
+                toast(`${imgs.length} kép betöltve a mappából`, 'success');
+            } else {
+                toast('Nem található kép a mappában', 'info');
+            }
+            folderInput.value = '';
+        });
+
+        // Collection picker
+        const colPicker = $('#rename-collection-picker');
+        $('#rename-from-collection').addEventListener('click', async () => {
+            colPicker.classList.toggle('hidden');
+            if (!colPicker.classList.contains('hidden')) {
+                await loadRenameCollections();
+            }
+        });
+        $('#rename-col-close').addEventListener('click', () => colPicker.classList.add('hidden'));
+        $('#rename-col-select-all').addEventListener('click', () => {
+            const imgs = colPicker.querySelectorAll('.rename-col-img');
+            const allSelected = Array.from(imgs).every(i => i.classList.contains('selected'));
+            imgs.forEach(i => i.classList.toggle('selected', !allSelected));
+        });
+        $('#rename-col-add').addEventListener('click', () => {
+            const selected = colPicker.querySelectorAll('.rename-col-img.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'info'); return; }
+            for (const el of selected) {
+                const url = el.dataset.url;
+                const name = el.dataset.name;
+                const preview = el.querySelector('img').src;
+                // Avoid duplicates
+                if (renameFiles.some(rf => rf.serverUrl === url)) continue;
+                renameFiles.push({ serverUrl: url, name, preview, file: null });
+            }
+            renderRenameFileList();
+            updateRenamePreview();
+            colPicker.classList.add('hidden');
+            toast(`${selected.length} kép hozzáadva a gyűjteményből`, 'success');
         });
 
         // Genre quick buttons
@@ -1965,6 +2167,84 @@
         $('#rename-apply').addEventListener('click', executeRename);
     }
 
+    // Load collections into the rename tool's inline picker
+    async function loadRenameCollections() {
+        const list = $('#rename-col-list');
+        const imagesDiv = $('#rename-col-images');
+        const actionsDiv = $('#rename-col-actions');
+        list.innerHTML = '<div class="rename-col-loading">Betöltés...</div>';
+        imagesDiv.classList.add('hidden');
+        actionsDiv.classList.add('hidden');
+
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (!data.collections || data.collections.length === 0) {
+                list.innerHTML = '<div class="rename-col-empty">Még nincsenek gyűjtemények. Használja a "Mentés gyűjteménybe" opciót az átnevezésnél.</div>';
+                return;
+            }
+            list.innerHTML = data.collections.map(col =>
+                `<button class="rename-col-btn" data-col-name="${esc(col.name)}">${esc(col.name)}<span class="col-btn-count">(${col.files.length})</span></button>`
+            ).join('');
+
+            // Store data for image display
+            list._colData = data.collections;
+
+            list.querySelectorAll('.rename-col-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    list.querySelectorAll('.rename-col-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const col = list._colData.find(c => c.name === btn.dataset.colName);
+                    showRenameCollectionImages(col);
+                });
+            });
+        } catch (e) {
+            list.innerHTML = '<div class="rename-col-empty">Hiba a betöltésnél</div>';
+        }
+    }
+
+    function showRenameCollectionImages(col) {
+        const imagesDiv = $('#rename-col-images');
+        const actionsDiv = $('#rename-col-actions');
+
+        if (!col || col.files.length === 0) {
+            imagesDiv.innerHTML = '<div class="rename-col-empty">Üres gyűjtemény</div>';
+            imagesDiv.classList.remove('hidden');
+            actionsDiv.classList.add('hidden');
+            return;
+        }
+
+        imagesDiv.innerHTML = col.files.map(f => {
+            const src = f.url.startsWith('http') ? f.url : '/' + f.url;
+            return `<div class="rename-col-img" data-url="${esc(f.url)}" data-name="${esc(f.name)}">
+                <img src="${src}" alt="${esc(f.name)}" onerror="this.style.opacity='0.3'">
+                <div class="rename-col-img-name" title="${esc(f.name)}">${esc(f.name)}</div>
+            </div>`;
+        }).join('');
+
+        // Toggle selection on click
+        imagesDiv.querySelectorAll('.rename-col-img').forEach(img => {
+            img.addEventListener('click', () => img.classList.toggle('selected'));
+        });
+
+        imagesDiv.classList.remove('hidden');
+        actionsDiv.classList.remove('hidden');
+    }
+
+    // Recursively collect File objects from drag-and-dropped entries (files + folders)
+    async function collectFilesFromEntries(entries, result) {
+        for (const entry of entries) {
+            if (entry.isFile) {
+                const file = await new Promise(resolve => entry.file(resolve));
+                result.push(file);
+            } else if (entry.isDirectory) {
+                const reader = entry.createReader();
+                const subEntries = await new Promise(resolve => reader.readEntries(resolve));
+                await collectFilesFromEntries(subEntries, result);
+            }
+        }
+    }
+
     function addRenameFiles(files) {
         for (const file of files) {
             if (!file.type.startsWith('image/')) continue;
@@ -1981,13 +2261,15 @@
 
     function renderRenameFileList() {
         const list = $('#rename-file-list');
-        list.innerHTML = renameFiles.map((rf, i) => `
-            <div class="rename-file-item">
+        list.innerHTML = renameFiles.map((rf, i) => {
+            const displayName = rf.file ? rf.file.name : rf.name;
+            const badge = rf.serverUrl ? '<span style="font-size:0.6rem;color:var(--accent);margin-left:4px">oldalról</span>' : '';
+            return `<div class="rename-file-item">
                 <img src="${rf.preview}" alt="">
-                <span>${rf.file.name}</span>
+                <span>${displayName}${badge}</span>
                 <button class="remove-file" data-remove-rename="${i}" title="Eltávolítás">&times;</button>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         // Bind remove buttons
         list.querySelectorAll('[data-remove-rename]').forEach(btn => {
@@ -2007,9 +2289,10 @@
 
         return renameFiles.map((rf, i) => {
             const num = String(start + i).padStart(3, '0');
-            const ext = rf.file.name.includes('.') ? '.' + rf.file.name.split('.').pop().toLowerCase() : '.jpg';
+            const originalName = rf.file ? rf.file.name : rf.name;
+            const ext = originalName.includes('.') ? '.' + originalName.split('.').pop().toLowerCase() : '.jpg';
             const newName = `silverframe_${genre}_${num}${ext}`;
-            return { file: rf.file, original: rf.file.name, newName };
+            return { file: rf.file || null, serverUrl: rf.serverUrl || null, original: originalName, newName };
         });
     }
 
@@ -2038,20 +2321,18 @@
         const list = getRenameList();
         if (list.length === 0) return;
 
-        const destUpload = $('#rename-dest-upload').checked;
         const destCollection = $('#rename-dest-collection').checked;
         const destDownload = $('#rename-dest-download').checked;
 
-        if (!destUpload && !destCollection && !destDownload) {
+        if (!destCollection && !destDownload) {
             toast('Válasszon legalább egy mentési célhelyet!', 'error');
             return;
         }
 
         if (destCollection) {
-            const colName = $('#rename-collection-name').value.trim();
+            const colName = getCollectionName($('#rename-collection-select'), $('#rename-collection-name'));
             if (!colName) {
-                toast('Adja meg a gyűjtemény nevét!', 'error');
-                $('#rename-collection-name').focus();
+                toast('Válasszon gyűjteményt vagy adjon meg egy nevet!', 'error');
                 return;
             }
         }
@@ -2063,15 +2344,19 @@
         try {
             let uploadedFiles = []; // { url, newName }
 
-            // ── Upload to server if needed ──
-            if (destUpload || destCollection) {
+            // Split list into local files (need upload) and server files (already uploaded)
+            const localItems = list.filter(item => item.file);
+            const serverItems = list.filter(item => item.serverUrl);
+
+            // ── Upload local files to server if needed ──
+            if (destCollection && localItems.length > 0) {
                 const formData = new FormData();
-                for (const item of list) {
+                for (const item of localItems) {
                     formData.append('images', item.file, item.file.name);
                 }
 
                 applyBtn.textContent = 'Feltöltés...';
-                toast(`${list.length} kép feltöltése...`, 'info');
+                toast(`${localItems.length} kép feltöltése...`, 'info');
                 const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
                 const uploadData = await uploadRes.json();
 
@@ -2083,7 +2368,7 @@
                 // Rename uploaded files
                 const renameOps = uploadData.files.map((uploaded, i) => ({
                     oldUrl: uploaded.url,
-                    newName: list[i].newName
+                    newName: localItems[i].newName
                 }));
 
                 applyBtn.textContent = 'Átnevezés...';
@@ -2095,20 +2380,37 @@
                 const renameData = await renameRes.json();
 
                 if (renameData.success) {
-                    uploadedFiles = renameData.results
-                        .filter(r => r.success)
-                        .map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() }));
+                    const results = renameData.results.filter(r => r.success);
+                    uploadedFiles.push(...results.map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() })));
+                    toast(`${results.length} helyi kép feltöltve és átnevezve!`, 'success');
+                }
+            }
 
-                    const successCount = renameData.results.filter(r => r.success).length;
-                    if (destUpload) {
-                        toast(`${successCount} kép feltöltve és átnevezve!`, 'success');
-                    }
+            // ── Rename server-side files (from collections) ──
+            if (serverItems.length > 0) {
+                const renameOps = serverItems.map(item => ({
+                    oldUrl: item.serverUrl,
+                    newName: item.newName
+                }));
+
+                applyBtn.textContent = 'Átnevezés (oldalon lévő képek)...';
+                const renameRes = await fetch('/api/batch-rename', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ files: renameOps })
+                });
+                const renameData = await renameRes.json();
+
+                if (renameData.success) {
+                    const results = renameData.results.filter(r => r.success);
+                    uploadedFiles.push(...results.map(r => ({ url: r.newUrl, newName: r.newUrl.split('/').pop() })));
+                    toast(`${results.length} gyűjteménybeli kép átnevezve!`, 'success');
                 }
             }
 
             // ── Save to collection ──
             if (destCollection && uploadedFiles.length > 0) {
-                const colName = $('#rename-collection-name').value.trim();
+                const colName = getCollectionName($('#rename-collection-select'), $('#rename-collection-name'));
                 applyBtn.textContent = 'Mentés gyűjteménybe...';
                 const colRes = await fetch('/api/collections/save', {
                     method: 'POST',
@@ -2126,8 +2428,11 @@
                 applyBtn.textContent = 'Letöltés...';
                 toast('Képek letöltése...', 'info');
                 for (const item of list) {
-                    await downloadRenamedFile(item.file, item.newName);
-                    // Small delay between downloads so browser doesn't block them
+                    if (item.file) {
+                        await downloadRenamedFile(item.file, item.newName);
+                    } else if (item.serverUrl) {
+                        await downloadServerFile(item.serverUrl, item.newName);
+                    }
                     await new Promise(r => setTimeout(r, 200));
                 }
                 toast(`${list.length} kép letöltve!`, 'success');
@@ -2160,6 +2465,24 @@
             };
             reader.readAsDataURL(file);
         });
+    }
+
+    async function downloadServerFile(serverUrl, newName) {
+        try {
+            const src = serverUrl.startsWith('http') ? serverUrl : '/' + serverUrl;
+            const res = await fetch(src);
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = newName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (e) {
+            toast('Letöltési hiba: ' + e.message, 'error');
+        }
     }
 
     // ══════════════════════════════════════
@@ -2322,6 +2645,7 @@
         $('#batch-preview').innerHTML = '<span class="batch-preview-empty">Válasszon képeket a feldolgozás előnézetéhez</span>';
         $('#batch-apply').disabled = true;
         $('#batch-progress').classList.add('hidden');
+        $('#batch-collection-picker').classList.add('hidden');
         // Reset tabs to "resolution"
         $$('.batch-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'resolution'));
         $$('.batch-tab-panel').forEach(p => p.classList.remove('active'));
@@ -2339,8 +2663,13 @@
         $('#batch-quality').value = 90;
         $('#batch-quality-val').textContent = '90%';
         // Reset destination
-        document.querySelector('input[name="batch-dest"][value="uploads"]').checked = true;
-        $('#batch-gallery-select').classList.add('hidden');
+        document.querySelector('input[name="batch-dest"][value="gallery"]').checked = true;
+        $('#batch-gallery-select').classList.remove('hidden');
+        $('#batch-collection-select-wrap').classList.add('hidden');
+        // Reset target banner (only shown when opened from upload context)
+        if (!batchReturnTarget) {
+            $('#batch-target-banner').classList.add('hidden');
+        }
         // Populate gallery dropdown
         populateBatchGallerySelect();
         bindBatchModal();
@@ -2389,6 +2718,13 @@
         const dropZone = $('#batch-drop-zone');
         const fileInput = $('#batch-file-input');
 
+        // Target banner "Módosítás" button — clears the auto-target so user can choose freely
+        $('#batch-target-change').addEventListener('click', () => {
+            batchReturnTarget = null;
+            $('#batch-target-banner').classList.add('hidden');
+            toast('Célhely feloldva — válasszon szabadon', 'info');
+        });
+
         // Close
         $('#batch-cancel').addEventListener('click', () => modal.classList.add('hidden'));
         modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
@@ -2401,15 +2737,73 @@
 
         dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-active'); });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
-        dropZone.addEventListener('drop', e => {
+        dropZone.addEventListener('drop', async e => {
             e.preventDefault();
             dropZone.classList.remove('drag-active');
-            addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            const items = e.dataTransfer.items;
+            if (items && items.length > 0 && items[0].webkitGetAsEntry) {
+                const allFiles = [];
+                const entries = [];
+                for (let i = 0; i < items.length; i++) {
+                    const entry = items[i].webkitGetAsEntry();
+                    if (entry) entries.push(entry);
+                }
+                await collectFilesFromEntries(entries, allFiles);
+                addBatchFiles(allFiles.filter(f => f.type.startsWith('image/')));
+            } else {
+                addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            }
         });
 
         fileInput.addEventListener('change', () => {
             addBatchFiles(Array.from(fileInput.files));
             fileInput.value = '';
+        });
+
+        // Folder browse
+        const batchFolderInput = $('#batch-folder-input');
+        $('#batch-browse-folder').addEventListener('click', () => batchFolderInput.click());
+        batchFolderInput.addEventListener('change', () => {
+            const imgs = Array.from(batchFolderInput.files).filter(f => f.type.startsWith('image/'));
+            if (imgs.length > 0) {
+                addBatchFiles(imgs);
+                toast(`${imgs.length} kép betöltve a mappából`, 'success');
+            } else {
+                toast('Nem található kép a mappában', 'info');
+            }
+            batchFolderInput.value = '';
+        });
+
+        // Collection picker
+        const batchColPicker = $('#batch-collection-picker');
+        $('#batch-from-collection').addEventListener('click', async () => {
+            batchColPicker.classList.toggle('hidden');
+            if (!batchColPicker.classList.contains('hidden')) {
+                await loadBatchCollections();
+            }
+        });
+        $('#batch-col-close').addEventListener('click', () => batchColPicker.classList.add('hidden'));
+        $('#batch-col-select-all').addEventListener('click', () => {
+            const imgs = batchColPicker.querySelectorAll('.rename-col-img');
+            const allSelected = Array.from(imgs).every(i => i.classList.contains('selected'));
+            imgs.forEach(i => i.classList.toggle('selected', !allSelected));
+        });
+        $('#batch-col-add').addEventListener('click', () => {
+            const selected = batchColPicker.querySelectorAll('.rename-col-img.selected');
+            if (selected.length === 0) { toast('Jelöljön ki képeket!', 'info'); return; }
+            for (const el of selected) {
+                const url = el.dataset.url;
+                const name = el.dataset.name;
+                const preview = el.querySelector('img').src;
+                if (batchFiles.some(bf => bf.serverUrl === url)) continue;
+                batchFiles.push({ serverUrl: url, name, preview, file: null, origW: 0, origH: 0 });
+            }
+            // Load dimensions for server images
+            loadBatchServerDimensions();
+            renderBatchFileList();
+            updateBatchPreview();
+            batchColPicker.classList.add('hidden');
+            toast(`${selected.length} kép hozzáadva a gyűjteményből`, 'success');
         });
 
         // Tab bar
@@ -2467,11 +2861,88 @@
                 const radio = opt.querySelector('input[type="radio"]');
                 radio.checked = true;
                 $('#batch-gallery-select').classList.toggle('hidden', radio.value !== 'gallery');
+                $('#batch-collection-select-wrap').classList.toggle('hidden', radio.value !== 'collection');
+                if (radio.value === 'collection') {
+                    populateCollectionDropdown($('#batch-collection-target'), $('#batch-collection-name'));
+                }
             });
         });
 
         // Apply
         $('#batch-apply').addEventListener('click', executeBatchProcess);
+    }
+
+    // Load collections into the batch process inline picker
+    async function loadBatchCollections() {
+        const list = $('#batch-col-list');
+        const imagesDiv = $('#batch-col-images');
+        const actionsDiv = $('#batch-col-actions');
+        list.innerHTML = '<div class="rename-col-loading">Betöltés...</div>';
+        imagesDiv.classList.add('hidden');
+        actionsDiv.classList.add('hidden');
+
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (!data.collections || data.collections.length === 0) {
+                list.innerHTML = '<div class="rename-col-empty">Még nincsenek gyűjtemények.</div>';
+                return;
+            }
+            list.innerHTML = data.collections.map(col =>
+                `<button class="rename-col-btn" data-col-name="${esc(col.name)}">${esc(col.name)}<span class="col-btn-count">(${col.files.length})</span></button>`
+            ).join('');
+            list._colData = data.collections;
+
+            list.querySelectorAll('.rename-col-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    list.querySelectorAll('.rename-col-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const col = list._colData.find(c => c.name === btn.dataset.colName);
+                    showBatchCollectionImages(col);
+                });
+            });
+        } catch (e) {
+            list.innerHTML = '<div class="rename-col-empty">Hiba a betöltésnél</div>';
+        }
+    }
+
+    function showBatchCollectionImages(col) {
+        const imagesDiv = $('#batch-col-images');
+        const actionsDiv = $('#batch-col-actions');
+        if (!col || col.files.length === 0) {
+            imagesDiv.innerHTML = '<div class="rename-col-empty">Üres gyűjtemény</div>';
+            imagesDiv.classList.remove('hidden');
+            actionsDiv.classList.add('hidden');
+            return;
+        }
+        imagesDiv.innerHTML = col.files.map(f => {
+            const src = f.url.startsWith('http') ? f.url : '/' + f.url;
+            return `<div class="rename-col-img" data-url="${esc(f.url)}" data-name="${esc(f.name)}">
+                <img src="${src}" alt="${esc(f.name)}" onerror="this.style.opacity='0.3'">
+                <div class="rename-col-img-name" title="${esc(f.name)}">${esc(f.name)}</div>
+            </div>`;
+        }).join('');
+        imagesDiv.querySelectorAll('.rename-col-img').forEach(img => {
+            img.addEventListener('click', () => img.classList.toggle('selected'));
+        });
+        imagesDiv.classList.remove('hidden');
+        actionsDiv.classList.remove('hidden');
+    }
+
+    // Load original dimensions for server-side images added from collections
+    function loadBatchServerDimensions() {
+        for (const bf of batchFiles) {
+            if (bf.serverUrl && bf.origW === 0) {
+                const img = new Image();
+                img.onload = () => {
+                    bf.origW = img.naturalWidth;
+                    bf.origH = img.naturalHeight;
+                    renderBatchFileList();
+                    updateBatchPreview();
+                };
+                img.src = bf.preview;
+            }
+        }
     }
 
     function addBatchFiles(files) {
@@ -2499,16 +2970,19 @@
 
     function renderBatchFileList() {
         const list = $('#batch-file-list');
-        list.innerHTML = batchFiles.map((bf, i) => `
-            <div class="batch-file-item">
+        list.innerHTML = batchFiles.map((bf, i) => {
+            const name = bf.file ? bf.file.name : bf.name;
+            const sizeText = bf.file ? `${(bf.file.size / 1024).toFixed(0)} KB` : 'oldalról';
+            const dims = bf.origW ? `${bf.origW}×${bf.origH}` : '...';
+            return `<div class="batch-file-item">
                 <img src="${bf.preview}" alt="">
                 <div class="batch-file-info">
-                    <span class="batch-file-name">${bf.file.name}</span>
-                    <span class="batch-file-size">${bf.origW}×${bf.origH} · ${(bf.file.size / 1024).toFixed(0)} KB</span>
+                    <span class="batch-file-name">${name}</span>
+                    <span class="batch-file-size">${dims} · ${sizeText}</span>
                 </div>
                 <button class="remove-file" data-remove-batch="${i}" title="Eltávolítás">&times;</button>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         list.querySelectorAll('[data-remove-batch]').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2669,6 +3143,15 @@
         const quality = parseInt($('#batch-quality').value) / 100;
         const dest = document.querySelector('input[name="batch-dest"]:checked').value;
 
+        // Validate collection name if saving to collection
+        if (dest === 'collection') {
+            const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+            if (!colName) {
+                toast('Válasszon gyűjteményt vagy adjon meg egy nevet!', 'error');
+                return;
+            }
+        }
+
         const applyBtn = $('#batch-apply');
         applyBtn.disabled = true;
         applyBtn.textContent = 'Feldolgozás...';
@@ -2689,12 +3172,14 @@
                 progressText.textContent = `Feldolgozás: ${i + 1} / ${total}`;
                 progressFill.style.width = ((i + 1) / total * 50) + '%';
 
-                // Load image
+                // Load image (works for both dataURL and server URL)
+                const imgSrc = bf.serverUrl ? (bf.serverUrl.startsWith('http') ? bf.serverUrl : '/' + bf.serverUrl) : bf.preview;
                 const img = await new Promise((resolve, reject) => {
                     const el = new Image();
+                    el.crossOrigin = 'anonymous';
                     el.onload = () => resolve(el);
                     el.onerror = reject;
-                    el.src = bf.preview;
+                    el.src = imgSrc;
                 });
 
                 // Process
@@ -2705,8 +3190,9 @@
                     canvas.toBlob(resolve, 'image/jpeg', quality);
                 });
 
-                const ext = bf.file.name.includes('.') ? '.' + bf.file.name.split('.').pop().toLowerCase() : '.jpg';
-                const cleanName = bf.file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+                const originalName = bf.file ? bf.file.name : bf.name;
+                const ext = originalName.includes('.') ? '.' + originalName.split('.').pop().toLowerCase() : '.jpg';
+                const cleanName = originalName.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
                 const outputName = cleanName + '_' + w + 'x' + h + (ext === '.png' ? '.jpg' : ext);
 
                 processedBlobs.push({ blob, name: outputName });
@@ -2731,9 +3217,14 @@
 
             progressFill.style.width = '85%';
 
-            // Step 3: If destination is gallery, add to gallery
-            if (dest === 'gallery') {
-                const galleryPath = $('#batch-gallery-target').value;
+            // Step 3: Handle return target (from upload context) or manual destination
+            if (batchReturnTarget && batchReturnTarget.type === 'field' && uploadData.files.length > 0) {
+                // Single field — set the first processed image
+                setByPath(contentData, batchReturnTarget.path, uploadData.files[0].url);
+                setDirty(true);
+                if (currentPage) renderEditor(currentPage);
+            } else if (dest === 'gallery') {
+                const galleryPath = batchReturnTarget ? batchReturnTarget.path : $('#batch-gallery-target').value;
                 if (galleryPath) {
                     const arr = getByPath(contentData, galleryPath);
                     if (arr && Array.isArray(arr)) {
@@ -2749,17 +3240,38 @@
                 }
             }
 
+            // Step 3b: If destination is collection, save to collection
+            if (dest === 'collection') {
+                const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+                if (colName) {
+                    const colFiles = uploadData.files.map(f => ({ url: f.url, newName: f.url.split('/').pop() }));
+                    await fetch('/api/collections/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: colName, files: colFiles })
+                    });
+                }
+            }
+
             progressFill.style.width = '100%';
             progressText.textContent = 'Kész!';
 
             const reused = uploadData.files.filter(f => f.reused).length;
             let msg = `${uploadData.files.length} kép feldolgozva és feltöltve (${w}×${h})!`;
             if (reused > 0) msg += ` (${reused} már létezett)`;
-            if (dest === 'gallery') {
+            if (batchReturnTarget) {
+                msg += ` → ${getTargetLabel(batchReturnTarget.path)}`;
+            } else if (dest === 'gallery') {
                 const galleryPath = $('#batch-gallery-target').value;
                 const navItem = NAV.flatMap(g => g.items).find(i => galleryPath.startsWith(i.id));
                 msg += ` Hozzáadva: ${navItem ? navItem.title : galleryPath}`;
             }
+            if (dest === 'collection') {
+                const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+                msg += ` Gyűjteménybe mentve: "${colName}"`;
+            }
+            // Clear return target
+            batchReturnTarget = null;
             toast(msg, 'success');
 
             // Show result URLs

@@ -154,9 +154,28 @@
                     <label class="rename-step-label">Képek kiválasztása</label>
                     <div class="rename-drop-zone" id="rename-drop-zone">
                         <div class="rename-drop-icon">&#128247;</div>
-                        <div>Húzza ide a képeket vagy kattintson</div>
-                        <div class="rename-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <div>Húzza ide a képeket vagy <strong>mappákat</strong>, vagy kattintson</div>
+                        <div class="rename-drop-hint">Több képet vagy teljes mappát is kiválaszthat</div>
                         <input type="file" id="rename-file-input" accept="image/*" multiple>
+                    </div>
+                    <div class="rename-browse-row">
+                        <button class="btn-tool" id="rename-browse-folder" title="Mappa tallózása — minden képet kiválaszt a mappán belül">&#128193; Mappa tallózása</button>
+                        <button class="btn-tool btn-tool-accent" id="rename-from-collection" title="Képek kiválasztása meglévő gyűjteményből">&#128193; Gyűjteményből</button>
+                        <input type="file" id="rename-folder-input" webkitdirectory multiple style="display:none">
+                    </div>
+                    <div id="rename-collection-picker" class="rename-collection-picker hidden">
+                        <div class="rename-col-header">
+                            <span>Válasszon gyűjteményt:</span>
+                            <button class="rename-col-close" id="rename-col-close">&times;</button>
+                        </div>
+                        <div class="rename-col-list" id="rename-col-list">
+                            <div class="rename-col-loading">Betöltés...</div>
+                        </div>
+                        <div class="rename-col-images hidden" id="rename-col-images"></div>
+                        <div class="rename-col-actions hidden" id="rename-col-actions">
+                            <button class="btn-tool" id="rename-col-select-all">Összes kijelölése</button>
+                            <button class="btn-tool btn-tool-accent" id="rename-col-add">Kijelöltek hozzáadása</button>
+                        </div>
                     </div>
                     <div id="rename-file-list" class="rename-file-list"></div>
                 </div>
@@ -203,20 +222,15 @@
                     <p class="rename-step-desc">Választhat egyet vagy mindkettőt:</p>
                     <div class="rename-dest-options">
                         <label class="rename-dest-option">
-                            <input type="checkbox" id="rename-dest-upload" checked>
-                            <span class="rename-dest-check"></span>
-                            <div>
-                                <strong>Feltöltés a weboldalra</strong>
-                                <p>A képek bekerülnek az uploads mappába, használhatók a galériákban</p>
-                            </div>
-                        </label>
-                        <label class="rename-dest-option">
-                            <input type="checkbox" id="rename-dest-collection">
+                            <input type="checkbox" id="rename-dest-collection" checked>
                             <span class="rename-dest-check"></span>
                             <div>
                                 <strong>Mentés gyűjteménybe</strong>
-                                <p>A képek egy gyűjteménybe kerülnek, amit bármikor elővehet később</p>
-                                <input type="text" id="rename-collection-name" class="field-input" placeholder="Gyűjtemény neve (pl. 2026 Tavasz)" style="margin-top:6px;display:none">
+                                <p>Válasszon meglévő gyűjteményt vagy hozzon létre újat</p>
+                                <select id="rename-collection-select" class="field-select" style="margin-top:6px">
+                                    <option value="">+ Új gyűjtemény...</option>
+                                </select>
+                                <input type="text" id="rename-collection-name" class="field-input" placeholder="Új gyűjtemény neve (pl. 2026 Tavasz)" style="margin-top:6px">
                             </div>
                         </label>
                         <label class="rename-dest-option">
@@ -278,6 +292,14 @@
         <div class="modal-content modal-batch">
             <h3>&#128248; Képek feldolgozása</h3>
 
+            <div id="batch-target-banner" class="batch-target-banner hidden">
+                <div>
+                    <span>&#127919;</span>
+                    <span>A feldolgozott képek ide kerülnek: <strong id="batch-target-name"></strong></span>
+                </div>
+                <button class="btn-tool" id="batch-target-change" style="font-size:0.75rem;padding:4px 10px">Módosítás</button>
+            </div>
+
             <div class="batch-help">
                 <p><strong>Hogyan működik?</strong></p>
                 <p>Töltsön fel képeket, válasszon méretet, és a rendszer automatikusan átméretezi és/vagy megvágja őket. A kész képek azonnal használhatók bárhol az oldalon (galériák, hero képek, stb.)</p>
@@ -290,9 +312,28 @@
                     <label class="batch-step-label">Képek kiválasztása</label>
                     <div class="batch-drop-zone" id="batch-drop-zone">
                         <div class="batch-drop-icon">&#128247;</div>
-                        <div>Húzza ide a képeket vagy kattintson</div>
-                        <div class="batch-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <div>Húzza ide a képeket vagy <strong>mappákat</strong>, vagy kattintson</div>
+                        <div class="batch-drop-hint">Több képet vagy teljes mappát is kiválaszthat</div>
                         <input type="file" id="batch-file-input" accept="image/*" multiple>
+                    </div>
+                    <div class="rename-browse-row">
+                        <button class="btn-tool" id="batch-browse-folder" title="Mappa tallózása">&#128193; Mappa tallózása</button>
+                        <button class="btn-tool btn-tool-accent" id="batch-from-collection" title="Képek kiválasztása meglévő gyűjteményből">&#128193; Gyűjteményből</button>
+                        <input type="file" id="batch-folder-input" webkitdirectory multiple style="display:none">
+                    </div>
+                    <div id="batch-collection-picker" class="rename-collection-picker hidden">
+                        <div class="rename-col-header">
+                            <span>Válasszon gyűjteményt:</span>
+                            <button class="rename-col-close" id="batch-col-close">&times;</button>
+                        </div>
+                        <div class="rename-col-list" id="batch-col-list">
+                            <div class="rename-col-loading">Betöltés...</div>
+                        </div>
+                        <div class="rename-col-images hidden" id="batch-col-images"></div>
+                        <div class="rename-col-actions hidden" id="batch-col-actions">
+                            <button class="btn-tool" id="batch-col-select-all">Összes kijelölése</button>
+                            <button class="btn-tool btn-tool-accent" id="batch-col-add">Kijelöltek hozzáadása</button>
+                        </div>
                     </div>
                     <div id="batch-file-list" class="batch-file-list"></div>
                 </div>
@@ -449,25 +490,32 @@
                     <p class="batch-step-desc">A feldolgozott képek feltöltődnek az oldalra. Ezután válassza ki, hova szeretné őket beilleszteni:</p>
                     <div class="batch-dest-options">
                         <label class="batch-dest-option">
-                            <input type="radio" name="batch-dest" value="uploads" checked>
-                            <span class="batch-dest-check"></span>
-                            <div>
-                                <strong>Feltöltés (uploads mappa)</strong>
-                                <p>A képek feltöltődnek és bárhol használhatók az admin felületen</p>
-                            </div>
-                        </label>
-                        <label class="batch-dest-option">
-                            <input type="radio" name="batch-dest" value="gallery">
+                            <input type="radio" name="batch-dest" value="gallery" checked>
                             <span class="batch-dest-check"></span>
                             <div>
                                 <strong>Hozzáadás egy galériához</strong>
                                 <p>A képek egyből bekerülnek a kiválasztott galéria végére</p>
                             </div>
                         </label>
+                        <label class="batch-dest-option">
+                            <input type="radio" name="batch-dest" value="collection">
+                            <span class="batch-dest-check"></span>
+                            <div>
+                                <strong>Mentés gyűjteménybe</strong>
+                                <p>A feldolgozott képek egy gyűjteménybe kerülnek</p>
+                            </div>
+                        </label>
                     </div>
                     <div class="batch-gallery-select hidden" id="batch-gallery-select">
                         <label class="toolbar-label">Galéria:</label>
                         <select id="batch-gallery-target" class="field-select"></select>
+                    </div>
+                    <div class="batch-gallery-select hidden" id="batch-collection-select-wrap">
+                        <label class="toolbar-label">Gyűjtemény:</label>
+                        <select id="batch-collection-target" class="field-select">
+                            <option value="">+ Új gyűjtemény...</option>
+                        </select>
+                        <input type="text" id="batch-collection-name" class="field-input" placeholder="Új gyűjtemény neve" style="margin-left:8px;width:200px">
                     </div>
                 </div>
             </div>
