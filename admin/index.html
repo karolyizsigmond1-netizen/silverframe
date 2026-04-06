@@ -154,9 +154,13 @@
                     <label class="rename-step-label">Képek kiválasztása</label>
                     <div class="rename-drop-zone" id="rename-drop-zone">
                         <div class="rename-drop-icon">&#128247;</div>
-                        <div>Húzza ide a képeket vagy kattintson</div>
-                        <div class="rename-drop-hint">Több képet is kiválaszthat egyszerre</div>
+                        <div>Húzza ide a képeket vagy <strong>mappákat</strong>, vagy kattintson</div>
+                        <div class="rename-drop-hint">Több képet vagy teljes mappát is kiválaszthat</div>
                         <input type="file" id="rename-file-input" accept="image/*" multiple>
+                    </div>
+                    <div class="rename-browse-row">
+                        <button class="btn-tool" id="rename-browse-folder" title="Mappa tallózása — minden képet kiválaszt a mappán belül">&#128193; Mappa tallózása</button>
+                        <input type="file" id="rename-folder-input" webkitdirectory multiple style="display:none">
                     </div>
                     <div id="rename-file-list" class="rename-file-list"></div>
                 </div>

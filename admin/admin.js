@@ -1911,7 +1911,7 @@
         $('#rename-cancel').addEventListener('click', () => modal.classList.add('hidden'));
         modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
 
-        // File drop zone
+        // File drop zone — click opens file picker
         dropZone.addEventListener('click', e => {
             if (e.target === fileInput) return;
             fileInput.click();
@@ -1922,15 +1922,45 @@
             dropZone.classList.add('drag-active');
         });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
-        dropZone.addEventListener('drop', e => {
+
+        // Drop handler — supports both files and folders
+        dropZone.addEventListener('drop', async e => {
             e.preventDefault();
             dropZone.classList.remove('drag-active');
-            addRenameFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            const items = e.dataTransfer.items;
+            if (items && items.length > 0 && items[0].webkitGetAsEntry) {
+                // Use entry API to read folders recursively
+                const allFiles = [];
+                const entries = [];
+                for (let i = 0; i < items.length; i++) {
+                    const entry = items[i].webkitGetAsEntry();
+                    if (entry) entries.push(entry);
+                }
+                await collectFilesFromEntries(entries, allFiles);
+                addRenameFiles(allFiles.filter(f => f.type.startsWith('image/')));
+            } else {
+                // Fallback: plain file list
+                addRenameFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+            }
         });
 
         fileInput.addEventListener('change', () => {
             addRenameFiles(Array.from(fileInput.files));
             fileInput.value = '';
+        });
+
+        // Folder browse button
+        const folderInput = $('#rename-folder-input');
+        $('#rename-browse-folder').addEventListener('click', () => folderInput.click());
+        folderInput.addEventListener('change', () => {
+            const imgs = Array.from(folderInput.files).filter(f => f.type.startsWith('image/'));
+            if (imgs.length > 0) {
+                addRenameFiles(imgs);
+                toast(`${imgs.length} kép betöltve a mappából`, 'success');
+            } else {
+                toast('Nem található kép a mappában', 'info');
+            }
+            folderInput.value = '';
         });
 
         // Genre quick buttons
@@ -1963,6 +1993,20 @@
 
         // Apply
         $('#rename-apply').addEventListener('click', executeRename);
+    }
+
+    // Recursively collect File objects from drag-and-dropped entries (files + folders)
+    async function collectFilesFromEntries(entries, result) {
+        for (const entry of entries) {
+            if (entry.isFile) {
+                const file = await new Promise(resolve => entry.file(resolve));
+                result.push(file);
+            } else if (entry.isDirectory) {
+                const reader = entry.createReader();
+                const subEntries = await new Promise(resolve => reader.readEntries(resolve));
+                await collectFilesFromEntries(subEntries, result);
+            }
+        }
     }
 
     function addRenameFiles(files) {

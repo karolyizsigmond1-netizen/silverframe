@@ -1188,6 +1188,17 @@ body {
     opacity: 0.6;
 }
 
+.rename-browse-row {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.rename-browse-row .btn-tool {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+}
+
 .rename-drop-zone input[type="file"] {
     position: absolute;
     inset: 0;
