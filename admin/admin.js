@@ -1882,6 +1882,36 @@
 
     let renameFiles = []; // { file: File, preview: dataUrl } OR { serverUrl: string, name: string, preview: string }
 
+    // Shared: populate a collection dropdown + text input pair
+    async function populateCollectionDropdown(selectEl, textInputEl) {
+        selectEl.innerHTML = '<option value="">+ Új gyűjtemény...</option>';
+        textInputEl.style.display = 'block';
+        try {
+            const res = await fetch('/api/collections');
+            const data = await res.json();
+            if (data.collections && data.collections.length > 0) {
+                for (const col of data.collections) {
+                    const opt = document.createElement('option');
+                    opt.value = col.name;
+                    opt.textContent = `${col.name} (${col.files.length} kép)`;
+                    selectEl.appendChild(opt);
+                }
+            }
+        } catch (e) { /* ignore */ }
+        // Bind toggle: show text input only when "new" is selected
+        selectEl.onchange = () => {
+            textInputEl.style.display = selectEl.value === '' ? 'block' : 'none';
+        };
+        selectEl.value = '';
+        textInputEl.style.display = 'block';
+    }
+
+    // Get the collection name from a select+input pair
+    function getCollectionName(selectEl, textInputEl) {
+        if (selectEl.value) return selectEl.value;
+        return textInputEl.value.trim();
+    }
+
     function openRenameModal() {
         renameFiles = [];
         const modal = $('#rename-modal');
@@ -1893,6 +1923,7 @@
         $$('.rename-genre-btn').forEach(b => b.classList.remove('active'));
         updateRenamePreview();
         bindRenameModal();
+        populateCollectionDropdown($('#rename-collection-select'), $('#rename-collection-name'));
     }
 
     let renameModalBound = false;
@@ -2189,10 +2220,9 @@
         }
 
         if (destCollection) {
-            const colName = $('#rename-collection-name').value.trim();
+            const colName = getCollectionName($('#rename-collection-select'), $('#rename-collection-name'));
             if (!colName) {
-                toast('Adja meg a gyűjtemény nevét!', 'error');
-                $('#rename-collection-name').focus();
+                toast('Válasszon gyűjteményt vagy adjon meg egy nevet!', 'error');
                 return;
             }
         }
@@ -2270,7 +2300,7 @@
 
             // ── Save to collection ──
             if (destCollection && uploadedFiles.length > 0) {
-                const colName = $('#rename-collection-name').value.trim();
+                const colName = getCollectionName($('#rename-collection-select'), $('#rename-collection-name'));
                 applyBtn.textContent = 'Mentés gyűjteménybe...';
                 const colRes = await fetch('/api/collections/save', {
                     method: 'POST',
@@ -2525,6 +2555,7 @@
         // Reset destination
         document.querySelector('input[name="batch-dest"][value="uploads"]').checked = true;
         $('#batch-gallery-select').classList.add('hidden');
+        $('#batch-collection-select-wrap').classList.add('hidden');
         // Populate gallery dropdown
         populateBatchGallerySelect();
         bindBatchModal();
@@ -2709,6 +2740,10 @@
                 const radio = opt.querySelector('input[type="radio"]');
                 radio.checked = true;
                 $('#batch-gallery-select').classList.toggle('hidden', radio.value !== 'gallery');
+                $('#batch-collection-select-wrap').classList.toggle('hidden', radio.value !== 'collection');
+                if (radio.value === 'collection') {
+                    populateCollectionDropdown($('#batch-collection-target'), $('#batch-collection-name'));
+                }
             });
         });
 
@@ -2987,6 +3022,15 @@
         const quality = parseInt($('#batch-quality').value) / 100;
         const dest = document.querySelector('input[name="batch-dest"]:checked').value;
 
+        // Validate collection name if saving to collection
+        if (dest === 'collection') {
+            const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+            if (!colName) {
+                toast('Válasszon gyűjteményt vagy adjon meg egy nevet!', 'error');
+                return;
+            }
+        }
+
         const applyBtn = $('#batch-apply');
         applyBtn.disabled = true;
         applyBtn.textContent = 'Feldolgozás...';
@@ -3070,6 +3114,19 @@
                 }
             }
 
+            // Step 3b: If destination is collection, save to collection
+            if (dest === 'collection') {
+                const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+                if (colName) {
+                    const colFiles = uploadData.files.map(f => ({ url: f.url, newName: f.url.split('/').pop() }));
+                    await fetch('/api/collections/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: colName, files: colFiles })
+                    });
+                }
+            }
+
             progressFill.style.width = '100%';
             progressText.textContent = 'Kész!';
 
@@ -3080,6 +3137,10 @@
                 const galleryPath = $('#batch-gallery-target').value;
                 const navItem = NAV.flatMap(g => g.items).find(i => galleryPath.startsWith(i.id));
                 msg += ` Hozzáadva: ${navItem ? navItem.title : galleryPath}`;
+            }
+            if (dest === 'collection') {
+                const colName = getCollectionName($('#batch-collection-target'), $('#batch-collection-name'));
+                msg += ` Gyűjteménybe mentve: "${colName}"`;
             }
             toast(msg, 'success');
 

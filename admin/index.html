@@ -226,8 +226,11 @@
                             <span class="rename-dest-check"></span>
                             <div>
                                 <strong>Mentés gyűjteménybe</strong>
-                                <p>A képek egy gyűjteménybe kerülnek, amit bármikor elővehet később</p>
-                                <input type="text" id="rename-collection-name" class="field-input" placeholder="Gyűjtemény neve (pl. 2026 Tavasz)" style="margin-top:6px">
+                                <p>Válasszon meglévő gyűjteményt vagy hozzon létre újat</p>
+                                <select id="rename-collection-select" class="field-select" style="margin-top:6px">
+                                    <option value="">+ Új gyűjtemény...</option>
+                                </select>
+                                <input type="text" id="rename-collection-name" class="field-input" placeholder="Új gyűjtemény neve (pl. 2026 Tavasz)" style="margin-top:6px">
                             </div>
                         </label>
                         <label class="rename-dest-option">
@@ -494,10 +497,25 @@
                                 <p>A képek egyből bekerülnek a kiválasztott galéria végére</p>
                             </div>
                         </label>
+                        <label class="batch-dest-option">
+                            <input type="radio" name="batch-dest" value="collection">
+                            <span class="batch-dest-check"></span>
+                            <div>
+                                <strong>Mentés gyűjteménybe</strong>
+                                <p>A feldolgozott képek egy gyűjteménybe kerülnek</p>
+                            </div>
+                        </label>
                     </div>
                     <div class="batch-gallery-select hidden" id="batch-gallery-select">
                         <label class="toolbar-label">Galéria:</label>
                         <select id="batch-gallery-target" class="field-select"></select>
+                    </div>
+                    <div class="batch-gallery-select hidden" id="batch-collection-select-wrap">
+                        <label class="toolbar-label">Gyűjtemény:</label>
+                        <select id="batch-collection-target" class="field-select">
+                            <option value="">+ Új gyűjtemény...</option>
+                        </select>
+                        <input type="text" id="batch-collection-name" class="field-input" placeholder="Új gyűjtemény neve" style="margin-left:8px;width:200px">
                     </div>
                 </div>
             </div>
