@@ -435,8 +435,36 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
-          "alt": "Közeli portré"
+          "src": "uploads/e335d2f29720-_DSC4261.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/625215cfc82c-_DSC4194_1.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5e1c48b95fea-_DSC4196.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/dae19bd70746-_DSC4200.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6860105d69ee-_DSC4204.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/98bca4b01b9e-_DSC4223.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/aed90d67c8b5-_DSC4233.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5a3e0c0119d3-_DSC4257.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Építsd a portfóliódat!",
