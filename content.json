@@ -1343,8 +1343,8 @@
     "wedding": {
       "title": "Esküvői Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Esküvői fotózás Szegeden. Dokumentarista stílusú esküvői fotózás. Kérj egyedi ajánlatot!",
-      "ogImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
+      "ogImage": "uploads/10339c4bcb3f-www.karolyifoto.hu__2_of_25_-topaz-sharpen-face.jpg",
+      "heroImage": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
       "heroLabel": "Szolgáltatások / 08",
       "heroTitle": "Esküvői fotózás",
       "breadcrumb": "Esküvő",
@@ -1355,7 +1355,7 @@
         "Nem zavarom az eseményt, hanem a háttérben dolgozva kapom el azokat a helyzeteket, amik igazán számítanak."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
+        "src": "uploads/c361bbf9aa0b-www.karolyifoto.hu__4_of_25_-topaz-sharpen-face.jpg",
         "alt": "Esküvői fotózás"
       },
       "packages": [
