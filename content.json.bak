@@ -2579,43 +2579,7 @@
       "breadcrumb": "Termékfotó",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
-          "alt": "Fejhallgató",
-          "title": "Fejhallgató",
-          "subtitle": "Termék / Lifestyle"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80",
-          "alt": "Óra",
-          "title": "Klasszikus óra",
-          "subtitle": "Termék / Fehér háttér"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80",
-          "alt": "Napszemüveg",
-          "title": "Napszemüveg",
-          "subtitle": "Termék / Lifestyle"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=600&q=80",
-          "alt": "Kozmetika",
-          "title": "Kozmetika",
-          "subtitle": "Termék / Szépségápolás"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80",
-          "alt": "Cipő",
-          "title": "Sneaker",
-          "subtitle": "Termék / Divat"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&q=80",
-          "alt": "Parfüm",
-          "title": "Parfüm",
-          "subtitle": "Termék / Luxus"
-        },
-        {
-          "src": "uploads/39e19e5a936e-1__42__m_solata_m_solata_1920x1080.jpg",
+          "src": "uploads/silverframe_product_001.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
