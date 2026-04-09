@@ -1,3 +1,16 @@
 {
-  "collections": []
+  "collections": [
+    {
+      "name": "teszt",
+      "created": "2026-04-09T17:14:24.711Z",
+      "files": [
+        {
+          "url": "uploads/39e19e5a936e-1__42__m_solata_m_solata_1920x1080.jpg",
+          "name": "39e19e5a936e-1__42__m_solata_m_solata_1920x1080.jpg",
+          "added": "2026-04-09T17:14:24.711Z"
+        }
+      ],
+      "updated": "2026-04-09T17:14:31.466Z"
+    }
+  ]
 }
