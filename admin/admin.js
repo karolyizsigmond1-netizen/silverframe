@@ -1517,24 +1517,26 @@
     }
 
     // ── Focal point editor ──
-    let focalState = { url: null, x: 50, y: 50, dragging: false };
+    let focalState = { url: null, x: 50, y: 50, zoom: 1, dragging: false };
 
     function openFocalPoint(imageUrl) {
         if (!imageUrl) return;
         focalState.url = imageUrl;
+        focalState.x = 50; focalState.y = 50; focalState.zoom = 1;
+
         // Get existing position or default center
         if (!contentData.imagePositions) contentData.imagePositions = {};
         const existing = contentData.imagePositions[imageUrl];
-        if (existing) {
+        if (typeof existing === 'string') {
             const match = existing.match(/(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
             if (match) {
                 focalState.x = parseFloat(match[1]);
                 focalState.y = parseFloat(match[2]);
-            } else {
-                focalState.x = 50; focalState.y = 50;
             }
-        } else {
-            focalState.x = 50; focalState.y = 50;
+        } else if (existing && typeof existing === 'object') {
+            if (typeof existing.x === 'number') focalState.x = existing.x;
+            if (typeof existing.y === 'number') focalState.y = existing.y;
+            if (typeof existing.zoom === 'number') focalState.zoom = existing.zoom;
         }
 
         const src = imageUrl.startsWith('http') ? imageUrl : '/' + imageUrl;
@@ -1542,6 +1544,8 @@
         $('#focal-preview-1').src = src;
         $('#focal-preview-2').src = src;
         $('#focal-preview-3').src = src;
+        $('#focal-zoom').value = Math.round(focalState.zoom * 100);
+        $('#focal-zoom-val').textContent = Math.round(focalState.zoom * 100) + '%';
         updateFocalPosition();
 
         $('#focal-point-modal').classList.remove('hidden');
@@ -1554,9 +1558,13 @@
         dot.style.top = focalState.y + '%';
         const pos = `${focalState.x.toFixed(0)}% ${focalState.y.toFixed(0)}%`;
         $('#focal-pos-text').textContent = pos;
-        $('#focal-preview-1').style.objectPosition = pos;
-        $('#focal-preview-2').style.objectPosition = pos;
-        $('#focal-preview-3').style.objectPosition = pos;
+        const previews = ['#focal-preview-1', '#focal-preview-2', '#focal-preview-3'];
+        for (const sel of previews) {
+            const el = $(sel);
+            el.style.objectPosition = pos;
+            el.style.transform = focalState.zoom > 1 ? `scale(${focalState.zoom})` : '';
+            el.style.transformOrigin = pos;
+        }
     }
 
     let focalBound = false;
@@ -1599,8 +1607,16 @@
         });
         document.addEventListener('touchend', () => { focalState.dragging = false; });
 
+        $('#focal-zoom').addEventListener('input', e => {
+            focalState.zoom = parseInt(e.target.value, 10) / 100;
+            $('#focal-zoom-val').textContent = e.target.value + '%';
+            updateFocalPosition();
+        });
+
         $('#focal-reset').addEventListener('click', () => {
-            focalState.x = 50; focalState.y = 50;
+            focalState.x = 50; focalState.y = 50; focalState.zoom = 1;
+            $('#focal-zoom').value = 100;
+            $('#focal-zoom-val').textContent = '100%';
             updateFocalPosition();
         });
 
@@ -1610,15 +1626,25 @@
         $('#focal-save').addEventListener('click', () => {
             if (!contentData.imagePositions) contentData.imagePositions = {};
             const pos = `${focalState.x.toFixed(0)}% ${focalState.y.toFixed(0)}%`;
-            // If centered (default), remove the entry to keep JSON clean
-            if (focalState.x === 50 && focalState.y === 50) {
+            const zoomRounded = Math.round(focalState.zoom * 100) / 100;
+            const isDefault = focalState.x === 50 && focalState.y === 50 && zoomRounded === 1;
+            if (isDefault) {
                 delete contentData.imagePositions[focalState.url];
+            } else if (zoomRounded > 1) {
+                contentData.imagePositions[focalState.url] = {
+                    x: Math.round(focalState.x),
+                    y: Math.round(focalState.y),
+                    zoom: zoomRounded
+                };
             } else {
                 contentData.imagePositions[focalState.url] = pos;
             }
             setDirty(true);
             modal.classList.add('hidden');
-            toast(`Fókuszpont mentve: ${pos}`, 'success');
+            const msg = zoomRounded > 1
+                ? `Fókuszpont mentve: ${pos} • ${Math.round(zoomRounded * 100)}%`
+                : `Fókuszpont mentve: ${pos}`;
+            toast(msg, 'success');
         });
     }
 

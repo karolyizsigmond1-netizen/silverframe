@@ -1038,6 +1038,32 @@ body {
 .focal-preview-portrait { aspect-ratio: 3/4; }
 .focal-preview-landscape { aspect-ratio: 16/9; }
 
+.focal-zoom-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.focal-zoom-slider {
+    flex: 1;
+    accent-color: var(--accent);
+    height: 6px;
+}
+
+#focal-zoom-val {
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 56px;
+    text-align: right;
+    font-family: var(--mono, monospace);
+}
+
 .focal-info {
     display: flex;
     align-items: center;

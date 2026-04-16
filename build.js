@@ -21,26 +21,46 @@ function imgSrc(src, prefix) {
   return prefix + src;
 }
 
-// Look up focal point for an image by its raw URL (no prefix)
+// Look up focal point for an image by its raw URL. Returns {pos, zoom} or null.
 function getFocalPos(src) {
   if (!src) return null;
   const positions = data.imagePositions || {};
-  return positions[src] || null;
+  const entry = positions[src];
+  if (!entry) return null;
+  if (typeof entry === 'string') return { pos: entry, zoom: 1 };
+  if (typeof entry === 'object') {
+    const x = typeof entry.x === 'number' ? Math.round(entry.x) : 50;
+    const y = typeof entry.y === 'number' ? Math.round(entry.y) : 50;
+    const zoom = typeof entry.zoom === 'number' ? entry.zoom : 1;
+    return { pos: `${x}% ${y}%`, zoom };
+  }
+  return null;
 }
 
-// Returns ` style="object-position:X% Y%"` for <img> tags, or '' if centered
+// Returns ` style="..."` for <img> tags, or '' if default
 function imgStyle(src) {
-  const pos = getFocalPos(src);
-  return pos ? ` style="object-position:${pos}"` : '';
+  const fp = getFocalPos(src);
+  if (!fp) return '';
+  const parts = [`object-position:${fp.pos}`];
+  if (fp.zoom > 1) {
+    parts.push(`transform:scale(${fp.zoom})`);
+    parts.push(`transform-origin:${fp.pos}`);
+  }
+  return ` style="${parts.join(';')}"`;
 }
 
 // Returns inline style string for background-image elements
 function bgStyle(src, prefix) {
   const url = imgSrc(src, prefix || '');
-  const pos = getFocalPos(src);
-  return pos
-    ? `background-image:url('${url}');background-position:${pos}`
-    : `background-image:url('${url}')`;
+  const fp = getFocalPos(src);
+  const parts = [`background-image:url('${url}')`];
+  if (fp) {
+    parts.push(`background-position:${fp.pos}`);
+    if (fp.zoom > 1) {
+      parts.push(`background-size:${fp.zoom * 100}% auto`);
+    }
+  }
+  return parts.join(';');
 }
 
 function bodyTag() {
