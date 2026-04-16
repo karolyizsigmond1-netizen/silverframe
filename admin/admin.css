@@ -1038,6 +1038,62 @@ body {
 .focal-preview-portrait { aspect-ratio: 3/4; }
 .focal-preview-landscape { aspect-ratio: 16/9; }
 
+.focal-previews.single .focal-preview-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.focal-previews.single .focal-preview-box {
+    max-height: 460px;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.focal-ratio-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.focal-ratio-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.focal-ratio-buttons .ratio-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: var(--mono, monospace);
+    transition: all 0.15s;
+}
+
+.focal-ratio-buttons .ratio-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.focal-ratio-buttons .ratio-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
 .focal-zoom-row {
     display: flex;
     align-items: center;

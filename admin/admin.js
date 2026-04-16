@@ -1546,7 +1546,11 @@
         $('#focal-preview-3').src = src;
         $('#focal-zoom').value = Math.round(focalState.zoom * 100);
         $('#focal-zoom-val').textContent = Math.round(focalState.zoom * 100) + '%';
-        updateFocalPosition();
+        // Reset ratio chooser to default (Alap = 1:1, 3:4, 16:9)
+        $$('#focal-ratio-buttons .ratio-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.ratio === '1:1,3:4,16:9');
+        });
+        applyRatioChoice(['1:1', '3:4', '16:9']);
 
         $('#focal-point-modal').classList.remove('hidden');
         bindFocalModal();
@@ -1565,6 +1569,37 @@
             el.style.transform = focalState.zoom > 1 ? `scale(${focalState.zoom})` : '';
             el.style.transformOrigin = pos;
         }
+    }
+
+    const RATIO_LABELS = {
+        '1:1': 'Négyzet (1:1)',
+        '4:5': 'Álló (4:5)',
+        '3:4': 'Álló (3:4)',
+        '2:3': 'Álló (2:3)',
+        '9:16': 'Álló (9:16)',
+        '5:4': 'Fekvő (5:4)',
+        '4:3': 'Fekvő (4:3)',
+        '3:2': 'Fekvő (3:2)',
+        '16:9': 'Fekvő (16:9)',
+        '21:9': 'Panoráma (21:9)'
+    };
+
+    function applyRatioChoice(ratios) {
+        for (let i = 1; i <= 3; i++) {
+            const wrap = $('#focal-preview-wrap-' + i);
+            const label = $('#focal-preview-label-' + i);
+            const group = wrap.parentElement;
+            if (i <= ratios.length) {
+                const parts = ratios[i - 1].split(':').map(Number);
+                wrap.style.aspectRatio = `${parts[0]}/${parts[1]}`;
+                label.textContent = RATIO_LABELS[ratios[i - 1]] || ratios[i - 1];
+                group.style.display = '';
+            } else {
+                group.style.display = 'none';
+            }
+        }
+        $('.focal-previews').classList.toggle('single', ratios.length === 1);
+        updateFocalPosition();
     }
 
     let focalBound = false;
@@ -1611,6 +1646,15 @@
             focalState.zoom = parseInt(e.target.value, 10) / 100;
             $('#focal-zoom-val').textContent = e.target.value + '%';
             updateFocalPosition();
+        });
+
+        $$('#focal-ratio-buttons .ratio-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                $$('#focal-ratio-buttons .ratio-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const ratios = btn.dataset.ratio.split(',');
+                applyRatioChoice(ratios);
+            });
         });
 
         $('#focal-reset').addEventListener('click', () => {
