@@ -303,7 +303,7 @@
                 <input class="field-input" type="text" data-path="${path}" value="${esc(src)}">
                 <button class="btn-upload" data-upload-for="${path}">Feltöltés</button>
                 ${previewSrc
-                    ? `<img class="image-preview" src="${previewSrc}" alt="Preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none">&#128247;</div><button class="btn-edit-image" data-edit-src="${esc(previewSrc)}" data-edit-target="${path}" title="Szerkesztés (vágás/átméretezés)">&#9998;</button>`
+                    ? `<img class="image-preview" src="${previewSrc}" alt="Preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none">&#128247;</div><button class="btn-edit-image" data-edit-src="${esc(previewSrc)}" data-edit-target="${path}" title="Szerkesztés (vágás/átméretezés)">&#9998;</button><button class="btn-focal-point" data-focal-src="${esc(src)}" title="Fókuszpont beállítása (mit mutasson ha vágva)">&#127919;</button>`
                     : `<div class="image-placeholder">&#128247;</div>`}
                 <div class="drop-label">Ejtse ide a képet</div>
             </div>
@@ -543,7 +543,7 @@
                         : `<div class="gallery-placeholder">Nincs kép</div>`}
                 </div>
                 <div class="gallery-card-actions">
-                    ${previewSrc ? `<button class="btn-icon" data-edit-src="${esc(previewSrc)}" data-edit-target="${basePath}.${i}.src" title="Szerkesztés">&#9998;</button>` : ''}
+                    ${previewSrc ? `<button class="btn-icon" data-edit-src="${esc(previewSrc)}" data-edit-target="${basePath}.${i}.src" title="Szerkesztés">&#9998;</button><button class="btn-icon" data-focal-src="${esc(src)}" title="Fókuszpont">&#127919;</button>` : ''}
                     <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">&#8593;</button>
                     <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Törlés">&#10005;</button>
                 </div>
@@ -1503,6 +1503,122 @@
                 const target = btn.dataset.editTarget;
                 openImageEditor(src, target);
             });
+        });
+        // Focal point buttons
+        container.querySelectorAll('[data-focal-src]').forEach(btn => {
+            btn.addEventListener('mousedown', e => e.stopPropagation());
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                e.preventDefault();
+                const src = btn.dataset.focalSrc;
+                if (src) openFocalPoint(src);
+            });
+        });
+    }
+
+    // ── Focal point editor ──
+    let focalState = { url: null, x: 50, y: 50, dragging: false };
+
+    function openFocalPoint(imageUrl) {
+        if (!imageUrl) return;
+        focalState.url = imageUrl;
+        // Get existing position or default center
+        if (!contentData.imagePositions) contentData.imagePositions = {};
+        const existing = contentData.imagePositions[imageUrl];
+        if (existing) {
+            const match = existing.match(/(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
+            if (match) {
+                focalState.x = parseFloat(match[1]);
+                focalState.y = parseFloat(match[2]);
+            } else {
+                focalState.x = 50; focalState.y = 50;
+            }
+        } else {
+            focalState.x = 50; focalState.y = 50;
+        }
+
+        const src = imageUrl.startsWith('http') ? imageUrl : '/' + imageUrl;
+        $('#focal-image').src = src;
+        $('#focal-preview-1').src = src;
+        $('#focal-preview-2').src = src;
+        $('#focal-preview-3').src = src;
+        updateFocalPosition();
+
+        $('#focal-point-modal').classList.remove('hidden');
+        bindFocalModal();
+    }
+
+    function updateFocalPosition() {
+        const dot = $('#focal-dot');
+        dot.style.left = focalState.x + '%';
+        dot.style.top = focalState.y + '%';
+        const pos = `${focalState.x.toFixed(0)}% ${focalState.y.toFixed(0)}%`;
+        $('#focal-pos-text').textContent = pos;
+        $('#focal-preview-1').style.objectPosition = pos;
+        $('#focal-preview-2').style.objectPosition = pos;
+        $('#focal-preview-3').style.objectPosition = pos;
+    }
+
+    let focalBound = false;
+    function bindFocalModal() {
+        if (focalBound) return;
+        focalBound = true;
+
+        const modal = $('#focal-point-modal');
+        const wrap = $('.focal-image-wrap');
+
+        const moveHandler = (clientX, clientY) => {
+            const rect = wrap.getBoundingClientRect();
+            const x = ((clientX - rect.left) / rect.width) * 100;
+            const y = ((clientY - rect.top) / rect.height) * 100;
+            focalState.x = Math.max(0, Math.min(100, x));
+            focalState.y = Math.max(0, Math.min(100, y));
+            updateFocalPosition();
+        };
+
+        wrap.addEventListener('mousedown', e => {
+            focalState.dragging = true;
+            moveHandler(e.clientX, e.clientY);
+        });
+        document.addEventListener('mousemove', e => {
+            if (focalState.dragging) moveHandler(e.clientX, e.clientY);
+        });
+        document.addEventListener('mouseup', () => { focalState.dragging = false; });
+
+        // Touch support
+        wrap.addEventListener('touchstart', e => {
+            focalState.dragging = true;
+            const t = e.touches[0];
+            moveHandler(t.clientX, t.clientY);
+        });
+        document.addEventListener('touchmove', e => {
+            if (focalState.dragging) {
+                const t = e.touches[0];
+                moveHandler(t.clientX, t.clientY);
+            }
+        });
+        document.addEventListener('touchend', () => { focalState.dragging = false; });
+
+        $('#focal-reset').addEventListener('click', () => {
+            focalState.x = 50; focalState.y = 50;
+            updateFocalPosition();
+        });
+
+        $('#focal-cancel').addEventListener('click', () => modal.classList.add('hidden'));
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.add('hidden'));
+
+        $('#focal-save').addEventListener('click', () => {
+            if (!contentData.imagePositions) contentData.imagePositions = {};
+            const pos = `${focalState.x.toFixed(0)}% ${focalState.y.toFixed(0)}%`;
+            // If centered (default), remove the entry to keep JSON clean
+            if (focalState.x === 50 && focalState.y === 50) {
+                delete contentData.imagePositions[focalState.url];
+            } else {
+                contentData.imagePositions[focalState.url] = pos;
+            }
+            setDirty(true);
+            modal.classList.add('hidden');
+            toast(`Fókuszpont mentve: ${pos}`, 'success');
         });
     }
 

@@ -21,6 +21,28 @@ function imgSrc(src, prefix) {
   return prefix + src;
 }
 
+// Look up focal point for an image by its raw URL (no prefix)
+function getFocalPos(src) {
+  if (!src) return null;
+  const positions = data.imagePositions || {};
+  return positions[src] || null;
+}
+
+// Returns ` style="object-position:X% Y%"` for <img> tags, or '' if centered
+function imgStyle(src) {
+  const pos = getFocalPos(src);
+  return pos ? ` style="object-position:${pos}"` : '';
+}
+
+// Returns inline style string for background-image elements
+function bgStyle(src, prefix) {
+  const url = imgSrc(src, prefix || '');
+  const pos = getFocalPos(src);
+  return pos
+    ? `background-image:url('${url}');background-position:${pos}`
+    : `background-image:url('${url}')`;
+}
+
 function bodyTag() {
   const cls = g.buttonStyle === 'rounded' ? ' class="rounded-buttons"' : '';
   return `<body${cls}>`;
@@ -156,7 +178,7 @@ function ctaBanner(label, title, href, btnText, solid = true) {
 
 function pageHero(bgImage, label, title, breadcrumbHtml, prefix) {
   return `        <section class="page-hero">
-            <div class="page-hero-bg" style="background-image:url('${imgSrc(bgImage, prefix || '')}')"></div>
+            <div class="page-hero-bg" style="${bgStyle(bgImage, prefix)}"></div>
             <div class="page-hero-content">
                 <span class="page-hero-label">${label}</span>
                 <h1 class="page-hero-title">${title}</h1>
@@ -197,7 +219,7 @@ ${mobileNavHtml('')}
         <section class="home-hero" aria-label="Bemutatkozás">
             <div class="home-hero-slideshow">
 ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1920&q=80']).map((img, i) =>
-  `                <div class="home-hero-slide${i === 0 ? ' active' : ''}" style="background-image:url('${img}')"></div>`
+  `                <div class="home-hero-slide${i === 0 ? ' active' : ''}" style="${bgStyle(img, '')}"></div>`
 ).join('\n')}
             </div>
             <div class="home-hero-overlay"></div>
@@ -215,7 +237,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
         <section class="section" aria-label="A fotósról">
             <div class="container intro-strip">
                 <div class="intro-img-wrap reveal">
-                    <img src="${p.introImage}" alt="${g.siteName} portré természetes fényben" width="700" height="933" loading="lazy">
+                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933" loading="lazy">
                 </div>
                 <div class="intro-text reveal reveal-delay-1">
                     <span class="section-label">${p.introLabel}</span>
@@ -241,7 +263,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
                 </div>
                 <div class="services-grid-home reveal reveal-delay-1">
 ${p.serviceCards.map(c => `                    <a href="${c.href}" class="service-card-home">
-                        <img src="${c.image}" alt="${c.alt}" width="500" height="667" loading="lazy">
+                        <img src="${c.image}"${imgStyle(c.image)} alt="${c.alt}" width="500" height="667" loading="lazy">
                         <div class="overlay"><h3>${c.title}</h3><p>${c.desc}</p></div>
                     </a>`).join('\n')}
                 </div>
@@ -255,7 +277,7 @@ ${p.serviceCards.map(c => `                    <a href="${c.href}" class="servic
                     <h2 class="section-title">${p.galleryTitle}</h2>
                 </div>
                 <div class="gallery-preview-grid reveal reveal-delay-1">
-${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}" alt="${img.alt}" width="400" height="400" loading="lazy"></div>`).join('\n')}
+${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400" loading="lazy"></div>`).join('\n')}
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
                     ${btn('portfolio.html', 'Teljes portfólió')}
@@ -320,7 +342,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
         <section class="section">
             <div class="container about-content">
                 <div class="about-portrait reveal">
-                    <img src="${p.aboutImage}" alt="${g.photographer} fotós" width="700" height="933" loading="lazy">
+                    <img src="${p.aboutImage}"${imgStyle(p.aboutImage)} alt="${g.photographer} fotós" width="700" height="933" loading="lazy">
                 </div>
                 <div class="about-body reveal reveal-delay-1">
                     <span class="section-label">${p.storyLabel}</span>
@@ -372,7 +394,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 </div>
                 <div class="img-accordion reveal reveal-delay-1">
 ${cats.map((c, i) => `                    <a href="portfolio/${c.portfolioId}.html" class="img-accordion-item${i === 0 ? ' active' : ''}" data-index="${i}">
-                        <img src="${c.image.replace('w=600', 'w=800')}" alt="${c.name} fotózás">
+                        <img src="${c.image.replace('w=600', 'w=800')}"${imgStyle(c.image)} alt="${c.name} fotózás">
                         <div class="img-accordion-overlay"></div>
                         <span class="img-accordion-caption">${c.name}</span>
                     </a>`).join('\n')}
@@ -397,7 +419,7 @@ ${p.stats.map(s => `                    <div class="portfolio-stat"><span class=
                 </div>
                 <div class="portfolio-highlight-grid reveal reveal-delay-1">
 ${p.highlights.map(h => `                    <a href="${h.href}" class="portfolio-highlight-item${h.wide ? ' portfolio-highlight-wide' : ''}">
-                        <img src="${h.image}" alt="${h.alt}" loading="lazy">
+                        <img src="${h.image}"${imgStyle(h.image)} alt="${h.alt}" loading="lazy">
                         <div class="portfolio-highlight-overlay"><span class="portfolio-highlight-cat">${h.cat}</span><h3>${h.title}</h3></div>
                     </a>`).join('\n')}
                 </div>
@@ -438,7 +460,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 <div class="category-grid">
 ${cats.map((c, i) => `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
                         <div class="category-card-img">
-                            <img src="${c.image}" alt="${c.name} fotózás" width="600" height="800" loading="lazy">
+                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás" width="600" height="800" loading="lazy">
                         </div>
                         <div class="category-card-body">
                             <span class="category-num">${c.num}</span>
@@ -539,7 +561,7 @@ ${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főol
 ${s.introDesc.map(p => `                        <p class="section-desc">${p}</p>`).join('\n')}
                     </div>
                     <div class="service-detail-img">
-                        <img src="${imgSrc(s.introImage.src, prefix)}" alt="${s.introImage.alt}" width="700" height="933" loading="lazy">
+                        <img src="${imgSrc(s.introImage.src, prefix)}"${imgStyle(s.introImage.src)} alt="${s.introImage.alt}" width="700" height="933" loading="lazy">
                     </div>
                 </div>
 
@@ -554,7 +576,7 @@ ${pkg.items.map((item, i) => `                        <div class="service-includ
                 <div class="service-gallery reveal">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
-${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}" alt="${img.alt}" width="500" height="667" loading="lazy"></div>`).join('\n')}
+${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667" loading="lazy"></div>`).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
                         <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
@@ -604,7 +626,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
             <div class="container">
                 <div class="masonry reveal">
 ${p.gallery.map(img => `                    <article class="masonry-item">
-                        <img src="${imgSrc(img.src, prefix)}" alt="${img.alt}" width="600" height="900" loading="lazy">
+                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900" loading="lazy">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
                     </article>`).join('\n')}
                 </div>

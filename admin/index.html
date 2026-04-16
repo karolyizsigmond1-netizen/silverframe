@@ -76,6 +76,46 @@
     </div>
 
     <!-- Image Editor Modal -->
+    <!-- Focal Point Modal -->
+    <div id="focal-point-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-focal">
+            <h3>&#127919; Fókuszpont beállítása</h3>
+            <p class="modal-desc">Húzza a pontot a képen — ez lesz a látható rész középpontja, amikor a képet vágja a weboldal.</p>
+
+            <div class="focal-layout">
+                <div class="focal-image-wrap">
+                    <img id="focal-image" src="" alt="">
+                    <div class="focal-dot" id="focal-dot"></div>
+                </div>
+                <div class="focal-previews">
+                    <div class="focal-preview-group">
+                        <div class="focal-preview-label">Négyzet (1:1)</div>
+                        <div class="focal-preview-box focal-preview-square"><img id="focal-preview-1" src="" alt=""></div>
+                    </div>
+                    <div class="focal-preview-group">
+                        <div class="focal-preview-label">Álló (3:4)</div>
+                        <div class="focal-preview-box focal-preview-portrait"><img id="focal-preview-2" src="" alt=""></div>
+                    </div>
+                    <div class="focal-preview-group">
+                        <div class="focal-preview-label">Fekvő (16:9)</div>
+                        <div class="focal-preview-box focal-preview-landscape"><img id="focal-preview-3" src="" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="focal-info">
+                <span>Pozíció: <strong id="focal-pos-text">50% 50%</strong></span>
+                <button class="btn-tool" id="focal-reset">Középre állítás</button>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" id="focal-cancel">Mégse</button>
+                <button class="btn-save" id="focal-save">Mentés</button>
+            </div>
+        </div>
+    </div>
+
     <div id="image-editor-modal" class="modal hidden">
         <div class="modal-backdrop"></div>
         <div class="modal-content modal-editor">
