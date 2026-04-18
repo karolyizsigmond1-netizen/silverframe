@@ -1,15 +1,16 @@
 {
   "global": {
-    "siteName": "Silverframe Studio",
+    "siteName": "Silverframe ",
     "photographer": "Károlyi István",
     "city": "Szeged",
-    "email": "hello@silverframestudio.com",
-    "instagram": "#",
-    "facebook": "#",
+    "email": "info@silverframe.hu",
+    "instagram": "https://www.instagram.com/silverframefoto/",
+    "facebook": "https://www.facebook.com/silverframefoto/",
     "baseUrl": "https://www.silverframestudio.com",
     "footerDesc": "Professzionális fotózás Szegeden. Minden pillanat számít.",
     "copyright": "2026",
-    "buttonStyle": "rounded"
+    "buttonStyle": "rounded",
+    "phone": "+3620/3799-814"
   },
   "serviceCategories": [
     {
