@@ -2693,40 +2693,562 @@
       "breadcrumb": "Kisállat",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
-          "alt": "Kutya portré",
-          "title": "Legjobb barát",
-          "subtitle": "Kisállat / Portré"
+          "src": "uploads/c935bcbd5a40-kutya-fotozas-szeged-studio__6_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80",
-          "alt": "Macska fotó",
-          "title": "Cica pillantás",
-          "subtitle": "Kisállat / Macska"
+          "src": "uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80",
-          "alt": "Kutyák a parkban",
-          "title": "Játék",
-          "subtitle": "Kisállat / Szabadtéri"
+          "src": "uploads/99e23005f28c-kutya-fotozas-szeged-studio__22_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&q=80",
-          "alt": "Golden retriever",
-          "title": "Hűség",
-          "subtitle": "Kisállat / Portré"
+          "src": "uploads/ab9c0b0ee639-kutya-fotozas-szeged-studio__30_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=600&q=80",
-          "alt": "Macska portré",
-          "title": "Titokzatos",
-          "subtitle": "Kisállat / Macska"
+          "src": "uploads/2c47bdabcec3-kutya-fotozas-szeged-studio__33_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=600&q=80",
-          "alt": "Kutya szabadtéren",
-          "title": "Szabadság",
-          "subtitle": "Kisállat / Szabadtéri"
+          "src": "uploads/360b16327180-kutya-fotozas-szeged-studio__35_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/4038dccc11d2-kutya-fotozas-szeged-studio__36_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9ff9a8d97797-kutya-fotozas-szeged-studio__37_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8bcfbaed065a-kutya-fotozas-szeged-studio__38_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/c78d08fe5862-kutya-fotozas-szeged-studio__40_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9ff145e9ad45-kutya-fotozas-szeged-studio__41_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/cbaad7ec669d-kutya-fotozas-szeged-studio__43_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/09b5c0d1185e-kutya-fotozas-szeged-studio__45_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/19945a54dcbd-kutya-fotozas-szeged-studio__46_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7938577a79dc-kutya-fotozas-szeged-studio__48_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/d9411b903381-kutya-fotozas-szeged-studio__50_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/3973aa14ac11-kutya-fotozas-szeged-studio__54_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/598003a6499d-kutya-fotozas-szeged-studio__55_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1c204c3337a2-kutya-fotozas-szeged-studio__59_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fa54fa49fc2d-kutya-fotozas-szeged-studio__61_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7ad4de036cdc-kutya-fotozas-szeged-studio__62_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/59690a95895e-kutya-fotozas-szeged-studio__63_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/2d42ca991813-kutya-fotozas-szeged-studio__64_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/b5e521742790-kutya-fotozas-szeged-studio__66_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8e17d973d477-kutya-fotozas-szeged-studio__69_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/46d0bbc1ff71-kutya-fotozas-szeged-studio__83_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/60ae11e6e895-kutya-fotozas-szeged-studio__84_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1f6a9e74d314-kutya-fotozas-szeged-studio__86_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/383b6d2c32e9-kutya-fotozas-szeged-studio__93_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/4305b8f7293d-kutya-fotozas-szeged-studio__94_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7231eccf2805-kutya-fotozas-szeged-studio__95_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/429c3e88a924-kutya-fotozas-szeged-studio__119_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9a884ecd07bd-kutya-fotozas-szeged-studio__121_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/828343f89715-kutya-fotozas-szeged-studio__123_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/94a1eb6989a8-kutya-fotozas-szeged-studio__124_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/f17331bbb3b4-kutya-fotozas-szeged-studio__127_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/e32aa040bdf8-kutya-fotozas-szeged-studio__132_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/176a333f31b1-kutya-fotozas-szeged-studio__134_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/189fe99378bf-kutya-fotozas-szeged-studio__137_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/b36d50ffb7e2-kutya-fotozas-szeged-studio__142_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fecb01efb343-kutya-fotozas-szeged-studio__144_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7b0f17a25bdf-kutya-fotozas-szeged-studio__147_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/4395f8c224cc-kutya-fotozas-szeged-studio__151_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/499d8628c4c0-kutya-fotozas-szeged-studio__152_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/aa8243d0842b-kutya-fotozas-szeged-studio__157_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/22523f63ea53-kutya-fotozas-szeged-studio__164_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/f3440db99a54-kutya-fotozas-szeged-studio__165_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/732ea05ba45d-kutya-fotozas-szeged-studio__174_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/31df0ee81fdf-kutya-fotozas-szeged-studio__181_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/aa44da08ea41-kutya-fotozas-szeged-studio__188_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/927e2dd64625-kutya-fotozas-szeged-studio__195_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/10a1e3ebb48c-kutya-fotozas-szeged-studio__196_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/2aa6bc7757ea-kutya-fotozas-szeged-studio__198_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/a84bc3144b20-kutya-fotozas-szeged-studio__202_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/a6bdea1527dd-kutya-fotozas-szeged-studio__205_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/0dd41d13aa51-kutya-fotozas-szeged-studio__207_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/37362e9ba9e0-kutya-fotozas-szeged-studio__213_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/bd953bcee78d-kutya-fotozas-szeged-studio__225_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/d8ea1563ad18-kutya-fotozas-szeged-studio__228_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/291d464acb80-kutya-fotozas-szeged-studio__234_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fefeab6a35ac-kutya-fotozas-szeged-studio__237_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/0f74037d4650-kutya-fotozas-szeged-studio__244_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/93373682a77e-kutya-fotozas-szeged-studio__245_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/187ff56e56de-kutya-fotozas-szeged-studio__246_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/bfa09b890708-kutya-fotozas-szeged-studio__248_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/ee96813c6e09-kutya-fotozas-termeszetben__2_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/d0595e410ffc-kutya-fotozas-termeszetben__3_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8281cd8e59cf-kutya-fotozas-termeszetben__6_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/79b0b5e7c2e6-kutya-fotozas-termeszetben__7_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/46afefd3265f-kutya-fotozas-termeszetben__10_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/e561eb448339-kutya-fotozas-termeszetben__13_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/c3224fce0f1d-kutya-fotozas-termeszetben__17_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8a162a9ffee3-kutya-fotozas-termeszetben__19_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9f208a7abf55-kutya-fotozas-termeszetben__29_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/2952093505fe-kutya-fotozas-termeszetben__35_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/0e1e5fbe8602-kutya-fotozas-termeszetben__36_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/c1fdb949abdb-kutya-fotozas-termeszetben__37_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/788bba8f330b-kutya-fotozas-termeszetben__38_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/2e98db6b313e-kutya-fotozas-termeszetben__40_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/3bc1f393cc76-kutya-fotozas-termeszetben__43_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/bea802d037a6-kutya-fotozas-termeszetben__45_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/b4724fb5822a-kutya-fotozas-termeszetben__47_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/592fd9ac5c54-macska-fotozas-szeged-studio__71_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/588963e7f4b1-macska-fotozas-szeged-studio__74_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/a56880ed0d75-macska-fotozas-szeged-studio__76_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fe1cae0d876d-macska-fotozas-szeged-studio__77_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/ee24b7f42441-macska-fotozas-szeged-studio__79_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/18142e2d5db8-macska-fotozas-szeged-studio__82_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/3a1f7f131923-macska-fotozas-szeged-studio__87_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/49af78f322b7-macska-fotozas-szeged-studio__88_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fb7633f403f9-macska-fotozas-szeged-studio__90_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/255ae25c7073-macska-fotozas-szeged-studio__92_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/6855026763c1-macska-fotozas-szeged-studio__94_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",

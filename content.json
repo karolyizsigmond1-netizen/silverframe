@@ -2641,44 +2641,7 @@
       "heroLabel": "Portfólió",
       "heroTitle": "Rendezvény",
       "breadcrumb": "Rendezvény",
-      "gallery": [
-        {
-          "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
-          "alt": "Rendezvény fotó",
-          "title": "Konferencia",
-          "subtitle": "Rendezvény / Céges"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-          "alt": "Céges esemény",
-          "title": "Networking",
-          "subtitle": "Rendezvény / Üzleti"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-          "alt": "Konferencia",
-          "title": "Előadás",
-          "subtitle": "Rendezvény / Konferencia"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
-          "alt": "Esemény részlet",
-          "title": "Részletek",
-          "subtitle": "Rendezvény / Dekoráció"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
-          "alt": "Gála fotó",
-          "title": "Gála",
-          "subtitle": "Rendezvény / Elegáns"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
-          "alt": "Ünnepség",
-          "title": "Ünneplés",
-          "subtitle": "Rendezvény / Privát"
-        }
-      ],
+      "gallery": [],
       "ctaLabel": "Tetszik, amit látsz?",
       "ctaTitle": "Örökítsük meg együtt<br>az eseményed hangulatát",
       "ctaButton": "Ajánlatkérés",
