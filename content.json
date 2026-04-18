@@ -101,7 +101,7 @@
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás. Foglalj időpontot még ma!",
+      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -118,7 +118,7 @@
         "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg"
       ],
       "heroInterval": 5,
-      "introImage": "uploads/5e03198477d5-Karel_3.jpg",
+      "introImage": "uploads/f99e473ee998-Karel.png",
       "introLabel": "Rólam",
       "introTitle": "Történetek<br>fénnyel elmesélve",
       "introDesc": "Fotósként több mint tíz éve élem át, hogy minden pillanat számít. Amikor fotózom, nem csak látok, hanem érzek is: színeket, hangulatot, örömöt — olyan dolgokat, amiket szavakkal nehéz kifejezni.",
@@ -213,12 +213,12 @@
       "ctaTitle": "Alkossunk együtt<br>valami maradandót"
     },
     "about": {
-      "title": "Rólam — Károlyi István | Silverframe Studio Szeged",
+      "title": "Rólam — Károlyi István | Silverframe Szeged",
       "metaDesc": "Ismerd meg Károlyi Istvánt, a Silverframe Studio fotósát. Több mint 10 éves tapasztalat, professzionális fotózás Szegeden.",
       "heroImage": "https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=1600&q=80",
       "heroLabel": "Ismerd meg a fotóst",
       "heroTitle": "Rólam",
-      "aboutImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=80",
+      "aboutImage": "uploads/f99e473ee998-Karel.png",
       "storyLabel": "Történetem",
       "storyTitle": "Károlyi István",
       "storyParagraphs": [
@@ -436,26 +436,6 @@
       ],
       "gallery": [
         {
-          "src": "uploads/2c85bb3c6084-8804._1.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/1a26d6687d3e-8804.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/e335d2f29720-_DSC4261.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/625215cfc82c-_DSC4194_1.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/5e1c48b95fea-_DSC4196.jpg",
-          "alt": ""
-        },
-        {
           "src": "uploads/dae19bd70746-_DSC4200.jpg",
           "alt": ""
         },
@@ -464,43 +444,115 @@
           "alt": ""
         },
         {
-          "src": "uploads/98bca4b01b9e-_DSC4223.jpg",
-          "alt": ""
-        },
-        {
           "src": "uploads/aed90d67c8b5-_DSC4233.jpg",
           "alt": ""
         },
         {
-          "src": "uploads/5a3e0c0119d3-_DSC4257.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/4b445274d3b0-_DSC5062_2.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/6590a18d609c-_DSC5085.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/3b7483c583a4-_DSC5085_1.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/e3980af167e7-_DSC5089.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/2988922df11e-_DSC5096_1.jpg",
-          "alt": ""
-        },
-        {
-          "src": "uploads/727b099c6d74-_DSC5111_1.jpg",
-          "alt": ""
-        },
-        {
           "src": "uploads/805ad029833f-_DSC5137.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4ac7d70aa9c2-modell-fotozas-kulter-divat-szegedjpg__165_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/02b09d968e83-modell-fotozas-kulter-divat-szegedjpg__168_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/26e300cc666b-modell-fotozas-kulter-divat-szegedjpg__175_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/62ff9cccffe5-modell-fotozas-kulter-divat-szegedjpg__183_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/175a45735717-modell-fotozas-kulter-divat-szegedjpg__186_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/69b4aac347d5-modell-fotozas-kulter-divat-szegedjpg__187_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/71cb606a8c1f-modell-fotozas-kulter-divat-szegedjpg__188_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0a6824f15635-modell-fotozas-kulter-divat-szegedjpg__193_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b518bba57fa6-modell-fotozas-kulter-divat-szegedjpg__197_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b614f33d5722-modell-fotozas-kulter-divat-szegedjpg__199_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/33fb712357af-modell-fotozas-kulter-divat-szegedjpg__204_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6684c98c9278-modell-fotozas-studio-divat-szeged.jpg__542_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/69aa3fe6fe35-modell-fotozas-studio-divat-szeged.jpg__550_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/902178df0037-modell-fotozas-studio-divat-szeged.jpg__578_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/167d5f56bd20-modell-fotozas-studio-divat-szeged.jpg__620_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b50557e0453e-modell-fotozas-studio-divat-szeged.jpg__655_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0e6b61cb8f7c-modell-fotozas-studio-divat-szeged.jpg__674_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/690d8c536c0e-modell-fotozas-studio-divat-szeged.jpg__676_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1205c7a43d74-modell-fotozas-studio-divat-szeged.jpg__706_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c2a4539b8ca9-modell-fotozas-studio-divat-szeged.jpg__709_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/106a1369471b-modell-fotozas-studio-divat-szeged.jpg__726_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7453be2653d9-modell-fotozas-studio-divat-szeged.jpg__727_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/30f4f3320d4d-modell-fotozas-studio-divat-szeged.jpg__740_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fe5c01c4d642-modell-fotozas-studio-divat-szeged.jpg__744_.jpg",
           "alt": ""
         }
       ],
@@ -2735,5 +2787,6 @@
       "ctaButton": "Ajánlatkérés",
       "ctaLink": "services/product.html"
     }
-  }
+  },
+  "imagePositions": {}
 }
