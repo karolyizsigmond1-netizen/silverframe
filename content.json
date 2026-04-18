@@ -3447,11 +3447,23 @@
     "product": {
       "title": "Termékfotó Galéria — Silverframe Studio",
       "metaDesc": "Termékfotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&q=80",
+      "heroImage": "uploads/c19bcd601601-termekfoto-webshop-termek-kep__34_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Termékfotó",
       "breadcrumb": "Termékfotó",
       "gallery": [
+        {
+          "src": "uploads/8c5d11d3130a-termekfoto-webshop-termek-kep__46_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/03fca3fccc24-termekfoto-webshop-termek-kep__45_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
         {
           "src": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
           "alt": "",
@@ -3466,6 +3478,12 @@
         },
         {
           "src": "uploads/2a029b78e1d8-termekfoto-webshop-termek-kep__1_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/cbc27b81d265-termekfoto-webshop-termek-kep__30_.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -3507,12 +3525,6 @@
           "subtitle": ""
         },
         {
-          "src": "uploads/cbc27b81d265-termekfoto-webshop-termek-kep__30_.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
           "src": "uploads/265924ce9ba0-termekfoto-webshop-termek-kep__31_.jpg",
           "alt": "",
           "title": "",
@@ -3544,18 +3556,6 @@
         },
         {
           "src": "uploads/b37f95596953-termekfoto-webshop-termek-kep__39_.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/03fca3fccc24-termekfoto-webshop-termek-kep__45_.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/8c5d11d3130a-termekfoto-webshop-termek-kep__46_.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
