@@ -2227,46 +2227,74 @@
     "family": {
       "title": "Családi Galéria — Silverframe Studio",
       "metaDesc": "Családi fotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1600&q=80",
+      "heroImage": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Családi",
       "breadcrumb": "Családi",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
-          "alt": "Családi fotó",
-          "title": "Együtt",
-          "subtitle": "Családi / Szabadtéri"
+          "src": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=80",
-          "alt": "Családi pillanat",
-          "title": "Pillanat",
-          "subtitle": "Családi / Természetes"
+          "src": "uploads/023f946cdf8c-csaladi-fotozas-szeged___204_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=600&q=80",
-          "alt": "Család a természetben",
-          "title": "Természetben",
-          "subtitle": "Családi / Park"
+          "src": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=600&q=80",
-          "alt": "Gyerekfotó",
-          "title": "Gyerekkor",
-          "subtitle": "Családi / Portré"
+          "src": "uploads/cd1d475f6e74-csaladi-fotozas-szeged___205_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80",
-          "alt": "Családi ölelés",
-          "title": "Ölelés",
-          "subtitle": "Családi / Érzelem"
+          "src": "uploads/86ff4cda85e6-csaladi-fotozas-szeged___214_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80",
-          "alt": "Család szabadtéren",
-          "title": "Séta",
-          "subtitle": "Családi / Szabadtéri"
+          "src": "uploads/d95651e8a31b-csaladi-fotozas-szeged___216_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4dd36f141636-csaladi-fotozas-szeged-park__2_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9b8130f20191-csaladi-fotozas-szeged-park__3_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bd51fc557463-csaladi-fotozas-szeged-park__25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5a7a7ab2dcf2-csaladi-fotozas-szeged-park__13_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b87a0c572cc4-csaladi-fotozas-szeged-park__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e3dc779e6934-csaladi-fotozas-szeged___119_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7b8c67e2e583-csaladi-fotozas-szeged___132_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/adcbaa06d61a-csaladi-fotozas-szeged___138_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bada164fa543-csaladi-fotozas-szeged___151_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ebb924d53b45-csaladi-fotozas-szeged___173_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",
