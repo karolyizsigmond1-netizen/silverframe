@@ -2304,59 +2304,171 @@
     },
     "couple": {
       "title": "Páros Galéria — Silverframe Studio",
-      "metaDesc": "Páros fotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1600&q=80",
+      "metaDesc": "Páros/jegyes fotózás galéria.",
+      "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Páros",
       "breadcrumb": "Páros",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
-          "alt": "Páros fotó",
-          "title": "Szerelem",
-          "subtitle": "Páros / Természetes"
+          "src": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-          "alt": "Jegyes fotó",
-          "title": "Jegyesek",
-          "subtitle": "Páros / Romantikus"
+          "src": "uploads/ca16129a5522-jegyes-fotozas-naplemente-par__86_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-          "alt": "Romantikus",
-          "title": "Pillanat",
-          "subtitle": "Páros / Spontán"
+          "src": "uploads/a578d8668ede-jegyes-fotozas-naplemente-par__135_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
-          "alt": "Páros természetben",
-          "title": "Séta",
-          "subtitle": "Páros / Szabadtéri"
+          "src": "uploads/3d5cc70a3062-jegyes-fotozas-naplemente-par__14_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
-          "alt": "Szerelmes pár",
-          "title": "Összhang",
-          "subtitle": "Páros / Portré"
+          "src": "uploads/000cbef7f893-jegyes-fotozas-naplemente-par__33_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80",
-          "alt": "Páros portré",
-          "title": "Együtt",
-          "subtitle": "Páros / Stúdió"
+          "src": "uploads/2683f49b0da8-jegyes-fotozas-naplemente-par__69_.jpg",
+          "alt": ""
         },
         {
-          "src": "uploads/1774723218982-tengerparti_esk_v__karolyifoto__5_.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
+          "src": "uploads/94bd4dea484c-jegyes-fotozas-naplemente-par__24_.jpg",
+          "alt": ""
         },
         {
-          "src": "uploads/1774723250182-tengerparti_esk_v__karolyifoto__8_.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
+          "src": "uploads/57011df64df5-jegyes-fotozas-naplemente-par__51_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/da9838bc7b8d-jegyes-fotozas-naplemente-par__1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8b3736e1f044-jegyes-fotozas-naplemente-par__3_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/643b36a6cf8d-jegyes-fotozas-naplemente-par__12_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/74f07f76aa79-jegyes-fotozas-naplemente-par__149_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cbed6713e734-jegyes-fotozas-naplemente-par__150_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/96ceeadf9fd8-jegyes-fotozas-naplemente-par__156_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4a295d148e4a-jegyes-fotozas-naplemente-par__159_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8982af3e58ec-jegyes-fotozas-naplemente-par__172_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/467bcfeca71e-jegyes-fotozas-naplemente-par__183_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d9598951be7b-jegyes-fotozas-naplemente-par__188_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3762ccbc90ad-jegyes-fotozas-naplemente-par__204_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3fa0627aa5d2-jegyes-fotozas-naplemente-par__216_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/698008ae3664-jegyes-fotozas-naplemente-par__220_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2b2153abb3f6-jegyes-fotozas-naplemente-par__237_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b4329ef43d17-jegyes-fotozas-naplemente-par__245_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fd75f83d6aeb-jegyes-fotozas-naplemente-par__274_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/226cb67979b2-jegyes-fotozas-naplemente-par__280_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7de7c4342eaa-jegyes-fotozas-naplemente-par__293_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2ddf133307c3-jegyes-fotozas-naplemente-par__308_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/72989be6f3c2-jegyes-fotozas-naplemente-par__321_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/887741d4d8ac-jegyes-fotozas-szeged-park__13_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/628fb2dfe321-jegyes-fotozas-szeged-park__17_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d4e2898d21d8-jegyes-fotozas-szeged-park__23_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/48e245f5091f-jegyes-fotozas-szeged-park__43_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/600e2db44447-jegyes-fotozas-szeged-park__48_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d9f401014708-paros-fotozas-termeszetben__3_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/97d831007d5d-paros-fotozas-termeszetben__4_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bec2d0a218ae-paros-fotozas-termeszetben__11_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/83d3406e00f8-paros-fotozas-termeszetben__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d8ff8efba7b6-paros-fotozas-termeszetben__23_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/140c64b0abbe-paros-fotozas-termeszetben__38_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",
