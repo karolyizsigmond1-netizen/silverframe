@@ -2971,22 +2971,16 @@
     "wedding-creative": {
       "title": "Esküvői Kreatív Galéria — Silverframe Studio",
       "metaDesc": "Esküvői kreatív fotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600&q=80",
+      "heroImage": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Esküvői kreatív",
       "breadcrumb": "Esküvői kreatív",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
-          "alt": "Kreatív esküvői",
-          "title": "Művészi pillanat",
-          "subtitle": "Kreatív / Editorial"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-          "alt": "Kreatív pár",
-          "title": "Összenézés",
-          "subtitle": "Kreatív / Portré"
+          "src": "uploads/4336899cda9b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__110_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
           "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
@@ -2995,22 +2989,88 @@
           "subtitle": "Kreatív / Művészi"
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-          "alt": "Kreatív pillanat",
-          "title": "Természetben",
-          "subtitle": "Kreatív / Szabadtéri"
+          "src": "uploads/a3e222dd3fea-eskuvo-kreativ-fotozas-szeged-balaton-budapest__4_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
-          "alt": "Művészi kép",
-          "title": "Elegancia",
-          "subtitle": "Kreatív / Elegáns"
+          "src": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
-          "alt": "Kreatív portré",
-          "title": "Együtt",
-          "subtitle": "Kreatív / Portré"
+          "src": "uploads/2a5dd07f5627-eskuvo-kreativ-fotozas-szeged-balaton-budapest__16_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/58201b15db39-eskuvo-kreativ-fotozas-szeged-balaton-budapest__26_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1f05c2f66c6e-eskuvo-kreativ-fotozas-szeged-balaton-budapest__35_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7c074a76afd6-eskuvo-kreativ-fotozas-szeged-balaton-budapest__82_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/70020f326d72-eskuvo-kreativ-fotozas-szeged-balaton-budapest__163_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9a6dbdb567ac-eskuvo-kreativ-fotozas-szeged-balaton-budapest__197_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/b32c7d49c68b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__221_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/7bcdf488763f-eskuvo-kreativ-fotozas-szeged-balaton-budapest__240_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1651cd02b50b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__250_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/c97763f3f5b8-eskuvo-kreativ-fotozas-szeged-balaton-budapest__263_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/50e337c9effb-eskuvo-kreativ-fotozas-szeged-balaton-budapest__270_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/f859a1a1c2b7-kreativ-fotozas-szeged-balaton__11_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",
