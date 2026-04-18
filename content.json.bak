@@ -2478,11 +2478,11 @@
     },
     "business": {
       "title": "Üzleti Portré Galéria — Silverframe Studio",
-      "metaDesc": "Üzleti portré galéria.",
+      "metaDesc": "Üzleti portré galéria. Brand  személyes márka fotózás (Personal Branding)",
       "heroImage": "uploads/015b522c5a9c-_DSC6748.jpg",
       "heroLabel": "Portfólió",
-      "heroTitle": "Üzleti portré",
-      "breadcrumb": "Üzleti portré",
+      "heroTitle": "Üzleti Brand márka fotózás",
+      "breadcrumb": "Üzleti Brand márka fotózás",
       "gallery": [
         {
           "src": "uploads/c1249917ec62-_DSC6746_1920x1080.jpg",

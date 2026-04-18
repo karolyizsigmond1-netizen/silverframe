@@ -2709,67 +2709,13 @@
     "real-estate": {
       "title": "Ingatlan Galéria — Silverframe Studio",
       "metaDesc": "Ingatlan fotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+      "heroImage": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Ingatlan",
       "breadcrumb": "Ingatlan",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-          "alt": "Ingatlan fotó",
-          "title": "Modern ház",
-          "subtitle": "Ingatlan / Kültéri"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
-          "alt": "Ház fotó",
-          "title": "Villa",
-          "subtitle": "Ingatlan / Homlokzat"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80",
-          "alt": "Beltéri fotó",
-          "title": "Nappali",
-          "subtitle": "Ingatlan / Beltéri"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80",
-          "alt": "Lakás fotó",
-          "title": "Kert",
-          "subtitle": "Ingatlan / Kültéri"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80",
-          "alt": "Konyha fotó",
-          "title": "Konyha",
-          "subtitle": "Ingatlan / Beltéri"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=600&q=80",
-          "alt": "Nappali fotó",
-          "title": "Tér és fény",
-          "subtitle": "Ingatlan / Design"
-        },
-        {
           "src": "uploads/e2624d6d2a0e-_DSC9017_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/f3d5f632109f-_DSC9020_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/b18a56006a94-_DSC9003_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/cfb5d37b8194-_DSC9016_m_solata_1920x1080.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -2787,43 +2733,7 @@
           "subtitle": ""
         },
         {
-          "src": "uploads/3768ad7c7cd4-_DSC9021_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/2b46336a8c08-_DSC9005_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/736b4cc57c19-_DSC9007_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
           "src": "uploads/aa9d75530216-_DSC9028_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/248bb6a739c0-_DSC9029_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/b18a56006a94-_DSC9003_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/e2624d6d2a0e-_DSC9017_m_solata_1920x1080.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -2841,37 +2751,67 @@
           "subtitle": ""
         },
         {
-          "src": "uploads/cfb5d37b8194-_DSC9016_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/f3d5f632109f-_DSC9020_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/a467b4c8143e-_DSC9018_m_solata_1920x1080.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
           "src": "uploads/b7d9bfcfb9b1-_DSC9009_1920x1080.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
         },
         {
-          "src": "uploads/2b46336a8c08-_DSC9005_1920x1080.jpg",
+          "src": "uploads/5c60f2ba9af7-ingatlan-fotozas-szeged-kert__2_.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
         },
         {
-          "src": "uploads/736b4cc57c19-_DSC9007_1920x1080.jpg",
+          "src": "uploads/84a030481121-ingatlan-fotozas-szeged-kert__10_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/55c139ecedde-ingatlan-fotozas-szeged-kert__11_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/74a195fe3b21-ingatlan-fotozas-szeged-kert__12_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/ea605ddb5476-ingatlan-fotozas-szeged-kert__24_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/6627225b8037-ingatlan-fotozas-szeged-kert__25_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/0de4b1a20626-ingatlan-fotozas-szeged-kert__26_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/d8db485dc59e-ingatlan-fotozas-szeged-kert__30_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/1c939231665a-ingatlan-fotozas-szeged-kert__43_.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
