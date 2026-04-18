@@ -149,40 +149,7 @@
       ],
       "galleryLabel": "Válogatott munkák",
       "galleryTitle": "A portfólióból",
-      "galleryImages": [
-        {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-          "alt": "Férfi portré arany fényben"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
-          "alt": "Tájkép hajnalban"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80",
-          "alt": "Divat portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&q=80",
-          "alt": "Szabadtéri portré meleg tónusokban"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80",
-          "alt": "Tájfotó"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80",
-          "alt": "Stúdió portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
-          "alt": "Ködös erdő"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80",
-          "alt": "Természetes fényű portré"
-        }
-      ],
+      "galleryImages": [],
       "testimonials": [
         {
           "text": "Istvánnal fotózni fantasztikus élmény volt! Már az első pillanattól kezdve laza és barátságos volt, így teljesen elfelejtettük a feszengést. A képek pedig… egyszerűen csodásak!",
@@ -252,7 +219,7 @@
     "portfolio": {
       "title": "Portfólió — Silverframe Studio | Válogatott munkák",
       "metaDesc": "Nézd meg a Silverframe Studio portfólióját — portrék, editorial, tájkép és művészi fotók. Válogatott munkák több mint 500 projektből.",
-      "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "heroImage": "uploads/c3ba66f9fc9f-glamour-fotozas-studio-noi-szeged__81_.jpg",
       "heroLabel": "Válogatott munkák",
       "heroTitle": "Portfólió",
       "accordionLabel": "Fedezd fel a kategóriákat",
@@ -2776,7 +2743,145 @@
       "breadcrumb": "Termékfotó",
       "gallery": [
         {
+          "src": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
           "src": "uploads/silverframe_product_001.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/2a029b78e1d8-termekfoto-webshop-termek-kep__1_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/cdb06e119547-termekfoto-webshop-termek-kep__7_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/146605fc193b-termekfoto-webshop-termek-kep__8_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/d4d9cf283921-termekfoto-webshop-termek-kep__9_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/fb5518bf6512-termekfoto-webshop-termek-kep__12_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/227243519481-termekfoto-webshop-termek-kep__25_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/77901f8a9967-termekfoto-webshop-termek-kep__26_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/cbc27b81d265-termekfoto-webshop-termek-kep__30_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/265924ce9ba0-termekfoto-webshop-termek-kep__31_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/6096cd6466ef-termekfoto-webshop-termek-kep__32_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/4bcbe89b7d84-termekfoto-webshop-termek-kep__33_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/111a14177148-termekfoto-webshop-termek-kep__35_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/9fc79c7998f6-termekfoto-webshop-termek-kep__36_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/b37f95596953-termekfoto-webshop-termek-kep__39_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/03fca3fccc24-termekfoto-webshop-termek-kep__45_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8c5d11d3130a-termekfoto-webshop-termek-kep__46_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/adca6345863a-termekfoto-webshop-termek-kep__48_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/c2f3fffed362-termekfoto-webshop-termek-kep__52_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/6bbef92274a7-termekfoto-webshop-termek-kep__53_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/5156816aff3b-termekfoto-webshop-termek-kep__57_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/0c1523bb9a0e-termekfoto-webshop-termek-kep__60_.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/8b0caa8c6a5e-termekfoto-webshop-termek-kep__61_.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
