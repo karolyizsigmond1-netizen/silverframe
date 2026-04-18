@@ -2825,73 +2825,19 @@
     "wedding": {
       "title": "Esküvői Galéria — Silverframe Studio",
       "metaDesc": "Esküvői fotózás galéria.",
-      "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
+      "heroImage": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Esküvő",
       "breadcrumb": "Esküvő",
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-          "alt": "Esküvői fotó",
-          "title": "Az első tánc",
-          "subtitle": "Esküvő / Ceremónia"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
-          "alt": "Esküvői pár",
-          "title": "Boldogság",
-          "subtitle": "Esküvő / Portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
-          "alt": "Esküvői részlet",
-          "title": "Részletek",
-          "subtitle": "Esküvő / Dekoráció"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-          "alt": "Esküvői pillanat",
-          "title": "Vőlegény",
-          "subtitle": "Esküvő / Portré"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
-          "alt": "Menyasszony",
-          "title": "Menyasszony",
-          "subtitle": "Esküvő / Készülődés"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&q=80",
-          "alt": "Esküvői portré",
-          "title": "Összetartozás",
-          "subtitle": "Esküvő / Kreatív"
-        },
-        {
-          "src": "uploads/silverframe_esk-v_001.jpg",
+          "src": "uploads/silverframe_esk-v_015.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
         },
         {
-          "src": "uploads/silverframe_esk-v_002.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_004.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_005.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_006.jpg",
+          "src": "uploads/silverframe_esk-v_014.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -2903,7 +2849,31 @@
           "subtitle": ""
         },
         {
-          "src": "uploads/silverframe_esk-v_008.jpg",
+          "src": "uploads/silverframe_esk-v_006.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_005.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_004.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_001.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_002.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -2927,31 +2897,7 @@
           "subtitle": ""
         },
         {
-          "src": "uploads/silverframe_esk-v_012.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
           "src": "uploads/silverframe_esk-v_013.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_014.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_015.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_016.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
@@ -2970,6 +2916,12 @@
         },
         {
           "src": "uploads/silverframe_esk-v_019.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_012.jpg",
           "alt": "",
           "title": "",
           "subtitle": ""
