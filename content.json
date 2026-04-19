@@ -2795,96 +2795,6 @@
       "breadcrumb": "Esküvő",
       "gallery": [
         {
-          "src": "uploads/silverframe_esk-v_015.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_014.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_007.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_006.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_005.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_004.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_001.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_002.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_009.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_010.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_011.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_013.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_017.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_018.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
-          "src": "uploads/silverframe_esk-v_019.jpg",
-          "alt": "",
-          "title": "",
-          "subtitle": ""
-        },
-        {
           "type": "bundle",
           "cover": "uploads/50b3a52373a5-tengerparti_esk_v__karolyifoto__6_.jpg",
           "alt": "",
@@ -2980,6 +2890,96 @@
               "alt": ""
             }
           ]
+        },
+        {
+          "src": "uploads/silverframe_esk-v_015.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_014.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_007.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_006.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_005.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_004.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_001.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_002.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_009.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_010.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_011.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_013.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_017.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_018.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
+        },
+        {
+          "src": "uploads/silverframe_esk-v_019.jpg",
+          "alt": "",
+          "title": "",
+          "subtitle": ""
         },
         {
           "src": "uploads/silverframe_esk-v_012.jpg",
