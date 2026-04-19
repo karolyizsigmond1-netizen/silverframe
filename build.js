@@ -251,6 +251,10 @@ function lightboxHtml() {
     </div>`;
 }
 
+function chatbotHtml() {
+  return fs.readFileSync(path.join(__dirname, 'silverframe-chatbot-snippet.html'), 'utf-8');
+}
+
 function ctaBanner(label, title, href, btnText, solid = true) {
   return `        <section class="cta-banner" aria-label="Időpontfoglalás">
             <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"></div>
@@ -416,6 +420,7 @@ ${lightboxHtml()}
         }, interval);
     })();
     </script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -476,6 +481,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
 
 ${footerHtml('')}
     <script src="js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -543,6 +549,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 ${footerHtml('')}
 ${lightboxHtml()}
     <script src="js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -601,6 +608,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
     <script src="js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -656,6 +664,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
 
 ${footerHtml('')}
     <script src="js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -775,6 +784,7 @@ ${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton)}
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="../js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -855,6 +865,7 @@ ${p.gallery.map(img => {
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="../js/main.js"></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
