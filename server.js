@@ -53,16 +53,26 @@ const server = http.createServer((req, res) => {
                 // Run build
                 try {
                     execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
-                    res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ success: true, message: 'Mentve, újraépítve és feltöltve GitHub-ra!' }));
-                    // Auto sync with GitHub in the background
+                    // Sync with GitHub — do this BEFORE responding so the client knows the outcome
+                    let gitWarning = null;
                     try {
                         try { execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
                         execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
                         console.log('  ✓ GitHub push sikeres');
                     } catch (gitErr) {
-                        console.log('  ⚠ GitHub push hiba:', gitErr.message.split('\n')[0]);
+                        const msg = gitErr.message || '';
+                        // "nothing to commit" is not an error
+                        if (!msg.includes('nothing to commit') && !msg.includes('nothing added')) {
+                            gitWarning = 'GitHub push hiba – az oldal esetleg nem frissült. Részletek: ' + msg.split('\n')[0];
+                            console.log('  ⚠ GitHub push hiba:', msg.split('\n')[0]);
+                        }
                     }
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({
+                        success: true,
+                        message: gitWarning ? 'Mentve és újraépítve, de GitHub feltöltés sikertelen!' : 'Mentve, újraépítve és feltöltve GitHub-ra!',
+                        warning: gitWarning || null
+                    }));
                 } catch (buildErr) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: false, message: 'Build hiba: ' + buildErr.message }));

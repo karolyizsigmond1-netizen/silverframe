@@ -109,8 +109,11 @@
             });
             const data = await res.json();
             if (data.success) {
-                toast('Sikeresen mentve és újraépítve!', 'success');
+                toast(data.message || 'Sikeresen mentve és újraépítve!', 'success');
                 setDirty(false);
+                if (data.warning) {
+                    setTimeout(() => toast('⚠ ' + data.warning, 'error'), 800);
+                }
             } else {
                 toast('Hiba: ' + (data.message || 'Ismeretlen hiba'), 'error');
             }
