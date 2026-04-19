@@ -599,7 +599,7 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                 <div class="service-gallery reveal">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
-${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667" loading="lazy"></div>`).join('\n')}
+${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667"></div>`).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
                         <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
@@ -649,7 +649,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
             <div class="container">
                 <div class="masonry reveal">
 ${p.gallery.map(img => `                    <article class="masonry-item">
-                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900" loading="lazy">
+                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
                     </article>`).join('\n')}
                 </div>
