@@ -141,25 +141,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
     }
 
-    // ── Image Accordion ──
-    const accordion = document.querySelector('.img-accordion');
-    if (accordion) {
-        const items = accordion.querySelectorAll('.img-accordion-item');
-        items.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                items.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-            });
-        });
-        // Touch support
-        items.forEach(item => {
-            item.addEventListener('click', (e) => {
-                if (!item.classList.contains('active')) {
-                    e.preventDefault();
-                    items.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                }
-            });
+    // ── Portfolio Index (editorial picker) ──
+    const pIndex = document.querySelector('.portfolio-index');
+    if (pIndex) {
+        const preview = pIndex.querySelector('.portfolio-index-preview');
+        const img = pIndex.querySelector('#portfolioPreviewImg');
+        const items = pIndex.querySelectorAll('.portfolio-index-item');
+        const links = pIndex.querySelectorAll('a[data-preview]');
+
+        const setCurrent = (link) => {
+            const item = link.closest('.portfolio-index-item');
+            if (item.classList.contains('is-current')) return;
+            items.forEach(i => i.classList.remove('is-current'));
+            item.classList.add('is-current');
+
+            const src = link.getAttribute('data-preview');
+            if (!src || img.src.endsWith(src)) return;
+            preview.classList.add('is-swapping');
+            const loader = new Image();
+            loader.onload = () => {
+                img.src = src;
+                img.style.objectPosition = '';
+                img.style.transform = '';
+                requestAnimationFrame(() => preview.classList.remove('is-swapping'));
+            };
+            loader.src = src;
+        };
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => setCurrent(link));
+            link.addEventListener('focus', () => setCurrent(link));
         });
     }
 
