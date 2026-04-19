@@ -265,6 +265,7 @@
         initFileDropOnImages(area);
         initFileDropOnGalleryCards(area);
         initBulkUploadZones(area);
+        initBundleCoverInputs(area);
         initImageLightbox(area);
         initCollapsible(area);
         initShowOnSite(area);
@@ -646,10 +647,16 @@
             <div class="bundle-card-meta">
                 <div class="bundle-cover">
                     <label class="field-label">Borítókép</label>
-                    <div class="gallery-img-wrap" data-src-path="${basePath}.${i}.cover">
-                        ${previewSrc
-                            ? `<img src="${previewSrc}" alt="${esc(bundle.alt || '')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="gallery-placeholder" style="display:none">Nincs kép</div>`
-                            : `<div class="gallery-placeholder">Nincs kép</div>`}
+                    <div class="bundle-cover-drop gallery-card" draggable="false"
+                         data-src-path="${basePath}.${i}.cover"
+                         data-drop-upload data-upload-target="${basePath}.${i}.cover">
+                        <div class="gallery-img-wrap">
+                            ${previewSrc
+                                ? `<img src="${previewSrc}" alt="${esc(bundle.alt || '')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="gallery-placeholder" style="display:none">Nincs kép</div>`
+                                : `<div class="gallery-placeholder">Kattintson vagy húzzon ide egy képet</div>`}
+                        </div>
+                        <div class="card-drop-label">Ejtse ide a képet</div>
+                        <input type="file" class="bundle-cover-file-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
                     </div>
                     <div class="bundle-cover-actions">
                         ${previewSrc ? `<button class="btn-icon" data-edit-src="${esc(previewSrc)}" data-edit-target="${basePath}.${i}.cover" title="Szerkesztés">&#9998;</button><button class="btn-icon" data-focal-src="${esc(cover)}" title="Fókuszpont">&#127919;</button>` : ''}
@@ -1225,6 +1232,23 @@
                 if (!files.length || !files[0].type.startsWith('image/')) return;
                 const targetPath = card.dataset.srcPath;
                 await uploadAndSet(files[0], targetPath);
+            });
+        });
+    }
+
+    // ══════════════════════════════════════
+    // ── BUNDLE COVER FILE INPUT ──
+    // ══════════════════════════════════════
+
+    function initBundleCoverInputs(container) {
+        container.querySelectorAll('.bundle-cover-file-input').forEach(input => {
+            const card = input.closest('.bundle-cover-drop');
+            if (!card) return;
+            const targetPath = card.dataset.srcPath;
+            input.addEventListener('change', async () => {
+                if (!input.files.length) return;
+                await uploadAndSet(input.files[0], targetPath);
+                input.value = '';
             });
         });
     }
