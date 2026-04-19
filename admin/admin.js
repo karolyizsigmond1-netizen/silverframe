@@ -447,6 +447,7 @@
                     </div>
                     ${textField('Csomag neve', pageId + '.packages.' + pi + '.name', pkg.name)}
                     ${textareaField('Csomag leírás', pageId + '.packages.' + pi + '.desc', pkg.desc)}
+                    ${imageField('Csomag kép', pageId + '.packages.' + pi + '.image', pkg.image || '')}
                     <div class="nested-array">
                         <label class="field-label">Elemek</label>`;
                 if (pkg.items) {
@@ -760,7 +761,7 @@
                         }
                         break;
                     case 'package':
-                        newItem = { name: 'Új csomag', desc: '', items: [] };
+                        newItem = { name: 'Új csomag', desc: '', image: '', items: [] };
                         break;
                     case 'packageItem':
                         newItem = { title: '', desc: '' };
