@@ -377,7 +377,8 @@
               "desc": "Online galéria a képek megtekintéséhez és letöltéséhez."
             }
           ],
-          "image": "uploads/d62d9d30b3a6-Amina_Strret_fot_z_s_karolyifoto__11_.jpg"
+          "image": "uploads/d62d9d30b3a6-Amina_Strret_fot_z_s_karolyifoto__11_.jpg",
+          "imageSide": "right"
         },
         {
           "name": "Prémium csomag — 95.000 Ft",
