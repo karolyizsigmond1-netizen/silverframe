@@ -233,12 +233,20 @@ function pageHero(bgImage, label, title, breadcrumbHtml, prefix) {
 function buildIndex() {
   const p = data.pages.index;
   const marqueeItems = cats.map(c => `<span class="marquee-item">${c.name}</span><span class="marquee-dot"></span>`).join('\n                ');
+  const sameAs = [g.instagram, g.facebook].filter(Boolean);
   const jsonLd = JSON.stringify({
-    "@context": "https://schema.org", "@type": "ProfessionalService",
-    "name": g.siteName, "description": `Professzionális fotózás Szegeden — ${g.photographer}`,
-    "url": g.baseUrl, "image": "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80",
-    "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" },
-    "priceRange": "$$", "sameAs": [`https://www.instagram.com/silverframestudio`, `https://www.facebook.com/silverframestudio`]
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "name": g.siteName.trim(),
+    "description": g.footerDesc,
+    "url": g.baseUrl,
+    "telephone": g.phone,
+    "email": g.email,
+    "image": p.heroImage ? `${g.baseUrl}/${p.heroImage}` : undefined,
+    "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
+    "areaServed": { "@type": "City", "name": g.city },
+    "priceRange": "$$",
+    "sameAs": sameAs
   }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80', 'css/style.css', jsonLd)}
@@ -369,7 +377,20 @@ ${lightboxHtml()}
 
 function buildAbout() {
   const p = data.pages.about;
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Person", "name": g.photographer, "jobTitle": "Fotós", "description": `Professzionális fotós Szegeden — ${g.siteName}`, "url": g.baseUrl + "/about.html", "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" } }, null, 8);
+  const sameAs = [g.instagram, g.facebook].filter(Boolean);
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": g.photographer,
+    "jobTitle": "Fotós",
+    "description": `Professzionális fotós ${g.city}en — ${g.siteName.trim()}`,
+    "url": `${g.baseUrl}/about.html`,
+    "email": g.email,
+    "telephone": g.phone,
+    "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" },
+    "worksFor": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl },
+    "sameAs": sameAs
+  }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', null, 'css/style.css', jsonLd)}
 ${bodyTag()}
@@ -483,7 +504,19 @@ ${lightboxHtml()}
 
 function buildServices() {
   const p = data.pages.services;
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Service", "provider": { "@type": "ProfessionalService", "name": g.siteName }, "serviceType": "Fotózás", "areaServed": { "@type": "Place", "name": `${g.city}, Magyarország` }, "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Fotózási Szolgáltatások", "itemListElement": cats.map(c => ({ "@type": "Offer", "itemOffered": { "@type": "Service", "name": c.name + " Fotózás" } })) } }, null, 8);
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Fotózási Szolgáltatások — ${g.siteName.trim()}`,
+    "description": p.metaDesc,
+    "url": `${g.baseUrl}/services.html`,
+    "itemListElement": cats.map((c, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": c.name + " Fotózás",
+      "url": `${g.baseUrl}/services/${c.id}.html`
+    }))
+  }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', null, 'css/style.css', jsonLd)}
 ${bodyTag()}
@@ -529,7 +562,21 @@ ${footerHtml('')}
 
 function buildContact() {
   const p = data.pages.contact;
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "ContactPage", "name": `Kapcsolat — ${g.siteName}`, "url": g.baseUrl + "/contact.html", "mainEntity": { "@type": "ProfessionalService", "name": g.siteName, "email": g.email, "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" } } }, null, 8);
+  const sameAs = [g.instagram, g.facebook].filter(Boolean);
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": `Kapcsolat — ${g.siteName.trim()}`,
+    "url": `${g.baseUrl}/contact.html`,
+    "mainEntity": {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "name": g.siteName.trim(),
+      "telephone": g.phone,
+      "email": g.email,
+      "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
+      "sameAs": sameAs
+    }
+  }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', null, 'css/style.css', jsonLd)}
 ${bodyTag()}
@@ -574,7 +621,23 @@ function buildServicePage(id) {
   const cat = cats.find(c => c.id === id);
   const prefix = '../';
 
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Service", "name": s.heroTitle, "provider": { "@type": "ProfessionalService", "name": g.siteName }, "description": s.metaDesc, "areaServed": g.city, "url": `${g.baseUrl}/services/${id}.html` });
+  const ogImg = s.ogImage || (s.heroImage ? `${g.baseUrl}/${s.heroImage}` : undefined);
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": s.heroTitle,
+    "description": s.metaDesc,
+    "image": ogImg,
+    "url": `${g.baseUrl}/services/${id}.html`,
+    "areaServed": { "@type": "City", "name": g.city },
+    "provider": {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "name": g.siteName.trim(),
+      "url": g.baseUrl,
+      "telephone": g.phone,
+      "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" }
+    }
+  }, null, 8);
 
   let prevNav, nextNav;
   if (s.prevService) {
@@ -664,7 +727,17 @@ function buildPortfolioPage(id) {
   if (!p) { console.warn(`No data for portfolio: ${id}`); return ''; }
   const prefix = '../';
 
-  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', '')}
+  const pgJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": p.title,
+    "description": p.metaDesc,
+    "url": `${g.baseUrl}/portfolio/${id}.html`,
+    "author": { "@type": "Person", "name": g.photographer, "url": `${g.baseUrl}/about.html` },
+    "publisher": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl }
+  }, null, 8);
+
+  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd)}
 ${bodyTag()}
 ${boilerplate()}
     <header class="header" role="banner">
@@ -726,6 +799,37 @@ function writeFile(filePath, content) {
   console.log(`  ✓ ${path.relative(__dirname, filePath)}`);
 }
 
+// ── sitemap.xml ──
+function buildSitemap() {
+  const today = new Date().toISOString().split('T')[0];
+  const urls = [
+    { loc: `${g.baseUrl}/`,               priority: '1.0', freq: 'weekly'  },
+    { loc: `${g.baseUrl}/about.html`,      priority: '0.7', freq: 'monthly' },
+    { loc: `${g.baseUrl}/portfolio.html`,  priority: '0.8', freq: 'weekly'  },
+    { loc: `${g.baseUrl}/services.html`,   priority: '0.8', freq: 'monthly' },
+    { loc: `${g.baseUrl}/contact.html`,    priority: '0.7', freq: 'monthly' },
+    ...cats.map(c => ({ loc: `${g.baseUrl}/services/${c.id}.html`, priority: '0.8', freq: 'monthly' })),
+    ...Object.keys(data.portfolioPages).map(id => ({ loc: `${g.baseUrl}/portfolio/${id}.html`, priority: '0.7', freq: 'weekly' })),
+  ];
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.freq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+}
+
+// ── robots.txt ──
+function buildRobots() {
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${g.baseUrl}/sitemap.xml`;
+}
+
 console.log('\n  Building Silverframe Studio...\n');
 
 // Root pages
@@ -744,5 +848,9 @@ cats.forEach(c => {
 Object.keys(data.portfolioPages).forEach(id => {
   writeFile(path.join(__dirname, 'portfolio', `${id}.html`), buildPortfolioPage(id));
 });
+
+// SEO files
+writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
+writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
 console.log(`\n  Done! ${5 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
