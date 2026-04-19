@@ -3603,5 +3603,7 @@
       "ctaLink": "services/product.html"
     }
   },
-  "imagePositions": {}
+  "imagePositions": {
+    "uploads/3d71d6695a1d-BGI06401.jpg": "73% 50%"
+  }
 }
