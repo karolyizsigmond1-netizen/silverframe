@@ -1313,38 +1313,43 @@
         }
 
         // Determine if gallery items have title/subtitle
-        const hasTitle = arr.length > 0 && arr[0].title !== undefined;
+        const hasTitle = arr.length > 0 && arr[0] && arr[0].type !== 'bundle' && arr[0].title !== undefined;
 
         toast(`${files.length} kép feltöltése...`, 'info');
 
-        const formData = new FormData();
-        for (const f of files) {
-            formData.append('images', f, f.name);
-        }
+        const BATCH = 10;
+        let added = 0;
+        let reused = 0;
 
         try {
-            const res = await fetch('/api/upload', { method: 'POST', body: formData });
-            const data = await res.json();
-            if (data.success && data.files) {
-                let added = 0;
-                let reused = 0;
+            for (let i = 0; i < files.length; i += BATCH) {
+                const batch = files.slice(i, i + BATCH);
+                const formData = new FormData();
+                for (const f of batch) formData.append('images', f, f.name);
+
+                const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (!data.success) throw new Error(data.message || 'Szerverhiba');
+
                 for (const uploaded of data.files) {
                     const newItem = { src: uploaded.url, alt: '' };
-                    if (hasTitle) {
-                        newItem.title = '';
-                        newItem.subtitle = '';
-                    }
+                    if (hasTitle) { newItem.title = ''; newItem.subtitle = ''; }
                     arr.push(newItem);
                     added++;
                     if (uploaded.reused) reused++;
                 }
-                setDirty(true);
-                renderEditor(currentPage);
-                const msg = reused > 0
-                    ? `${added} kép hozzáadva (${reused} már létezett, újrahasználva)!`
-                    : `${added} kép sikeresen feltöltve!`;
-                toast(msg, 'success');
+
+                if (files.length > BATCH) {
+                    toast(`${Math.min(i + BATCH, files.length)} / ${files.length} feltöltve...`, 'info');
+                }
             }
+
+            setDirty(true);
+            renderEditor(currentPage);
+            const msg = reused > 0
+                ? `${added} kép hozzáadva (${reused} már létezett, újrahasználva)!`
+                : `${added} kép sikeresen feltöltve!`;
+            toast(msg, 'success');
         } catch (err) {
             toast('Feltöltési hiba: ' + err.message, 'error');
         }
