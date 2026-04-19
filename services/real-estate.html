@@ -17,29 +17,56 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Ingatlan fotózás",
-        "description": "Ingatlan fotózás Szegeden 50.000 Ft. 30 perc fotózás, 20 kidolgozott kép.",
-        "image": "uploads/923253371b66-_DSC9017_m_solata.jpg",
-        "url": "https://www.silverframestudio.com/services/real-estate.html",
-        "areaServed": {
-                "@type": "City",
-                "name": "Szeged"
-        },
-        "provider": {
-                "@type": [
-                        "LocalBusiness",
-                        "ProfessionalService"
-                ],
-                "name": "Silverframe",
-                "url": "https://www.silverframestudio.com",
-                "telephone": "+3620/3799-814",
-                "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Szeged",
-                        "addressCountry": "HU"
+        "@graph": [
+                {
+                        "@type": "Service",
+                        "name": "Ingatlan fotózás",
+                        "description": "Ingatlan fotózás Szegeden 50.000 Ft. 30 perc fotózás, 20 kidolgozott kép.",
+                        "image": "uploads/923253371b66-_DSC9017_m_solata.jpg",
+                        "url": "https://www.silverframestudio.com/services/real-estate.html",
+                        "areaServed": {
+                                "@type": "City",
+                                "name": "Szeged"
+                        },
+                        "provider": {
+                                "@type": [
+                                        "LocalBusiness",
+                                        "ProfessionalService"
+                                ],
+                                "name": "Silverframe",
+                                "url": "https://www.silverframestudio.com",
+                                "telephone": "+3620/3799-814",
+                                "address": {
+                                        "@type": "PostalAddress",
+                                        "addressLocality": "Szeged",
+                                        "addressCountry": "HU"
+                                }
+                        }
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://www.silverframestudio.com/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Szolgáltatások",
+                                        "item": "https://www.silverframestudio.com/services.html"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Ingatlan fotózás",
+                                        "item": "https://www.silverframestudio.com/services/real-estate.html"
+                                }
+                        ]
                 }
-        }
+        ]
 }
     </script>
 </head>

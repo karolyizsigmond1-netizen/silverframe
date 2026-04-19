@@ -16,20 +16,47 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ImageGallery",
-        "name": "Esküvői Kreatív Galéria — Silverframe Studio",
-        "description": "Esküvői kreatív fotózás galéria.",
-        "url": "https://www.silverframestudio.com/portfolio/wedding-creative.html",
-        "author": {
-                "@type": "Person",
-                "name": "Károlyi István",
-                "url": "https://www.silverframestudio.com/about.html"
-        },
-        "publisher": {
-                "@type": "Organization",
-                "name": "Silverframe",
-                "url": "https://www.silverframestudio.com"
-        }
+        "@graph": [
+                {
+                        "@type": "ImageGallery",
+                        "name": "Esküvői Kreatív Galéria — Silverframe Studio",
+                        "description": "Esküvői kreatív fotózás galéria.",
+                        "url": "https://www.silverframestudio.com/portfolio/wedding-creative.html",
+                        "author": {
+                                "@type": "Person",
+                                "name": "Károlyi István",
+                                "url": "https://www.silverframestudio.com/about.html"
+                        },
+                        "publisher": {
+                                "@type": "Organization",
+                                "name": "Silverframe",
+                                "url": "https://www.silverframestudio.com"
+                        }
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://www.silverframestudio.com/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Portfólió",
+                                        "item": "https://www.silverframestudio.com/portfolio.html"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Esküvői Kreatív Galéria — Silverframe Studio",
+                                        "item": "https://www.silverframestudio.com/portfolio/wedding-creative.html"
+                                }
+                        ]
+                }
+        ]
 }
     </script>
 </head>

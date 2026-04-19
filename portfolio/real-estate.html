@@ -16,20 +16,47 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ImageGallery",
-        "name": "Ingatlan Galéria — Silverframe Studio",
-        "description": "Ingatlan fotózás galéria.",
-        "url": "https://www.silverframestudio.com/portfolio/real-estate.html",
-        "author": {
-                "@type": "Person",
-                "name": "Károlyi István",
-                "url": "https://www.silverframestudio.com/about.html"
-        },
-        "publisher": {
-                "@type": "Organization",
-                "name": "Silverframe",
-                "url": "https://www.silverframestudio.com"
-        }
+        "@graph": [
+                {
+                        "@type": "ImageGallery",
+                        "name": "Ingatlan Galéria — Silverframe Studio",
+                        "description": "Ingatlan fotózás galéria.",
+                        "url": "https://www.silverframestudio.com/portfolio/real-estate.html",
+                        "author": {
+                                "@type": "Person",
+                                "name": "Károlyi István",
+                                "url": "https://www.silverframestudio.com/about.html"
+                        },
+                        "publisher": {
+                                "@type": "Organization",
+                                "name": "Silverframe",
+                                "url": "https://www.silverframestudio.com"
+                        }
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://www.silverframestudio.com/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Portfólió",
+                                        "item": "https://www.silverframestudio.com/portfolio.html"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Ingatlan Galéria — Silverframe Studio",
+                                        "item": "https://www.silverframestudio.com/portfolio/real-estate.html"
+                                }
+                        ]
+                }
+        ]
 }
     </script>
 </head>

@@ -17,29 +17,56 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Portfólió / Modell",
-        "description": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
-        "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
-        "url": "https://www.silverframestudio.com/services/portfolio-model.html",
-        "areaServed": {
-                "@type": "City",
-                "name": "Szeged"
-        },
-        "provider": {
-                "@type": [
-                        "LocalBusiness",
-                        "ProfessionalService"
-                ],
-                "name": "Silverframe",
-                "url": "https://www.silverframestudio.com",
-                "telephone": "+3620/3799-814",
-                "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Szeged",
-                        "addressCountry": "HU"
+        "@graph": [
+                {
+                        "@type": "Service",
+                        "name": "Portfólió / Modell",
+                        "description": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
+                        "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
+                        "url": "https://www.silverframestudio.com/services/portfolio-model.html",
+                        "areaServed": {
+                                "@type": "City",
+                                "name": "Szeged"
+                        },
+                        "provider": {
+                                "@type": [
+                                        "LocalBusiness",
+                                        "ProfessionalService"
+                                ],
+                                "name": "Silverframe",
+                                "url": "https://www.silverframestudio.com",
+                                "telephone": "+3620/3799-814",
+                                "address": {
+                                        "@type": "PostalAddress",
+                                        "addressLocality": "Szeged",
+                                        "addressCountry": "HU"
+                                }
+                        }
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://www.silverframestudio.com/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Szolgáltatások",
+                                        "item": "https://www.silverframestudio.com/services.html"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Portfólió / Modell",
+                                        "item": "https://www.silverframestudio.com/services/portfolio-model.html"
+                                }
+                        ]
                 }
-        }
+        ]
 }
     </script>
 </head>

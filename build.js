@@ -624,19 +624,31 @@ function buildServicePage(id) {
   const ogImg = s.ogImage || (s.heroImage ? `${g.baseUrl}/${s.heroImage}` : undefined);
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": s.heroTitle,
-    "description": s.metaDesc,
-    "image": ogImg,
-    "url": `${g.baseUrl}/services/${id}.html`,
-    "areaServed": { "@type": "City", "name": g.city },
-    "provider": {
-      "@type": ["LocalBusiness", "ProfessionalService"],
-      "name": g.siteName.trim(),
-      "url": g.baseUrl,
-      "telephone": g.phone,
-      "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" }
-    }
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": s.heroTitle,
+        "description": s.metaDesc,
+        "image": ogImg,
+        "url": `${g.baseUrl}/services/${id}.html`,
+        "areaServed": { "@type": "City", "name": g.city },
+        "provider": {
+          "@type": ["LocalBusiness", "ProfessionalService"],
+          "name": g.siteName.trim(),
+          "url": g.baseUrl,
+          "telephone": g.phone,
+          "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Főoldal",        "item": `${g.baseUrl}/` },
+          { "@type": "ListItem", "position": 2, "name": "Szolgáltatások", "item": `${g.baseUrl}/services.html` },
+          { "@type": "ListItem", "position": 3, "name": s.heroTitle,      "item": `${g.baseUrl}/services/${id}.html` }
+        ]
+      }
+    ]
   }, null, 8);
 
   let prevNav, nextNav;
@@ -729,12 +741,24 @@ function buildPortfolioPage(id) {
 
   const pgJsonLd = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    "name": p.title,
-    "description": p.metaDesc,
-    "url": `${g.baseUrl}/portfolio/${id}.html`,
-    "author": { "@type": "Person", "name": g.photographer, "url": `${g.baseUrl}/about.html` },
-    "publisher": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl }
+    "@graph": [
+      {
+        "@type": "ImageGallery",
+        "name": p.title,
+        "description": p.metaDesc,
+        "url": `${g.baseUrl}/portfolio/${id}.html`,
+        "author": { "@type": "Person", "name": g.photographer, "url": `${g.baseUrl}/about.html` },
+        "publisher": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Főoldal",   "item": `${g.baseUrl}/` },
+          { "@type": "ListItem", "position": 2, "name": "Portfólió", "item": `${g.baseUrl}/portfolio.html` },
+          { "@type": "ListItem", "position": 3, "name": p.title,     "item": `${g.baseUrl}/portfolio/${id}.html` }
+        ]
+      }
+    ]
   }, null, 8);
 
   return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd)}

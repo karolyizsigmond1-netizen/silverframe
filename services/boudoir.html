@@ -17,29 +17,56 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Boudoir / Glamour",
-        "description": "Boudoir és glamour fotózás Szegeden. Alap csomag 80.000 Ft, Prémium csomag 150.000 Ft.",
-        "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80",
-        "url": "https://www.silverframestudio.com/services/boudoir.html",
-        "areaServed": {
-                "@type": "City",
-                "name": "Szeged"
-        },
-        "provider": {
-                "@type": [
-                        "LocalBusiness",
-                        "ProfessionalService"
-                ],
-                "name": "Silverframe",
-                "url": "https://www.silverframestudio.com",
-                "telephone": "+3620/3799-814",
-                "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Szeged",
-                        "addressCountry": "HU"
+        "@graph": [
+                {
+                        "@type": "Service",
+                        "name": "Boudoir / Glamour",
+                        "description": "Boudoir és glamour fotózás Szegeden. Alap csomag 80.000 Ft, Prémium csomag 150.000 Ft.",
+                        "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80",
+                        "url": "https://www.silverframestudio.com/services/boudoir.html",
+                        "areaServed": {
+                                "@type": "City",
+                                "name": "Szeged"
+                        },
+                        "provider": {
+                                "@type": [
+                                        "LocalBusiness",
+                                        "ProfessionalService"
+                                ],
+                                "name": "Silverframe",
+                                "url": "https://www.silverframestudio.com",
+                                "telephone": "+3620/3799-814",
+                                "address": {
+                                        "@type": "PostalAddress",
+                                        "addressLocality": "Szeged",
+                                        "addressCountry": "HU"
+                                }
+                        }
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://www.silverframestudio.com/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Szolgáltatások",
+                                        "item": "https://www.silverframestudio.com/services.html"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Boudoir / Glamour",
+                                        "item": "https://www.silverframestudio.com/services/boudoir.html"
+                                }
+                        ]
                 }
-        }
+        ]
 }
     </script>
 </head>
