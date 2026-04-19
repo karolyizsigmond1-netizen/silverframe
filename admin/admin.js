@@ -1352,15 +1352,70 @@
             img.addEventListener('click', e => {
                 if (!img.src || img.style.display === 'none') return;
                 e.stopPropagation();
+
+                // Build sibling list for navigation (gallery grid cards share a parent)
+                const grid = img.closest('.gallery-grid');
+                let siblings = [img];
+                if (grid) {
+                    siblings = Array.from(grid.querySelectorAll('.gallery-img-wrap img'))
+                        .filter(el => el.src && el.style.display !== 'none');
+                }
+                let idx = siblings.indexOf(img);
+                if (idx < 0) idx = 0;
+
                 const overlay = document.createElement('div');
                 overlay.className = 'image-lightbox';
                 const bigImg = document.createElement('img');
-                bigImg.src = img.src;
+                bigImg.src = siblings[idx].src;
                 overlay.appendChild(bigImg);
-                overlay.addEventListener('click', () => overlay.remove());
-                document.addEventListener('keydown', function handler(ev) {
-                    if (ev.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', handler); }
+
+                let prevBtn, nextBtn, counter;
+                const show = (i) => {
+                    idx = (i + siblings.length) % siblings.length;
+                    bigImg.src = siblings[idx].src;
+                    if (counter) counter.textContent = `${idx + 1} / ${siblings.length}`;
+                };
+
+                if (siblings.length > 1) {
+                    prevBtn = document.createElement('button');
+                    prevBtn.className = 'image-lightbox-nav image-lightbox-prev';
+                    prevBtn.innerHTML = '&#8249;';
+                    prevBtn.setAttribute('aria-label', 'Előző kép');
+                    prevBtn.addEventListener('click', ev => { ev.stopPropagation(); show(idx - 1); });
+                    overlay.appendChild(prevBtn);
+
+                    nextBtn = document.createElement('button');
+                    nextBtn.className = 'image-lightbox-nav image-lightbox-next';
+                    nextBtn.innerHTML = '&#8250;';
+                    nextBtn.setAttribute('aria-label', 'Következő kép');
+                    nextBtn.addEventListener('click', ev => { ev.stopPropagation(); show(idx + 1); });
+                    overlay.appendChild(nextBtn);
+
+                    counter = document.createElement('div');
+                    counter.className = 'image-lightbox-counter';
+                    counter.textContent = `${idx + 1} / ${siblings.length}`;
+                    overlay.appendChild(counter);
+                }
+
+                overlay.addEventListener('click', ev => {
+                    if (ev.target === overlay || ev.target === bigImg) overlay.remove();
                 });
+
+                const keyHandler = ev => {
+                    if (ev.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', keyHandler); }
+                    else if (ev.key === 'ArrowLeft' && siblings.length > 1) show(idx - 1);
+                    else if (ev.key === 'ArrowRight' && siblings.length > 1) show(idx + 1);
+                };
+                document.addEventListener('keydown', keyHandler);
+
+                const mo = new MutationObserver(() => {
+                    if (!document.body.contains(overlay)) {
+                        document.removeEventListener('keydown', keyHandler);
+                        mo.disconnect();
+                    }
+                });
+                mo.observe(document.body, { childList: true });
+
                 document.body.appendChild(overlay);
             });
         });

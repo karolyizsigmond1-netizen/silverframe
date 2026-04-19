@@ -128,17 +128,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
         const lbImg = lightbox.querySelector('img');
-        document.querySelectorAll('.masonry-item, .gallery-preview-item, .service-gallery-item').forEach(item => {
+        const prevBtn = lightbox.querySelector('.lightbox-prev');
+        const nextBtn = lightbox.querySelector('.lightbox-next');
+        const counter = lightbox.querySelector('.lightbox-counter');
+        const itemSelectors = '.masonry-item, .gallery-preview-item, .service-gallery-item';
+        const containerSelectors = '.masonry, .gallery-preview, .service-gallery';
+        let currentList = [];
+        let currentIndex = 0;
+
+        const showAt = (i) => {
+            if (!currentList.length) return;
+            currentIndex = (i + currentList.length) % currentList.length;
+            const img = currentList[currentIndex].querySelector('img');
+            if (img) {
+                lbImg.src = img.src;
+                lbImg.alt = img.alt || '';
+            }
+            if (counter) counter.textContent = `${currentIndex + 1} / ${currentList.length}`;
+            const many = currentList.length > 1;
+            if (prevBtn) prevBtn.style.display = many ? '' : 'none';
+            if (nextBtn) nextBtn.style.display = many ? '' : 'none';
+            if (counter) counter.style.display = many ? '' : 'none';
+        };
+
+        document.querySelectorAll(itemSelectors).forEach(item => {
             item.addEventListener('click', () => {
-                lbImg.src = item.querySelector('img').src;
-                lbImg.alt = item.querySelector('img').alt || '';
+                const container = item.closest(containerSelectors) || document;
+                currentList = Array.from(container.querySelectorAll(itemSelectors))
+                    .filter(el => el.style.display !== 'none');
+                const idx = currentList.indexOf(item);
+                showAt(idx < 0 ? 0 : idx);
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });
         });
+
+        if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex + 1); });
+
         const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
         lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLb(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            else if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
+            else if (e.key === 'ArrowRight') showAt(currentIndex + 1);
+        });
+
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        lightbox.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 50) showAt(currentIndex + (dx < 0 ? 1 : -1));
+        });
     }
 
 

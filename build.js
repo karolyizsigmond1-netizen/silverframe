@@ -181,7 +181,10 @@ function footerHtml(prefix) {
 function lightboxHtml() {
   return `    <div class="lightbox" id="lightbox" role="dialog" aria-label="Képnézegető">
         <button class="lightbox-close" aria-label="Bezárás">&times;</button>
+        <button class="lightbox-nav lightbox-prev" aria-label="Előző kép">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" aria-label="Következő kép">&#8250;</button>
         <img src="" alt="">
+        <div class="lightbox-counter" aria-hidden="true"></div>
     </div>`;
 }
 
