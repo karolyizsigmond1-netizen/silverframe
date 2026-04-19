@@ -21,6 +21,51 @@ function imgSrc(src, prefix) {
   return prefix + src;
 }
 
+// Read image dimensions from file header (JPEG/PNG). Returns {w,h} or null.
+const _dimCache = {};
+function readImgSize(src) {
+  if (!src || src.startsWith('http')) return null;
+  if (_dimCache[src]) return _dimCache[src];
+  try {
+    const filePath = path.join(__dirname, src);
+    if (!fs.existsSync(filePath)) return null;
+    const stat = fs.statSync(filePath);
+    const readLen = Math.min(65536, stat.size);
+    const buf = Buffer.alloc(readLen);
+    const fd = fs.openSync(filePath, 'r');
+    fs.readSync(fd, buf, 0, readLen, 0);
+    fs.closeSync(fd);
+
+    let dims = null;
+    if (buf[0] === 0x89 && buf[1] === 0x50) {
+      // PNG: width at byte 16, height at byte 20
+      dims = { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+    } else if (buf[0] === 0xFF && buf[1] === 0xD8) {
+      // JPEG: scan for SOF marker
+      let i = 2;
+      while (i < buf.length - 8) {
+        if (buf[i] !== 0xFF) { i++; continue; }
+        const marker = buf[i + 1];
+        if (marker === 0x00 || marker === 0xFF) { i++; continue; }
+        const segLen = buf.readUInt16BE(i + 2);
+        if (marker >= 0xC0 && marker <= 0xCF && marker !== 0xC4 && marker !== 0xC8 && marker !== 0xCC) {
+          dims = { w: buf.readUInt16BE(i + 7), h: buf.readUInt16BE(i + 5) };
+          break;
+        }
+        i += 2 + segLen;
+      }
+    }
+    if (dims) _dimCache[src] = dims;
+    return dims;
+  } catch (e) { return null; }
+}
+
+// Returns width/height HTML attributes using real image dimensions (falls back to defaults)
+function imgDims(src, defW, defH) {
+  const d = readImgSize(src);
+  return d ? `width="${d.w}" height="${d.h}"` : `width="${defW}" height="${defH}"`;
+}
+
 // Look up focal point for an image by its raw URL. Returns {pos, zoom} or null.
 function getFocalPos(src) {
   if (!src) return null;
@@ -707,9 +752,9 @@ ${s.gallery.map(img => {
                             const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
                             const title = img.title || info.alt || '';
                             const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
-                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="500" height="667" loading="lazy">${caption}${badge}</div>`;
+                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">${caption}${badge}</div>`;
                           }
-                          return `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667" loading="lazy"></div>`;
+                          return `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy"></div>`;
                         }).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
@@ -790,13 +835,13 @@ ${p.gallery.map(img => {
                     const title = img.title || info.alt || '';
                     const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
                     return `                    <article class="${cls}"${attr}>
-                        <img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="600" height="900" loading="lazy">
+                        <img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">
                         ${caption}
                         ${badge}
                     </article>`;
                   }
                   return `                    <article class="masonry-item">
-                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900" loading="lazy">
+                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
                     </article>`;
                 }).join('\n')}
