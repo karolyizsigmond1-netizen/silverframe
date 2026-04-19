@@ -596,7 +596,7 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                     </div>
                 </div>`).join('\n\n')}
 
-                <div class="service-gallery reveal">
+                <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
 ${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667"></div>`).join('\n')}
@@ -647,7 +647,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
 
         <section class="section">
             <div class="container">
-                <div class="masonry reveal">
+                <div class="masonry">
 ${p.gallery.map(img => `                    <article class="masonry-item">
                         <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
