@@ -535,12 +535,41 @@
 
     // ── Gallery section with bulk upload ──
     function renderGallerySection(gallery, basePath) {
-        let html = '<div class="field-section"><div class="field-section-title">Galéria (' + gallery.length + ' kép)</div>';
+        const bundleCount = gallery.filter(x => x && x.type === 'bundle').length;
+        const imageCount = gallery.length - bundleCount;
+        const titleBits = [imageCount + ' kép'];
+        if (bundleCount) titleBits.push(bundleCount + ' képcsomag');
+        let html = '<div class="field-section"><div class="field-section-title">Galéria (' + titleBits.join(', ') + ')</div>';
         html += '<div class="gallery-grid" data-array-path="' + basePath + '">';
         gallery.forEach((img, i) => {
-            const src = img.src || '';
-            const previewSrc = src ? (src.startsWith('http') ? src : '/' + src) : '';
-            html += `<div class="gallery-card" draggable="true" data-index="${i}" data-src-path="${basePath}.${i}.src">
+            if (img && img.type === 'bundle') {
+                html += renderBundleCard(img, i, basePath);
+            } else {
+                html += renderRegularGalleryCard(img, i, basePath);
+            }
+        });
+        html += '</div>';
+
+        // Bulk upload drop zone
+        html += `<div class="bulk-upload-zone" data-bulk-upload="${basePath}">
+            <div class="bulk-upload-icon">&#128247;</div>
+            <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
+            <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
+            <input type="file" class="bulk-upload-input" accept="image/*" multiple>
+        </div>`;
+
+        html += `<div class="gallery-add-row">`;
+        html += `<button class="btn-add" data-add-array="${basePath}" data-template="galleryItem">+ Kép hozzáadása (üres)</button>`;
+        html += `<button class="btn-add" data-add-array="${basePath}" data-template="bundle">+ Képcsomag hozzáadása</button>`;
+        html += `</div>`;
+        html += '</div>';
+        return html;
+    }
+
+    function renderRegularGalleryCard(img, i, basePath) {
+        const src = img.src || '';
+        const previewSrc = src ? (src.startsWith('http') ? src : '/' + src) : '';
+        return `<div class="gallery-card" draggable="true" data-index="${i}" data-src-path="${basePath}.${i}.src">
                 <span class="gallery-card-index">${i + 1}</span>
                 <div class="gallery-img-wrap">
                     ${previewSrc
@@ -560,20 +589,80 @@
                     ${img.subtitle !== undefined ? `<input class="field-input" type="text" data-path="${basePath}.${i}.subtitle" value="${esc(img.subtitle || '')}" placeholder="Alcím">` : ''}
                 </div>
             </div>`;
+    }
+
+    function renderBundleCard(bundle, i, basePath) {
+        const cover = bundle.cover || '';
+        const previewSrc = cover ? (cover.startsWith('http') ? cover : '/' + cover) : '';
+        const innerPath = basePath + '.' + i + '.images';
+        const innerArr = Array.isArray(bundle.images) ? bundle.images : [];
+
+        let inner = '';
+        innerArr.forEach((img, j) => {
+            const src = img.src || '';
+            const psrc = src ? (src.startsWith('http') ? src : '/' + src) : '';
+            inner += `<div class="gallery-card bundle-inner-card" draggable="true" data-index="${j}" data-src-path="${innerPath}.${j}.src">
+                <span class="gallery-card-index">${j + 1}</span>
+                <div class="gallery-img-wrap">
+                    ${psrc
+                        ? `<img src="${psrc}" alt="${esc(img.alt || '')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="gallery-placeholder" style="display:none">Nincs kép</div>`
+                        : `<div class="gallery-placeholder">Nincs kép</div>`}
+                </div>
+                <div class="gallery-card-actions">
+                    ${psrc ? `<button class="btn-icon" data-edit-src="${esc(psrc)}" data-edit-target="${innerPath}.${j}.src" title="Szerkesztés">&#9998;</button><button class="btn-icon" data-focal-src="${esc(src)}" title="Fókuszpont">&#127919;</button>` : ''}
+                    <button class="btn-icon" data-move-up="${innerPath}" data-index="${j}" title="Fel">&#8593;</button>
+                    <button class="btn-icon danger" data-remove-array="${innerPath}" data-index="${j}" title="Törlés">&#10005;</button>
+                </div>
+                <div class="card-drop-label">Ejtse ide a képet</div>
+                <div class="gallery-card-body">
+                    <input class="field-input" type="text" data-path="${innerPath}.${j}.src" value="${esc(src)}" placeholder="Kép elérési út">
+                    <input class="field-input" type="text" data-path="${innerPath}.${j}.alt" value="${esc(img.alt || '')}" placeholder="Alt szöveg">
+                </div>
+            </div>`;
         });
-        html += '</div>';
 
-        // Bulk upload drop zone
-        html += `<div class="bulk-upload-zone" data-bulk-upload="${basePath}">
-            <div class="bulk-upload-icon">&#128247;</div>
-            <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
-            <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
-            <input type="file" class="bulk-upload-input" accept="image/*" multiple>
+        return `<div class="bundle-card" data-index="${i}">
+            <div class="bundle-card-header">
+                <span class="bundle-card-badge">&#128230; Képcsomag #${i + 1} (${innerArr.length} kép)</span>
+                <div class="bundle-card-header-actions">
+                    <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">&#8593;</button>
+                    <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Képcsomag törlése">&#10005;</button>
+                </div>
+            </div>
+            <div class="bundle-card-meta">
+                <div class="bundle-cover">
+                    <label class="field-label">Borítókép</label>
+                    <div class="gallery-img-wrap" data-src-path="${basePath}.${i}.cover">
+                        ${previewSrc
+                            ? `<img src="${previewSrc}" alt="${esc(bundle.alt || '')}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="gallery-placeholder" style="display:none">Nincs kép</div>`
+                            : `<div class="gallery-placeholder">Nincs kép</div>`}
+                    </div>
+                    <div class="bundle-cover-actions">
+                        ${previewSrc ? `<button class="btn-icon" data-edit-src="${esc(previewSrc)}" data-edit-target="${basePath}.${i}.cover" title="Szerkesztés">&#9998;</button><button class="btn-icon" data-focal-src="${esc(cover)}" title="Fókuszpont">&#127919;</button>` : ''}
+                        <button class="btn-icon" data-upload-for="${basePath}.${i}.cover" title="Feltöltés">&#128190;</button>
+                    </div>
+                    <input class="field-input" type="text" data-path="${basePath}.${i}.cover" value="${esc(cover)}" placeholder="Borítókép elérési út">
+                    <input class="field-input" type="text" data-path="${basePath}.${i}.alt" value="${esc(bundle.alt || '')}" placeholder="Alt szöveg">
+                </div>
+                <div class="bundle-meta-fields">
+                    <label class="field-label">Cím</label>
+                    <input class="field-input" type="text" data-path="${basePath}.${i}.title" value="${esc(bundle.title || '')}" placeholder="Cím (opcionális)">
+                    <label class="field-label">Alcím</label>
+                    <input class="field-input" type="text" data-path="${basePath}.${i}.subtitle" value="${esc(bundle.subtitle || '')}" placeholder="Alcím (opcionális)">
+                </div>
+            </div>
+            <div class="bundle-card-body">
+                <div class="field-section-title">Csomag képek</div>
+                <div class="gallery-grid bundle-inner-grid" data-array-path="${innerPath}">${inner}</div>
+                <div class="bulk-upload-zone" data-bulk-upload="${innerPath}">
+                    <div class="bulk-upload-icon">&#128247;</div>
+                    <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
+                    <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
+                    <input type="file" class="bulk-upload-input" accept="image/*" multiple>
+                </div>
+                <button class="btn-add" data-add-array="${innerPath}" data-template="galleryItem" style="margin-top:8px">+ Kép hozzáadása a csomaghoz</button>
+            </div>
         </div>`;
-
-        html += `<button class="btn-add" data-add-array="${basePath}" data-template="galleryItem" style="margin-top:12px">+ Kép hozzáadása (üres)</button>`;
-        html += '</div>';
-        return html;
     }
 
     // ── Render remaining object fields generically ──
@@ -765,10 +854,13 @@
                         break;
                     case 'galleryItem':
                         newItem = { src: '', alt: '' };
-                        if (arr.length > 0 && arr[0].title !== undefined) {
+                        if (arr.length > 0 && arr[0] && arr[0].type !== 'bundle' && arr[0].title !== undefined) {
                             newItem.title = '';
                             newItem.subtitle = '';
                         }
+                        break;
+                    case 'bundle':
+                        newItem = { type: 'bundle', cover: '', alt: '', title: '', subtitle: '', images: [] };
                         break;
                     case 'package':
                         newItem = { name: 'Új csomag', desc: '', image: '', imageSide: 'left', items: [] };

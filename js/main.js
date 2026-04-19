@@ -133,17 +133,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const counter = lightbox.querySelector('.lightbox-counter');
         const itemSelectors = '.masonry-item, .gallery-preview-item, .service-gallery-item';
         const containerSelectors = '.masonry, .gallery-preview, .service-gallery';
+        // currentList is an array of {src, alt} objects
         let currentList = [];
         let currentIndex = 0;
+
+        const parseBundle = (el) => {
+            const raw = el.getAttribute('data-bundle');
+            if (!raw) return null;
+            try {
+                const arr = JSON.parse(decodeURIComponent(raw));
+                if (Array.isArray(arr) && arr.length) return arr;
+            } catch (err) { /* ignore */ }
+            return null;
+        };
+
+        const itemToEntry = (el) => {
+            const img = el.querySelector('img');
+            return { src: img ? img.src : '', alt: img ? (img.alt || '') : '' };
+        };
 
         const showAt = (i) => {
             if (!currentList.length) return;
             currentIndex = (i + currentList.length) % currentList.length;
-            const img = currentList[currentIndex].querySelector('img');
-            if (img) {
-                lbImg.src = img.src;
-                lbImg.alt = img.alt || '';
-            }
+            const entry = currentList[currentIndex];
+            lbImg.src = entry.src;
+            lbImg.alt = entry.alt || '';
             if (counter) counter.textContent = `${currentIndex + 1} / ${currentList.length}`;
             const many = currentList.length > 1;
             if (prevBtn) prevBtn.style.display = many ? '' : 'none';
@@ -153,11 +167,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll(itemSelectors).forEach(item => {
             item.addEventListener('click', () => {
-                const container = item.closest(containerSelectors) || document;
-                currentList = Array.from(container.querySelectorAll(itemSelectors))
-                    .filter(el => el.style.display !== 'none');
-                const idx = currentList.indexOf(item);
-                showAt(idx < 0 ? 0 : idx);
+                const bundle = parseBundle(item);
+                if (bundle) {
+                    // Bundle: navigate through the bundle's inner images only
+                    currentList = bundle;
+                    showAt(0);
+                } else {
+                    // Regular: walk siblings, skip bundle tiles and hidden items
+                    const container = item.closest(containerSelectors) || document;
+                    const siblings = Array.from(container.querySelectorAll(itemSelectors))
+                        .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
+                    currentList = siblings.map(itemToEntry);
+                    const idx = siblings.indexOf(item);
+                    showAt(idx < 0 ? 0 : idx);
+                }
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });

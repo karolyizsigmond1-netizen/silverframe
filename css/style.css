@@ -942,6 +942,30 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 @media (max-width: 900px) { .masonry { columns: 2; } }
 @media (max-width: 550px) { .masonry { columns: 1; } }
 
+/* Bundle badge — marks tiles that open a nested image set */
+.is-bundle { position: relative; }
+.bundle-badge {
+    position: absolute; top: 14px; right: 14px;
+    min-width: 28px; height: 28px; padding: 0 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+    background: rgba(11,12,16,0.72);
+    color: #fff;
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.18);
+    pointer-events: none;
+    z-index: 2;
+}
+.bundle-badge::before {
+    content: ''; display: inline-block;
+    width: 12px; height: 12px; margin-right: 4px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8'><rect x='3' y='3' width='13' height='13' rx='1'/><path d='M8 8h13v13H8z'/></svg>") center/contain no-repeat;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8'><rect x='3' y='3' width='13' height='13' rx='1'/><path d='M8 8h13v13H8z'/></svg>") center/contain no-repeat;
+}
+
 /* Lightbox */
 .lightbox {
     position: fixed; inset: 0;

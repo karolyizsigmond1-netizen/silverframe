@@ -68,6 +68,24 @@ function bodyTag() {
   return `<body${cls}>`;
 }
 
+// Encode a bundle's inner images as a data-bundle attribute value.
+// Returns '' if the bundle has no inner images (caller should render it as a regular tile).
+function bundleAttr(item, prefix) {
+  if (!item || item.type !== 'bundle') return '';
+  const images = Array.isArray(item.images) ? item.images.filter(im => im && im.src) : [];
+  if (!images.length) return '';
+  const payload = images.map(im => ({ src: imgSrc(im.src, prefix), alt: im.alt || '' }));
+  return ` data-bundle="${encodeURIComponent(JSON.stringify(payload))}"`;
+}
+
+// Returns { cover, alt, count } for a bundle, falling back to the first inner image if no cover set.
+function bundleInfo(item) {
+  const images = Array.isArray(item.images) ? item.images.filter(im => im && im.src) : [];
+  const cover = item.cover || (images[0] && images[0].src) || '';
+  const alt = item.alt || (images[0] && images[0].alt) || item.title || '';
+  return { cover, alt, count: images.length };
+}
+
 function fonts() {
   return `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">`;
@@ -606,7 +624,16 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                 <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
-${s.gallery.map(img => `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667"></div>`).join('\n')}
+${s.gallery.map(img => {
+                          if (img && img.type === 'bundle') {
+                            const attr = bundleAttr(img, prefix);
+                            const info = bundleInfo(img);
+                            const cls = attr ? 'service-gallery-item is-bundle' : 'service-gallery-item';
+                            const badge = attr ? `<span class="bundle-badge" aria-hidden="true">${info.count}</span>` : '';
+                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="500" height="667">${badge}</div>`;
+                          }
+                          return `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667"></div>`;
+                        }).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
                         <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
@@ -655,10 +682,23 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
         <section class="section">
             <div class="container">
                 <div class="masonry">
-${p.gallery.map(img => `                    <article class="masonry-item">
+${p.gallery.map(img => {
+                  if (img && img.type === 'bundle') {
+                    const attr = bundleAttr(img, prefix);
+                    const info = bundleInfo(img);
+                    const cls = attr ? 'masonry-item is-bundle' : 'masonry-item';
+                    const badge = attr ? `<span class="bundle-badge" aria-hidden="true">${info.count}</span>` : '';
+                    return `                    <article class="${cls}"${attr}>
+                        <img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="600" height="900">
+                        <div class="masonry-overlay"><h3>${img.title || ''}</h3><span>${img.subtitle || ''}</span></div>
+                        ${badge}
+                    </article>`;
+                  }
+                  return `                    <article class="masonry-item">
                         <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="600" height="900">
                         <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
-                    </article>`).join('\n')}
+                    </article>`;
+                }).join('\n')}
                 </div>
             </div>
         </section>
