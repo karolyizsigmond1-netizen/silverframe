@@ -257,7 +257,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
         <section class="section" aria-label="A fotósról">
             <div class="container intro-strip">
                 <div class="intro-img-wrap reveal">
-                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933" loading="lazy">
+                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933">
                 </div>
                 <div class="intro-text reveal reveal-delay-1">
                     <span class="section-label">${p.introLabel}</span>
@@ -283,7 +283,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
                 </div>
                 <div class="services-grid-home reveal reveal-delay-1">
 ${p.serviceCards.map(c => `                    <a href="${c.href}" class="service-card-home">
-                        <img src="${c.image}"${imgStyle(c.image)} alt="${c.alt}" width="500" height="667" loading="lazy">
+                        <img src="${c.image}"${imgStyle(c.image)} alt="${c.alt}" width="500" height="667">
                         <div class="overlay"><h3>${c.title}</h3><p>${c.desc}</p></div>
                     </a>`).join('\n')}
                 </div>
@@ -297,7 +297,7 @@ ${p.serviceCards.map(c => `                    <a href="${c.href}" class="servic
                     <h2 class="section-title">${p.galleryTitle}</h2>
                 </div>
                 <div class="gallery-preview-grid reveal reveal-delay-1">
-${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400" loading="lazy"></div>`).join('\n')}
+${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400"></div>`).join('\n')}
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
                     ${btn('portfolio.html', 'Teljes portfólió')}
@@ -362,7 +362,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
         <section class="section">
             <div class="container about-content">
                 <div class="about-portrait reveal">
-                    <img src="${p.aboutImage}"${imgStyle(p.aboutImage)} alt="${g.photographer} fotós" width="700" height="933" loading="lazy">
+                    <img src="${p.aboutImage}"${imgStyle(p.aboutImage)} alt="${g.photographer} fotós" width="700" height="933">
                 </div>
                 <div class="about-body reveal reveal-delay-1">
                     <span class="section-label">${p.storyLabel}</span>
@@ -439,7 +439,7 @@ ${p.stats.map(s => `                    <div class="portfolio-stat"><span class=
                 </div>
                 <div class="portfolio-highlight-grid reveal reveal-delay-1">
 ${p.highlights.map(h => `                    <a href="${h.href}" class="portfolio-highlight-item${h.wide ? ' portfolio-highlight-wide' : ''}">
-                        <img src="${h.image}"${imgStyle(h.image)} alt="${h.alt}" loading="lazy">
+                        <img src="${h.image}"${imgStyle(h.image)} alt="${h.alt}">
                         <div class="portfolio-highlight-overlay"><span class="portfolio-highlight-cat">${h.cat}</span><h3>${h.title}</h3></div>
                     </a>`).join('\n')}
                 </div>
@@ -480,7 +480,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 <div class="category-grid">
 ${cats.map((c, i) => `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
                         <div class="category-card-img">
-                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás" width="600" height="800" loading="lazy">
+                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás" width="600" height="800">
                         </div>
                         <div class="category-card-body">
                             <span class="category-num">${c.num}</span>
@@ -581,7 +581,7 @@ ${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főol
 ${s.introDesc.map(p => `                        <p class="section-desc">${p}</p>`).join('\n')}
                     </div>
                     <div class="service-detail-img">
-                        <img src="${imgSrc(s.introImage.src, prefix)}"${imgStyle(s.introImage.src)} alt="${s.introImage.alt}" width="700" height="933" loading="lazy">
+                        <img src="${imgSrc(s.introImage.src, prefix)}"${imgStyle(s.introImage.src)} alt="${s.introImage.alt}" width="700" height="933">
                     </div>
                 </div>
 
