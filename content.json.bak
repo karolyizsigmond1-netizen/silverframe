@@ -377,8 +377,7 @@
               "desc": "Online galéria a képek megtekintéséhez és letöltéséhez."
             }
           ],
-          "image": "uploads/d62d9d30b3a6-Amina_Strret_fot_z_s_karolyifoto__11_.jpg",
-          "imageSide": "left"
+          "image": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg"
         },
         {
           "name": "Prémium csomag — 95.000 Ft",
@@ -401,7 +400,7 @@
               "desc": "A fotózás nálam nem feszengős — inkább egy laza folyamat."
             }
           ],
-          "image": "uploads/38515fd03e9b-Nikon_Roadshow_karolyifoto-7.jpg",
+          "image": "uploads/1afb0210e175-modell-fotozas-kulter-divat-szegedjpg__1308_.jpg",
           "imageSide": "right"
         }
       ],
@@ -1783,7 +1782,7 @@
     "portrait": {
       "title": "Portfólió / Modell Galéria — Silverframe Studio",
       "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
-      "heroImage": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1600&q=80",
+      "heroImage": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Portfólió / Modell",
       "breadcrumb": "Portfólió / Modell",
@@ -3705,6 +3704,8 @@
     }
   },
   "imagePositions": {
-    "uploads/3d71d6695a1d-BGI06401.jpg": "73% 50%"
+    "uploads/3d71d6695a1d-BGI06401.jpg": "69% 50%",
+    "uploads/26e300cc666b-modell-fotozas-kulter-divat-szegedjpg__175_.jpg": "44% 7%",
+    "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg": "49% 29%"
   }
 }
