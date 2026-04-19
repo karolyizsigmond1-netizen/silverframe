@@ -905,14 +905,15 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 .filter-btn.active::after { width: 100%; }
 
 .masonry {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-content: flex-start;
     padding-bottom: 5rem;
 }
 .masonry-item {
     position: relative; overflow: hidden; cursor: pointer;
-    aspect-ratio: 2 / 3;
+    flex-shrink: 0;
     transition: opacity 0.4s, transform 0.4s;
 }
 .masonry-item img {
@@ -942,8 +943,7 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 }
 .masonry-item:hover .masonry-overlay span { transform: translateY(0); }
 
-@media (max-width: 900px) { .masonry { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 550px) { .masonry { grid-template-columns: 1fr; } }
+/* Row height controlled by JS justifyMasonry(); breakpoints just change the target height */
 
 /* ── Bundle tiles — grouped image sets ── */
 .is-bundle {

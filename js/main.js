@@ -105,6 +105,54 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(() => show((cur + 1) % testimonials.length), 6000);
     }
 
+    // ── Justified masonry layout ──
+    const masonryGrid = document.querySelector('.masonry');
+    const GAP = 6;
+    let justifyMasonry = null;
+
+    if (masonryGrid) {
+        justifyMasonry = function() {
+            const totalWidth = masonryGrid.offsetWidth;
+            if (!totalWidth) return;
+            const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
+            const items = Array.from(masonryGrid.querySelectorAll(':scope > .masonry-item'))
+                .filter(el => el.style.display !== 'none');
+            if (!items.length) return;
+
+            let row = [], rowNaturalW = 0;
+
+            const flushRow = (isPartialLast) => {
+                if (!row.length) return;
+                const gapsW = (row.length - 1) * GAP;
+                const available = totalWidth - gapsW;
+                const scale = (!isPartialLast || rowNaturalW >= available * 0.6)
+                    ? available / rowNaturalW : 1;
+                const h = Math.floor(targetRowH * scale);
+                row.forEach(({ item, ratio }) => {
+                    item.style.width = Math.floor(h * ratio) + 'px';
+                    item.style.height = h + 'px';
+                });
+                row = []; rowNaturalW = 0;
+            };
+
+            items.forEach((item, idx) => {
+                const img = item.querySelector('img');
+                const w = parseInt(img.getAttribute('width')) || 3;
+                const h = parseInt(img.getAttribute('height')) || 2;
+                const ratio = w / h;
+                row.push({ item, ratio });
+                rowNaturalW += targetRowH * ratio;
+                const gapsW = (row.length - 1) * GAP;
+                const isLast = idx === items.length - 1;
+                if (rowNaturalW + gapsW >= totalWidth || isLast) flushRow(isLast);
+            });
+        };
+
+        justifyMasonry();
+        let rTimer;
+        window.addEventListener('resize', () => { clearTimeout(rTimer); rTimer = setTimeout(justifyMasonry, 120); }, { passive: true });
+    }
+
     // ── Portfolio filter ──
     const filterBtns = document.querySelectorAll('.filter-btn');
     const masonryItems = document.querySelectorAll('.masonry-item');
@@ -118,8 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const match = f === 'all' || item.dataset.category === f;
                     item.style.opacity = match ? '1' : '0';
                     item.style.transform = match ? 'scale(1)' : 'scale(0.96)';
-                    setTimeout(() => { item.style.display = match ? 'block' : 'none'; }, match ? 0 : 350);
+                    setTimeout(() => { item.style.display = match ? '' : 'none'; }, match ? 0 : 350);
                 });
+                if (justifyMasonry) setTimeout(justifyMasonry, 400);
             });
         });
     }
