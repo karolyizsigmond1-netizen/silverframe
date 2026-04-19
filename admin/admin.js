@@ -631,7 +631,12 @@
                                 </div>`;
                             for (const k of Object.keys(item)) {
                                 if (typeof item[k] === 'string') {
-                                    html += textField(k, path + '.' + i + '.' + k, item[k]);
+                                    const kLower = k.toLowerCase();
+                                    if (kLower.includes('image') || kLower.includes('img') || kLower.includes('src')) {
+                                        html += imageField(k, path + '.' + i + '.' + k, item[k]);
+                                    } else {
+                                        html += textField(k, path + '.' + i + '.' + k, item[k]);
+                                    }
                                 }
                             }
                             html += '</div>';
@@ -646,7 +651,8 @@
                     const v = val[k];
                     const p = path + '.' + k;
                     if (typeof v === 'string') {
-                        if (k.toLowerCase().includes('src') || k.toLowerCase().includes('image')) {
+                        const kLower = k.toLowerCase();
+                        if (kLower.includes('src') || kLower.includes('image') || kLower.includes('img')) {
                             html += imageField(k, p, v);
                         } else {
                             html += textField(k, p, v);
