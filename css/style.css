@@ -1153,6 +1153,15 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     gap: 3rem;
     align-items: start;
 }
+.service-includes.has-image.img-right {
+    grid-template-columns: 2fr minmax(280px, 1fr);
+}
+.service-includes.has-image.img-right .service-includes-img {
+    order: 2;
+}
+.service-includes.has-image.img-right .service-includes-content {
+    order: 1;
+}
 .service-includes-img {
     overflow: hidden;
     aspect-ratio: 3/4;

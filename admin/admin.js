@@ -448,6 +448,10 @@
                     ${textField('Csomag neve', pageId + '.packages.' + pi + '.name', pkg.name)}
                     ${textareaField('Csomag leírás', pageId + '.packages.' + pi + '.desc', pkg.desc)}
                     ${imageField('Csomag kép', pageId + '.packages.' + pi + '.image', pkg.image || '')}
+                    ${selectField('Kép oldala', pageId + '.packages.' + pi + '.imageSide', pkg.imageSide || 'left', [
+                        { value: 'left', label: 'Bal oldal' },
+                        { value: 'right', label: 'Jobb oldal' }
+                    ])}
                     <div class="nested-array">
                         <label class="field-label">Elemek</label>`;
                 if (pkg.items) {
@@ -761,7 +765,7 @@
                         }
                         break;
                     case 'package':
-                        newItem = { name: 'Új csomag', desc: '', image: '', items: [] };
+                        newItem = { name: 'Új csomag', desc: '', image: '', imageSide: 'left', items: [] };
                         break;
                     case 'packageItem':
                         newItem = { title: '', desc: '' };

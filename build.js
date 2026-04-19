@@ -585,7 +585,7 @@ ${s.introDesc.map(p => `                        <p class="section-desc">${p}</p>
                     </div>
                 </div>
 
-${s.packages.map(pkg => `                <div class="service-includes reveal${pkg.image ? ' has-image' : ''}">
+${s.packages.map(pkg => `                <div class="service-includes reveal${pkg.image ? ' has-image img-' + (pkg.imageSide || 'left') : ''}">
 ${pkg.image ? `                    <div class="service-includes-img"><img src="${imgSrc(pkg.image, prefix)}"${imgStyle(pkg.image)} alt="${pkg.name}" width="500" height="667" loading="lazy"></div>` : ''}
                     <div class="service-includes-content">
                         <h3 class="service-includes-title">${pkg.name}</h3>
