@@ -412,19 +412,16 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                     <span class="section-label">${p.accordionLabel}</span>
                     <h2 class="section-title">${p.accordionTitle}</h2>
                 </div>
-                <div class="portfolio-index reveal reveal-delay-1">
-                    <ol class="portfolio-index-list">
-${cats.map((c, i) => `                        <li class="portfolio-index-item${i === 0 ? ' is-current' : ''}">
-                            <a href="portfolio/${c.portfolioId}.html" data-preview="${c.image.replace('w=600', 'w=1200')}">
-                                <span class="portfolio-index-num">${String(i + 1).padStart(2, '0')}</span>
-                                <span class="portfolio-index-name">${c.name}</span>
-                                <span class="portfolio-index-arrow" aria-hidden="true">→</span>
-                            </a>
-                        </li>`).join('\n')}
-                    </ol>
-                    <div class="portfolio-index-preview">
-                        <img src="${cats[0].image.replace('w=600', 'w=1200')}"${imgStyle(cats[0].image)} alt="" id="portfolioPreviewImg">
-                    </div>
+                <div class="portfolio-grid reveal reveal-delay-1">
+${cats.map((c, i) => `                    <a href="portfolio/${c.portfolioId}.html" class="portfolio-grid-tile">
+                        <div class="portfolio-grid-img-wrap">
+                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás">
+                        </div>
+                        <div class="portfolio-grid-meta">
+                            <span class="portfolio-grid-num">${String(i + 1).padStart(2, '0')}</span>
+                            <span class="portfolio-grid-name">${c.name}</span>
+                        </div>
+                    </a>`).join('\n')}
                 </div>
                 <p class="section-desc reveal reveal-delay-2" style="text-align:center; max-width:600px; margin: 4rem auto 0;">${p.accordionHint}</p>
             </div>
