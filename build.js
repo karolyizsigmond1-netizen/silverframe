@@ -629,8 +629,10 @@ ${s.gallery.map(img => {
                             const attr = bundleAttr(img, prefix);
                             const info = bundleInfo(img);
                             const cls = attr ? 'service-gallery-item is-bundle' : 'service-gallery-item';
-                            const badge = attr ? `<span class="bundle-badge" aria-hidden="true">${info.count}</span>` : '';
-                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="500" height="667">${badge}</div>`;
+                            const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
+                            const title = img.title || info.alt || '';
+                            const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
+                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="500" height="667">${caption}${badge}</div>`;
                           }
                           return `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" width="500" height="667"></div>`;
                         }).join('\n')}
@@ -687,10 +689,12 @@ ${p.gallery.map(img => {
                     const attr = bundleAttr(img, prefix);
                     const info = bundleInfo(img);
                     const cls = attr ? 'masonry-item is-bundle' : 'masonry-item';
-                    const badge = attr ? `<span class="bundle-badge" aria-hidden="true">${info.count}</span>` : '';
+                    const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
+                    const title = img.title || info.alt || '';
+                    const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
                     return `                    <article class="${cls}"${attr}>
                         <img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" width="600" height="900">
-                        <div class="masonry-overlay"><h3>${img.title || ''}</h3><span>${img.subtitle || ''}</span></div>
+                        ${caption}
                         ${badge}
                     </article>`;
                   }

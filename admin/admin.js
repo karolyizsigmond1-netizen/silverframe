@@ -621,9 +621,20 @@
             </div>`;
         });
 
-        return `<div class="bundle-card" data-index="${i}">
-            <div class="bundle-card-header">
-                <span class="bundle-card-badge">&#128230; Képcsomag #${i + 1} (${innerArr.length} kép)</span>
+        const previewThumb = previewSrc
+            ? `<img src="${esc(previewSrc)}" alt="" onerror="this.style.display='none'">`
+            : `<span class="bundle-thumb-empty">?</span>`;
+        const previewTitle = esc(bundle.title || bundle.alt || 'Névtelen képcsomag');
+
+        return `<div class="bundle-card collapsed" data-index="${i}">
+            <div class="bundle-card-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="bundle-collapse-caret" aria-hidden="true">&#9662;</span>
+                <div class="bundle-card-thumb">${previewThumb}</div>
+                <div class="bundle-card-summary">
+                    <span class="bundle-card-badge">&#128230; Képcsomag #${i + 1}</span>
+                    <span class="bundle-card-title">${previewTitle}</span>
+                    <span class="bundle-card-count">${innerArr.length} kép</span>
+                </div>
                 <div class="bundle-card-header-actions">
                     <button class="btn-icon" data-move-up="${basePath}" data-index="${i}" title="Fel">&#8593;</button>
                     <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Képcsomag törlése">&#10005;</button>
@@ -1522,6 +1533,22 @@
             title.addEventListener('click', e => {
                 if (e.target.closest('button')) return;
                 title.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        container.querySelectorAll('.bundle-card-header').forEach(header => {
+            const toggle = () => {
+                const card = header.parentElement;
+                card.classList.toggle('collapsed');
+                header.setAttribute('aria-expanded', card.classList.contains('collapsed') ? 'false' : 'true');
+            };
+            header.addEventListener('click', e => {
+                if (e.target.closest('button, input')) return;
+                toggle();
+            });
+            header.addEventListener('keydown', e => {
+                if (e.target.closest('button, input')) return;
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
             });
         });
     }
