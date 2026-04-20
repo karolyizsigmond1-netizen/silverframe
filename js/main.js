@@ -176,23 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Lightbox ──
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
-        const lbImg = lightbox.querySelector(':scope > img');
+        const lbImg = lightbox.querySelector('img');
         const prevBtn = lightbox.querySelector('.lightbox-prev');
         const nextBtn = lightbox.querySelector('.lightbox-next');
         const counter = lightbox.querySelector('.lightbox-counter');
-        const bundleBar = lightbox.querySelector('.lightbox-bundle-bar');
-        const bundleTitleEl = lightbox.querySelector('.lightbox-bundle-title');
-        const btnSingle = lightbox.querySelector('.lv-single');
-        const btnGrid = lightbox.querySelector('.lv-grid');
-        const gridView = lightbox.querySelector('.lightbox-grid-view');
-        const gridInner = lightbox.querySelector('.lightbox-grid-inner');
         const itemSelectors = '.masonry-item, .gallery-preview-item, .service-gallery-item';
         const containerSelectors = '.masonry, .gallery-preview, .service-gallery';
-
         let currentList = [];
         let currentIndex = 0;
-        let isBundleMode = false;
-        let builtGridSrc = null; // cache: don't rebuild grid for same bundle
 
         const parseBundle = (el) => {
             const raw = el.getAttribute('data-bundle');
@@ -222,143 +213,39 @@ document.addEventListener('DOMContentLoaded', () => {
             if (counter) counter.style.display = many ? '' : 'none';
         };
 
-        // Build justified grid using pre-embedded w/h — single layout pass, no image-load waiting
-        const buildGrid = (images) => {
-            const GAP = 6, TARGET_H = window.innerWidth < 600 ? 140 : 200;
-            const totalW = gridInner.offsetWidth || (window.innerWidth - 64);
-
-            const frag = document.createDocumentFragment();
-            const rowItems = [];
-            let row = [], rowNatW = 0;
-
-            const flush = (isLast) => {
-                if (!row.length) return;
-                const gapsW = (row.length - 1) * GAP;
-                const avail = totalW - gapsW;
-                const scale = (!isLast || rowNatW >= avail * 0.55) ? avail / rowNatW : 1;
-                const h = Math.floor(TARGET_H * scale);
-                row.forEach(({ div, ratio }) => {
-                    div.style.width = Math.floor(h * ratio) + 'px';
-                    div.style.height = h + 'px';
-                });
-                row = []; rowNatW = 0;
-            };
-
-            images.forEach((entry, idx) => {
-                const ratio = (entry.w && entry.h) ? entry.w / entry.h : 3 / 2;
-                const div = document.createElement('div');
-                div.className = 'lb-grid-item';
-                div.dataset.index = idx;
-                const img = document.createElement('img');
-                img.src = entry.src;
-                img.alt = entry.alt || '';
-                img.loading = 'lazy';
-                img.decoding = 'async';
-                div.appendChild(img);
-                frag.appendChild(div);
-
-                row.push({ div, ratio });
-                rowNatW += TARGET_H * ratio;
-                const gapsW = (row.length - 1) * GAP;
-                if (rowNatW + gapsW >= totalW || idx === images.length - 1) flush(idx === images.length - 1);
-            });
-
-            gridInner.innerHTML = '';
-            gridInner.appendChild(frag);
-        };
-
-        const setView = (mode) => {
-            if (mode === 'grid') {
-                lightbox.classList.add('grid-mode');
-                btnSingle.classList.remove('active');
-                btnGrid.classList.add('active');
-            } else {
-                lightbox.classList.remove('grid-mode');
-                btnSingle.classList.add('active');
-                btnGrid.classList.remove('active');
-            }
-        };
-
-        const openBundle = (images, title, startIndex = 0) => {
-            currentList = images;
-            isBundleMode = true;
-            lightbox.classList.add('bundle-mode');
-            if (bundleTitleEl) bundleTitleEl.textContent = title || '';
-            // Only rebuild grid if it's a different bundle
-            const cacheKey = images[0] && images[0].src;
-            if (builtGridSrc !== cacheKey) {
-                buildGrid(images);
-                builtGridSrc = cacheKey;
-            }
-            setView('single');
-            showAt(startIndex);
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        };
-
-        const openRegular = (list, idx) => {
-            currentList = list;
-            isBundleMode = false;
-            lightbox.classList.remove('bundle-mode', 'grid-mode');
-            showAt(idx);
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        };
-
         document.querySelectorAll(itemSelectors).forEach(item => {
             item.addEventListener('click', () => {
                 const bundle = parseBundle(item);
                 if (bundle) {
-                    const titleEl = item.querySelector('.bundle-caption-name, .bundle-caption');
-                    const title = titleEl ? titleEl.textContent.trim() : '';
-                    openBundle(bundle, title);
+                    currentList = bundle;
+                    showAt(0);
                 } else {
                     const container = item.closest(containerSelectors) || document;
                     const siblings = Array.from(container.querySelectorAll(itemSelectors))
                         .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
-                    openRegular(siblings.map(itemToEntry), siblings.indexOf(item));
+                    currentList = siblings.map(itemToEntry);
+                    showAt(siblings.indexOf(item));
                 }
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
             });
-        });
-
-        if (btnSingle) btnSingle.addEventListener('click', e => { e.stopPropagation(); setView('single'); });
-        if (btnGrid) btnGrid.addEventListener('click', e => {
-            e.stopPropagation();
-            setView('grid');
-        });
-
-        // Clicking a grid item switches to single view at that image
-        if (gridInner) gridInner.addEventListener('click', e => {
-            const item = e.target.closest('.lb-grid-item');
-            if (!item) return;
-            setView('single');
-            showAt(parseInt(item.dataset.index));
         });
 
         if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex - 1); });
         if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex + 1); });
 
-        const closeLb = () => {
-            lightbox.classList.remove('open', 'bundle-mode', 'grid-mode');
-            document.body.style.overflow = '';
-            isBundleMode = false;
-            lbImg.src = '';
-            if (gridView) gridView.scrollTop = 0;
-        };
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox || e.target === gridView || e.target.classList.contains('lightbox-close')) closeLb();
-        });
+        const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; };
+        lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLb(); });
         document.addEventListener('keydown', e => {
             if (!lightbox.classList.contains('open')) return;
             if (e.key === 'Escape') closeLb();
-            else if (e.key === 'ArrowLeft' && !lightbox.classList.contains('grid-mode')) showAt(currentIndex - 1);
-            else if (e.key === 'ArrowRight' && !lightbox.classList.contains('grid-mode')) showAt(currentIndex + 1);
+            else if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
+            else if (e.key === 'ArrowRight') showAt(currentIndex + 1);
         });
 
         let touchStartX = 0;
         lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
         lightbox.addEventListener('touchend', e => {
-            if (lightbox.classList.contains('grid-mode')) return;
             const dx = e.changedTouches[0].clientX - touchStartX;
             if (Math.abs(dx) > 50) showAt(currentIndex + (dx < 0 ? 1 : -1));
         });

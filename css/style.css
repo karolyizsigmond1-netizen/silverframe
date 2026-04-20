@@ -1106,64 +1106,6 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     .lightbox-next { right: 0.5rem; }
 }
 
-/* Bundle bar — view toggle */
-.lightbox-bundle-bar {
-    position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%);
-    display: none; align-items: center; gap: 1.2rem;
-    background: rgba(20,21,26,0.85); border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    padding: 0.45rem 1rem 0.45rem 1.2rem;
-    border-radius: 2px;
-    z-index: 10;
-}
-.lightbox.bundle-mode .lightbox-bundle-bar { display: flex; }
-.lightbox-bundle-title {
-    font-family: var(--serif); font-size: 0.95rem; color: rgba(255,255,255,0.75);
-    letter-spacing: 0.06em; white-space: nowrap; max-width: 240px;
-    overflow: hidden; text-overflow: ellipsis;
-}
-.lightbox-view-toggle {
-    display: flex; gap: 2px;
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden;
-}
-.lv-btn {
-    width: 36px; height: 36px; background: none; border: none;
-    color: rgba(255,255,255,0.45); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s, color 0.2s;
-}
-.lv-btn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
-.lv-btn.active { background: var(--accent); color: #fff; }
-
-/* Grid view overlay */
-.lightbox-grid-view {
-    display: none; position: absolute; inset: 0;
-    overflow-y: auto; padding: 5.5rem 2rem 2rem;
-}
-.lightbox.grid-mode .lightbox-grid-view { display: block; }
-.lightbox.grid-mode > img,
-.lightbox.grid-mode .lightbox-nav,
-.lightbox.grid-mode .lightbox-counter { display: none; }
-.lightbox-grid-inner {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    align-content: flex-start;
-    max-width: 1200px; margin: 0 auto;
-}
-.lb-grid-item {
-    flex-shrink: 0; overflow: hidden; cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
-}
-.lb-grid-item img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.4s;
-}
-.lb-grid-item:hover { opacity: 0.88; }
-.lb-grid-item:hover img { transform: scale(1.04); }
-@media (max-width: 600px) {
-    .lightbox-grid-view { padding: 4.5rem 0.75rem 1rem; }
-    .lightbox-bundle-title { max-width: 130px; font-size: 0.82rem; }
-    .lightbox-bundle-bar { gap: 0.6rem; padding: 0.35rem 0.6rem 0.35rem 0.8rem; }
-}
 
 /* ═══════════════════════════════════════════
    SERVICES PAGE
