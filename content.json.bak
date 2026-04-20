@@ -139,21 +139,21 @@
       "serviceCards": [
         {
           "href": "services/portfolio-model.html",
-          "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
+          "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portfólió és modell fotózás",
           "title": "Portfólió / Modell",
           "desc": "Professzionális portfóliók"
         },
         {
           "href": "services/wedding.html",
-          "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+          "image": "uploads/1e04dafae97b-www.karolyifoto.hu__3_of_25_.jpg",
           "alt": "Esküvői fotózás",
           "title": "Esküvő",
           "desc": "Esküvői fotózás"
         },
         {
           "href": "services/boudoir.html",
-          "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",
+          "image": "uploads/c2641de93fa8-Boudoir__2_.jpg",
           "alt": "Boudoir fotózás",
           "title": "Boudoir",
           "desc": "Intim & Magabiztos"
@@ -3729,6 +3729,8 @@
       "x": 38,
       "y": 19,
       "zoom": 1.25
-    }
+    },
+    "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg": "46% 39%",
+    "uploads/1e04dafae97b-www.karolyifoto.hu__3_of_25_.jpg": "41% 39%"
   }
 }
