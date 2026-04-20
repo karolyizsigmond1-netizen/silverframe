@@ -586,7 +586,8 @@
               "title": "Digitális galéria",
               "desc": "Online galéria a képek megtekintéséhez és letöltéséhez."
             }
-          ]
+          ],
+          "image": "uploads/20152d35bbc0-kismama-fotozas-szeged-studio__126_.jpg"
         },
         {
           "name": "Prémium csomag — 90.000 Ft",
@@ -601,14 +602,16 @@
               "desc": "Professzionálisan retusált képek a legszebb pillanatokról."
             },
             {
-              "title": "+100 nyers kép",
+              "title": "+50 kidolgozott kép",
               "desc": "Digitálisan átadva, hogy minden fontos pillanat a kezedben legyen."
             },
             {
               "title": "Teljes élmény",
               "desc": "Tökéletes választás, ha szeretnéd megőrizni a kis élet első jeleit."
             }
-          ]
+          ],
+          "image": "uploads/161f39b69286-kismama-fotozas-szeged-studio__728_.jpg",
+          "imageSide": "right"
         }
       ],
       "gallery": [
