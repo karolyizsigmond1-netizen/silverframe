@@ -539,8 +539,20 @@
 
     // ── Gallery section with bulk upload ──
     function renderGallerySection(gallery, basePath) {
-        const bundleCount = gallery.filter(x => x && x.type === 'bundle').length;
-        const imageCount = gallery.length - bundleCount;
+        // Auto-sort: bundles always at top
+        const bundles = gallery.filter(x => x && x.type === 'bundle');
+        const images  = gallery.filter(x => !x || x.type !== 'bundle');
+        const alreadySorted = gallery.every((item, i) => {
+            const isBundle = item && item.type === 'bundle';
+            return i < bundles.length ? isBundle : !isBundle;
+        });
+        if (bundles.length && images.length && !alreadySorted) {
+            bundles.concat(images).forEach((item, i) => { gallery[i] = item; });
+            setDirty(true);
+        }
+
+        const bundleCount = bundles.length;
+        const imageCount = images.length;
         const titleBits = [imageCount + ' kép'];
         if (bundleCount) titleBits.push(bundleCount + ' képcsomag');
         let html = '<div class="field-section"><div class="field-section-title">Galéria (' + titleBits.join(', ') + ')</div>';
@@ -630,8 +642,9 @@
             : `<span class="bundle-thumb-empty">?</span>`;
         const previewTitle = esc(bundle.title || bundle.alt || 'Névtelen képcsomag');
 
-        return `<div class="bundle-card collapsed" data-index="${i}">
+        return `<div class="bundle-card collapsed" draggable="true" data-index="${i}">
             <div class="bundle-card-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="bundle-drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</span>
                 <span class="bundle-collapse-caret" aria-hidden="true">&#9662;</span>
                 <div class="bundle-card-thumb">${previewThumb}</div>
                 <div class="bundle-card-summary">
@@ -1122,13 +1135,21 @@
             });
         });
 
-        // Gallery grids (direct card drag)
+        // Gallery grids (direct card drag — both .gallery-card and .bundle-card)
         container.querySelectorAll('.gallery-grid[data-array-path]').forEach(grid => {
             const arrayPath = grid.dataset.arrayPath;
-            grid.querySelectorAll(':scope > .gallery-card').forEach(card => {
+            grid.querySelectorAll(':scope > .gallery-card, :scope > .bundle-card').forEach(card => {
+                const isBundle = card.classList.contains('bundle-card');
+
                 card.addEventListener('dragstart', e => {
-                    if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
-                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) return;
+                    if (e.dataTransfer.types && e.dataTransfer.types.includes('Files')) return;
+                    if (isBundle) {
+                        // Only start drag from the drag handle or header; block from inner content
+                        if (!e.target.closest('.bundle-card-header')) { e.preventDefault(); return; }
+                        if (e.target.closest('button, input, .btn-icon, .bundle-card-header-actions')) { e.preventDefault(); return; }
+                    } else {
+                        if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
+                    }
                     dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
                     e.dataTransfer.effectAllowed = 'move';
                     e.dataTransfer.setData('text/plain', card.dataset.index);
@@ -1150,7 +1171,8 @@
                     card.classList.add('drag-over');
                 });
 
-                card.addEventListener('dragleave', () => {
+                card.addEventListener('dragleave', e => {
+                    if (card.contains(e.relatedTarget)) return;
                     card.classList.remove('drag-over');
                 });
 
