@@ -346,13 +346,6 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
             </div>
         </section>
 
-        <div class="marquee" aria-hidden="true">
-            <div class="marquee-track">
-                ${marqueeItems}
-                ${marqueeItems}
-            </div>
-        </div>
-
         <section class="section services-preview" aria-label="Fotózási szolgáltatások">
             <div class="container">
                 <div class="reveal" style="text-align:center;">
