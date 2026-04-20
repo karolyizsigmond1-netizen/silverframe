@@ -512,15 +512,15 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                     <h2 class="section-title">${p.accordionTitle}</h2>
                 </div>
                 <div class="portfolio-grid reveal reveal-delay-1">
-${cats.map((c, i) => `                    <a href="portfolio/${c.portfolioId}.html" class="portfolio-grid-tile">
+${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="portfolio/${c.portfolioId}.html" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás">
+                            <img src="${cImg}"${imgStyle(cImg)} alt="${c.name} fotózás">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">${String(i + 1).padStart(2, '0')}</span>
                             <span class="portfolio-grid-name">${c.name}</span>
                         </div>
-                    </a>`).join('\n')}
+                    </a>`; }).join('\n')}
                 </div>
                 <p class="section-desc reveal reveal-delay-2" style="text-align:center; max-width:600px; margin: 4rem auto 0;">${p.accordionHint}</p>
             </div>
@@ -593,9 +593,9 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 </div>
 
                 <div class="category-grid">
-${cats.map((c, i) => `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
+${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
                         <div class="category-card-img">
-                            <img src="${c.image}"${imgStyle(c.image)} alt="${c.name} fotózás" width="600" height="800">
+                            <img src="${cImg}"${imgStyle(cImg)} alt="${c.name} fotózás" width="600" height="800">
                         </div>
                         <div class="category-card-body">
                             <span class="category-num">${c.num}</span>
@@ -603,7 +603,7 @@ ${cats.map((c, i) => `                    <a href="services/${c.id}.html" class=
                             <p>${p.categoryDescriptions[c.id] || ''}</p>
                             <span class="category-link">Részletek <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                         </div>
-                    </a>`).join('\n\n')}
+                    </a>`; }).join('\n\n')}
                 </div>
             </div>
         </section>
