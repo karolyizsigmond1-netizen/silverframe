@@ -34,70 +34,80 @@
       "name": "Boudoir",
       "num": "03",
       "portfolioId": "boudoir",
-      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80",
+      "img": "uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg"
     },
     {
       "id": "family",
       "name": "Családi",
       "num": "04",
       "portfolioId": "family",
-      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
+      "img": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg"
     },
     {
       "id": "couple",
       "name": "Páros",
       "num": "05",
       "portfolioId": "couple",
-      "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
+      "img": "uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg"
     },
     {
       "id": "business",
       "name": "Üzleti portré",
       "num": "06",
       "portfolioId": "business",
-      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
+      "img": "uploads/015b522c5a9c-_DSC6748.jpg"
     },
     {
       "id": "real-estate",
       "name": "Ingatlan",
       "num": "07",
       "portfolioId": "real-estate",
-      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+      "img": "uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg"
     },
     {
       "id": "wedding",
       "name": "Esküvő",
       "num": "08",
       "portfolioId": "wedding",
-      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
+      "img": "uploads/6b6ba1e96c51-eskuvoi-fotozas-szeged__16_.jpg"
     },
     {
       "id": "wedding-creative",
       "name": "Esküvői kreatív",
       "num": "09",
       "portfolioId": "wedding-creative",
-      "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
+      "img": "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg"
     },
     {
       "id": "event",
       "name": "Rendezvény",
       "num": "10",
       "portfolioId": "event",
-      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+      "img": "uploads/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg"
     },
     {
       "id": "pet",
       "name": "Kisállat",
       "num": "11",
       "portfolioId": "pet",
-      "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
+      "img": "uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg"
     },
     {
       "id": "product",
       "name": "Termékfotó",
       "num": "12",
       "portfolioId": "product",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
+      "img": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg"
     }
   ],
   "pages": {
@@ -3709,6 +3719,8 @@
     "uploads/3d71d6695a1d-BGI06401.jpg": "69% 50%",
     "uploads/26e300cc666b-modell-fotozas-kulter-divat-szegedjpg__175_.jpg": "44% 7%",
     "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg": "49% 29%",
-    "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg": "38% 19%"
+    "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg": "38% 19%",
+    "uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg": "48% 33%",
+    "uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg": "20% 47%"
   }
 }
