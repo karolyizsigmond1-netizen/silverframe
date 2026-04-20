@@ -759,18 +759,18 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
 
                 <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
-                    <div class="service-gallery-grid">
+                    <div class="masonry">
 ${sortedGallery(s.gallery).map(img => {
                           if (img && img.type === 'bundle') {
                             const attr = bundleAttr(img, prefix);
                             const info = bundleInfo(img);
-                            const cls = attr ? 'service-gallery-item is-bundle' : 'service-gallery-item';
+                            const cls = attr ? 'masonry-item service-gallery-item is-bundle' : 'masonry-item service-gallery-item';
                             const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
                             const title = img.title || info.alt || '';
                             const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
                             return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">${caption}${badge}</div>`;
                           }
-                          return `                        <div class="service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy"></div>`;
+                          return `                        <div class="masonry-item service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy"></div>`;
                         }).join('\n')}
                     </div>
                     <div style="text-align:center; margin-top: 2.5rem;">
