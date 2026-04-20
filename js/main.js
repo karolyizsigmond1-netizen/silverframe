@@ -176,15 +176,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Lightbox ──
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
-        const lbImg = lightbox.querySelector('img');
+        const lbImg = lightbox.querySelector(':scope > img');
         const prevBtn = lightbox.querySelector('.lightbox-prev');
         const nextBtn = lightbox.querySelector('.lightbox-next');
         const counter = lightbox.querySelector('.lightbox-counter');
+        const bundleBar = lightbox.querySelector('.lightbox-bundle-bar');
+        const bundleTitleEl = lightbox.querySelector('.lightbox-bundle-title');
+        const btnSingle = lightbox.querySelector('.lv-single');
+        const btnGrid = lightbox.querySelector('.lv-grid');
+        const gridView = lightbox.querySelector('.lightbox-grid-view');
+        const gridInner = lightbox.querySelector('.lightbox-grid-inner');
         const itemSelectors = '.masonry-item, .gallery-preview-item, .service-gallery-item';
         const containerSelectors = '.masonry, .gallery-preview, .service-gallery';
-        // currentList is an array of {src, alt} objects
+
         let currentList = [];
         let currentIndex = 0;
+        let isBundleMode = false;
 
         const parseBundle = (el) => {
             const raw = el.getAttribute('data-bundle');
@@ -192,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const arr = JSON.parse(decodeURIComponent(raw));
                 if (Array.isArray(arr) && arr.length) return arr;
-            } catch (err) { /* ignore */ }
+            } catch (e) {}
             return null;
         };
 
@@ -214,42 +221,146 @@ document.addEventListener('DOMContentLoaded', () => {
             if (counter) counter.style.display = many ? '' : 'none';
         };
 
+        // Build justified grid for bundle grid-view
+        const buildGrid = (images) => {
+            gridInner.innerHTML = '';
+            const GAP = 6, TARGET_H = 200;
+            // Create items with known dimensions from src URL (fallback ratio 3:2)
+            const items = images.map((entry, idx) => {
+                const div = document.createElement('div');
+                div.className = 'lb-grid-item';
+                div.dataset.index = idx;
+                const img = document.createElement('img');
+                img.src = entry.src;
+                img.alt = entry.alt || '';
+                img.loading = 'lazy';
+                div.appendChild(img);
+                gridInner.appendChild(div);
+                return { div, img };
+            });
+
+            const justify = () => {
+                const totalW = gridInner.offsetWidth;
+                if (!totalW) return;
+                let row = [], rowNatW = 0;
+                const flush = (isLast) => {
+                    if (!row.length) return;
+                    const gapsW = (row.length - 1) * GAP;
+                    const avail = totalW - gapsW;
+                    const scale = (!isLast || rowNatW >= avail * 0.55) ? avail / rowNatW : 1;
+                    const h = Math.floor(TARGET_H * scale);
+                    row.forEach(({ div, ratio }) => {
+                        div.style.width = Math.floor(h * ratio) + 'px';
+                        div.style.height = h + 'px';
+                    });
+                    row = []; rowNatW = 0;
+                };
+                items.forEach(({ div, img }, idx) => {
+                    const w = img.naturalWidth || img.width || 3;
+                    const h = img.naturalHeight || img.height || 2;
+                    const ratio = (w || 3) / (h || 2);
+                    row.push({ div, ratio });
+                    rowNatW += TARGET_H * ratio;
+                    const gapsW = (row.length - 1) * GAP;
+                    if (rowNatW + gapsW >= totalW || idx === items.length - 1) flush(idx === items.length - 1);
+                });
+            };
+
+            // Run after images load for accurate ratios
+            let loaded = 0;
+            items.forEach(({ img }) => {
+                const onLoad = () => { loaded++; if (loaded === items.length) justify(); };
+                if (img.complete) onLoad(); else { img.addEventListener('load', onLoad, { once: true }); }
+            });
+            // Also run immediately with fallback ratios
+            setTimeout(justify, 50);
+        };
+
+        const setView = (mode) => {
+            if (mode === 'grid') {
+                lightbox.classList.add('grid-mode');
+                btnSingle.classList.remove('active');
+                btnGrid.classList.add('active');
+            } else {
+                lightbox.classList.remove('grid-mode');
+                btnSingle.classList.add('active');
+                btnGrid.classList.remove('active');
+            }
+        };
+
+        const openBundle = (images, title, startIndex = 0) => {
+            currentList = images;
+            isBundleMode = true;
+            lightbox.classList.add('bundle-mode');
+            if (bundleTitleEl) bundleTitleEl.textContent = title || '';
+            buildGrid(images);
+            setView('single');
+            showAt(startIndex);
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const openRegular = (list, idx) => {
+            currentList = list;
+            isBundleMode = false;
+            lightbox.classList.remove('bundle-mode', 'grid-mode');
+            showAt(idx);
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
         document.querySelectorAll(itemSelectors).forEach(item => {
             item.addEventListener('click', () => {
                 const bundle = parseBundle(item);
                 if (bundle) {
-                    // Bundle: navigate through the bundle's inner images only
-                    currentList = bundle;
-                    showAt(0);
+                    const titleEl = item.querySelector('.bundle-caption-name, .bundle-caption');
+                    const title = titleEl ? titleEl.textContent.trim() : '';
+                    openBundle(bundle, title);
                 } else {
-                    // Regular: walk siblings, skip bundle tiles and hidden items
                     const container = item.closest(containerSelectors) || document;
                     const siblings = Array.from(container.querySelectorAll(itemSelectors))
                         .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
-                    currentList = siblings.map(itemToEntry);
-                    const idx = siblings.indexOf(item);
-                    showAt(idx < 0 ? 0 : idx);
+                    openRegular(siblings.map(itemToEntry), siblings.indexOf(item));
                 }
-                lightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
             });
+        });
+
+        if (btnSingle) btnSingle.addEventListener('click', e => { e.stopPropagation(); setView('single'); });
+        if (btnGrid) btnGrid.addEventListener('click', e => {
+            e.stopPropagation();
+            setView('grid');
+        });
+
+        // Clicking a grid item switches to single view at that image
+        if (gridInner) gridInner.addEventListener('click', e => {
+            const item = e.target.closest('.lb-grid-item');
+            if (!item) return;
+            setView('single');
+            showAt(parseInt(item.dataset.index));
         });
 
         if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex - 1); });
         if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex + 1); });
 
-        const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
-        lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLb(); });
+        const closeLb = () => {
+            lightbox.classList.remove('open', 'bundle-mode', 'grid-mode');
+            document.body.style.overflow = '';
+            isBundleMode = false;
+        };
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox || e.target === gridView || e.target.classList.contains('lightbox-close')) closeLb();
+        });
         document.addEventListener('keydown', e => {
             if (!lightbox.classList.contains('open')) return;
             if (e.key === 'Escape') closeLb();
-            else if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
-            else if (e.key === 'ArrowRight') showAt(currentIndex + 1);
+            else if (e.key === 'ArrowLeft' && !lightbox.classList.contains('grid-mode')) showAt(currentIndex - 1);
+            else if (e.key === 'ArrowRight' && !lightbox.classList.contains('grid-mode')) showAt(currentIndex + 1);
         });
 
         let touchStartX = 0;
         lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
         lightbox.addEventListener('touchend', e => {
+            if (lightbox.classList.contains('grid-mode')) return;
             const dx = e.changedTouches[0].clientX - touchStartX;
             if (Math.abs(dx) > 50) showAt(currentIndex + (dx < 0 ? 1 : -1));
         });
