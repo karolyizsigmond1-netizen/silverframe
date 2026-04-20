@@ -353,10 +353,14 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
                     <h2 class="section-title">${p.servicesTitle}</h2>
                 </div>
                 <div class="services-grid-home reveal reveal-delay-1">
-${p.serviceCards.map(c => `                    <a href="${c.href}" class="service-card-home">
-                        <img src="${c.image}"${imgStyle(c.image)} alt="${c.alt}" width="500" height="667">
-                        <div class="overlay"><h3>${c.title}</h3><p>${c.desc}</p></div>
-                    </a>`).join('\n')}
+${data.serviceCategories.map(c => {
+  const img = c.img || c.image || '';
+  const alt = c.name + ' fotózás – Silverframe Studio, Szeged';
+  return `                    <a href="services/${c.id}.html" class="service-card-home">
+                        <img src="${img}"${imgStyle(img)} alt="${alt}" width="500" height="667">
+                        <div class="overlay"><h3>${c.name}</h3></div>
+                    </a>`;
+}).join('\n')}
                 </div>
             </div>
         </section>

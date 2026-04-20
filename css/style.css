@@ -425,7 +425,7 @@ button { font-family: inherit; cursor: pointer; }
    ═══════════════════════════════════════════ */
 .services-preview { padding: 7rem 0; }
 .services-grid-home {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem; margin-top: 3rem;
 }
 .service-card-home {
@@ -461,7 +461,9 @@ button { font-family: inherit; cursor: pointer; }
 }
 .service-card-home:hover p { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 768px) { .services-grid-home { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .services-grid-home { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .services-grid-home { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .services-grid-home { grid-template-columns: 1fr; } }
 
 /* ═══════════════════════════════════════════
    HOMEPAGE — GALLERY PREVIEW
