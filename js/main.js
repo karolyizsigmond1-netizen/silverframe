@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentList = [];
         let currentIndex = 0;
         let isBundleMode = false;
+        let builtGridSrc = null; // cache: don't rebuild grid for same bundle
 
         const parseBundle = (el) => {
             const raw = el.getAttribute('data-bundle');
@@ -221,12 +222,30 @@ document.addEventListener('DOMContentLoaded', () => {
             if (counter) counter.style.display = many ? '' : 'none';
         };
 
-        // Build justified grid for bundle grid-view
+        // Build justified grid using pre-embedded w/h — single layout pass, no image-load waiting
         const buildGrid = (images) => {
-            gridInner.innerHTML = '';
-            const GAP = 6, TARGET_H = 200;
-            // Create items with known dimensions from src URL (fallback ratio 3:2)
-            const items = images.map((entry, idx) => {
+            const GAP = 6, TARGET_H = window.innerWidth < 600 ? 140 : 200;
+            const totalW = gridInner.offsetWidth || (window.innerWidth - 64);
+
+            const frag = document.createDocumentFragment();
+            const rowItems = [];
+            let row = [], rowNatW = 0;
+
+            const flush = (isLast) => {
+                if (!row.length) return;
+                const gapsW = (row.length - 1) * GAP;
+                const avail = totalW - gapsW;
+                const scale = (!isLast || rowNatW >= avail * 0.55) ? avail / rowNatW : 1;
+                const h = Math.floor(TARGET_H * scale);
+                row.forEach(({ div, ratio }) => {
+                    div.style.width = Math.floor(h * ratio) + 'px';
+                    div.style.height = h + 'px';
+                });
+                row = []; rowNatW = 0;
+            };
+
+            images.forEach((entry, idx) => {
+                const ratio = (entry.w && entry.h) ? entry.w / entry.h : 3 / 2;
                 const div = document.createElement('div');
                 div.className = 'lb-grid-item';
                 div.dataset.index = idx;
@@ -234,46 +253,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.src = entry.src;
                 img.alt = entry.alt || '';
                 img.loading = 'lazy';
+                img.decoding = 'async';
                 div.appendChild(img);
-                gridInner.appendChild(div);
-                return { div, img };
+                frag.appendChild(div);
+
+                row.push({ div, ratio });
+                rowNatW += TARGET_H * ratio;
+                const gapsW = (row.length - 1) * GAP;
+                if (rowNatW + gapsW >= totalW || idx === images.length - 1) flush(idx === images.length - 1);
             });
 
-            const justify = () => {
-                const totalW = gridInner.offsetWidth;
-                if (!totalW) return;
-                let row = [], rowNatW = 0;
-                const flush = (isLast) => {
-                    if (!row.length) return;
-                    const gapsW = (row.length - 1) * GAP;
-                    const avail = totalW - gapsW;
-                    const scale = (!isLast || rowNatW >= avail * 0.55) ? avail / rowNatW : 1;
-                    const h = Math.floor(TARGET_H * scale);
-                    row.forEach(({ div, ratio }) => {
-                        div.style.width = Math.floor(h * ratio) + 'px';
-                        div.style.height = h + 'px';
-                    });
-                    row = []; rowNatW = 0;
-                };
-                items.forEach(({ div, img }, idx) => {
-                    const w = img.naturalWidth || img.width || 3;
-                    const h = img.naturalHeight || img.height || 2;
-                    const ratio = (w || 3) / (h || 2);
-                    row.push({ div, ratio });
-                    rowNatW += TARGET_H * ratio;
-                    const gapsW = (row.length - 1) * GAP;
-                    if (rowNatW + gapsW >= totalW || idx === items.length - 1) flush(idx === items.length - 1);
-                });
-            };
-
-            // Run after images load for accurate ratios
-            let loaded = 0;
-            items.forEach(({ img }) => {
-                const onLoad = () => { loaded++; if (loaded === items.length) justify(); };
-                if (img.complete) onLoad(); else { img.addEventListener('load', onLoad, { once: true }); }
-            });
-            // Also run immediately with fallback ratios
-            setTimeout(justify, 50);
+            gridInner.innerHTML = '';
+            gridInner.appendChild(frag);
         };
 
         const setView = (mode) => {
@@ -293,7 +284,12 @@ document.addEventListener('DOMContentLoaded', () => {
             isBundleMode = true;
             lightbox.classList.add('bundle-mode');
             if (bundleTitleEl) bundleTitleEl.textContent = title || '';
-            buildGrid(images);
+            // Only rebuild grid if it's a different bundle
+            const cacheKey = images[0] && images[0].src;
+            if (builtGridSrc !== cacheKey) {
+                buildGrid(images);
+                builtGridSrc = cacheKey;
+            }
             setView('single');
             showAt(startIndex);
             lightbox.classList.add('open');
@@ -346,6 +342,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('open', 'bundle-mode', 'grid-mode');
             document.body.style.overflow = '';
             isBundleMode = false;
+            lbImg.src = '';
+            if (gridView) gridView.scrollTop = 0;
         };
         lightbox.addEventListener('click', e => {
             if (e.target === lightbox || e.target === gridView || e.target.classList.contains('lightbox-close')) closeLb();

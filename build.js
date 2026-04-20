@@ -119,7 +119,10 @@ function bundleAttr(item, prefix) {
   if (!item || item.type !== 'bundle') return '';
   const images = Array.isArray(item.images) ? item.images.filter(im => im && im.src) : [];
   if (!images.length) return '';
-  const payload = images.map(im => ({ src: imgSrc(im.src, prefix), alt: im.alt || '' }));
+  const payload = images.map(im => {
+    const dims = readImgSize(im.src);
+    return { src: imgSrc(im.src, prefix), alt: im.alt || '', w: dims ? dims.w : 0, h: dims ? dims.h : 0 };
+  });
   return ` data-bundle="${encodeURIComponent(JSON.stringify(payload))}"`;
 }
 
