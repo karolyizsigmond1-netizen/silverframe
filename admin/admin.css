@@ -955,6 +955,35 @@ body {
     color: var(--text-dim);
 }
 
+/* Bundle-specific upload zone — always visually prominent */
+.bundle-upload-zone {
+    border-color: var(--accent) !important;
+    background: var(--accent-glow);
+    padding: 28px 20px;
+}
+
+.bundle-upload-zone .bulk-upload-icon {
+    opacity: 1;
+    font-size: 2.4rem;
+}
+
+.bundle-upload-zone .bulk-upload-text {
+    font-size: 1rem;
+    color: var(--accent);
+}
+
+.bundle-upload-zone .bulk-upload-cta {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 4px 0;
+}
+
+.bundle-upload-zone .bulk-upload-hint {
+    font-size: 0.75rem;
+    color: #e88c4a;
+    font-weight: 500;
+}
+
 .bulk-upload-input {
     position: absolute;
     inset: 0;

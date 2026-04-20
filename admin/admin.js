@@ -675,13 +675,13 @@
             <div class="bundle-card-body">
                 <div class="field-section-title">Csomag képek</div>
                 <div class="gallery-grid bundle-inner-grid" data-array-path="${innerPath}">${inner}</div>
-                <div class="bulk-upload-zone" data-bulk-upload="${innerPath}">
-                    <div class="bulk-upload-icon">&#128247;</div>
-                    <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
-                    <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
+                <div class="bulk-upload-zone bundle-upload-zone" data-bulk-upload="${innerPath}">
+                    <div class="bulk-upload-icon">&#128444;&#65039;</div>
+                    <div class="bulk-upload-text"><strong>Képek feltöltése ebbe a képcsomagba</strong></div>
+                    <div class="bulk-upload-cta">Kattintson ide vagy húzzon ide képeket</div>
+                    <div class="bulk-upload-hint">Egyszerre több képet is feltölthet — ne töltsön fel a fő galériába!</div>
                     <input type="file" class="bulk-upload-input" accept="image/*" multiple>
                 </div>
-                <button class="btn-add" data-add-array="${innerPath}" data-template="galleryItem" style="margin-top:8px">+ Kép hozzáadása a csomaghoz</button>
             </div>
         </div>`;
     }
