@@ -432,7 +432,6 @@ ${lightboxHtml()}
     })();
     </script>
 ${chatbotHtml()}
-${chatbotHtml()}
 </body>
 </html>`;
 }
