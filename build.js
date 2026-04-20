@@ -115,6 +115,13 @@ function bodyTag() {
 
 // Encode a bundle's inner images as a data-bundle attribute value.
 // Returns '' if the bundle has no inner images (caller should render it as a regular tile).
+// Sort gallery so bundles always come first, preserving relative order within each group.
+function sortedGallery(gallery) {
+  const bundles = gallery.filter(x => x && x.type === 'bundle');
+  const images  = gallery.filter(x => !x || x.type !== 'bundle');
+  return bundles.concat(images);
+}
+
 function bundleAttr(item, prefix) {
   if (!item || item.type !== 'bundle') return '';
   const images = Array.isArray(item.images) ? item.images.filter(im => im && im.src) : [];
@@ -749,7 +756,7 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                 <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
                     <div class="service-gallery-grid">
-${s.gallery.map(img => {
+${sortedGallery(s.gallery).map(img => {
                           if (img && img.type === 'bundle') {
                             const attr = bundleAttr(img, prefix);
                             const info = bundleInfo(img);
@@ -831,7 +838,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
         <section class="section">
             <div class="container">
                 <div class="masonry">
-${p.gallery.map(img => {
+${sortedGallery(p.gallery).map(img => {
                   if (img && img.type === 'bundle') {
                     const attr = bundleAttr(img, prefix);
                     const info = bundleInfo(img);

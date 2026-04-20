@@ -1144,13 +1144,12 @@
                 card.addEventListener('dragstart', e => {
                     if (e.dataTransfer.types && e.dataTransfer.types.includes('Files')) return;
                     if (isBundle) {
-                        // Only start drag from the drag handle or header; block from inner content
                         if (!e.target.closest('.bundle-card-header')) { e.preventDefault(); return; }
                         if (e.target.closest('button, input, .btn-icon, .bundle-card-header-actions')) { e.preventDefault(); return; }
                     } else {
                         if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
                     }
-                    dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
+                    dragState = { arrayPath, fromIndex: parseInt(card.dataset.index), isBundle };
                     e.dataTransfer.effectAllowed = 'move';
                     e.dataTransfer.setData('text/plain', card.dataset.index);
                     requestAnimationFrame(() => card.classList.add('dragging'));
@@ -1165,6 +1164,8 @@
                 card.addEventListener('dragover', e => {
                     if (e.dataTransfer.types.includes('Files')) return;
                     if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    // Bundles can only swap with bundles; images can only swap with images
+                    if (dragState.isBundle !== isBundle) return;
                     e.preventDefault();
                     e.dataTransfer.dropEffect = 'move';
                     grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
@@ -1181,6 +1182,7 @@
                     e.preventDefault();
                     card.classList.remove('drag-over');
                     if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    if (dragState.isBundle !== isBundle) return;
                     const fromIndex = dragState.fromIndex;
                     const toIndex = parseInt(card.dataset.index);
                     if (fromIndex === toIndex) return;
