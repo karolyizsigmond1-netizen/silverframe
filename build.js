@@ -142,11 +142,14 @@ function bundleInfo(item) {
 }
 
 function fonts() {
+  const href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap';
   return `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">`;
+    <link rel="preload" as="style" href="${href}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="${href}"></noscript>`;
 }
 
-function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImage, cssPath, jsonLd) {
+function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImage, cssPath, jsonLd, preloadImg) {
+  const preload = preloadImg ? `\n    <link rel="preload" as="image" href="${preloadImg.startsWith('http') ? preloadImg : '/' + preloadImg}">` : '';
   return `<!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -158,7 +161,7 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
     <meta property="og:title" content="${ogTitle || title}">
     <meta property="og:description" content="${ogDesc || desc}">
     <meta property="og:type" content="${ogType || 'website'}">
-    <meta property="og:url" content="${ogUrl || canonical}">${ogImage ? `\n    <meta property="og:image" content="${ogImage}">` : ''}
+    <meta property="og:url" content="${ogUrl || canonical}">${ogImage ? `\n    <meta property="og:image" content="${ogImage}">` : ''}${preload}
     ${fonts()}
     <link rel="stylesheet" href="${cssPath}">
     ${jsonLd ? `<script type="application/ld+json">\n    ${jsonLd}\n    </script>` : ''}
@@ -308,7 +311,8 @@ function buildIndex() {
     "sameAs": sameAs
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80', 'css/style.css', jsonLd)}
+  const heroPreload = p.heroImages && p.heroImages[0] ? p.heroImages[0] : null;
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80', 'css/style.css', jsonLd, heroPreload)}
 ${bodyTag()}
 ${boilerplate()}
 
@@ -413,7 +417,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
 ${lightboxHtml()}
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script>
     (function(){
         var slides = document.querySelectorAll('.home-hero-slide');
@@ -487,7 +491,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -554,7 +558,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
 ${lightboxHtml()}
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -612,7 +616,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -667,7 +671,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -720,7 +724,7 @@ function buildServicePage(id) {
     nextNav = `<a href="../services.html" class="service-nav-link next"><span class="service-nav-label">${s.nextLabel || 'Összes szolgáltatás'}</span><span class="service-nav-title">${s.nextTitle}</span></a>`;
   }
 
-  return `${headHtml(s.title, s.metaDesc, `${g.baseUrl}/services/${id}.html`, s.title, s.metaDesc, 'website', `${g.baseUrl}/services/${id}.html`, s.ogImage, '../css/style.css', jsonLd)}
+  return `${headHtml(s.title, s.metaDesc, `${g.baseUrl}/services/${id}.html`, s.title, s.metaDesc, 'website', `${g.baseUrl}/services/${id}.html`, s.ogImage, '../css/style.css', jsonLd, s.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml(prefix, null, id)}
@@ -786,7 +790,7 @@ ${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton)}
 
 ${footerHtml(prefix)}
 ${lightboxHtml()}
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>`;
 }
@@ -818,7 +822,7 @@ function buildPortfolioPage(id) {
     ]
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd)}
+  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd, p.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
     <header class="header" role="banner">
@@ -866,7 +870,7 @@ ${sortedGallery(p.gallery).map(img => {
 
 ${footerHtml(prefix)}
 ${lightboxHtml()}
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>`;
 }

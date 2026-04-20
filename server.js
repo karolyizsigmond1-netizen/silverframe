@@ -3,6 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
+let sharp; try { sharp = require('sharp'); } catch(e) { sharp = null; }
+
+async function compressImage(buf, ext) {
+    if (!sharp) return buf;
+    try {
+        const img = sharp(buf);
+        const meta = await img.metadata();
+        const needsResize = meta.width > 1920 || meta.height > 1920;
+        let p = needsResize ? img.resize(1920, 1920, { fit: 'inside', withoutEnlargement: true }) : img;
+        return ext === '.png'
+            ? await p.png({ compressionLevel: 8 }).toBuffer()
+            : await p.jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+    } catch(e) { return buf; }
+}
 
 const PORT = 3000;
 const ROOT = __dirname;
@@ -89,7 +103,7 @@ const server = http.createServer((req, res) => {
     if (req.method === 'POST' && req.url === '/api/upload') {
         const chunks = [];
         req.on('data', chunk => chunks.push(chunk));
-        req.on('end', () => {
+        req.on('end', async () => {
             const buffer = Buffer.concat(chunks);
             const boundary = req.headers['content-type'].split('boundary=')[1];
             if (!boundary) {
@@ -101,18 +115,18 @@ const server = http.createServer((req, res) => {
             const results = [];
             for (const part of parts) {
                 if (part.filename) {
-                    // Hash file content to detect duplicates
-                    const hash = crypto.createHash('md5').update(part.data).digest('hex').substring(0, 12);
                     const ext = path.extname(part.filename).toLowerCase() || '.jpg';
-
-                    // Check if a file with the same hash already exists
+                    // Compress before hashing so duplicate detection works on compressed version
+                    const data = /\.(jpg|jpeg|png|webp)$/i.test(part.filename)
+                        ? await compressImage(part.data, ext)
+                        : part.data;
+                    const hash = crypto.createHash('md5').update(data).digest('hex').substring(0, 12);
                     const existing = findExistingByHash(hash, ext);
                     if (existing) {
                         results.push({ original: part.filename, url: 'uploads/' + existing, reused: true });
                     } else {
                         const safeName = hash + '-' + part.filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-                        const filePath = path.join(UPLOADS_DIR, safeName);
-                        fs.writeFileSync(filePath, part.data);
+                        fs.writeFileSync(path.join(UPLOADS_DIR, safeName), data);
                         results.push({ original: part.filename, url: 'uploads/' + safeName });
                     }
                 }
