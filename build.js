@@ -856,9 +856,10 @@ ${sortedGallery(p.gallery).map(img => {
                         ${badge}
                     </article>`;
                   }
-                  return `                    <article class="masonry-item">
+                  const hasTitle = img.title && img.title.trim();
+                  return `                    <article class="masonry-item${hasTitle ? '' : ' no-title'}">
                         <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy">
-                        <div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>
+                        ${hasTitle ? `<div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>` : ''}
                     </article>`;
                 }).join('\n')}
                 </div>
