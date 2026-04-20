@@ -177,11 +177,12 @@
 (function() {
   // ── Config ──
   var WEBHOOK = 'https://n8n-giez.srv1499541.hstgr.cloud/webhook/silverframe-chat';
-  var DEMO_MODE = false; // false = live n8n | true = scripted demo responses
-
+  var DEMO_MODE = false;
+  var STORAGE_KEY = 'sf_chat_v1';
+  var MAX_MESSAGES = 60;
+  var SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
   // ── State ──
-  var sessionId = 'sf-' + Math.random().toString(36).substring(2, 10);
   var isOpen = false;
   var isSending = false;
 
@@ -192,13 +193,56 @@
   var sendBtn  = document.getElementById('sfSendBtn');
   var quickEl  = document.getElementById('sfQuickReplies');
 
+  // ── Persistence ──
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var s = JSON.parse(raw);
+      if (Date.now() - s.ts > SESSION_TTL) { localStorage.removeItem(STORAGE_KEY); return null; }
+      return s;
+    } catch(e) { return null; }
+  }
+
+  function saveState() {
+    try {
+      var history = [];
+      msgs.querySelectorAll('.sf-message:not(.typing)').forEach(function(el) {
+        history.push({ role: el.classList.contains('user') ? 'user' : 'bot', text: el.textContent });
+      });
+      if (history.length > MAX_MESSAGES) history = history.slice(-MAX_MESSAGES);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ sessionId: sessionId, history: history, open: isOpen, ts: Date.now() }));
+    } catch(e) {}
+  }
+
+  var stored = loadState();
+  var sessionId = stored ? stored.sessionId : ('sf-' + Math.random().toString(36).substring(2, 10));
+
+  // ── Restore history ──
+  if (stored && stored.history && stored.history.length) {
+    stored.history.forEach(function(m) { addMsgDirect(m.role, m.text); });
+  }
+
   // ── Toggle ──
   toggle.addEventListener('click', function() {
     isOpen = !isOpen;
     toggle.classList.toggle('open', isOpen);
     win.classList.toggle('open', isOpen);
-    if (isOpen) { input.focus(); if (msgs.children.length === 0) showWelcome(); }
+    if (isOpen) {
+      input.focus();
+      msgs.scrollTop = msgs.scrollHeight;
+      if (msgs.querySelectorAll('.sf-message').length === 0) showWelcome();
+    }
+    saveState();
   });
+
+  // Restore open state
+  if (stored && stored.open) {
+    isOpen = true;
+    toggle.classList.add('open');
+    win.classList.add('open');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
 
   // ── Welcome ──
   function showWelcome() {
@@ -207,12 +251,17 @@
   }
 
   // ── Messages ──
-  function addMsg(role, text) {
+  function addMsgDirect(role, text) {
     var d = document.createElement('div');
     d.className = 'sf-message ' + role;
     d.textContent = text;
     msgs.appendChild(d);
+  }
+
+  function addMsg(role, text) {
+    addMsgDirect(role, text);
     msgs.scrollTop = msgs.scrollHeight;
+    saveState();
   }
 
   function showTyping() {
@@ -245,7 +294,7 @@
     var lower = t.toLowerCase();
 
     if (DEMO_MODE) {
-      getDemoReply(lower).then(function(r) { hideTyping(); addMsg('bot', r); setFollowUp(lower); isSending = false; sendBtn.disabled = false; input.focus(); });
+      getDemoReply(lower).then(function(r) { hideTyping(); addMsg('bot', r); setFollowUp(lower); isSending = false; sendBtn.disabled = false; input.focus(); saveState(); });
       return;
     }
 
@@ -266,7 +315,7 @@
     .catch(function() { return getDemoReply(lower); })
     .then(function(r) {
       hideTyping(); addMsg('bot', r); setFollowUp(lower);
-      isSending = false; sendBtn.disabled = false; input.focus();
+      isSending = false; sendBtn.disabled = false; input.focus(); saveState();
     });
   }
 

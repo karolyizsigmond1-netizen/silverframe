@@ -432,6 +432,7 @@ ${lightboxHtml()}
     })();
     </script>
 ${chatbotHtml()}
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -492,6 +493,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
 
 ${footerHtml('')}
     <script src="js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -559,6 +561,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 ${footerHtml('')}
 ${lightboxHtml()}
     <script src="js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -617,6 +620,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
     <script src="js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -672,6 +676,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
 
 ${footerHtml('')}
     <script src="js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -791,6 +796,7 @@ ${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton)}
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="../js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }
@@ -872,6 +878,7 @@ ${sortedGallery(p.gallery).map(img => {
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="../js/main.js" defer></script>
+${chatbotHtml()}
 </body>
 </html>`;
 }

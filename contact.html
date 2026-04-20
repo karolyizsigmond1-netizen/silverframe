@@ -155,5 +155,400 @@
         </div>
     </footer>
     <script src="js/main.js" defer></script>
+<!-- ============================================
+     SILVERFRAME CHATBOT — Anetan AI
+     Paste this entire block before </body>
+     ============================================ -->
+
+<style>
+  .sf-chat-toggle {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1C1C1C, #444444);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 10000;
+  }
+  .sf-chat-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.5); }
+  .sf-chat-toggle svg { width: 28px; height: 28px; fill: white; }
+  .sf-chat-toggle .sf-close-icon { display: none; }
+  .sf-chat-toggle.open .sf-chat-icon { display: none; }
+  .sf-chat-toggle.open .sf-close-icon { display: block; }
+
+  .sf-chat-window {
+    position: fixed;
+    bottom: 104px;
+    right: 28px;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    height: 590px;
+    max-height: calc(100vh - 140px);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.14);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  .sf-chat-window.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+  .sf-chat-header {
+    background: linear-gradient(135deg, #1C1C1C, #3a3a3a);
+    color: #fff;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .sf-chat-header .sf-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .sf-chat-header .sf-info h3 { font-size: 1rem; font-weight: 700; margin: 0; }
+  .sf-chat-header .sf-info p { font-size: 0.76rem; opacity: 0.75; margin: 2px 0 0; }
+
+  .sf-status-dot {
+    width: 8px; height: 8px; background: #90EE90; border-radius: 50%;
+    display: inline-block; margin-right: 5px;
+    animation: sfPulse 2s infinite;
+  }
+  @keyframes sfPulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+  .sf-chat-messages {
+    flex: 1; overflow-y: auto; padding: 18px;
+    display: flex; flex-direction: column; gap: 10px;
+    background: #F8F7F6;
+  }
+  .sf-chat-messages::-webkit-scrollbar { width: 4px; }
+  .sf-chat-messages::-webkit-scrollbar-thumb { background: #DDD; border-radius: 4px; }
+
+  .sf-message {
+    max-width: 84%; padding: 11px 15px; border-radius: 16px;
+    font-size: 0.9rem; line-height: 1.55;
+    animation: sfFadeIn 0.3s ease; white-space: pre-wrap;
+  }
+  @keyframes sfFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  .sf-message.bot {
+    background: #fff; color: #2b2b2b; border: 1px solid #E8E8E8;
+    align-self: flex-start; border-bottom-left-radius: 4px;
+  }
+  .sf-message.user {
+    background: linear-gradient(135deg, #2c2c2c, #4a4a4a);
+    color: #fff; align-self: flex-end; border-bottom-right-radius: 4px;
+  }
+  .sf-message.typing {
+    background: #fff; border: 1px solid #E8E8E8;
+    align-self: flex-start; border-bottom-left-radius: 4px; padding: 14px 18px;
+  }
+  .sf-typing-dots { display: flex; gap: 5px; }
+  .sf-typing-dots span {
+    width: 7px; height: 7px; background: #C0C0C0; border-radius: 50%;
+    animation: sfBounce 1.4s infinite;
+  }
+  .sf-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .sf-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes sfBounce { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-6px); } }
+
+  .sf-quick-replies {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    padding: 0 16px 10px; background: #F8F7F6; flex-shrink: 0;
+  }
+  .sf-quick-reply {
+    background: #fff; border: 1.5px solid #1C1C1C; color: #1C1C1C;
+    padding: 6px 13px; border-radius: 20px; font-size: 0.8rem;
+    cursor: pointer; transition: all 0.18s; font-family: inherit;
+  }
+  .sf-quick-reply:hover { background: #1C1C1C; color: #fff; }
+
+  .sf-chat-input-area {
+    padding: 14px 16px; background: #fff; border-top: 1px solid #EFEFEF;
+    display: flex; gap: 9px; align-items: center; flex-shrink: 0;
+  }
+  .sf-chat-input-area input {
+    flex: 1; border: 1.5px solid #E0E0E0; border-radius: 24px;
+    padding: 10px 17px; font-size: 0.9rem; outline: none;
+    font-family: inherit; transition: border-color 0.2s;
+  }
+  .sf-chat-input-area input:focus { border-color: #1C1C1C; }
+  .sf-chat-input-area button {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, #1C1C1C, #444);
+    border: none; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: transform 0.15s; flex-shrink: 0;
+  }
+  .sf-chat-input-area button:hover { transform: scale(1.08); }
+  .sf-chat-input-area button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .sf-chat-input-area button svg { width: 17px; height: 17px; fill: white; }
+
+  .sf-powered-by {
+    text-align: center; padding: 7px; font-size: 0.69rem;
+    color: #bbb; background: #fff; flex-shrink: 0;
+  }
+</style>
+
+<!-- Chat toggle button -->
+<button class="sf-chat-toggle" id="sfChatToggle" aria-label="Chat megnyitása">
+  <svg class="sf-chat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+  <svg class="sf-close-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+</button>
+
+<!-- Chat window -->
+<div class="sf-chat-window" id="sfChatWindow">
+  <div class="sf-chat-header">
+    <div class="sf-avatar">📸</div>
+    <div class="sf-info">
+      <h3>Silverframe Asszisztens</h3>
+      <p><span class="sf-status-dot"></span>Online — Segítségre készen</p>
+    </div>
+  </div>
+  <div class="sf-chat-messages" id="sfChatMessages"></div>
+  <div class="sf-quick-replies" id="sfQuickReplies"></div>
+  <div class="sf-chat-input-area">
+    <input type="text" id="sfChatInput" placeholder="Kérdezz csomagokról, árakról, időpontokról..." autocomplete="off">
+    <button id="sfSendBtn" aria-label="Küldés">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ── Config ──
+  var WEBHOOK = 'https://n8n-giez.srv1499541.hstgr.cloud/webhook/silverframe-chat';
+  var DEMO_MODE = false;
+  var STORAGE_KEY = 'sf_chat_v1';
+  var MAX_MESSAGES = 60;
+  var SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+  // ── State ──
+  var isOpen = false;
+  var isSending = false;
+
+  var toggle   = document.getElementById('sfChatToggle');
+  var win      = document.getElementById('sfChatWindow');
+  var msgs     = document.getElementById('sfChatMessages');
+  var input    = document.getElementById('sfChatInput');
+  var sendBtn  = document.getElementById('sfSendBtn');
+  var quickEl  = document.getElementById('sfQuickReplies');
+
+  // ── Persistence ──
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var s = JSON.parse(raw);
+      if (Date.now() - s.ts > SESSION_TTL) { localStorage.removeItem(STORAGE_KEY); return null; }
+      return s;
+    } catch(e) { return null; }
+  }
+
+  function saveState() {
+    try {
+      var history = [];
+      msgs.querySelectorAll('.sf-message:not(.typing)').forEach(function(el) {
+        history.push({ role: el.classList.contains('user') ? 'user' : 'bot', text: el.textContent });
+      });
+      if (history.length > MAX_MESSAGES) history = history.slice(-MAX_MESSAGES);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ sessionId: sessionId, history: history, open: isOpen, ts: Date.now() }));
+    } catch(e) {}
+  }
+
+  var stored = loadState();
+  var sessionId = stored ? stored.sessionId : ('sf-' + Math.random().toString(36).substring(2, 10));
+
+  // ── Restore history ──
+  if (stored && stored.history && stored.history.length) {
+    stored.history.forEach(function(m) { addMsgDirect(m.role, m.text); });
+  }
+
+  // ── Toggle ──
+  toggle.addEventListener('click', function() {
+    isOpen = !isOpen;
+    toggle.classList.toggle('open', isOpen);
+    win.classList.toggle('open', isOpen);
+    if (isOpen) {
+      input.focus();
+      msgs.scrollTop = msgs.scrollHeight;
+      if (msgs.querySelectorAll('.sf-message').length === 0) showWelcome();
+    }
+    saveState();
+  });
+
+  // Restore open state
+  if (stored && stored.open) {
+    isOpen = true;
+    toggle.classList.add('open');
+    win.classList.add('open');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  // ── Welcome ──
+  function showWelcome() {
+    addMsg('bot', 'Szia! Üdv a Silverframe Stúdióban! 📸\n\nSegítünk megtalálni a neked megfelelő fotóscsomagot és időpontot foglalni Istvánnal.\n\nMilyen fotózást keresel?');
+    showQuick(['Milyen fotózásokat kínáltok?', 'Esküvői fotózás', 'Családi vagy páros fotózás', 'Időpontot foglalnék']);
+  }
+
+  // ── Messages ──
+  function addMsgDirect(role, text) {
+    var d = document.createElement('div');
+    d.className = 'sf-message ' + role;
+    d.textContent = text;
+    msgs.appendChild(d);
+  }
+
+  function addMsg(role, text) {
+    addMsgDirect(role, text);
+    msgs.scrollTop = msgs.scrollHeight;
+    saveState();
+  }
+
+  function showTyping() {
+    var d = document.createElement('div');
+    d.className = 'sf-message typing'; d.id = 'sfTyping';
+    d.innerHTML = '<div class="sf-typing-dots"><span></span><span></span><span></span></div>';
+    msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function hideTyping() { var e = document.getElementById('sfTyping'); if (e) e.remove(); }
+
+  // ── Quick replies ──
+  function showQuick(opts) {
+    quickEl.innerHTML = '';
+    opts.forEach(function(t) {
+      var b = document.createElement('button');
+      b.className = 'sf-quick-reply'; b.textContent = t;
+      b.addEventListener('click', function() { send(t); });
+      quickEl.appendChild(b);
+    });
+  }
+
+  // ── Send ──
+  function send(text) {
+    if (!text || !text.trim() || isSending) return;
+    var t = text.trim();
+    addMsg('user', t); quickEl.innerHTML = ''; input.value = '';
+    isSending = true; sendBtn.disabled = true; showTyping();
+
+    var lower = t.toLowerCase();
+
+    if (DEMO_MODE) {
+      getDemoReply(lower).then(function(r) { hideTyping(); addMsg('bot', r); setFollowUp(lower); isSending = false; sendBtn.disabled = false; input.focus(); saveState(); });
+      return;
+    }
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: t, sessionId: sessionId })
+    })
+    .then(function(res) { return res.text(); })
+    .then(function(raw) {
+      var reply = null;
+      if (raw && raw.trim()) {
+        try { var d = JSON.parse(raw); reply = d.reply || d.message || d.output || d.text; } catch(e) {}
+      }
+      if (!reply) return getDemoReply(lower);
+      return reply;
+    })
+    .catch(function() { return getDemoReply(lower); })
+    .then(function(r) {
+      hideTyping(); addMsg('bot', r); setFollowUp(lower);
+      isSending = false; sendBtn.disabled = false; input.focus(); saveState();
+    });
+  }
+
+  function setFollowUp(lower) {
+    if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer')) {
+      showQuick(['Esküvő', 'Portré / Modell', 'Kismama fotózás', 'Rendezvényfotózás']);
+    } else if (lower.includes('esküvő') || lower.includes('wedding')) {
+      showQuick(['Mennyi ideig tart?', 'Mi van a csomagban?', 'Kreatív esküvői opció', 'Árajánlatot kérek']);
+    } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('üzleti') || lower.includes('céges')) {
+      showQuick(['Mennyi ideig tart?', 'Hol lesz a fotózás?', 'Hány képet kapok?', 'Időpontot foglalnék']);
+    } else if (lower.includes('család') || lower.includes('pár') || lower.includes('kismama')) {
+      showQuick(['Beltéri vagy kültéri?', 'Mennyi ideig tart?', 'Mik az árak?', 'Időpontot foglalnék']);
+    } else if (lower.includes('ár') || lower.includes('csomag') || lower.includes('mennyibe') || lower.includes('price')) {
+      showQuick(['Esküvői csomagok', 'Portré szesszió', 'Rendezvényfotózás', 'Árajánlatot kérek']);
+    } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad')) {
+      showQuick(['E-mailt küldök', 'Instagram üzenet', 'Milyen infóra van szükség?']);
+    } else {
+      showQuick(['Összes fotózás típus', 'Árinformáció', 'Időpontot foglalnék', 'Kapcsolat Istvánnal']);
+    }
+  }
+
+  // ── Demo responses ──
+  function getDemoReply(lower) {
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer')) {
+          resolve('A Silverframe Stúdió számos fotózási típust kínál:\n\n• Portré és modellszesszió\n• Kismama fotózás és újszülött fotók\n• Boudoir\n• Családi portrék\n• Páros és jegyesi fotózás\n• Üzleti / céges arcképek\n• Ingatlan- és enteriőrfotózás\n• Esküvői fotózás (hagyományos és kreatív)\n• Rendezvény- és cégesfotózás\n• Kisállat fotózás\n• Termékfotózás\n\nMindent a te igényeidre szabunk. Melyik érdekel leginkább?');
+        } else if ((lower.includes('esküvő') || lower.includes('wedding')) && (lower.includes('kreatív') || lower.includes('creative'))) {
+          resolve('István kreatív esküvői fotózása messze túlmutat a szokványos képeken – ez valójában történetmesélés, hangulat és az igazi pillanatok megörökítése.\n\nDokumentarista stílus és művészi kompozíció keveréke. Kevesebb póz, több valódiság.\n\nSzeretnél példákat látni, vagy megbeszélni az elképzeléseidet? Keress minket: info@silverframe.hu vagy @silverframefoto Instagramon.');
+        } else if (lower.includes('esküvő') || lower.includes('wedding')) {
+          resolve('Az esküvői fotózás István egyik szakterülete – 10+ év tapasztalattal pontosan tudja, hogyan kell megragadni a nap érzelmeit anélkül, hogy állandóan a kamera előtt éreznéd magad.\n\nA lefedettség általában magában foglalja az öltöztetést, a ceremóniát és a bulit. Kreatív esküvői fotózás is elérhető azoknak a párnak, akik egyedibb megközelítést szeretnének.\n\nEllenőrizd a dátumodat: írj az info@silverframe.hu-ra a dátummal és a helyszínnel.');
+        } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('portfol')) {
+          resolve('A portré és modellszessziók kiválóak portfolio építéséhez vagy megújításához. István olyan légkört teremt, amelyben természetesnek érzed magad – nem merev, hanem önmagad.\n\nA fotózás stúdióban vagy külső helyszínen is elvégezhető Szegeden és környékén.\n\nHány outfitet vagy beállítást tervezel? Ez segít a szesszió hosszát és a csomagot meghatározni.');
+        } else if (lower.includes('boudoir')) {
+          resolve('A boudoir szessziók intim és személyes élmények – István professzionálisan és diszkréten közelíti meg ezeket, hogy mindvégig kényelemben és magabiztosan érezd magad.\n\nA cél mindig az, hogy a legjobb formádat mutasd, hitelesen.\n\nRészletekért írj: info@silverframe.hu.');
+        } else if (lower.includes('kismama') || lower.includes('terhes') || lower.includes('várandós') || lower.includes('újszülött')) {
+          resolve('A kismama fotózásra ideális időpont a 28–34. terhességi hét – amikor a pocak gyönyörűen látszik, de még kényelmes minden.\n\nIstván meleg, érzelmes képeket készít, amelyeket egész életedben kincsként fogsz őrizni.\n\nSzeretné megbeszélni az időzítést? Keress minket: info@silverframe.hu.');
+        } else if (lower.includes('család') || lower.includes('gyerek') || lower.includes('gyermek')) {
+          resolve('A családi fotózások megörökítik a jelent – és ezek a pillanatok gyorsan változnak.\n\nIstván remekül dolgozik gyerekekkel – inkább játékos és laza légkört teremt, semmint merev pózokat erőltet.\n\nHány fős a család? Ez segít megtervezni a szesszió hosszát.');
+        } else if (lower.includes('páros') || lower.includes('jegyes') || lower.includes('pár')) {
+          resolve('Páros és jegyesi fotózás remek lehetőség arra, hogy megszokd a kamera előtt érzést – vagy hogy egyszerűen szép képeket kapjatok egymásról.\n\nIstván természetes pillanatokat és valódi kapcsolatot örökít meg, nem csak pózokat. A szesszió jellemzően 1–2 óráig tart.\n\nÍrjatok: info@silverframe.hu vagy @silverframefoto.');
+        } else if (lower.includes('üzleti') || lower.includes('céges') || lower.includes('vállalkozás') || lower.includes('fejlövés')) {
+          resolve('Az üzleti portréfotózás gyors és hatékony – általában 30–60 perc. Profi, igényes fejlövésekkel távozhatsz, amelyek tökéletesek LinkedIn-hez, weboldalhoz vagy sajtóanyaghoz.\n\nIstván tiszta, semleges stílusban fényképez, hogy te kerülj a fókuszba.\n\nIdőpontot foglalnál? Írj az info@silverframe.hu-ra.');
+        } else if (lower.includes('ingatlan') || lower.includes('lakás') || lower.includes('enteriőr')) {
+          resolve('Az ingatlanfotózás gyors átfutást és olyan képeket igényel, amelyek a legjobb fényben mutatják be az ingatlant.\n\nIstván belső tereket, külső homlokzatokat és részletfotókat is készít.\n\nHelyszínnel és időzítési igényekkel írj: info@silverframe.hu.');
+        } else if (lower.includes('rendezvény') || lower.includes('esemény') || lower.includes('buli') || lower.includes('event')) {
+          resolve('A rendezvényfotózás magában foglalja a céges eseményeket, bulikat, termékbemutatókat, konferenciákat és személyes ünnepléseket.\n\nIstván feltűnésmentesen dolgozik, megörökítve a kulcspillanatokat az esemény során.\n\nDátummal és helyszínnel írj: info@silverframe.hu.');
+        } else if (lower.includes('kisállat') || lower.includes('kutya') || lower.includes('macska') || lower.includes('állat')) {
+          resolve('A kisállat fotózással megörökítjük a négylábú barátod személyiségét – nem csak egy általános állatfotót készítünk.\n\nKutyák, macskák, lovak – mindenki szívesen látott.\n\nFoglalnál időpontot? Írj: info@silverframe.hu vagy @silverframefoto Instagramon.');
+        } else if (lower.includes('termék') || lower.includes('kereskedelm')) {
+          resolve('A termékfotózás a márkádra szabva készül – tiszta fehér hátteres e-kereskedelmi képektől a lifestyle fotókig.\n\nIstván szegedi és környékbeli kis- és egyéni vállalkozásokkal dolgozik együtt.\n\nA terméked megbeszéléséhez írj: info@silverframe.hu.');
+        } else if (lower.includes('ár') || lower.includes('mennyibe') || lower.includes('díj') || lower.includes('csomag') || lower.includes('ajánlat') || lower.includes('price') || lower.includes('cost')) {
+          resolve('Az árazás a szesszió típusától, hosszától és a tartalomtól függ.\n\nIstván szívesebben állít össze személyre szabott ajánlatot – így csak azért fizetsz, amire valóban szükséged van.\n\nAjánlatkérés: küldj e-mailt az info@silverframe.hu-ra a szesszió típusával. Általában aznap választ kapsz.');
+        } else if (lower.includes('hol') || lower.includes('helyszín') || lower.includes('stúdió') || lower.includes('szeged')) {
+          resolve('A Silverframe Stúdió Szegeden, Magyarországon működik.\n\nA fotózás elvégezhető stúdióban vagy külső helyszínen – parkokban, városi terekben, otthonodban, templomban esküvőkhöz.\n\nIstván esküvőkre és nagyobb eseményekre utazik is.');
+        } else if (lower.includes('mennyi') || lower.includes('meddig') || lower.includes('óra') || lower.includes('hosszú')) {
+          resolve('A szesszió hossza típusonként változik:\n\n• Üzleti arcképek: 30–60 perc\n• Páros / Családi: 1–2 óra\n• Kismama / Portré: 1–2 óra\n• Rendezvény: fél- vagy egész nap\n• Esküvő: általában 6–10 óra\n\nVan valamilyen konkrét szesszió a fejedben?');
+        } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad') || lower.includes('elérhetőség') || lower.includes('kapcsolat')) {
+          resolve('A foglaláshoz vagy az elérhetőség ellenőrzéséhez lépj kapcsolatba Istvánnal:\n\n📧 info@silverframe.hu\n📸 @silverframefoto (Instagram)\n📘 silverframefoto (Facebook)\n\nCsak jelezd a fotózás típusát, a preferált dátumot és az egyéb részleteket – hamarosan visszajelez.');
+        } else if (lower.includes('istván') || lower.includes('fotós') || lower.includes('tapasztalat') || lower.includes('ki vagy') || lower.includes('rólad')) {
+          resolve('István a Silverframe Stúdió mögötti fotós – szegedi, 10+ év szakmai tapasztalattal.\n\nMegközelítése laza és személyes. Az ügyfelek következetesen megemlítik, hogy kényelemben érezték magukat a fotózáson – és ez pontosan az oka, hogy a képek igaziak lesznek.\n\nSok különböző stílusban dolgozik – a csendes portréktól a dinamikus rendezvényfotózásig. Számára minden pillanat számít.');
+        } else {
+          resolve('Jó kérdés! István szívesen megbeszéli személyesen.\n\n📧 info@silverframe.hu\n📸 @silverframefoto Instagramon\n\nCsak jelezd, milyen fotózásra gondolsz, és hamarosan visszajelez.');
+        }
+      }, 600 + Math.random() * 900);
+    });
+  }
+
+  sendBtn.addEventListener('click', function() { send(input.value); });
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') send(input.value); });
+})();
+</script>
+
+<!-- ============================================
+     END SILVERFRAME CHATBOT
+     ============================================ -->
+
 </body>
 </html>
