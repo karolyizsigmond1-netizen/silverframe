@@ -18,14 +18,16 @@
       "name": "Portfólió / Modell",
       "num": "01",
       "portfolioId": "portrait",
-      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
+      "img": "uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg"
     },
     {
       "id": "maternity",
       "name": "Kismama",
       "num": "02",
       "portfolioId": "maternity",
-      "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80",
+      "img": "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg"
     },
     {
       "id": "boudoir",
