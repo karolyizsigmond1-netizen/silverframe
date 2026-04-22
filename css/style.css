@@ -949,6 +949,22 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 
 /* Row height controlled by JS justifyMasonry(); breakpoints just change the target height */
 
+/* ── Gallery sections: bundles above, images below ── */
+.gallery-section + .gallery-section { margin-top: 4rem; }
+.gallery-section-header {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-bottom: 1.8rem;
+}
+.gallery-section-header::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--text-muted), transparent);
+    opacity: 0.3;
+}
+.gallery-section-label {
+    font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent); white-space: nowrap;
+}
+
 /* ── Bundle tiles — grouped image sets ── */
 .is-bundle {
     position: relative;

@@ -122,6 +122,57 @@ function sortedGallery(gallery) {
   return bundles.concat(images);
 }
 
+// Render gallery as two separate sections: bundles on top, images below.
+// opts: { tag: 'article'|'div', extraClass: string, withOverlay: bool }
+function renderGallerySections(gallery, prefix, opts) {
+  const tag = opts.tag || 'article';
+  const extraCls = opts.extraClass || '';
+  const withOverlay = opts.withOverlay !== false;
+
+  const bundles = (gallery || []).filter(x => x && x.type === 'bundle');
+  const images  = (gallery || []).filter(x => !x || x.type !== 'bundle');
+
+  function renderBundle(img) {
+    const attr = bundleAttr(img, prefix);
+    const info = bundleInfo(img);
+    const cls = attr ? `masonry-item${extraCls} is-bundle` : `masonry-item${extraCls}`;
+    const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
+    const title = img.title || info.alt || '';
+    const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
+    return `                    <${tag} class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">${caption}${badge}</${tag}>`;
+  }
+
+  function renderImage(img) {
+    if (!withOverlay) {
+      return `                    <${tag} class="masonry-item${extraCls}"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy"></${tag}>`;
+    }
+    const hasTitle = img.title && img.title.trim();
+    return `                    <${tag} class="masonry-item${extraCls}${hasTitle ? '' : ' no-title'}"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy">${hasTitle ? `<div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>` : ''}</${tag}>`;
+  }
+
+  const parts = [];
+
+  if (bundles.length) {
+    parts.push(`                <div class="gallery-section">
+                    <div class="gallery-section-header"><span class="gallery-section-label">Képsorozatok</span></div>
+                    <div class="masonry">
+${bundles.map(renderBundle).join('\n')}
+                    </div>
+                </div>`);
+  }
+
+  if (images.length) {
+    const hdr = bundles.length ? `<div class="gallery-section-header"><span class="gallery-section-label">Fotók</span></div>\n                    ` : '';
+    parts.push(`                <div class="gallery-section">
+                    ${hdr}<div class="masonry">
+${images.map(renderImage).join('\n')}
+                    </div>
+                </div>`);
+  }
+
+  return parts.join('\n');
+}
+
 function bundleAttr(item, prefix) {
   if (!item || item.type !== 'bundle') return '';
   const images = Array.isArray(item.images) ? item.images.filter(im => im && im.src) : [];
@@ -763,20 +814,7 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
 
                 <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
-                    <div class="masonry">
-${sortedGallery(s.gallery).map(img => {
-                          if (img && img.type === 'bundle') {
-                            const attr = bundleAttr(img, prefix);
-                            const info = bundleInfo(img);
-                            const cls = attr ? 'masonry-item service-gallery-item is-bundle' : 'masonry-item service-gallery-item';
-                            const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
-                            const title = img.title || info.alt || '';
-                            const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
-                            return `                        <div class="${cls}"${attr}><img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">${caption}${badge}</div>`;
-                          }
-                          return `                        <div class="masonry-item service-gallery-item"><img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy"></div>`;
-                        }).join('\n')}
-                    </div>
+${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-gallery-item', withOverlay: false })}
                     <div style="text-align:center; margin-top: 2.5rem;">
                         <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
                     </div>
@@ -846,28 +884,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főol
 
         <section class="section">
             <div class="container">
-                <div class="masonry">
-${sortedGallery(p.gallery).map(img => {
-                  if (img && img.type === 'bundle') {
-                    const attr = bundleAttr(img, prefix);
-                    const info = bundleInfo(img);
-                    const cls = attr ? 'masonry-item is-bundle' : 'masonry-item';
-                    const badge = attr ? `<span class="bundle-badge" aria-hidden="true"><span class="bundle-badge-count">${info.count}</span><span class="bundle-badge-label">kép</span></span>` : '';
-                    const title = img.title || info.alt || '';
-                    const caption = attr && title ? `<div class="bundle-caption"><h3>${title}</h3>${img.subtitle ? `<span>${img.subtitle}</span>` : ''}</div>` : '';
-                    return `                    <article class="${cls}"${attr}>
-                        <img src="${imgSrc(info.cover, prefix)}"${imgStyle(info.cover)} alt="${info.alt}" ${imgDims(info.cover, 1920, 1080)} loading="lazy">
-                        ${caption}
-                        ${badge}
-                    </article>`;
-                  }
-                  const hasTitle = img.title && img.title.trim();
-                  return `                    <article class="masonry-item${hasTitle ? '' : ' no-title'}">
-                        <img src="${imgSrc(img.src, prefix)}"${imgStyle(img.src)} alt="${img.alt}" ${imgDims(img.src, 1920, 1080)} loading="lazy">
-                        ${hasTitle ? `<div class="masonry-overlay"><h3>${img.title}</h3><span>${img.subtitle}</span></div>` : ''}
-                    </article>`;
-                }).join('\n')}
-                </div>
+${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', withOverlay: true })}
             </div>
         </section>
 
