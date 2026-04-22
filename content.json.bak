@@ -4000,11 +4000,444 @@
         },
         {
           "type": "bundle",
-          "cover": "",
+          "cover": "uploads/d7d71fd9d470-Bea-Kris-eskuvo__108_of_108__1.jpg",
           "alt": "",
           "title": "B&K",
           "subtitle": "Liget Rezidencia",
-          "images": []
+          "images": [
+            {
+              "src": "uploads/b48d3411b69e-Bea-Kris-eskuvo__99_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2e6479348b0d-Bea-Kris-eskuvo__100_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a85def0c9ec9-Bea-Kris-eskuvo__101_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f4d255e1629a-Bea-Kris-eskuvo__102_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c3e04bf3a69-Bea-Kris-eskuvo__103_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2457aaf8edfc-Bea-Kris-eskuvo__104_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5f9a1469d6ef-Bea-Kris-eskuvo__105_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/90d71888a151-Bea-Kris-eskuvo__106_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ac251c7bacf8-Bea-Kris-eskuvo__107_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d7d71fd9d470-Bea-Kris-eskuvo__108_of_108__1.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a8bb450fb635-Bea-Kris-eskuvo__1_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/153bc2fb26dd-Bea-Kris-eskuvo__2_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/150dd5086417-Bea-Kris-eskuvo__3_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/784f6cc6d70a-Bea-Kris-eskuvo__4_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3e3736e525c2-Bea-Kris-eskuvo__5_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e5db3c07c2ce-Bea-Kris-eskuvo__6_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3f5885de0d1-Bea-Kris-eskuvo__7_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3be5474f5256-Bea-Kris-eskuvo__8_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/54ceca5c8151-Bea-Kris-eskuvo__9_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/140c2125600e-Bea-Kris-eskuvo__10_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dd49193eedec-Bea-Kris-eskuvo__11_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e76f8c5c4d1c-Bea-Kris-eskuvo__12_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/89fca12fc45e-Bea-Kris-eskuvo__13_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/36c5fbba8318-Bea-Kris-eskuvo__14_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6d57500b134d-Bea-Kris-eskuvo__15_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/88d279054287-Bea-Kris-eskuvo__16_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8bb67edeb548-Bea-Kris-eskuvo__17_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/963518326da5-Bea-Kris-eskuvo__18_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f354c97f8634-Bea-Kris-eskuvo__19_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b80e245ad81-Bea-Kris-eskuvo__20_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/11e459bdcaff-Bea-Kris-eskuvo__21_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b8864a8ef92d-Bea-Kris-eskuvo__22_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f2d82164ff84-Bea-Kris-eskuvo__23_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fe783cdd79de-Bea-Kris-eskuvo__24_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/75a7187ad22f-Bea-Kris-eskuvo__25_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bdfe486e8bbd-Bea-Kris-eskuvo__26_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/93a4dbcb5228-Bea-Kris-eskuvo__27_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5921a0d10ae7-Bea-Kris-eskuvo__28_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d8beefa347d9-Bea-Kris-eskuvo__29_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06de83b3c2a7-Bea-Kris-eskuvo__30_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b6e82d9fd273-Bea-Kris-eskuvo__31_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/746ad9f4e86b-Bea-Kris-eskuvo__32_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ffd91c0c61fd-Bea-Kris-eskuvo__33_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b0bbc97e5356-Bea-Kris-eskuvo__34_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b15f40270e6-Bea-Kris-eskuvo__35_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bd09bc161e64-Bea-Kris-eskuvo__36_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/28b49cfeb087-Bea-Kris-eskuvo__37_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/04b9eece17b5-Bea-Kris-eskuvo__38_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d7879391e1b-Bea-Kris-eskuvo__39_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/74d51d85d5b1-Bea-Kris-eskuvo__40_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c728e158e9e8-Bea-Kris-eskuvo__41_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6eec18040fe2-Bea-Kris-eskuvo__42_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/92f61261ba1d-Bea-Kris-eskuvo__43_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/737e10d2887a-Bea-Kris-eskuvo__44_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/30acc943b29e-Bea-Kris-eskuvo__45_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/70811aa0065d-Bea-Kris-eskuvo__46_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b324708fcedc-Bea-Kris-eskuvo__47_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e0ec86bf1973-Bea-Kris-eskuvo__48_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d1b61b74638-Bea-Kris-eskuvo__49_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9bfba307df14-Bea-Kris-eskuvo__50_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/96ef2814a18f-Bea-Kris-eskuvo__51_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1bedb7c2316e-Bea-Kris-eskuvo__52_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/af16baab5072-Bea-Kris-eskuvo__53_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d441ea5e23fe-Bea-Kris-eskuvo__54_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4506e8c71d4e-Bea-Kris-eskuvo__55_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d19c0d062c5a-Bea-Kris-eskuvo__56_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cabb272ccbfd-Bea-Kris-eskuvo__57_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f29c84edaaf5-Bea-Kris-eskuvo__58_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ddcd3e32f19e-Bea-Kris-eskuvo__59_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/841e93b28f60-Bea-Kris-eskuvo__60_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ca405270edb2-Bea-Kris-eskuvo__61_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/26e4342f824b-Bea-Kris-eskuvo__62_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d04b74561c05-Bea-Kris-eskuvo__63_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/616a865b9da3-Bea-Kris-eskuvo__64_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aefad41dfa36-Bea-Kris-eskuvo__65_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d75757baf91-Bea-Kris-eskuvo__66_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45bc7e984894-Bea-Kris-eskuvo__67_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9a50c3af02f9-Bea-Kris-eskuvo__68_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/36fa7388d33a-Bea-Kris-eskuvo__69_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4087ab96b4f-Bea-Kris-eskuvo__70_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e2f7d2fb7160-Bea-Kris-eskuvo__71_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5d3cc738a5ae-Bea-Kris-eskuvo__72_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/67e7f82fcf90-Bea-Kris-eskuvo__73_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/efd86d022387-Bea-Kris-eskuvo__74_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e8c988f8ebd5-Bea-Kris-eskuvo__75_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/528286dd8160-Bea-Kris-eskuvo__76_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a0f1a73308d3-Bea-Kris-eskuvo__77_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fad38b581288-Bea-Kris-eskuvo__78_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba2fd8e6f49c-Bea-Kris-eskuvo__79_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/af9ec71a258a-Bea-Kris-eskuvo__80_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b9c3dcafc627-Bea-Kris-eskuvo__81_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e9000723972c-Bea-Kris-eskuvo__82_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ce5124db6269-Bea-Kris-eskuvo__83_of_108__1.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/928896f418a3-Bea-Kris-eskuvo__84_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/85b4c85faec5-Bea-Kris-eskuvo__85_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/39355945c9fc-Bea-Kris-eskuvo__86_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8b820585b96b-Bea-Kris-eskuvo__87_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/698ba43c7833-Bea-Kris-eskuvo__88_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/14fa7c2e1d92-Bea-Kris-eskuvo__89_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/143ec8fe57d2-Bea-Kris-eskuvo__90_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4da6019a62ed-Bea-Kris-eskuvo__91_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45513b0a0e57-Bea-Kris-eskuvo__92_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b07463372247-Bea-Kris-eskuvo__93_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2c7369a845d0-Bea-Kris-eskuvo__94_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/008a259c410a-Bea-Kris-eskuvo__95_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/952f2eeb036a-Bea-Kris-eskuvo__96_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/883df3628a59-Bea-Kris-eskuvo__97_of_108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7f2e1e90fb76-Bea-Kris-eskuvo__98_of_108_.jpg",
+              "alt": ""
+            }
+          ]
         },
         {
           "src": "uploads/silverframe_esk-v_015.jpg",
