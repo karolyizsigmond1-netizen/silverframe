@@ -2015,8 +2015,8 @@
     "couple": {
       "title": "Páros / Jegyes Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Páros és jegyes fotózás Szegeden 70.000 Ft. 60 perc fotózás, 20 retusált fotó.",
-      "ogImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1600&q=80",
+      "ogImage": "uploads/d2ce2d0d3797-jegyes-fotozas-naplemente-par__141_.jpg",
+      "heroImage": "uploads/3762ccbc90ad-jegyes-fotozas-naplemente-par__204_.jpg",
       "heroLabel": "Szolgáltatások / 05",
       "heroTitle": "Páros / Jegyes",
       "breadcrumb": "Páros",
@@ -2027,7 +2027,7 @@
         "Nincs pózolás, nincs túlbonyolított beállítás — csak ti, az érzések, a nevetés."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=700&q=80",
+        "src": "uploads/a89c36f119c5-karolyifoto_jegyesfotozas__5_.JPG",
         "alt": "Páros fotózás"
       },
       "packages": [
@@ -2051,33 +2051,302 @@
               "title": "Természetes pillanatok",
               "desc": "Nincs erőltetett pózolás — csak ti és az igazi érzések."
             }
-          ]
+          ],
+          "image": "uploads/ef23c620f0f8-karolyifoto_jegyesfotozas__18_.JPG"
         }
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80",
-          "alt": "Páros fotó"
+          "src": "uploads/aa89840e0e59-paros-fotozas-termeszetben__56_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
-          "alt": "Jegyes fotózás"
+          "src": "uploads/96593e3143fa-paros-fotozas-termeszetben__44_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
-          "alt": "Romantikus pillanat"
+          "src": "uploads/a368858fed1e-paros-fotozas-termeszetben__52_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "Páros a természetben"
+          "src": "uploads/0b1646752ef2-paros-fotozas-termeszetben__10_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Szerelmes pár"
+          "src": "uploads/bec2d0a218ae-paros-fotozas-termeszetben__11_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80",
-          "alt": "Páros portré"
+          "src": "uploads/78719bdbe0db-paros-fotozas-termeszetben__12_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d092b0288b2c-paros-fotozas-termeszetben__14_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/83d3406e00f8-paros-fotozas-termeszetben__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/92050337f516-paros-fotozas-termeszetben__21_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/887d94cdcb82-paros-fotozas-termeszetben__24_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5c70c0a7a383-paros-fotozas-termeszetben__33_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/905825a52954-paros-fotozas-termeszetben__34_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4204ed647d4a-paros-fotozas-termeszetben__36_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/140c64b0abbe-paros-fotozas-termeszetben__38_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4163f1facda7-paros-fotozas-termeszetben__41_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/dc7e90cfb565-paros-fotozas-termeszetben__43_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d1e027503b1e-paros-fotozas-termeszetben__46_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/519048f5ef6b-paros-fotozas-termeszetben__48_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4dc596ec9930-paros-fotozas-termeszetben__50_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2a41b6f34a56-paros-fotozas-termeszetben__54_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/dced0913b03e-paros-fotozas-termeszetben__59_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/05b45961ea2a-paros-fotozas-termeszetben__60_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/25ec60eb8e7b-paros-fotozas-termeszetben__61_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d8e6a5cd4897-paros-fotozas-termeszetben__63_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3a30bb8a3c66-paros-fotozas-termeszetben__64_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/537010a194f9-paros-fotozas-termeszetben__67_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e44177859755-paros-fotozas-termeszetben__70_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ce15d23e536f-paros-fotozas-termeszetben__74_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f0aa5d96a1a9-paros-fotozas-termeszetben__77_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9e869fbf9a3e-paros-fotozas-termeszetben__79_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a25528e57690-jegyes-fotozas-naplemente-par__52_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6bb0329baf53-jegyes-fotozas-naplemente-par__66_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6c0e7ef86da8-jegyes-fotozas-naplemente-par__73_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/35a2a5bddc1b-jegyes-fotozas-naplemente-par__76_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c585a2953ffb-jegyes-fotozas-naplemente-par__102_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/44d3bedb2899-jegyes-fotozas-naplemente-par__122_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9f6af9450914-jegyes-fotozas-naplemente-par__133_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c4af5dee3bb5-jegyes-fotozas-naplemente-par__137_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/97e7350e19a7-jegyes-fotozas-szeged-park__90_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6e9ee41f383e-jegyes-fotozas-szeged-park__113_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a0a6a46d337b-jegyes-fotozas-szeged-park__136_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f71819e8603d-jegyes-fotozas-naplemente-par__164_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3f4fc5355740-jegyes-fotozas-naplemente-par__173_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1c67a741b779-jegyes-fotozas-naplemente-par__186_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c0276e056b39-jegyes-fotozas-naplemente-par__192_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3762ccbc90ad-jegyes-fotozas-naplemente-par__204_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/698008ae3664-jegyes-fotozas-naplemente-par__220_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f046ea8e6c09-jegyes-fotozas-naplemente-par__228_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e314f49d9b4b-jegyes-fotozas-naplemente-par__232_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2b2153abb3f6-jegyes-fotozas-naplemente-par__237_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5be6bdcded06-jegyes-fotozas-naplemente-par__258_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9b3efa4e5692-jegyes-fotozas-naplemente-par__267_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d925d938f9c-jegyes-fotozas-naplemente-par__279_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b259a3d91014-jegyes-fotozas-naplemente-par__285_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b8a8365798c1-jegyes-fotozas-naplemente-par__303_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/06d6a86e5757-jegyes-fotozas-naplemente-par__305_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9adcbce44620-jegyes-fotozas-naplemente-par__323_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a2110c7c019a-jegyes-fotozas-szeged-park__1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/05fadbdcd3a3-jegyes-fotozas-szeged-park__2_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a3a576554e2f-jegyes-fotozas-szeged-park__3_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2dd578a4f6de-jegyes-fotozas-szeged-park__4_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f1f1865472d1-jegyes-fotozas-szeged-park__5_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a45c07b8592a-jegyes-fotozas-szeged-park__10_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bcffd76b94c8-jegyes-fotozas-szeged-park__28_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c831b6ef984e-jegyes-fotozas-szeged-park__36_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/af72fab48c27-jegyes-fotozas-szeged-park__38_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e55948db93ea-jegyes-fotozas-szeged-park__42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c234c55369b1-jegyes-fotozas-szeged-park__44_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f922508e2bc9-jegyes-fotozas-szeged-park__54_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b04af3e644be-jegyes-fotozas-szeged-park__56_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/acc66a1eefaa-jegyes-fotozas-szeged-park__60_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/622256a0229d-jegyes-fotozas-szeged-park__72_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Szerelmes fotózás",
@@ -2092,8 +2361,8 @@
     "business": {
       "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
-      "ogImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
+      "ogImage": "uploads/015b522c5a9c-_DSC6748.jpg",
+      "heroImage": "uploads/37931a9ba3aa-www.silverframe.hu__2550_of_5516_.jpg",
       "heroLabel": "Szolgáltatások / 06",
       "heroTitle": "Üzleti portré",
       "breadcrumb": "Üzleti portré",
@@ -2104,7 +2373,7 @@
         "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80",
+        "src": "uploads/7a4d687e0752-www.silverframe.hu__2608_of_5516_.jpg",
         "alt": "Üzleti portré fotózás"
       },
       "packages": [
@@ -2128,7 +2397,8 @@
               "title": "Digitális átadás",
               "desc": "Online galéria a képek letöltéséhez."
             }
-          ]
+          ],
+          "image": "uploads/015b522c5a9c-_DSC6748.jpg"
         },
         {
           "name": "Munkahelyi portfólió — 60.000 Ft",
@@ -2150,33 +2420,158 @@
               "title": "Marketing anyag",
               "desc": "Egységes, profi vizuális anyag weboldalra, social médiára."
             }
-          ]
+          ],
+          "image": "uploads/1069a533520f-www.silverframe.hu__649_of_869_.jpg"
         }
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
-          "alt": "Üzleti portré"
+          "src": "uploads/4343531c4279-_DSC6726.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
-          "alt": "Vállalati fotó"
+          "src": "uploads/6185ff4b71c5-_DSC6730.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "LinkedIn portré"
+          "src": "uploads/37df783a5ad4-_DSC6731.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Profi portré"
+          "src": "uploads/9c84d6e292ac-_DSC6736.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
-          "alt": "Üzleti fotó"
+          "src": "uploads/f048bc405d13-_DSC6738.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
-          "alt": "Céges portré"
+          "src": "uploads/94186811dbc1-_DSC6739.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bb3417b5e9ff-_DSC6746.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/015b522c5a9c-_DSC6748.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/613eb0678683-_DSC6750.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1a68793fd618-_DSC6754.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/253ece242dce-_DSC6755.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fdf85d056857-_DSC6760.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/793b13485947-_DSC6762.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a77e933047d7-_DSC6763.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7ac75f1f1d09-_DSC6765.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bc2956b8cabc-_DSC6769.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0a39d20ccc68-_DSC6770.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b364c898a609-www.silverframe.hu__632_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d48dce51db6-www.silverframe.hu__634_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ccccfda49087-www.silverframe.hu__636_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/011bd1d73680-www.silverframe.hu__637_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e746971aee2e-www.silverframe.hu__638_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b3b5395be348-www.silverframe.hu__639_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/12cdccd47540-www.silverframe.hu__640_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a015943149e8-www.silverframe.hu__641_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/feb9ba28aa8c-www.silverframe.hu__642_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/09ac0b12f03d-www.silverframe.hu__643_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9253eeb52f73-www.silverframe.hu__644_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4e5148949450-www.silverframe.hu__645_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/96bcaf0f8b18-www.silverframe.hu__646_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/18c928208464-www.silverframe.hu__648_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1069a533520f-www.silverframe.hu__649_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d93c7c25907-www.silverframe.hu__651_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/79039b8151cd-www.silverframe.hu__652_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/24395b4d2dd4-www.silverframe.hu__655_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/80a1a28b6113-www.silverframe.hu__656_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/70a6d65f3420-www.silverframe.hu__657_of_869_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Emeld a márkád!",
@@ -4624,6 +5019,9 @@
     "uploads/1e04dafae97b-www.karolyifoto.hu__3_of_25_.jpg": "41% 39%",
     "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg": "47% 30%",
     "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg": "49% 9%",
-    "uploads/2a2b947179e1-14570382_1433141726713124_5213103682742096301_n.jpg": "31% 7%"
+    "uploads/2a2b947179e1-14570382_1433141726713124_5213103682742096301_n.jpg": "31% 7%",
+    "uploads/a89c36f119c5-karolyifoto_jegyesfotozas__5_.JPG": "32% 49%",
+    "uploads/ef23c620f0f8-karolyifoto_jegyesfotozas__18_.JPG": "64% 46%",
+    "uploads/7a4d687e0752-www.silverframe.hu__2608_of_5516_.jpg": "54% 52%"
   }
 }
