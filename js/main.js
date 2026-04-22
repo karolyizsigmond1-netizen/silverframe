@@ -106,16 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Justified masonry layout ──
-    const masonryGrid = document.querySelector('.masonry');
+    const masonryGrids = Array.from(document.querySelectorAll('.masonry'));
     const GAP = 6;
     let justifyMasonry = null;
 
-    if (masonryGrid) {
-        justifyMasonry = function() {
-            const totalWidth = masonryGrid.offsetWidth;
+    if (masonryGrids.length) {
+        const justifyOne = (grid) => {
+            const totalWidth = grid.offsetWidth;
             if (!totalWidth) return;
             const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
-            const items = Array.from(masonryGrid.querySelectorAll(':scope > .masonry-item'))
+            const items = Array.from(grid.querySelectorAll(':scope > .masonry-item'))
                 .filter(el => el.style.display !== 'none');
             if (!items.length) return;
 
@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        justifyMasonry = () => masonryGrids.forEach(justifyOne);
         justifyMasonry();
         let rTimer;
         window.addEventListener('resize', () => { clearTimeout(rTimer); rTimer = setTimeout(justifyMasonry, 120); }, { passive: true });
