@@ -15,7 +15,7 @@
   "serviceCategories": [
     {
       "id": "portfolio-model",
-      "name": "Galéria / Modell",
+      "name": "Portfólió / Modell",
       "num": "01",
       "portfolioId": "portrait",
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
@@ -55,7 +55,7 @@
     },
     {
       "id": "business",
-      "name": "Brand üzleti fotózás",
+      "name": "Üzleti portré",
       "num": "06",
       "portfolioId": "business",
       "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
@@ -113,7 +113,7 @@
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Galéria, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
+      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -140,9 +140,9 @@
         {
           "href": "services/portfolio-model.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
-          "alt": "Galéria és modell fotózás",
-          "title": "Galéria / Modell",
-          "desc": "Professzionális galériák"
+          "alt": "Portfólió és modell fotózás",
+          "title": "Portfólió / Modell",
+          "desc": "Professzionális portfóliók"
         },
         {
           "href": "services/wedding.html",
@@ -160,7 +160,7 @@
         }
       ],
       "galleryLabel": "Válogatott munkák",
-      "galleryTitle": "A galériából",
+      "galleryTitle": "A portfólióból",
       "galleryImages": [],
       "testimonials": [
         {
@@ -180,7 +180,7 @@
           "author": "— Gábor és Eszter, Szeged"
         },
         {
-          "text": "Brand üzleti fotózást csináltattam, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.",
+          "text": "Üzleti portrét készíttettem, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.",
           "author": "— Luca, Szeged"
         },
         {
@@ -229,11 +229,11 @@
       "ctaTitle": "Van egy ötleted?<br>Beszéljük meg!"
     },
     "portfolio": {
-      "title": "Galéria — Silverframe Studio | Válogatott munkák",
-      "metaDesc": "Silverframe Studio galéria – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
+      "title": "Portfólió — Silverframe Studio | Válogatott munkák",
+      "metaDesc": "Silverframe Studio portfólió – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
       "heroImage": "uploads/c3ba66f9fc9f-glamour-fotozas-studio-noi-szeged__81_.jpg",
       "heroLabel": "Válogatott munkák",
-      "heroTitle": "Galéria",
+      "heroTitle": "Portfólió",
       "accordionLabel": "Fedezd fel a kategóriákat",
       "accordionTitle": "Minden műfajban<br>otthon vagyok",
       "accordionHint": "Kattints egy kategóriára a válogatott munkák megtekintéséhez.",
@@ -256,13 +256,13 @@
         }
       ],
       "highlightsLabel": "Kiemelt munkák",
-      "highlightsTitle": "Néhány kedvenc<br>a galériából",
+      "highlightsTitle": "Néhány kedvenc<br>a portfólióból",
       "highlights": [
         {
           "href": "portfolio/portrait.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portré fotózás",
-          "cat": "Galéria / Modell",
+          "cat": "Portfólió / Modell",
           "title": "Stúdió portré",
           "wide": true
         },
@@ -312,7 +312,7 @@
     },
     "services": {
       "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
-      "metaDesc": "Silverframe Studio fotózási szolgáltatások: galéria, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
+      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
@@ -320,12 +320,12 @@
       "sectionTitle": "Minden pillanat megérdemli<br>a saját történetét",
       "sectionDesc": "Az intim portréktól a nagyszabású ünnepségekig, ugyanazzal a szenvedéllyel és művészi igényességgel dolgozom minden projekten.",
       "categoryDescriptions": {
-        "portfolio-model": "Professzionális galéria fotózás modellek, színészek és kreatívok számára",
+        "portfolio-model": "Professzionális portfólió fotózás modellek, színészek és kreatívok számára",
         "maternity": "Az anyaság szépségének megörökítése elegáns, időtlen képekkel",
         "boudoir": "Intim, erőt adó fotózás, ami az önbizalmat és a szépséget ünnepli",
         "family": "Természetes, vidám családi portrék, amik valódi kapcsolatokat örökítenek meg",
         "couple": "Romantikus fotózás, ami elmeseli az egyedi szerelmi történeteteket",
-        "business": "Professzionális brand üzleti fotózás és személyes márkaépítés",
+        "business": "Professzionális üzleti portrék, branding és vállalati fotózás",
         "real-estate": "Lenyűgöző beltéri és kültéri fotók, amik eladják az ingatlanokat",
         "wedding": "Klasszikus, dokumentarista esküvői fotózás",
         "wedding-creative": "Művészi, editorial stílusú esküvői fotózás filmes hangulattal",
@@ -350,22 +350,22 @@
   },
   "servicePages": {
     "portfolio-model": {
-      "title": "Galéria / Modell Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Professzionális galéria és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
+      "title": "Portfólió / Modell Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
       "ogImage": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
       "heroImage": "uploads/04ae11b30779-edited-1775497562504.jpg",
       "heroLabel": "Szolgáltatások / 01",
-      "heroTitle": "Galéria / Modell",
-      "breadcrumb": "Galéria / Modell",
+      "heroTitle": "Portfólió / Modell",
+      "breadcrumb": "Portfólió / Modell",
       "introLabel": "Mire számíthatsz",
       "introTitle": "A te víziód,<br>a mi szakértelmünk",
       "introDesc": [
-        "Ha szeretnél egy erős galériát, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
+        "Ha szeretnél egy erős portfóliót, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
         "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."
       ],
       "introImage": {
         "src": "uploads/3d71d6695a1d-BGI06401.jpg",
-        "alt": "Modell galéria fotózás"
+        "alt": "Modell portfólió fotózás"
       },
       "packages": [
         {
@@ -542,7 +542,7 @@
           "alt": ""
         }
       ],
-      "ctaLabel": "Építsd a galériádat!",
+      "ctaLabel": "Építsd a portfóliódat!",
       "ctaTitle": "Alkossunk olyan képeket,<br>amik ajtókat nyitnak",
       "ctaButton": "Időpontfoglalás",
       "prevService": null,
@@ -720,7 +720,7 @@
       "ctaTitle": "Örökítsd meg ezt<br>a gyönyörű időszakot",
       "ctaButton": "Időpontfoglalás",
       "prevService": "portfolio-model",
-      "prevTitle": "Galéria / Modell",
+      "prevTitle": "Portfólió / Modell",
       "prevLabel": "Előző",
       "nextService": "boudoir",
       "nextTitle": "Boudoir"
@@ -2293,29 +2293,29 @@
       "prevTitle": "Családi",
       "prevLabel": "Előző",
       "nextService": "business",
-      "nextTitle": "Brand üzleti fotózás"
+      "nextTitle": "Üzleti portré"
     },
     "business": {
-      "title": "Brand Üzleti Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Brand üzleti fotózás és személyes márkaépítés Szegeden. 60.000 Ft.",
+      "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
       "ogImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
       "heroLabel": "Szolgáltatások / 06",
-      "heroTitle": "Brand üzleti fotózás",
-      "breadcrumb": "Brand üzleti fotózás",
+      "heroTitle": "Üzleti portré",
+      "breadcrumb": "Üzleti portré",
       "introLabel": "Profi megjelenés",
       "introTitle": "Hiteles, profi képek<br>amikre büszke lehetsz",
       "introDesc": [
-        "Mindenkinek jól jön egy profi brand üzleti fotózás — akár önéletrajzhoz, weboldalhoz, LinkedInhez.",
+        "Mindenkinek jól jön egy profi üzleti portré — akár önéletrajzhoz, weboldalhoz, LinkedInhez.",
         "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."
       ],
       "introImage": {
         "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80",
-        "alt": "Brand üzleti fotózás"
+        "alt": "Üzleti portré fotózás"
       },
       "packages": [
         {
-          "name": "Brand üzleti fotózás csomag — 60.000 Ft",
+          "name": "Üzleti portré csomag — 60.000 Ft",
           "desc": "",
           "items": [
             {
@@ -2337,7 +2337,7 @@
           ]
         },
         {
-          "name": "Munkahelyi galéria — 60.000 Ft",
+          "name": "Munkahelyi portfólió — 60.000 Ft",
           "desc": "Egy cég első benyomása ma már legtöbbször online történik.",
           "items": [
             {
@@ -2362,7 +2362,7 @@
       "gallery": [
         {
           "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
-          "alt": "Brand üzleti fotózás"
+          "alt": "Üzleti portré"
         },
         {
           "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
@@ -2466,7 +2466,7 @@
       "ctaTitle": "Profi képek, amik<br>eladják az ingatlant",
       "ctaButton": "Időpontfoglalás",
       "prevService": "business",
-      "prevTitle": "Brand üzleti fotózás",
+      "prevTitle": "Üzleti portré",
       "prevLabel": "Előző",
       "nextService": "wedding",
       "nextTitle": "Esküvő"
@@ -2888,12 +2888,12 @@
   },
   "portfolioPages": {
     "portrait": {
-      "title": "Galéria / Modell Galéria — Silverframe Studio",
-      "metaDesc": "Galéria és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
+      "title": "Portfólió / Modell Galéria — Silverframe Studio",
+      "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
       "heroImage": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg",
-      "heroLabel": "Galéria",
-      "heroTitle": "Galéria / Modell",
-      "breadcrumb": "Galéria / Modell",
+      "heroLabel": "Portfólió",
+      "heroTitle": "Portfólió / Modell",
+      "breadcrumb": "Portfólió / Modell",
       "gallery": [
         {
           "src": "uploads/2389d8890250-modell-fotozas-kulter-divat-szegedjpg__203_.jpg",
@@ -2917,7 +2917,7 @@
           "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
           "alt": "Divat portré",
           "title": "Elegancia",
-          "subtitle": "Galéria / Divat"
+          "subtitle": "Portfólió / Divat"
         },
         {
           "src": "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg",
@@ -3067,7 +3067,7 @@
       "title": "Kismama Galéria — Silverframe Studio",
       "metaDesc": "Kismama fotózás galéria.",
       "heroImage": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Kismama",
       "breadcrumb": "Kismama",
       "gallery": [
@@ -3221,7 +3221,7 @@
       "title": "Boudoir Galéria — Silverframe Studio",
       "metaDesc": "Boudoir fotózás galéria.",
       "heroImage": "uploads/eafef756bc28-glamour-fotozas-studio-noi-szeged__19_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Boudoir",
       "breadcrumb": "Boudoir",
       "gallery": [
@@ -3299,7 +3299,7 @@
       "title": "Családi Galéria — Silverframe Studio",
       "metaDesc": "Családi fotózás galéria.",
       "heroImage": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Családi",
       "breadcrumb": "Családi",
       "gallery": [
@@ -3377,7 +3377,7 @@
       "title": "Páros Galéria — Silverframe Studio",
       "metaDesc": "Páros/jegyes fotózás galéria.",
       "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Páros",
       "breadcrumb": "Páros",
       "gallery": [
@@ -3548,10 +3548,10 @@
       "ctaLink": "services/couple.html"
     },
     "business": {
-      "title": "Brand Üzleti Fotózás Galéria — Silverframe Studio",
-      "metaDesc": "Brand üzleti fotózás galéria. Személyes márkaépítés (Personal Branding) Szegeden.",
+      "title": "Üzleti Portré Galéria — Silverframe Studio",
+      "metaDesc": "Üzleti portré galéria. Brand  személyes márka fotózás (Personal Branding)",
       "heroImage": "uploads/015b522c5a9c-_DSC6748.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Üzleti Brand márka fotózás",
       "breadcrumb": "Üzleti Brand márka fotózás",
       "gallery": [
@@ -3781,7 +3781,7 @@
       "title": "Ingatlan Galéria — Silverframe Studio",
       "metaDesc": "Ingatlan fotózás galéria.",
       "heroImage": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Ingatlan",
       "breadcrumb": "Ingatlan",
       "gallery": [
@@ -3897,7 +3897,7 @@
       "title": "Esküvői Galéria — Silverframe Studio",
       "metaDesc": "Esküvői fotózás galéria.",
       "heroImage": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Esküvő",
       "breadcrumb": "Esküvő",
       "gallery": [
@@ -8553,6 +8553,2152 @@
           ]
         },
         {
+          "type": "bundle",
+          "cover": "uploads/4d33bbbffb1f-L_ZS-fotos-eskuvo-komloska-szeged__149_.jpg",
+          "alt": "",
+          "title": "E&ZS",
+          "subtitle": "Komlóska",
+          "images": [
+            {
+              "src": "uploads/6ceaded0a25c-L_ZS-fotos-eskuvo-komloska-szeged__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e474706440b9-L_ZS-fotos-eskuvo-komloska-szeged__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/753e957422e6-L_ZS-fotos-eskuvo-komloska-szeged__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/01f3943e4a03-L_ZS-fotos-eskuvo-komloska-szeged__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b62d74b04fd-L_ZS-fotos-eskuvo-komloska-szeged__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cb625b5ca9a7-L_ZS-fotos-eskuvo-komloska-szeged__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/967491eddc0d-L_ZS-fotos-eskuvo-komloska-szeged__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b4f96480e529-L_ZS-fotos-eskuvo-komloska-szeged__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cc5bd2fa6c2f-L_ZS-fotos-eskuvo-komloska-szeged__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7052fc9dfb68-L_ZS-fotos-eskuvo-komloska-szeged__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2f262be4bff0-L_ZS-fotos-eskuvo-komloska-szeged__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/52534a10d5fd-L_ZS-fotos-eskuvo-komloska-szeged__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eadfa5a5eab9-L_ZS-fotos-eskuvo-komloska-szeged__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/68d687c8184a-L_ZS-fotos-eskuvo-komloska-szeged__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5332dba851c0-L_ZS-fotos-eskuvo-komloska-szeged__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3307764b465c-L_ZS-fotos-eskuvo-komloska-szeged__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ad85d65f3b44-L_ZS-fotos-eskuvo-komloska-szeged__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2d8806aac26c-L_ZS-fotos-eskuvo-komloska-szeged__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cb6241cbae55-L_ZS-fotos-eskuvo-komloska-szeged__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5f3616cb3ac8-L_ZS-fotos-eskuvo-komloska-szeged__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d56b5205f58-L_ZS-fotos-eskuvo-komloska-szeged__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2b2bd8eb3aa1-L_ZS-fotos-eskuvo-komloska-szeged__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a0b0409ea1bf-L_ZS-fotos-eskuvo-komloska-szeged__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7a4be7562b32-L_ZS-fotos-eskuvo-komloska-szeged__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/08b715fe9757-L_ZS-fotos-eskuvo-komloska-szeged__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c1acade6c1b1-L_ZS-fotos-eskuvo-komloska-szeged__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/00d22ef6f9ec-L_ZS-fotos-eskuvo-komloska-szeged__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4832389654bb-L_ZS-fotos-eskuvo-komloska-szeged__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/775423b8ab2f-L_ZS-fotos-eskuvo-komloska-szeged__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2979249e2a32-L_ZS-fotos-eskuvo-komloska-szeged__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f864cef845f9-L_ZS-fotos-eskuvo-komloska-szeged__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1fefb0b2fca1-L_ZS-fotos-eskuvo-komloska-szeged__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0443e96e228a-L_ZS-fotos-eskuvo-komloska-szeged__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45430ab4f655-L_ZS-fotos-eskuvo-komloska-szeged__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/93c4a1cb2bfe-L_ZS-fotos-eskuvo-komloska-szeged__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9133fe15a425-L_ZS-fotos-eskuvo-komloska-szeged__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/11e1744a886c-L_ZS-fotos-eskuvo-komloska-szeged__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eed68a167d3d-L_ZS-fotos-eskuvo-komloska-szeged__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b351ba671f7-L_ZS-fotos-eskuvo-komloska-szeged__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8d3f7c6ba4e7-L_ZS-fotos-eskuvo-komloska-szeged__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0cf6d9434bb-L_ZS-fotos-eskuvo-komloska-szeged__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/124d5f76df6f-L_ZS-fotos-eskuvo-komloska-szeged__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b1e013b9c16-L_ZS-fotos-eskuvo-komloska-szeged__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06826809b9e2-L_ZS-fotos-eskuvo-komloska-szeged__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/071b83b7dbda-L_ZS-fotos-eskuvo-komloska-szeged__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f18f722db028-L_ZS-fotos-eskuvo-komloska-szeged__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/24b42ccc6324-L_ZS-fotos-eskuvo-komloska-szeged__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8900d403f288-L_ZS-fotos-eskuvo-komloska-szeged__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2f3d40b13bd4-L_ZS-fotos-eskuvo-komloska-szeged__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/da322d56defb-L_ZS-fotos-eskuvo-komloska-szeged__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1b2a50e2683e-L_ZS-fotos-eskuvo-komloska-szeged__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9f7b90fb6355-L_ZS-fotos-eskuvo-komloska-szeged__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1ed15cb64fb7-L_ZS-fotos-eskuvo-komloska-szeged__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3f107a08f991-L_ZS-fotos-eskuvo-komloska-szeged__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e4e9da9cdbcb-L_ZS-fotos-eskuvo-komloska-szeged__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/db7e431c18a4-L_ZS-fotos-eskuvo-komloska-szeged__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/12640c97617b-L_ZS-fotos-eskuvo-komloska-szeged__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c9089c938e2c-L_ZS-fotos-eskuvo-komloska-szeged__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/61ef1cb1b6d8-L_ZS-fotos-eskuvo-komloska-szeged__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b35742f5983-L_ZS-fotos-eskuvo-komloska-szeged__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b17edfbc95b9-L_ZS-fotos-eskuvo-komloska-szeged__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fc07b1d811e2-L_ZS-fotos-eskuvo-komloska-szeged__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d7bf2efbddf7-L_ZS-fotos-eskuvo-komloska-szeged__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ca1ad93a2a5d-L_ZS-fotos-eskuvo-komloska-szeged__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/459f19783214-L_ZS-fotos-eskuvo-komloska-szeged__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c204d7c3484-L_ZS-fotos-eskuvo-komloska-szeged__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fdd437dadfad-L_ZS-fotos-eskuvo-komloska-szeged__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1b440e354a00-L_ZS-fotos-eskuvo-komloska-szeged__75_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e273830a146e-L_ZS-fotos-eskuvo-komloska-szeged__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a5b2f4cc10ad-L_ZS-fotos-eskuvo-komloska-szeged__77_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3c45f079917-L_ZS-fotos-eskuvo-komloska-szeged__78_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/54c6fac1f268-L_ZS-fotos-eskuvo-komloska-szeged__79_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f5672956334a-L_ZS-fotos-eskuvo-komloska-szeged__80_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c9b606cee0e6-L_ZS-fotos-eskuvo-komloska-szeged__81_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fde5028af290-L_ZS-fotos-eskuvo-komloska-szeged__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3eab36aaf618-L_ZS-fotos-eskuvo-komloska-szeged__83_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dae4bec3ddc5-L_ZS-fotos-eskuvo-komloska-szeged__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3dfd73ee5e6-L_ZS-fotos-eskuvo-komloska-szeged__85_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2078d414b54b-L_ZS-fotos-eskuvo-komloska-szeged__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1a9001c45b28-L_ZS-fotos-eskuvo-komloska-szeged__87_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d2c1fd287168-L_ZS-fotos-eskuvo-komloska-szeged__88_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9cafe3309411-L_ZS-fotos-eskuvo-komloska-szeged__89_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9660cbe39a39-L_ZS-fotos-eskuvo-komloska-szeged__90_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6948604be733-L_ZS-fotos-eskuvo-komloska-szeged__91_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/035389ee27b4-L_ZS-fotos-eskuvo-komloska-szeged__92_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/841a6b122542-L_ZS-fotos-eskuvo-komloska-szeged__93_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a6e440c61b8c-L_ZS-fotos-eskuvo-komloska-szeged__94_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a809d1fe0ffb-L_ZS-fotos-eskuvo-komloska-szeged__95_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2cd31c111d35-L_ZS-fotos-eskuvo-komloska-szeged__96_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d768360ada51-L_ZS-fotos-eskuvo-komloska-szeged__97_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/403d375e53ce-L_ZS-fotos-eskuvo-komloska-szeged__98_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e56de96a1bc-L_ZS-fotos-eskuvo-komloska-szeged__99_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/97c27435847b-L_ZS-fotos-eskuvo-komloska-szeged__100_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d11f71802076-L_ZS-fotos-eskuvo-komloska-szeged__101_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/98ebbccc0cb7-L_ZS-fotos-eskuvo-komloska-szeged__102_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/56fcff142eb0-L_ZS-fotos-eskuvo-komloska-szeged__103_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/259c3b17fa80-L_ZS-fotos-eskuvo-komloska-szeged__104_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8a44e23cef90-L_ZS-fotos-eskuvo-komloska-szeged__105_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1e1eef2c3f7f-L_ZS-fotos-eskuvo-komloska-szeged__106_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/35a018401ca1-L_ZS-fotos-eskuvo-komloska-szeged__107_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/75b87613d83b-L_ZS-fotos-eskuvo-komloska-szeged__108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6613b4deb8ad-L_ZS-fotos-eskuvo-komloska-szeged__109_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/60fbe8054094-L_ZS-fotos-eskuvo-komloska-szeged__110_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eeeef4a94ae4-L_ZS-fotos-eskuvo-komloska-szeged__111_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f229725720d4-L_ZS-fotos-eskuvo-komloska-szeged__112_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3773ea8ed50-L_ZS-fotos-eskuvo-komloska-szeged__113_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/07412eff5b91-L_ZS-fotos-eskuvo-komloska-szeged__114_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f73338cd806b-L_ZS-fotos-eskuvo-komloska-szeged__115_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/893ee66e680a-L_ZS-fotos-eskuvo-komloska-szeged__116_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/646f72d8f8da-L_ZS-fotos-eskuvo-komloska-szeged__117_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4c5a3c20f3f7-L_ZS-fotos-eskuvo-komloska-szeged__118_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a12a40ce6fd3-L_ZS-fotos-eskuvo-komloska-szeged__119_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/213263dec33f-L_ZS-fotos-eskuvo-komloska-szeged__120_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c68807d41d5d-L_ZS-fotos-eskuvo-komloska-szeged__121_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c90171a9dba1-L_ZS-fotos-eskuvo-komloska-szeged__122_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0ba6db3696c5-L_ZS-fotos-eskuvo-komloska-szeged__123_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/adee508065a0-L_ZS-fotos-eskuvo-komloska-szeged__124_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/22dc58d02c70-L_ZS-fotos-eskuvo-komloska-szeged__125_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e8f4cc9e6d0f-L_ZS-fotos-eskuvo-komloska-szeged__126_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/95b4b90d3868-L_ZS-fotos-eskuvo-komloska-szeged__127_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8f68191fcbe6-L_ZS-fotos-eskuvo-komloska-szeged__128_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ecb99c15e6ea-L_ZS-fotos-eskuvo-komloska-szeged__129_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d95e68e77538-L_ZS-fotos-eskuvo-komloska-szeged__130_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/21d864a7302e-L_ZS-fotos-eskuvo-komloska-szeged__131_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/66af8837432b-L_ZS-fotos-eskuvo-komloska-szeged__132_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/05e2f9f819b2-L_ZS-fotos-eskuvo-komloska-szeged__133_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8f0c24d7f4b9-L_ZS-fotos-eskuvo-komloska-szeged__134_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/52a8d1cf34bd-L_ZS-fotos-eskuvo-komloska-szeged__135_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/462f04ddc631-L_ZS-fotos-eskuvo-komloska-szeged__136_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a8f4aff8f342-L_ZS-fotos-eskuvo-komloska-szeged__137_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/723ee5604339-L_ZS-fotos-eskuvo-komloska-szeged__138_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7d9b30c4d04f-L_ZS-fotos-eskuvo-komloska-szeged__139_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/afb760035fc4-L_ZS-fotos-eskuvo-komloska-szeged__140_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ae1d9a421cfa-L_ZS-fotos-eskuvo-komloska-szeged__141_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/27a6a2b90bda-L_ZS-fotos-eskuvo-komloska-szeged__142_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a2b47fea728f-L_ZS-fotos-eskuvo-komloska-szeged__143_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a4b810edba8a-L_ZS-fotos-eskuvo-komloska-szeged__144_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a2471474969e-L_ZS-fotos-eskuvo-komloska-szeged__145_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/03fc65f3e81d-L_ZS-fotos-eskuvo-komloska-szeged__146_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9620c788efcd-L_ZS-fotos-eskuvo-komloska-szeged__147_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f602dfc451ca-L_ZS-fotos-eskuvo-komloska-szeged__148_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d33bbbffb1f-L_ZS-fotos-eskuvo-komloska-szeged__149_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ad473b3e9f4f-L_ZS-fotos-eskuvo-komloska-szeged__150_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a749b2d29fbd-L_ZS-fotos-eskuvo-komloska-szeged__151_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/54b96fe6a483-L_ZS-fotos-eskuvo-komloska-szeged__152_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2b60647dc80d-L_ZS-fotos-eskuvo-komloska-szeged__153_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/854d7e6cf81c-L_ZS-fotos-eskuvo-komloska-szeged__154_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9c96e2447363-L_ZS-fotos-eskuvo-komloska-szeged__155_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e358fd50daa0-L_ZS-fotos-eskuvo-komloska-szeged__156_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/10d1461c0c85-L_ZS-fotos-eskuvo-komloska-szeged__157_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d2028a7043a9-L_ZS-fotos-eskuvo-komloska-szeged__158_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4de21109882e-L_ZS-fotos-eskuvo-komloska-szeged__159_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9ee94f0bcbb5-L_ZS-fotos-eskuvo-komloska-szeged__160_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/20ed64274a22-L_ZS-fotos-eskuvo-komloska-szeged__161_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4ce14a6323b1-L_ZS-fotos-eskuvo-komloska-szeged__162_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aaa4d72cc4cc-L_ZS-fotos-eskuvo-komloska-szeged__163_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7b583728fdef-L_ZS-fotos-eskuvo-komloska-szeged__164_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/38862c9776eb-L_ZS-fotos-eskuvo-komloska-szeged__165_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e032f096843b-L_ZS-fotos-eskuvo-komloska-szeged__166_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8025c9a8facb-L_ZS-fotos-eskuvo-komloska-szeged__167_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba77ed0ceeb4-L_ZS-fotos-eskuvo-komloska-szeged__168_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8dbe3b971d93-L_ZS-fotos-eskuvo-komloska-szeged__169_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5dbf67fd9061-L_ZS-fotos-eskuvo-komloska-szeged__170_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c956e3da45b-L_ZS-fotos-eskuvo-komloska-szeged__171_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bdb497e11ce3-L_ZS-fotos-eskuvo-komloska-szeged__172_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aa8bc8e1b036-L_ZS-fotos-eskuvo-komloska-szeged__173_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a14055e2163-L_ZS-fotos-eskuvo-komloska-szeged__174_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ad1458de8599-L_ZS-fotos-eskuvo-komloska-szeged__175_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f4b452eeaf3c-L_ZS-fotos-eskuvo-komloska-szeged__176_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/36ff076411f4-L_ZS-fotos-eskuvo-komloska-szeged__177_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/394c9224b674-L_ZS-fotos-eskuvo-komloska-szeged__178_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8dfcc5458c0e-L_ZS-fotos-eskuvo-komloska-szeged__179_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dad61250357a-L_ZS-fotos-eskuvo-komloska-szeged__180_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9238776eb98b-L_ZS-fotos-eskuvo-komloska-szeged__181_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e244a743ca71-L_ZS-fotos-eskuvo-komloska-szeged__182_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e389f93e3462-L_ZS-fotos-eskuvo-komloska-szeged__183_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a9af00cd6045-L_ZS-fotos-eskuvo-komloska-szeged__184_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a50af3ddd5ea-L_ZS-fotos-eskuvo-komloska-szeged__185_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c835162c3b76-L_ZS-fotos-eskuvo-komloska-szeged__186_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1121132bd259-L_ZS-fotos-eskuvo-komloska-szeged__187_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dd5aa1da715d-L_ZS-fotos-eskuvo-komloska-szeged__188_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/76bd9bdf17be-L_ZS-fotos-eskuvo-komloska-szeged__189_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d58baab5b0ff-L_ZS-fotos-eskuvo-komloska-szeged__190_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a8ba0064b2d8-L_ZS-fotos-eskuvo-komloska-szeged__191_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cce12a02752c-L_ZS-fotos-eskuvo-komloska-szeged__192_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cff9e681a833-L_ZS-fotos-eskuvo-komloska-szeged__193_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d51ed84021a5-L_ZS-fotos-eskuvo-komloska-szeged__194_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5711d1cdf14d-L_ZS-fotos-eskuvo-komloska-szeged__195_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e9f5969e26fc-L_ZS-fotos-eskuvo-komloska-szeged__196_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0bd0055dd299-L_ZS-fotos-eskuvo-komloska-szeged__197_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e2f058c6d357-L_ZS-fotos-eskuvo-komloska-szeged__198_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/773a4effe47f-L_ZS-fotos-eskuvo-komloska-szeged__199_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d5d4bdc9a9a7-L_ZS-fotos-eskuvo-komloska-szeged__200_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d487caaf8c27-L_ZS-fotos-eskuvo-komloska-szeged__201_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7b4ae49049ff-L_ZS-fotos-eskuvo-komloska-szeged__202_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1e2c4180820a-L_ZS-fotos-eskuvo-komloska-szeged__203_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8bef688dde0d-L_ZS-fotos-eskuvo-komloska-szeged__204_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d899723126d0-L_ZS-fotos-eskuvo-komloska-szeged__205_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/17c89d144f95-L_ZS-fotos-eskuvo-komloska-szeged__206_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5292702a5531-L_ZS-fotos-eskuvo-komloska-szeged__207_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fce0be5d3bde-L_ZS-fotos-eskuvo-komloska-szeged__208_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/deff1a99ca6b-L_ZS-fotos-eskuvo-komloska-szeged__209_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ad34c09d116d-L_ZS-fotos-eskuvo-komloska-szeged__210_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fa1c35a6d515-L_ZS-fotos-eskuvo-komloska-szeged__211_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/30163581410a-L_ZS-fotos-eskuvo-komloska-szeged__212_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d74207a688e-L_ZS-fotos-eskuvo-komloska-szeged__213_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b031dedbbad7-L_ZS-fotos-eskuvo-komloska-szeged__214_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a15b8fd03401-L_ZS-fotos-eskuvo-komloska-szeged__215_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/32259ca892fe-L_ZS-fotos-eskuvo-komloska-szeged__216_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4bfbb8116128-L_ZS-fotos-eskuvo-komloska-szeged__217_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/61e86b937f7b-L_ZS-fotos-eskuvo-komloska-szeged__218_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5432ca66faf7-L_ZS-fotos-eskuvo-komloska-szeged__219_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/713c925ed988-L_ZS-fotos-eskuvo-komloska-szeged__220_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b14ef84b8c2-L_ZS-fotos-eskuvo-komloska-szeged__221_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/29d895dcdfc7-L_ZS-fotos-eskuvo-komloska-szeged__222_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/63005513bdca-L_ZS-fotos-eskuvo-komloska-szeged__223_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b111c5fdb5f7-L_ZS-fotos-eskuvo-komloska-szeged__224_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/22bde193788e-L_ZS-fotos-eskuvo-komloska-szeged__225_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/996e1a268dd1-L_ZS-fotos-eskuvo-komloska-szeged__1_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3cd14b100295-L_ZS-fotos-eskuvo-komloska-szeged__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/66af0186b51f-L_ZS-fotos-eskuvo-komloska-szeged__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/258ebd6c9c16-L_ZS-fotos-eskuvo-komloska-szeged__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06c615df7457-L_ZS-fotos-eskuvo-komloska-szeged__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/30ce7c634be3-L_ZS-fotos-eskuvo-komloska-szeged__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8f832ffdc5f7-L_ZS-fotos-eskuvo-komloska-szeged__7_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/e11f16c148a9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__41_.jpg",
+          "alt": "",
+          "title": "E&F",
+          "subtitle": "Rózsa Sándor Csárda",
+          "images": [
+            {
+              "src": "uploads/05812ad13170-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d854dd2b27bc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2d3483efc2d1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/463846012a33-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a152fcb7b3d4-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4990aacf7255-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a2a09e3cce6a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bce40a930ded-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2cdfaed49046-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/593bce5014d2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ab55c96e9083-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a37c08961dad-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7f51bfa10af2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6684742ca4c3-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9f538ab6a611-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2ac6f32a6996-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c593e275c86c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/255a18f0f67c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c7e82c4ee7ff-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4965ff1f8e93-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/32f957626e58-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bd924f45172a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8abdcf21d61f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/be9d85c17d0f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5255c553a859-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/54a6ca2cfd5d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a6481c3330b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/12fa04bf2e45-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/76b2567dcbbc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5eaa30a4eb9f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6aad73702832-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cbe917081dc9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e1e1bd2d734-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e11f16c148a9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ae46f6a2c336-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2fe1733cd09f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/013ce961c5ea-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eb2c60bb0ee4-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c5e53289abbc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d739d5262903-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dc628021d501-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7bcdeba2a655-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a20ca916dd01-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/83cbd5bf0344-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cd6680f1ce21-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0fc1ae0e2fe2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3aa6022584f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ac878cbecc07-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/78cda9c0aca8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/16d3689ce735-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cddaaa9f9289-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f904ec3c579a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5683cee68da3-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2839f1e35f14-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cf2ad25507ca-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6104a980f3d0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/34cb95653c24-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7aa65976ff6a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7a0b16a2fbb9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a940800bdbea-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1381b37c06d1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d6dd4847743-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/831eeeb94660-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/092a850e0126-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/10dd85d0fcc0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1ab23a84492f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d38b8e7e23f6-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/309967958286-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__75_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0c41d158b2e0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/248d8fb34ce5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__77_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/689d1980d0b3-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__78_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e72242268e62-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__79_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8551eb18c1df-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__80_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/903e24d791e1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__81_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/baa88871e31f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2195948f24e9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__83_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b6f5d583f5bc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/af9c310395f5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__85_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/69e77bb8c24f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f797dd9d3637-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__87_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/78aa09afb49b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__88_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d6acdd20b552-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__89_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3e89533763d5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__90_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/582f6e7d0d67-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__91_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0c2a30e3497f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__92_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1673eefdbc9b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__93_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3bc8a0013dc2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__94_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b457cfab3451-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__95_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/22c227040f30-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__96_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d6483909b88d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__97_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0de6b3b0ed3f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__98_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c42d584c9ca8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__99_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/604fe8f7a693-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__100_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b7d1794bfa27-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__101_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c87316553f15-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__102_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3ea1e401afe1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__103_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77cba3c73b15-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__104_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/94169a1cf867-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__105_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/910894382872-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__106_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1b9d942e4450-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__107_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2804f9a0c3bb-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/604349d3656b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__109_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cc9180ede029-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__110_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b4e538ec1ad1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__111_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a55f7cc23559-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__112_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5f6de92f6be8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__113_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2d4f39fc6262-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__114_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a06ed59eb708-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__115_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0fd43dee483f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__116_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4853c7d1b015-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__117_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/318248722c89-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__118_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6f511fd1e896-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__119_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/05a236ac92f8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__120_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/09a029ba0eca-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__121_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/41a88b806eb8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__122_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f4e3da42d0d7-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__123_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b25291958968-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__124_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0f2b097648c2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__125_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eab6a7ac76b8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__126_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/63a08ec237a2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__127_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c19c57cd247-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__128_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/73d864d15d53-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__129_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/faf4d5423a19-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__130_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/274006ff5619-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__131_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cca626fdce49-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__132_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e21e9f55c85-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__133_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3ef0587aa6b6-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__134_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/71b0b9ffb875-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__135_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c84049703172-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__136_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bb87a038ebc5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__137_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/804af4bdb0cb-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__138_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0c59b83a6f30-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__139_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cadcc6107724-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__140_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/32d1fed3c420-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__141_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3a6de6be1280-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__142_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/948836629b23-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__143_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b16af3c4824-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__144_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7f118b0f5949-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__145_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c601a2f175ca-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__146_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/09937f7b5216-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__147_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2adefe468b40-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__148_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1a542df5db81-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__149_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b834f86bff36-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__150_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ce76deb44561-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__151_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/10680544f136-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__152_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c8261516f1c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__153_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5d5e9440a2da-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__154_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f23b67e577c8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__155_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/12f80e7b149b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__156_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3d7ba7086d58-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__157_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ed0e99efd376-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__158_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0d702019621-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__159_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/84b8c5c0ccc4-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__160_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8ba0e13577f2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__161_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1deb76150833-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__162_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/99c06ec2b72d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__163_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c1bd8b42fc6b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__164_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba2bc89fd628-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__165_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3f923c72862c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__166_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/72c36cb69478-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__167_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2ed37e41e32e-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__168_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9fc62ab2e322-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__169_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9bd1d407421c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__170_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/09df0c9fe364-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__171_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c64135b590e1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__172_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/81d2f8ac95d2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__173_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f6804d41ea99-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__174_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3d42eebf11af-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__175_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f7317643f5e7-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__176_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f9d850a42161-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__177_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2fd24a5dd117-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__178_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7937dbfcc590-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__179_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/78908b6dcd88-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__180_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/80dc34b41eac-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__181_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e49ddf0df514-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__182_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fb74e76d58bf-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__183_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fcfa61149ca3-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__184_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e13477f4e5f2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__185_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a6eca5353d32-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__186_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/65e2a491978f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__187_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/61f537a933c4-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__188_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/119710178158-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__189_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d4c0a9a1d176-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__190_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0276a87ceab7-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__191_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d8363ff33bd7-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__192_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/76022b723726-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__193_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3534ff39d559-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__194_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ce84f8f151d5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__195_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3a7a45a505e3-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__196_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f7873604f1d1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__197_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/baf66d4767e9-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__198_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f60d83640b15-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__199_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dd98592bf316-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__200_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7b8858cdd69b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__201_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/94efef0d93fe-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__202_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8211a1234acb-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__203_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0ebfaf703afd-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__204_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f3e1b1fe1357-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__205_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4c7ff849827d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__206_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bb15cb2cfd5a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__207_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0d45729beaeb-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__208_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3637a44cc957-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__209_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b387bfb82a0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__210_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/89d816374b9e-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__211_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/981c28eaafbe-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__212_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d845eae65039-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__213_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/23e044e6642f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__214_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2b3ae5977b31-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__215_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d5509a235bc7-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__216_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77c95c5d80fd-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__217_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ca9251cc7a5f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__218_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a1ce892dcd67-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__219_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3ade7906b3cb-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__220_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/da6684345863-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__221_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4b22f3896d9c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__222_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/21ec6210a1bd-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__223_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/265f410b1fe1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__224_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e219c610349c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__225_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/57d8255567a1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__226_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b4d105f6ca5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__227_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a490ae66385d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__228_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ae1559915a46-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__229_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2ec9468c65e0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__230_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4b35d63838a1-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__231_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d85ca325baa8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__232_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/414c767a7ea5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__233_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b1da220530ac-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__234_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b40984f2783a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__235_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d23bb42d4d8c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__236_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/979b911e6eaf-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__237_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/182ab1312c2e-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__238_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/810d74cc9995-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__239_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b70329af4b96-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__240_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e19f42175cd5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__241_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a227d0d01a4e-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__242_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4c785b84930-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__243_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5dec3cc0bd2f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__244_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8cd06e88ad64-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__245_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5e0c3344932d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__246_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/21e36fa53442-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__247_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/42cc585526db-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__248_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e4b195a8b12b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__249_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/008778980b70-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__250_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3584917d9519-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__251_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/584016c14e09-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__252_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/083175387143-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__253_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/891579bd3f21-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__254_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9ba18a8d1d7c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__255_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ceac634ee6d0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__256_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/01676d87ec38-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__257_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4614c87ad20-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__258_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3c76cc4267d2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__259_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0f8c95b8d725-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__260_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bf3b629d0a59-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__261_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fcd9aceb9377-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__262_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6a10eb686304-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__263_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e481c429a596-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__264_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fe42dab217b6-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__265_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4ced69170a3b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__266_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/11d5f5c53e01-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__267_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/322b1a21756d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__268_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f5e3c84d9639-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__269_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8d893da54c1a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__270_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3da142024595-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__271_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4fc0d781a2f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__272_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e2d8bf4cd445-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__273_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/90d4712d503b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__274_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/82c5c509fc10-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__275_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4a544c86155b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__276_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d893bf25c057-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__277_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/40f04319e6b0-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__278_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e993204fa5ba-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__279_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0232a14106c5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__280_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/512e3dcbbe03-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__281_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e3599bbd404-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__282_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/038c5ed40cc6-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__283_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5f961978fb16-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__284_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/26cf774eedcc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__285_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e5a4ad973369-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__286_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77074b08def8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__287_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/41b528d4795a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__288_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f80ed64ed513-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__289_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bf781f272a74-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__290_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c76eeba9dd1c-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__291_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/70d979dc0c82-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__292_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/18ca5f03decf-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__293_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a865c3b0653a-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__294_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ff3591a2f025-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__295_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e3efa459d2f-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__296_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9283d35d7c8d-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__297_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/705fd7c580f5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__298_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/952d502292ab-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__299_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5bf953c9c7e4-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__300_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e0bf5e75a472-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__301_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cd76f0a94fe8-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__302_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e4f81af838f5-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__303_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a765a5261888-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__304_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f603a5697d18-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__305_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8f4de9da400b-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__306_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba4eee03c482-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__307_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7838523f8345-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__1_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/22564fc66fe2-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b77ed7ab17fc-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/04abd4a07993-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5efa55e1b99e-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/abbb8677de15-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2c8a6790fed6-E_F-fotos-eskuvo-szeged-rozsa-sandor-csarda__7_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
           "src": "uploads/silverframe_esk-v_015.jpg",
           "alt": "",
           "title": "",
@@ -8694,7 +10840,7 @@
       "title": "Esküvői Kreatív Galéria — Silverframe Studio",
       "metaDesc": "Esküvői kreatív fotózás galéria.",
       "heroImage": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Esküvői kreatív",
       "breadcrumb": "Esküvői kreatív",
       "gallery": [
@@ -8810,7 +10956,7 @@
       "title": "Rendezvény Galéria — Silverframe Studio",
       "metaDesc": "Rendezvény fotózás galéria.",
       "heroImage": "uploads/2203724322cb-rendezveny-fotozas-szeged-ceges__147_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Rendezvény",
       "breadcrumb": "Rendezvény",
       "gallery": [
@@ -8944,7 +11090,7 @@
       "title": "Kisállat Galéria — Silverframe Studio",
       "metaDesc": "Kisállat fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Kisállat",
       "breadcrumb": "Kisállat",
       "gallery": [
@@ -9210,7 +11356,7 @@
       "title": "Termékfotó Galéria — Silverframe Studio",
       "metaDesc": "Termékfotózás galéria.",
       "heroImage": "uploads/c19bcd601601-termekfoto-webshop-termek-kep__34_.jpg",
-      "heroLabel": "Galéria",
+      "heroLabel": "Portfólió",
       "heroTitle": "Termékfotó",
       "breadcrumb": "Termékfotó",
       "gallery": [
