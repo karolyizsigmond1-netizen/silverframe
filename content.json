@@ -15,7 +15,7 @@
   "serviceCategories": [
     {
       "id": "portfolio-model",
-      "name": "Portfólió / Modell",
+      "name": "Galéria / Modell",
       "num": "01",
       "portfolioId": "portrait",
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
@@ -113,7 +113,7 @@
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
+      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Galéria, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -140,9 +140,9 @@
         {
           "href": "services/portfolio-model.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
-          "alt": "Portfólió és modell fotózás",
-          "title": "Portfólió / Modell",
-          "desc": "Professzionális portfóliók"
+          "alt": "Galéria és modell fotózás",
+          "title": "Galéria / Modell",
+          "desc": "Professzionális galériák"
         },
         {
           "href": "services/wedding.html",
@@ -160,7 +160,7 @@
         }
       ],
       "galleryLabel": "Válogatott munkák",
-      "galleryTitle": "A portfólióból",
+      "galleryTitle": "A galériából",
       "galleryImages": [],
       "testimonials": [
         {
@@ -229,11 +229,11 @@
       "ctaTitle": "Van egy ötleted?<br>Beszéljük meg!"
     },
     "portfolio": {
-      "title": "Portfólió — Silverframe Studio | Válogatott munkák",
-      "metaDesc": "Silverframe Studio portfólió – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
+      "title": "Galéria — Silverframe Studio | Válogatott munkák",
+      "metaDesc": "Silverframe Studio galéria – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
       "heroImage": "uploads/c3ba66f9fc9f-glamour-fotozas-studio-noi-szeged__81_.jpg",
       "heroLabel": "Válogatott munkák",
-      "heroTitle": "Portfólió",
+      "heroTitle": "Galéria",
       "accordionLabel": "Fedezd fel a kategóriákat",
       "accordionTitle": "Minden műfajban<br>otthon vagyok",
       "accordionHint": "Kattints egy kategóriára a válogatott munkák megtekintéséhez.",
@@ -256,13 +256,13 @@
         }
       ],
       "highlightsLabel": "Kiemelt munkák",
-      "highlightsTitle": "Néhány kedvenc<br>a portfólióból",
+      "highlightsTitle": "Néhány kedvenc<br>a galériából",
       "highlights": [
         {
           "href": "portfolio/portrait.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portré fotózás",
-          "cat": "Portfólió / Modell",
+          "cat": "Galéria / Modell",
           "title": "Stúdió portré",
           "wide": true
         },
@@ -312,7 +312,7 @@
     },
     "services": {
       "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
-      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
+      "metaDesc": "Silverframe Studio fotózási szolgáltatások: galéria, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
@@ -320,7 +320,7 @@
       "sectionTitle": "Minden pillanat megérdemli<br>a saját történetét",
       "sectionDesc": "Az intim portréktól a nagyszabású ünnepségekig, ugyanazzal a szenvedéllyel és művészi igényességgel dolgozom minden projekten.",
       "categoryDescriptions": {
-        "portfolio-model": "Professzionális portfólió fotózás modellek, színészek és kreatívok számára",
+        "portfolio-model": "Professzionális galéria fotózás modellek, színészek és kreatívok számára",
         "maternity": "Az anyaság szépségének megörökítése elegáns, időtlen képekkel",
         "boudoir": "Intim, erőt adó fotózás, ami az önbizalmat és a szépséget ünnepli",
         "family": "Természetes, vidám családi portrék, amik valódi kapcsolatokat örökítenek meg",
@@ -350,22 +350,22 @@
   },
   "servicePages": {
     "portfolio-model": {
-      "title": "Portfólió / Modell Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
+      "title": "Galéria / Modell Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Professzionális galéria és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
       "ogImage": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
       "heroImage": "uploads/04ae11b30779-edited-1775497562504.jpg",
       "heroLabel": "Szolgáltatások / 01",
-      "heroTitle": "Portfólió / Modell",
-      "breadcrumb": "Portfólió / Modell",
+      "heroTitle": "Galéria / Modell",
+      "breadcrumb": "Galéria / Modell",
       "introLabel": "Mire számíthatsz",
       "introTitle": "A te víziód,<br>a mi szakértelmünk",
       "introDesc": [
-        "Ha szeretnél egy erős portfóliót, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
+        "Ha szeretnél egy erős galériát, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
         "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."
       ],
       "introImage": {
         "src": "uploads/3d71d6695a1d-BGI06401.jpg",
-        "alt": "Modell portfólió fotózás"
+        "alt": "Modell galéria fotózás"
       },
       "packages": [
         {
@@ -542,7 +542,7 @@
           "alt": ""
         }
       ],
-      "ctaLabel": "Építsd a portfóliódat!",
+      "ctaLabel": "Építsd a galériádat!",
       "ctaTitle": "Alkossunk olyan képeket,<br>amik ajtókat nyitnak",
       "ctaButton": "Időpontfoglalás",
       "prevService": null,
@@ -720,7 +720,7 @@
       "ctaTitle": "Örökítsd meg ezt<br>a gyönyörű időszakot",
       "ctaButton": "Időpontfoglalás",
       "prevService": "portfolio-model",
-      "prevTitle": "Portfólió / Modell",
+      "prevTitle": "Galéria / Modell",
       "prevLabel": "Előző",
       "nextService": "boudoir",
       "nextTitle": "Boudoir"
@@ -2337,7 +2337,7 @@
           ]
         },
         {
-          "name": "Munkahelyi portfólió — 60.000 Ft",
+          "name": "Munkahelyi galéria — 60.000 Ft",
           "desc": "Egy cég első benyomása ma már legtöbbször online történik.",
           "items": [
             {
@@ -2888,12 +2888,12 @@
   },
   "portfolioPages": {
     "portrait": {
-      "title": "Portfólió / Modell Galéria — Silverframe Studio",
-      "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
+      "title": "Galéria / Modell Galéria — Silverframe Studio",
+      "metaDesc": "Galéria és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
       "heroImage": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg",
-      "heroLabel": "Portfólió",
-      "heroTitle": "Portfólió / Modell",
-      "breadcrumb": "Portfólió / Modell",
+      "heroLabel": "Galéria",
+      "heroTitle": "Galéria / Modell",
+      "breadcrumb": "Galéria / Modell",
       "gallery": [
         {
           "src": "uploads/2389d8890250-modell-fotozas-kulter-divat-szegedjpg__203_.jpg",
@@ -2917,7 +2917,7 @@
           "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
           "alt": "Divat portré",
           "title": "Elegancia",
-          "subtitle": "Portfólió / Divat"
+          "subtitle": "Galéria / Divat"
         },
         {
           "src": "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg",
@@ -3067,7 +3067,7 @@
       "title": "Kismama Galéria — Silverframe Studio",
       "metaDesc": "Kismama fotózás galéria.",
       "heroImage": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Kismama",
       "breadcrumb": "Kismama",
       "gallery": [
@@ -3221,7 +3221,7 @@
       "title": "Boudoir Galéria — Silverframe Studio",
       "metaDesc": "Boudoir fotózás galéria.",
       "heroImage": "uploads/eafef756bc28-glamour-fotozas-studio-noi-szeged__19_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Boudoir",
       "breadcrumb": "Boudoir",
       "gallery": [
@@ -3299,7 +3299,7 @@
       "title": "Családi Galéria — Silverframe Studio",
       "metaDesc": "Családi fotózás galéria.",
       "heroImage": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Családi",
       "breadcrumb": "Családi",
       "gallery": [
@@ -3377,7 +3377,7 @@
       "title": "Páros Galéria — Silverframe Studio",
       "metaDesc": "Páros/jegyes fotózás galéria.",
       "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Páros",
       "breadcrumb": "Páros",
       "gallery": [
@@ -3551,7 +3551,7 @@
       "title": "Brand Üzleti Fotózás Galéria — Silverframe Studio",
       "metaDesc": "Brand üzleti fotózás galéria. Személyes márkaépítés (Personal Branding) Szegeden.",
       "heroImage": "uploads/015b522c5a9c-_DSC6748.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Üzleti Brand márka fotózás",
       "breadcrumb": "Üzleti Brand márka fotózás",
       "gallery": [
@@ -3781,7 +3781,7 @@
       "title": "Ingatlan Galéria — Silverframe Studio",
       "metaDesc": "Ingatlan fotózás galéria.",
       "heroImage": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Ingatlan",
       "breadcrumb": "Ingatlan",
       "gallery": [
@@ -3897,7 +3897,7 @@
       "title": "Esküvői Galéria — Silverframe Studio",
       "metaDesc": "Esküvői fotózás galéria.",
       "heroImage": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Esküvő",
       "breadcrumb": "Esküvő",
       "gallery": [
@@ -8694,7 +8694,7 @@
       "title": "Esküvői Kreatív Galéria — Silverframe Studio",
       "metaDesc": "Esküvői kreatív fotózás galéria.",
       "heroImage": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Esküvői kreatív",
       "breadcrumb": "Esküvői kreatív",
       "gallery": [
@@ -8810,7 +8810,7 @@
       "title": "Rendezvény Galéria — Silverframe Studio",
       "metaDesc": "Rendezvény fotózás galéria.",
       "heroImage": "uploads/2203724322cb-rendezveny-fotozas-szeged-ceges__147_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Rendezvény",
       "breadcrumb": "Rendezvény",
       "gallery": [
@@ -8944,7 +8944,7 @@
       "title": "Kisállat Galéria — Silverframe Studio",
       "metaDesc": "Kisállat fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Kisállat",
       "breadcrumb": "Kisállat",
       "gallery": [
@@ -9210,7 +9210,7 @@
       "title": "Termékfotó Galéria — Silverframe Studio",
       "metaDesc": "Termékfotózás galéria.",
       "heroImage": "uploads/c19bcd601601-termekfoto-webshop-termek-kep__34_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Termékfotó",
       "breadcrumb": "Termékfotó",
       "gallery": [

@@ -237,7 +237,7 @@ function headerHtml(prefix, activePage, activeService) {
         <a href="${prefix}index.html" class="header-logo" aria-label="${g.siteName} — Főoldal">${g.siteName}</a>
         <nav class="header-nav" aria-label="Fő navigáció">
             <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
-            <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Portfólió</a>
+            <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             ${navDropdown(prefix, activeService)}
             <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
             <a href="${prefix}contact.html" class="header-cta">Időpontfoglalás</a>
@@ -250,7 +250,7 @@ function mobileNavHtml(prefix) {
   return `    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció">
         <a href="${prefix}index.html">Főoldal</a>
         <a href="${prefix}about.html">Rólam</a>
-        <a href="${prefix}portfolio.html">Portfólió</a>
+        <a href="${prefix}portfolio.html">Galéria</a>
         <a href="${prefix}services.html">Szolgáltatások</a>
         <div class="mobile-nav-sub">${cats.map(c =>
     `\n            <a href="${prefix}services/${c.id}.html">${c.name}</a>`
@@ -273,7 +273,7 @@ function footerHtml(prefix) {
                     <ul class="footer-links">
                         <li><a href="${prefix}index.html">Főoldal</a></li>
                         <li><a href="${prefix}about.html">Rólam</a></li>
-                        <li><a href="${prefix}portfolio.html">Portfólió</a></li>
+                        <li><a href="${prefix}portfolio.html">Galéria</a></li>
                         <li><a href="${prefix}services.html">Szolgáltatások</a></li>
                         <li><a href="${prefix}contact.html">Kapcsolat</a></li>
                     </ul>
@@ -281,7 +281,7 @@ function footerHtml(prefix) {
                 <div>
                     <h4 class="footer-heading">Szolgáltatások</h4>
                     <ul class="footer-links">
-                        <li><a href="${prefix}services/portfolio-model.html">Portfólió / Modell</a></li>
+                        <li><a href="${prefix}services/portfolio-model.html">Galéria / Modell</a></li>
                         <li><a href="${prefix}services/maternity.html">Kismama</a></li>
                         <li><a href="${prefix}services/boudoir.html">Boudoir</a></li>
                         <li><a href="${prefix}services/wedding.html">Esküvő</a></li>
@@ -440,7 +440,7 @@ ${data.serviceCategories.map(c => {
 ${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400"></div>`).join('\n')}
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
-                    ${btn('portfolio.html', 'Teljes portfólió')}
+                    ${btn('portfolio.html', 'Teljes galéria')}
                 </div>
             </div>
         </section>
@@ -550,7 +550,7 @@ ${chatbotHtml()}
 
 function buildPortfolio() {
   const p = data.pages.portfolio;
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Portfólió`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": g.baseUrl + "/portfolio.html" });
+  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Galéria`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": g.baseUrl + "/portfolio.html" });
 
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', null, 'css/style.css', jsonLd)}
 ${bodyTag()}
@@ -559,7 +559,7 @@ ${headerHtml('', 'portfolio', null)}
 ${mobileNavHtml('')}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Portfólió`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Galéria`)}
 
         <section class="section accordion-section">
             <div class="container">
@@ -816,7 +816,7 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                     <h3 class="service-includes-title">Válogatott munkák</h3>
 ${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-gallery-item', withOverlay: false })}
                     <div style="text-align:center; margin-top: 2.5rem;">
-                        <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Portfólió megtekintése</span>${arrowSvg}</a>
+                        <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Galéria megtekintése</span>${arrowSvg}</a>
                     </div>
                 </div>
             </div>
@@ -858,7 +858,7 @@ function buildPortfolioPage(id) {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Főoldal",   "item": `${g.baseUrl}/` },
-          { "@type": "ListItem", "position": 2, "name": "Portfólió", "item": `${g.baseUrl}/portfolio.html` },
+          { "@type": "ListItem", "position": 2, "name": "Galéria", "item": `${g.baseUrl}/portfolio.html` },
           { "@type": "ListItem", "position": 3, "name": p.title,     "item": `${g.baseUrl}/portfolio/${id}.html` }
         ]
       }
@@ -870,17 +870,17 @@ ${bodyTag()}
 ${boilerplate()}
     <header class="header" role="banner">
         <a href="../index.html" class="header-logo">${g.siteName}</a>
-        <nav class="header-nav" aria-label="Fő navigáció"><a href="../about.html">Rólam</a><a href="../portfolio.html" class="active">Portfólió</a>
+        <nav class="header-nav" aria-label="Fő navigáció"><a href="../about.html">Rólam</a><a href="../portfolio.html" class="active">Galéria</a>
             <div class="nav-dropdown"><a href="../services.html">Szolgáltatások ${dropdownArrow}</a>
                 <div class="dropdown-menu">${cats.map(c => `<a href="../services/${c.id}.html">${c.name}</a>`).join('')}</div>
             </div><a href="../contact.html">Kapcsolat</a><a href="../contact.html" class="header-cta">Időpontfoglalás</a>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
     </header>
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció"><a href="../index.html">Főoldal</a><a href="../about.html">Rólam</a><a href="../portfolio.html">Portfólió</a><a href="../services.html">Szolgáltatások</a><a href="../contact.html">Kapcsolat</a></nav>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció"><a href="../index.html">Főoldal</a><a href="../about.html">Rólam</a><a href="../portfolio.html">Galéria</a><a href="../services.html">Szolgáltatások</a><a href="../contact.html">Kapcsolat</a></nav>
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Portfólió</a> <span>/</span> ${p.breadcrumb}`, prefix)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Galéria</a> <span>/</span> ${p.breadcrumb}`, prefix)}
 
         <section class="section">
             <div class="container">
