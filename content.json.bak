@@ -15,7 +15,7 @@
   "serviceCategories": [
     {
       "id": "portfolio-model",
-      "name": "Portfólió / Modell",
+      "name": "Galéria / Modell",
       "num": "01",
       "portfolioId": "portrait",
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
@@ -55,7 +55,7 @@
     },
     {
       "id": "business",
-      "name": "Üzleti portré",
+      "name": "Brand üzleti fotózás",
       "num": "06",
       "portfolioId": "business",
       "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
@@ -113,7 +113,7 @@
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
+      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Galéria, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -140,9 +140,9 @@
         {
           "href": "services/portfolio-model.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
-          "alt": "Portfólió és modell fotózás",
-          "title": "Portfólió / Modell",
-          "desc": "Professzionális portfóliók"
+          "alt": "Galéria és modell fotózás",
+          "title": "Galéria / Modell",
+          "desc": "Professzionális galériák"
         },
         {
           "href": "services/wedding.html",
@@ -160,7 +160,7 @@
         }
       ],
       "galleryLabel": "Válogatott munkák",
-      "galleryTitle": "A portfólióból",
+      "galleryTitle": "A galériából",
       "galleryImages": [],
       "testimonials": [
         {
@@ -180,7 +180,7 @@
           "author": "— Gábor és Eszter, Szeged"
         },
         {
-          "text": "Üzleti portrét készíttettem, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.",
+          "text": "Brand üzleti fotózást csináltattam, és István profi módon vezette a fotózást. A végeredmény tökéletes lett az önéletrajzomhoz és LinkedIn profilomhoz.",
           "author": "— Luca, Szeged"
         },
         {
@@ -229,11 +229,11 @@
       "ctaTitle": "Van egy ötleted?<br>Beszéljük meg!"
     },
     "portfolio": {
-      "title": "Portfólió — Silverframe Studio | Válogatott munkák",
-      "metaDesc": "Silverframe Studio portfólió – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
+      "title": "Galéria — Silverframe Studio | Válogatott munkák",
+      "metaDesc": "Silverframe Studio galéria – portré-, esküvő- és lifestyle fotók egy helyen. Válogatott munkák több mint 500 projektből. Nézd meg stílusunkat és inspirálódj!",
       "heroImage": "uploads/c3ba66f9fc9f-glamour-fotozas-studio-noi-szeged__81_.jpg",
       "heroLabel": "Válogatott munkák",
-      "heroTitle": "Portfólió",
+      "heroTitle": "Galéria",
       "accordionLabel": "Fedezd fel a kategóriákat",
       "accordionTitle": "Minden műfajban<br>otthon vagyok",
       "accordionHint": "Kattints egy kategóriára a válogatott munkák megtekintéséhez.",
@@ -256,13 +256,13 @@
         }
       ],
       "highlightsLabel": "Kiemelt munkák",
-      "highlightsTitle": "Néhány kedvenc<br>a portfólióból",
+      "highlightsTitle": "Néhány kedvenc<br>a galériából",
       "highlights": [
         {
           "href": "portfolio/portrait.html",
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portré fotózás",
-          "cat": "Portfólió / Modell",
+          "cat": "Galéria / Modell",
           "title": "Stúdió portré",
           "wide": true
         },
@@ -312,7 +312,7 @@
     },
     "services": {
       "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
-      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
+      "metaDesc": "Silverframe Studio fotózási szolgáltatások: galéria, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
@@ -320,12 +320,12 @@
       "sectionTitle": "Minden pillanat megérdemli<br>a saját történetét",
       "sectionDesc": "Az intim portréktól a nagyszabású ünnepségekig, ugyanazzal a szenvedéllyel és művészi igényességgel dolgozom minden projekten.",
       "categoryDescriptions": {
-        "portfolio-model": "Professzionális portfólió fotózás modellek, színészek és kreatívok számára",
+        "portfolio-model": "Professzionális galéria fotózás modellek, színészek és kreatívok számára",
         "maternity": "Az anyaság szépségének megörökítése elegáns, időtlen képekkel",
         "boudoir": "Intim, erőt adó fotózás, ami az önbizalmat és a szépséget ünnepli",
         "family": "Természetes, vidám családi portrék, amik valódi kapcsolatokat örökítenek meg",
         "couple": "Romantikus fotózás, ami elmeseli az egyedi szerelmi történeteteket",
-        "business": "Professzionális üzleti portrék, branding és vállalati fotózás",
+        "business": "Professzionális brand üzleti fotózás és személyes márkaépítés",
         "real-estate": "Lenyűgöző beltéri és kültéri fotók, amik eladják az ingatlanokat",
         "wedding": "Klasszikus, dokumentarista esküvői fotózás",
         "wedding-creative": "Művészi, editorial stílusú esküvői fotózás filmes hangulattal",
@@ -350,22 +350,22 @@
   },
   "servicePages": {
     "portfolio-model": {
-      "title": "Portfólió / Modell Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Professzionális portfólió és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
+      "title": "Galéria / Modell Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Professzionális galéria és modell fotózás Szegeden. Start csomag 70.000 Ft, Prémium csomag 95.000 Ft.",
       "ogImage": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
       "heroImage": "uploads/04ae11b30779-edited-1775497562504.jpg",
       "heroLabel": "Szolgáltatások / 01",
-      "heroTitle": "Portfólió / Modell",
-      "breadcrumb": "Portfólió / Modell",
+      "heroTitle": "Galéria / Modell",
+      "breadcrumb": "Galéria / Modell",
       "introLabel": "Mire számíthatsz",
       "introTitle": "A te víziód,<br>a mi szakértelmünk",
       "introDesc": [
-        "Ha szeretnél egy erős portfóliót, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
+        "Ha szeretnél egy erős galériát, vagy egyszerűen csak kipróbálnád magad a kamera előtt, ez a fotózás neked szól. Nem kell tapasztalat — segítek végig a pózokban, a mozgásban, abban, hogy mit kezdj a kamera előtt.",
         "Készülhetnek letisztult portrék, divatos anyagok, vagy akár karakteresebb, kreatív képek is — attól függően, mit szeretnél kihozni magadból."
       ],
       "introImage": {
         "src": "uploads/3d71d6695a1d-BGI06401.jpg",
-        "alt": "Modell portfólió fotózás"
+        "alt": "Modell galéria fotózás"
       },
       "packages": [
         {
@@ -542,7 +542,7 @@
           "alt": ""
         }
       ],
-      "ctaLabel": "Építsd a portfóliódat!",
+      "ctaLabel": "Építsd a galériádat!",
       "ctaTitle": "Alkossunk olyan képeket,<br>amik ajtókat nyitnak",
       "ctaButton": "Időpontfoglalás",
       "prevService": null,
@@ -720,7 +720,7 @@
       "ctaTitle": "Örökítsd meg ezt<br>a gyönyörű időszakot",
       "ctaButton": "Időpontfoglalás",
       "prevService": "portfolio-model",
-      "prevTitle": "Portfólió / Modell",
+      "prevTitle": "Galéria / Modell",
       "prevLabel": "Előző",
       "nextService": "boudoir",
       "nextTitle": "Boudoir"
@@ -2293,29 +2293,29 @@
       "prevTitle": "Családi",
       "prevLabel": "Előző",
       "nextService": "business",
-      "nextTitle": "Üzleti portré"
+      "nextTitle": "Brand üzleti fotózás"
     },
     "business": {
-      "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
+      "title": "Brand Üzleti Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Brand üzleti fotózás és személyes márkaépítés Szegeden. 60.000 Ft.",
       "ogImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
       "heroLabel": "Szolgáltatások / 06",
-      "heroTitle": "Üzleti portré",
-      "breadcrumb": "Üzleti portré",
+      "heroTitle": "Brand üzleti fotózás",
+      "breadcrumb": "Brand üzleti fotózás",
       "introLabel": "Profi megjelenés",
       "introTitle": "Hiteles, profi képek<br>amikre büszke lehetsz",
       "introDesc": [
-        "Mindenkinek jól jön egy profi üzleti portré — akár önéletrajzhoz, weboldalhoz, LinkedInhez.",
+        "Mindenkinek jól jön egy profi brand üzleti fotózás — akár önéletrajzhoz, weboldalhoz, LinkedInhez.",
         "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."
       ],
       "introImage": {
         "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80",
-        "alt": "Üzleti portré fotózás"
+        "alt": "Brand üzleti fotózás"
       },
       "packages": [
         {
-          "name": "Üzleti portré csomag — 60.000 Ft",
+          "name": "Brand üzleti fotózás csomag — 60.000 Ft",
           "desc": "",
           "items": [
             {
@@ -2337,7 +2337,7 @@
           ]
         },
         {
-          "name": "Munkahelyi portfólió — 60.000 Ft",
+          "name": "Munkahelyi galéria — 60.000 Ft",
           "desc": "Egy cég első benyomása ma már legtöbbször online történik.",
           "items": [
             {
@@ -2362,7 +2362,7 @@
       "gallery": [
         {
           "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
-          "alt": "Üzleti portré"
+          "alt": "Brand üzleti fotózás"
         },
         {
           "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
@@ -2466,7 +2466,7 @@
       "ctaTitle": "Profi képek, amik<br>eladják az ingatlant",
       "ctaButton": "Időpontfoglalás",
       "prevService": "business",
-      "prevTitle": "Üzleti portré",
+      "prevTitle": "Brand üzleti fotózás",
       "prevLabel": "Előző",
       "nextService": "wedding",
       "nextTitle": "Esküvő"
@@ -2888,12 +2888,12 @@
   },
   "portfolioPages": {
     "portrait": {
-      "title": "Portfólió / Modell Galéria — Silverframe Studio",
-      "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
+      "title": "Galéria / Modell Galéria — Silverframe Studio",
+      "metaDesc": "Galéria és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
       "heroImage": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg",
-      "heroLabel": "Portfólió",
-      "heroTitle": "Portfólió / Modell",
-      "breadcrumb": "Portfólió / Modell",
+      "heroLabel": "Galéria",
+      "heroTitle": "Galéria / Modell",
+      "breadcrumb": "Galéria / Modell",
       "gallery": [
         {
           "src": "uploads/2389d8890250-modell-fotozas-kulter-divat-szegedjpg__203_.jpg",
@@ -2917,7 +2917,7 @@
           "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80",
           "alt": "Divat portré",
           "title": "Elegancia",
-          "subtitle": "Portfólió / Divat"
+          "subtitle": "Galéria / Divat"
         },
         {
           "src": "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg",
@@ -3067,7 +3067,7 @@
       "title": "Kismama Galéria — Silverframe Studio",
       "metaDesc": "Kismama fotózás galéria.",
       "heroImage": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Kismama",
       "breadcrumb": "Kismama",
       "gallery": [
@@ -3221,7 +3221,7 @@
       "title": "Boudoir Galéria — Silverframe Studio",
       "metaDesc": "Boudoir fotózás galéria.",
       "heroImage": "uploads/eafef756bc28-glamour-fotozas-studio-noi-szeged__19_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Boudoir",
       "breadcrumb": "Boudoir",
       "gallery": [
@@ -3299,7 +3299,7 @@
       "title": "Családi Galéria — Silverframe Studio",
       "metaDesc": "Családi fotózás galéria.",
       "heroImage": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Családi",
       "breadcrumb": "Családi",
       "gallery": [
@@ -3377,7 +3377,7 @@
       "title": "Páros Galéria — Silverframe Studio",
       "metaDesc": "Páros/jegyes fotózás galéria.",
       "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Páros",
       "breadcrumb": "Páros",
       "gallery": [
@@ -3548,10 +3548,10 @@
       "ctaLink": "services/couple.html"
     },
     "business": {
-      "title": "Üzleti Portré Galéria — Silverframe Studio",
-      "metaDesc": "Üzleti portré galéria. Brand  személyes márka fotózás (Personal Branding)",
+      "title": "Brand Üzleti Fotózás Galéria — Silverframe Studio",
+      "metaDesc": "Brand üzleti fotózás galéria. Személyes márkaépítés (Personal Branding) Szegeden.",
       "heroImage": "uploads/015b522c5a9c-_DSC6748.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Üzleti Brand márka fotózás",
       "breadcrumb": "Üzleti Brand márka fotózás",
       "gallery": [
@@ -3781,7 +3781,7 @@
       "title": "Ingatlan Galéria — Silverframe Studio",
       "metaDesc": "Ingatlan fotózás galéria.",
       "heroImage": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Ingatlan",
       "breadcrumb": "Ingatlan",
       "gallery": [
@@ -3897,7 +3897,7 @@
       "title": "Esküvői Galéria — Silverframe Studio",
       "metaDesc": "Esküvői fotózás galéria.",
       "heroImage": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Esküvő",
       "breadcrumb": "Esküvő",
       "gallery": [
@@ -8200,6 +8200,359 @@
           ]
         },
         {
+          "type": "bundle",
+          "cover": "uploads/59d4d1179eaf-M_K-fotos-eskuvo-kastely-kert-szeged__77_.jpg",
+          "alt": "",
+          "title": "M&K",
+          "subtitle": "Kastélykert Fogadó",
+          "images": [
+            {
+              "src": "uploads/4deb0b17819c-M_K-fotos-eskuvo-kastely-kert-szeged__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a31d4b17ec6f-M_K-fotos-eskuvo-kastely-kert-szeged__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/68a231f68638-M_K-fotos-eskuvo-kastely-kert-szeged__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ffced1320c53-M_K-fotos-eskuvo-kastely-kert-szeged__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fa895b901661-M_K-fotos-eskuvo-kastely-kert-szeged__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e646ef98ca3c-M_K-fotos-eskuvo-kastely-kert-szeged__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/da3be1abd872-M_K-fotos-eskuvo-kastely-kert-szeged__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/de51cfa687bc-M_K-fotos-eskuvo-kastely-kert-szeged__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c172e70fea56-M_K-fotos-eskuvo-kastely-kert-szeged__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7d0c45879732-M_K-fotos-eskuvo-kastely-kert-szeged__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/46c4107d05fe-M_K-fotos-eskuvo-kastely-kert-szeged__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/26abc5e38dca-M_K-fotos-eskuvo-kastely-kert-szeged__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba8ca94002d1-M_K-fotos-eskuvo-kastely-kert-szeged__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/08de8cca3f1d-M_K-fotos-eskuvo-kastely-kert-szeged__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/451f3fc60b92-M_K-fotos-eskuvo-kastely-kert-szeged__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0161596a6782-M_K-fotos-eskuvo-kastely-kert-szeged__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b7c0f32baf7-M_K-fotos-eskuvo-kastely-kert-szeged__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/32a2ccc2d615-M_K-fotos-eskuvo-kastely-kert-szeged__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/df576b02d29e-M_K-fotos-eskuvo-kastely-kert-szeged__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6223906332e0-M_K-fotos-eskuvo-kastely-kert-szeged__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4a1fd75bc0c1-M_K-fotos-eskuvo-kastely-kert-szeged__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/233f6a7389c4-M_K-fotos-eskuvo-kastely-kert-szeged__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bea223db1ceb-M_K-fotos-eskuvo-kastely-kert-szeged__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/53ef700b3ebf-M_K-fotos-eskuvo-kastely-kert-szeged__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c63d4ad2df4f-M_K-fotos-eskuvo-kastely-kert-szeged__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c8b6ce166ef-M_K-fotos-eskuvo-kastely-kert-szeged__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3e892c953110-M_K-fotos-eskuvo-kastely-kert-szeged__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1ed99301ef37-M_K-fotos-eskuvo-kastely-kert-szeged__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a6bfe162ce7e-M_K-fotos-eskuvo-kastely-kert-szeged__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/df1b5062488b-M_K-fotos-eskuvo-kastely-kert-szeged__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2515c1ee46a8-M_K-fotos-eskuvo-kastely-kert-szeged__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b21b09a60c54-M_K-fotos-eskuvo-kastely-kert-szeged__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/528bcac4fb2f-M_K-fotos-eskuvo-kastely-kert-szeged__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/974fc87926e0-M_K-fotos-eskuvo-kastely-kert-szeged__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/922cec6af290-M_K-fotos-eskuvo-kastely-kert-szeged__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1d09a84afd81-M_K-fotos-eskuvo-kastely-kert-szeged__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d44b420d2b68-M_K-fotos-eskuvo-kastely-kert-szeged__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7127e927e6ef-M_K-fotos-eskuvo-kastely-kert-szeged__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3c585e136bfa-M_K-fotos-eskuvo-kastely-kert-szeged__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d7b1f0b9e68d-M_K-fotos-eskuvo-kastely-kert-szeged__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/762968bf4113-M_K-fotos-eskuvo-kastely-kert-szeged__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7e74571e098f-M_K-fotos-eskuvo-kastely-kert-szeged__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5bf5f1c449aa-M_K-fotos-eskuvo-kastely-kert-szeged__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9c1aa07cf63a-M_K-fotos-eskuvo-kastely-kert-szeged__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/53c199487572-M_K-fotos-eskuvo-kastely-kert-szeged__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2e93597b1560-M_K-fotos-eskuvo-kastely-kert-szeged__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cf1cf3d99ac2-M_K-fotos-eskuvo-kastely-kert-szeged__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8d3e667ed7b9-M_K-fotos-eskuvo-kastely-kert-szeged__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1dfccf22a68c-M_K-fotos-eskuvo-kastely-kert-szeged__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ad00f592737f-M_K-fotos-eskuvo-kastely-kert-szeged__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/27b356ad8a4f-M_K-fotos-eskuvo-kastely-kert-szeged__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/beba7bb09f31-M_K-fotos-eskuvo-kastely-kert-szeged__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9615d702d12e-M_K-fotos-eskuvo-kastely-kert-szeged__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/26da006440fa-M_K-fotos-eskuvo-kastely-kert-szeged__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2cd2a6288dfe-M_K-fotos-eskuvo-kastely-kert-szeged__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b851dc5d912e-M_K-fotos-eskuvo-kastely-kert-szeged__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cd04e5e2e98f-M_K-fotos-eskuvo-kastely-kert-szeged__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4f693472793c-M_K-fotos-eskuvo-kastely-kert-szeged__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aa49483c8d92-M_K-fotos-eskuvo-kastely-kert-szeged__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b6b88fde7ba5-M_K-fotos-eskuvo-kastely-kert-szeged__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/270981b6f1f4-M_K-fotos-eskuvo-kastely-kert-szeged__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e17277dfa948-M_K-fotos-eskuvo-kastely-kert-szeged__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8f1163e045f8-M_K-fotos-eskuvo-kastely-kert-szeged__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8eacd09f3780-M_K-fotos-eskuvo-kastely-kert-szeged__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a19a229c7597-M_K-fotos-eskuvo-kastely-kert-szeged__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/10078128d79a-M_K-fotos-eskuvo-kastely-kert-szeged__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/94534e4aef0f-M_K-fotos-eskuvo-kastely-kert-szeged__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1045c10a4ce1-M_K-fotos-eskuvo-kastely-kert-szeged__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/85452442eb7f-M_K-fotos-eskuvo-kastely-kert-szeged__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d0a2f262facb-M_K-fotos-eskuvo-kastely-kert-szeged__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cea31f99fe72-M_K-fotos-eskuvo-kastely-kert-szeged__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9c78a3d62e1d-M_K-fotos-eskuvo-kastely-kert-szeged__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ef4400855c25-M_K-fotos-eskuvo-kastely-kert-szeged__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a9d8aad6e9b-M_K-fotos-eskuvo-kastely-kert-szeged__75_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8c4879121c3c-M_K-fotos-eskuvo-kastely-kert-szeged__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/59d4d1179eaf-M_K-fotos-eskuvo-kastely-kert-szeged__77_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2f0a7f7df180-M_K-fotos-eskuvo-kastely-kert-szeged__78_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9b664d201018-M_K-fotos-eskuvo-kastely-kert-szeged__79_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d9cdc9597f78-M_K-fotos-eskuvo-kastely-kert-szeged__80_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b603e57f1ba6-M_K-fotos-eskuvo-kastely-kert-szeged__81_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/99cb4c8fbfdf-M_K-fotos-eskuvo-kastely-kert-szeged__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c3ebba0ada6c-M_K-fotos-eskuvo-kastely-kert-szeged__83_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a4105cf900da-M_K-fotos-eskuvo-kastely-kert-szeged__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9e05b5696c0f-M_K-fotos-eskuvo-kastely-kert-szeged__85_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d9d5540b24ef-M_K-fotos-eskuvo-kastely-kert-szeged__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/795dfd7755cb-M_K-fotos-eskuvo-kastely-kert-szeged__1_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
           "src": "uploads/silverframe_esk-v_015.jpg",
           "alt": "",
           "title": "",
@@ -8341,7 +8694,7 @@
       "title": "Esküvői Kreatív Galéria — Silverframe Studio",
       "metaDesc": "Esküvői kreatív fotózás galéria.",
       "heroImage": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Esküvői kreatív",
       "breadcrumb": "Esküvői kreatív",
       "gallery": [
@@ -8457,7 +8810,7 @@
       "title": "Rendezvény Galéria — Silverframe Studio",
       "metaDesc": "Rendezvény fotózás galéria.",
       "heroImage": "uploads/2203724322cb-rendezveny-fotozas-szeged-ceges__147_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Rendezvény",
       "breadcrumb": "Rendezvény",
       "gallery": [
@@ -8591,7 +8944,7 @@
       "title": "Kisállat Galéria — Silverframe Studio",
       "metaDesc": "Kisállat fotózás galéria.",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Kisállat",
       "breadcrumb": "Kisállat",
       "gallery": [
@@ -8857,7 +9210,7 @@
       "title": "Termékfotó Galéria — Silverframe Studio",
       "metaDesc": "Termékfotózás galéria.",
       "heroImage": "uploads/c19bcd601601-termekfoto-webshop-termek-kep__34_.jpg",
-      "heroLabel": "Portfólió",
+      "heroLabel": "Galéria",
       "heroTitle": "Termékfotó",
       "breadcrumb": "Termékfotó",
       "gallery": [
