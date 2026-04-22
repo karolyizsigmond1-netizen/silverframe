@@ -642,7 +642,7 @@
             : `<span class="bundle-thumb-empty">?</span>`;
         const previewTitle = esc(bundle.title || bundle.alt || 'Névtelen képcsomag');
 
-        return `<div class="bundle-card collapsed" draggable="true" data-index="${i}">
+        return `<div class="bundle-card collapsed" draggable="false" data-index="${i}">
             <div class="bundle-card-header" role="button" tabindex="0" aria-expanded="false">
                 <span class="bundle-drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</span>
                 <span class="bundle-collapse-caret" aria-hidden="true">&#9662;</span>
@@ -1141,11 +1141,19 @@
             grid.querySelectorAll(':scope > .gallery-card, :scope > .bundle-card').forEach(card => {
                 const isBundle = card.classList.contains('bundle-card');
 
+                if (isBundle) {
+                    // Only enable drag via the handle to prevent click interference
+                    const handle = card.querySelector('.bundle-drag-handle');
+                    if (handle) {
+                        handle.addEventListener('mousedown', () => { card.draggable = true; });
+                        card.addEventListener('dragend', () => { card.draggable = false; });
+                    }
+                }
+
                 card.addEventListener('dragstart', e => {
                     if (e.dataTransfer.types && e.dataTransfer.types.includes('Files')) return;
                     if (isBundle) {
-                        if (!e.target.closest('.bundle-card-header')) { e.preventDefault(); return; }
-                        if (e.target.closest('button, input, .btn-icon, .bundle-card-header-actions')) { e.preventDefault(); return; }
+                        if (!card.draggable) { e.preventDefault(); return; }
                     } else {
                         if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
                     }
@@ -1157,6 +1165,7 @@
 
                 card.addEventListener('dragend', () => {
                     card.classList.remove('dragging');
+                    if (isBundle) card.draggable = false;
                     grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
                     dragState = null;
                 });
