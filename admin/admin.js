@@ -21,6 +21,7 @@
                 { id: 'pages.portfolio', title: 'Portfólió' },
                 { id: 'pages.services', title: 'Szolgáltatások' },
                 { id: 'pages.contact', title: 'Kapcsolat' },
+                { id: 'pages.arak', title: 'Árak oldal' },
             ]
         },
         {
@@ -256,6 +257,8 @@
             area.innerHTML = renderServicePageEditor(data, pageId);
         } else if (pageId.startsWith('portfolioPages.')) {
             area.innerHTML = renderPortfolioPageEditor(data, pageId);
+        } else if (pageId === 'pages.arak') {
+            area.innerHTML = renderArakEditor(data, pageId);
         } else {
             area.innerHTML = renderGenericPageEditor(data, pageId);
         }
@@ -336,6 +339,51 @@
             <input class="field-input" type="number" data-path="${path}" value="${value || ''}" min="1" max="60">
             ${hint ? `<div class="field-hint">${hint}</div>` : ''}
         </div>`;
+    }
+
+
+    // ── Árak page editor ──
+    function renderArakEditor(data, pageId) {
+        let html = '';
+
+        // SEO
+        html += '<div class="field-section"><div class="field-section-title">SEO & Meta</div>';
+        html += textField('Oldal cím', pageId + '.title', data.title);
+        html += textareaField('Meta leírás', pageId + '.metaDesc', data.metaDesc);
+        html += '</div>';
+
+        // Hero
+        html += '<div class="field-section"><div class="field-section-title">Hero szekció</div>';
+        html += imageField('Hero háttérkép', pageId + '.heroImage', data.heroImage);
+        html += textField('Hero felső szöveg', pageId + '.heroLabel', data.heroLabel);
+        html += textField('Hero cím', pageId + '.heroTitle', data.heroTitle);
+        html += '</div>';
+
+        // Card taglines & badges (from serviceCategories)
+        html += '<div class="field-section"><div class="field-section-title">Kártyák — tagline & badge</div>';
+        html += '<div class="field-hint" style="margin-bottom:1rem;">Az árak és csomagok a Szolgáltatás oldalakon szerkeszthetők. Itt a kártyán megjelenő rövid tagline és opcionális badge szöveg szerkeszthető.</div>';
+        (contentData.serviceCategories || []).forEach((cat, i) => {
+            html += `<div class="field-group" style="border-left:2px solid rgba(201,169,110,0.2);padding-left:1rem;margin-bottom:0.5rem;">
+                <div class="field-label" style="margin-bottom:0.5rem;color:var(--accent-light);">${cat.num || (i+1)} — ${cat.name}</div>
+                ${textField('Tagline', 'serviceCategories.' + i + '.arakTagline', cat.arakTagline || '')}
+                ${textField('Badge (pl. Legnépszerűbb)', 'serviceCategories.' + i + '.arakBadge', cat.arakBadge || '')}
+            </div>`;
+        });
+        html += '</div>';
+
+        // Custom band
+        html += '<div class="field-section"><div class="field-section-title">Egyedi ajánlat szekció</div>';
+        html += textField('Cím', pageId + '.customBandTitle', data.customBandTitle);
+        html += textareaField('Leírás', pageId + '.customBandDesc', data.customBandDesc);
+        html += '</div>';
+
+        // Final CTA
+        html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
+        html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
+        html += textareaField('CTA bekezdés', pageId + '.ctaDesc', data.ctaDesc);
+        html += '</div>';
+
+        return html;
     }
 
     // ── Global editor ──
@@ -1338,13 +1386,6 @@
         const arr = getByPath(contentData, arrayPath);
         if (!arr) return;
 
-        // Ask if they want to resize first
-        const wantResize = await askResizePrompt(files.length);
-        if (wantResize) {
-            openBatchProcessWith(files, { type: 'gallery', path: arrayPath });
-            return;
-        }
-
         // Determine if gallery items have title/subtitle
         const hasTitle = arr.length > 0 && arr[0] && arr[0].type !== 'bundle' && arr[0].title !== undefined;
 
@@ -1386,35 +1427,6 @@
         } catch (err) {
             toast('Feltöltési hiba: ' + err.message, 'error');
         }
-    }
-
-    // ══════════════════════════════════════
-    // ── RESIZE PROMPT (before upload) ──
-    // ══════════════════════════════════════
-
-    function askResizePrompt(fileCount) {
-        return new Promise(resolve => {
-            const yesBtn = $('#confirm-yes');
-            const noBtn = $('#confirm-no');
-            // Save original state
-            const origYesText = yesBtn.textContent;
-            const origYesClass = yesBtn.className;
-            const origNoText = noBtn.textContent;
-            // Custom text
-            $('#confirm-title').textContent = 'Átméretezés?';
-            $('#confirm-message').textContent = `${fileCount} kép kiválasztva. Szeretné átméretezni a képeket feltöltés előtt?`;
-            yesBtn.textContent = '✓ Igen, átméretezés';
-            yesBtn.className = 'btn-save';
-            noBtn.textContent = 'Nem, feltöltés így';
-            confirmResolve = (val) => {
-                // Restore
-                yesBtn.textContent = origYesText;
-                yesBtn.className = origYesClass;
-                noBtn.textContent = origNoText;
-                resolve(val);
-            };
-            $('#confirm-modal').classList.remove('hidden');
-        });
     }
 
     // Get a human-readable label for a content.json path
@@ -1479,21 +1491,6 @@
 
     // ── Shared upload helper (single file) ──
     async function uploadAndSet(file, targetPath) {
-        // Ask if they want to resize first
-        const wantResize = await askResizePrompt(1);
-        if (wantResize) {
-            // Determine target type
-            const isGallery = targetPath.includes('.gallery.');
-            if (isGallery) {
-                // Extract gallery array path (e.g. servicePages.x.gallery from servicePages.x.gallery.0.src)
-                const galleryPath = targetPath.replace(/\.\d+\.src$/, '');
-                openBatchProcessWith([file], { type: 'gallery', path: galleryPath });
-            } else {
-                openBatchProcessWith([file], { type: 'field', path: targetPath });
-            }
-            return;
-        }
-        // Normal upload
         const formData = new FormData();
         formData.append('images', file, file.name);
         try {
