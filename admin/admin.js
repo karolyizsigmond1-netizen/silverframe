@@ -539,8 +539,20 @@
 
     // ── Gallery section with bulk upload ──
     function renderGallerySection(gallery, basePath) {
-        const bundleCount = gallery.filter(x => x && x.type === 'bundle').length;
-        const imageCount = gallery.length - bundleCount;
+        // Auto-sort: bundles always at top
+        const bundles = gallery.filter(x => x && x.type === 'bundle');
+        const images  = gallery.filter(x => !x || x.type !== 'bundle');
+        const alreadySorted = gallery.every((item, i) => {
+            const isBundle = item && item.type === 'bundle';
+            return i < bundles.length ? isBundle : !isBundle;
+        });
+        if (bundles.length && images.length && !alreadySorted) {
+            bundles.concat(images).forEach((item, i) => { gallery[i] = item; });
+            setDirty(true);
+        }
+
+        const bundleCount = bundles.length;
+        const imageCount = images.length;
         const titleBits = [imageCount + ' kép'];
         if (bundleCount) titleBits.push(bundleCount + ' képcsomag');
         let html = '<div class="field-section"><div class="field-section-title">Galéria (' + titleBits.join(', ') + ')</div>';
@@ -630,8 +642,9 @@
             : `<span class="bundle-thumb-empty">?</span>`;
         const previewTitle = esc(bundle.title || bundle.alt || 'Névtelen képcsomag');
 
-        return `<div class="bundle-card collapsed" data-index="${i}">
+        return `<div class="bundle-card collapsed" draggable="false" data-index="${i}">
             <div class="bundle-card-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="bundle-drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</span>
                 <span class="bundle-collapse-caret" aria-hidden="true">&#9662;</span>
                 <div class="bundle-card-thumb">${previewThumb}</div>
                 <div class="bundle-card-summary">
@@ -675,13 +688,13 @@
             <div class="bundle-card-body">
                 <div class="field-section-title">Csomag képek</div>
                 <div class="gallery-grid bundle-inner-grid" data-array-path="${innerPath}">${inner}</div>
-                <div class="bulk-upload-zone" data-bulk-upload="${innerPath}">
-                    <div class="bulk-upload-icon">&#128247;</div>
-                    <div class="bulk-upload-text">Húzzon ide képeket vagy kattintson a tallózáshoz</div>
-                    <div class="bulk-upload-hint">Egyszerre több képet is feltölthet</div>
+                <div class="bulk-upload-zone bundle-upload-zone" data-bulk-upload="${innerPath}">
+                    <div class="bulk-upload-icon">&#128444;&#65039;</div>
+                    <div class="bulk-upload-text"><strong>Képek feltöltése ebbe a képcsomagba</strong></div>
+                    <div class="bulk-upload-cta">Kattintson ide vagy húzzon ide képeket</div>
+                    <div class="bulk-upload-hint">Egyszerre több képet is feltölthet — ne töltsön fel a fő galériába!</div>
                     <input type="file" class="bulk-upload-input" accept="image/*" multiple>
                 </div>
-                <button class="btn-add" data-add-array="${innerPath}" data-template="galleryItem" style="margin-top:8px">+ Kép hozzáadása a csomaghoz</button>
             </div>
         </div>`;
     }
@@ -1122,14 +1135,29 @@
             });
         });
 
-        // Gallery grids (direct card drag)
+        // Gallery grids (direct card drag — both .gallery-card and .bundle-card)
         container.querySelectorAll('.gallery-grid[data-array-path]').forEach(grid => {
             const arrayPath = grid.dataset.arrayPath;
-            grid.querySelectorAll(':scope > .gallery-card').forEach(card => {
+            grid.querySelectorAll(':scope > .gallery-card, :scope > .bundle-card').forEach(card => {
+                const isBundle = card.classList.contains('bundle-card');
+
+                if (isBundle) {
+                    // Only enable drag via the handle to prevent click interference
+                    const handle = card.querySelector('.bundle-drag-handle');
+                    if (handle) {
+                        handle.addEventListener('mousedown', () => { card.draggable = true; });
+                        card.addEventListener('dragend', () => { card.draggable = false; });
+                    }
+                }
+
                 card.addEventListener('dragstart', e => {
-                    if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
-                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) return;
-                    dragState = { arrayPath, fromIndex: parseInt(card.dataset.index) };
+                    if (e.dataTransfer.types && e.dataTransfer.types.includes('Files')) return;
+                    if (isBundle) {
+                        if (!card.draggable) { e.preventDefault(); return; }
+                    } else {
+                        if (e.target.closest('button, input, .btn-icon, .gallery-card-actions')) { e.preventDefault(); return; }
+                    }
+                    dragState = { arrayPath, fromIndex: parseInt(card.dataset.index), isBundle };
                     e.dataTransfer.effectAllowed = 'move';
                     e.dataTransfer.setData('text/plain', card.dataset.index);
                     requestAnimationFrame(() => card.classList.add('dragging'));
@@ -1137,6 +1165,7 @@
 
                 card.addEventListener('dragend', () => {
                     card.classList.remove('dragging');
+                    if (isBundle) card.draggable = false;
                     grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
                     dragState = null;
                 });
@@ -1144,13 +1173,16 @@
                 card.addEventListener('dragover', e => {
                     if (e.dataTransfer.types.includes('Files')) return;
                     if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    // Bundles can only swap with bundles; images can only swap with images
+                    if (dragState.isBundle !== isBundle) return;
                     e.preventDefault();
                     e.dataTransfer.dropEffect = 'move';
                     grid.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
                     card.classList.add('drag-over');
                 });
 
-                card.addEventListener('dragleave', () => {
+                card.addEventListener('dragleave', e => {
+                    if (card.contains(e.relatedTarget)) return;
                     card.classList.remove('drag-over');
                 });
 
@@ -1159,6 +1191,7 @@
                     e.preventDefault();
                     card.classList.remove('drag-over');
                     if (!dragState || dragState.arrayPath !== arrayPath) return;
+                    if (dragState.isBundle !== isBundle) return;
                     const fromIndex = dragState.fromIndex;
                     const toIndex = parseInt(card.dataset.index);
                     if (fromIndex === toIndex) return;

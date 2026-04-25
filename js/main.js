@@ -106,16 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Justified masonry layout ──
-    const masonryGrid = document.querySelector('.masonry');
+    const masonryGrids = Array.from(document.querySelectorAll('.masonry'));
     const GAP = 6;
     let justifyMasonry = null;
 
-    if (masonryGrid) {
-        justifyMasonry = function() {
-            const totalWidth = masonryGrid.offsetWidth;
+    if (masonryGrids.length) {
+        const justifyOne = (grid) => {
+            const totalWidth = grid.offsetWidth;
             if (!totalWidth) return;
             const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
-            const items = Array.from(masonryGrid.querySelectorAll(':scope > .masonry-item'))
+            const items = Array.from(grid.querySelectorAll(':scope > .masonry-item'))
                 .filter(el => el.style.display !== 'none');
             if (!items.length) return;
 
@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        justifyMasonry = () => masonryGrids.forEach(justifyOne);
         justifyMasonry();
         let rTimer;
         window.addEventListener('resize', () => { clearTimeout(rTimer); rTimer = setTimeout(justifyMasonry, 120); }, { passive: true });
@@ -182,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const counter = lightbox.querySelector('.lightbox-counter');
         const itemSelectors = '.masonry-item, .gallery-preview-item, .service-gallery-item';
         const containerSelectors = '.masonry, .gallery-preview, .service-gallery';
-        // currentList is an array of {src, alt} objects
         let currentList = [];
         let currentIndex = 0;
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const arr = JSON.parse(decodeURIComponent(raw));
                 if (Array.isArray(arr) && arr.length) return arr;
-            } catch (err) { /* ignore */ }
+            } catch (e) {}
             return null;
         };
 
@@ -218,17 +218,14 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', () => {
                 const bundle = parseBundle(item);
                 if (bundle) {
-                    // Bundle: navigate through the bundle's inner images only
                     currentList = bundle;
                     showAt(0);
                 } else {
-                    // Regular: walk siblings, skip bundle tiles and hidden items
                     const container = item.closest(containerSelectors) || document;
                     const siblings = Array.from(container.querySelectorAll(itemSelectors))
                         .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
                     currentList = siblings.map(itemToEntry);
-                    const idx = siblings.indexOf(item);
-                    showAt(idx < 0 ? 0 : idx);
+                    showAt(siblings.indexOf(item));
                 }
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
@@ -238,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex - 1); });
         if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex + 1); });
 
-        const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+        const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; };
         lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLb(); });
         document.addEventListener('keydown', e => {
             if (!lightbox.classList.contains('open')) return;

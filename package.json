@@ -7,5 +7,7 @@
     "admin": "node server.js",
     "start": "node server.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
 }

@@ -11,8 +11,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.silverframestudio.com/">
     <meta property="og:image" content="https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80">
+    <link rel="preload" as="image" href="/uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap"></noscript>
     <link rel="stylesheet" href="css/style.css">
     <script type="application/ld+json">
     {
@@ -59,7 +61,7 @@
         <a href="index.html" class="header-logo" aria-label="Silverframe  — Főoldal">Silverframe </a>
         <nav class="header-nav" aria-label="Fő navigáció">
             <a href="about.html">Rólam</a>
-            <a href="portfolio.html">Portfólió</a>
+            <a href="portfolio.html">Galéria</a>
             <div class="nav-dropdown">
                 <a href="services.html">Szolgáltatások <svg class="dropdown-arrow" viewBox="0 0 12 12" width="10" height="10"><path d="M3 5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
                 <div class="dropdown-menu"><a href="services/portfolio-model.html">Portfólió / Modell</a><a href="services/maternity.html">Kismama</a><a href="services/boudoir.html">Boudoir</a><a href="services/family.html">Családi</a><a href="services/couple.html">Páros</a><a href="services/business.html">Üzleti portré</a><a href="services/real-estate.html">Ingatlan</a><a href="services/wedding.html">Esküvő</a><a href="services/wedding-creative.html">Esküvői kreatív</a><a href="services/event.html">Rendezvény</a><a href="services/pet.html">Kisállat</a><a href="services/product.html">Termékfotó</a></div>
@@ -72,7 +74,7 @@
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció">
         <a href="index.html">Főoldal</a>
         <a href="about.html">Rólam</a>
-        <a href="portfolio.html">Portfólió</a>
+        <a href="portfolio.html">Galéria</a>
         <a href="services.html">Szolgáltatások</a>
         <div class="mobile-nav-sub">
             <a href="services/portfolio-model.html">Portfólió / Modell</a>
@@ -131,35 +133,6 @@
             </div>
         </section>
 
-        <div class="marquee" aria-hidden="true">
-            <div class="marquee-track">
-                <span class="marquee-item">Portfólió / Modell</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Kismama</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Boudoir</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Családi</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Páros</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Üzleti portré</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Ingatlan</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Esküvő</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Esküvői kreatív</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Rendezvény</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Kisállat</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Termékfotó</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Portfólió / Modell</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Kismama</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Boudoir</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Családi</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Páros</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Üzleti portré</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Ingatlan</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Esküvő</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Esküvői kreatív</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Rendezvény</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Kisállat</span><span class="marquee-dot"></span>
-                <span class="marquee-item">Termékfotó</span><span class="marquee-dot"></span>
-            </div>
-        </div>
-
         <section class="section services-preview" aria-label="Fotózási szolgáltatások">
             <div class="container">
                 <div class="reveal" style="text-align:center;">
@@ -168,16 +141,52 @@
                 </div>
                 <div class="services-grid-home reveal reveal-delay-1">
                     <a href="services/portfolio-model.html" class="service-card-home">
-                        <img src="uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg" style="object-position:46% 39%" alt="Portfólió és modell fotózás" width="500" height="667">
-                        <div class="overlay"><h3>Portfólió / Modell</h3><p>Professzionális portfóliók</p></div>
+                        <img src="uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg" alt="Portfólió / Modell fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Portfólió / Modell</h3></div>
                     </a>
-                    <a href="services/wedding.html" class="service-card-home">
-                        <img src="uploads/1e04dafae97b-www.karolyifoto.hu__3_of_25_.jpg" style="object-position:41% 39%" alt="Esküvői fotózás" width="500" height="667">
-                        <div class="overlay"><h3>Esküvő</h3><p>Esküvői fotózás</p></div>
+                    <a href="services/maternity.html" class="service-card-home">
+                        <img src="uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg" style="object-position:38% 19%" alt="Kismama fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Kismama</h3></div>
                     </a>
                     <a href="services/boudoir.html" class="service-card-home">
-                        <img src="uploads/c2641de93fa8-Boudoir__2_.jpg" alt="Boudoir fotózás" width="500" height="667">
-                        <div class="overlay"><h3>Boudoir</h3><p>Intim & Magabiztos</p></div>
+                        <img src="uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg" style="object-position:48% 33%" alt="Boudoir fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Boudoir</h3></div>
+                    </a>
+                    <a href="services/family.html" class="service-card-home">
+                        <img src="uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg" alt="Családi fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Családi</h3></div>
+                    </a>
+                    <a href="services/couple.html" class="service-card-home">
+                        <img src="uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg" alt="Páros fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Páros</h3></div>
+                    </a>
+                    <a href="services/business.html" class="service-card-home">
+                        <img src="uploads/015b522c5a9c-_DSC6748.jpg" alt="Üzleti portré fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Üzleti portré</h3></div>
+                    </a>
+                    <a href="services/real-estate.html" class="service-card-home">
+                        <img src="uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg" alt="Ingatlan fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Ingatlan</h3></div>
+                    </a>
+                    <a href="services/wedding.html" class="service-card-home">
+                        <img src="uploads/6b6ba1e96c51-eskuvoi-fotozas-szeged__16_.jpg" alt="Esküvő fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Esküvő</h3></div>
+                    </a>
+                    <a href="services/wedding-creative.html" class="service-card-home">
+                        <img src="uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg" style="object-position:76% 52%" alt="Esküvői kreatív fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Esküvői kreatív</h3></div>
+                    </a>
+                    <a href="services/event.html" class="service-card-home">
+                        <img src="uploads/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg" alt="Rendezvény fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Rendezvény</h3></div>
+                    </a>
+                    <a href="services/pet.html" class="service-card-home">
+                        <img src="uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg" style="object-position:20% 47%" alt="Kisállat fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Kisállat</h3></div>
+                    </a>
+                    <a href="services/product.html" class="service-card-home">
+                        <img src="uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg" style="object-position:66% 42%" alt="Termékfotó fotózás – Silverframe Studio, Szeged" width="500" height="667">
+                        <div class="overlay"><h3>Termékfotó</h3></div>
                     </a>
                 </div>
             </div>
@@ -193,7 +202,7 @@
 
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
-                    <a href="portfolio.html" class="btn"><span>Teljes portfólió</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <a href="portfolio.html" class="btn"><span>Teljes galéria</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
             </div>
         </section>
@@ -263,7 +272,7 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Főoldal</a></li>
                         <li><a href="about.html">Rólam</a></li>
-                        <li><a href="portfolio.html">Portfólió</a></li>
+                        <li><a href="portfolio.html">Galéria</a></li>
                         <li><a href="services.html">Szolgáltatások</a></li>
                         <li><a href="contact.html">Kapcsolat</a></li>
                     </ul>
@@ -271,7 +280,7 @@
                 <div>
                     <h4 class="footer-heading">Szolgáltatások</h4>
                     <ul class="footer-links">
-                        <li><a href="services/portfolio-model.html">Portfólió / Modell</a></li>
+                        <li><a href="services/portfolio-model.html">Galéria / Modell</a></li>
                         <li><a href="services/maternity.html">Kismama</a></li>
                         <li><a href="services/boudoir.html">Boudoir</a></li>
                         <li><a href="services/wedding.html">Esküvő</a></li>
@@ -300,7 +309,7 @@
         <img src="" alt="">
         <div class="lightbox-counter" aria-hidden="true"></div>
     </div>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script>
     (function(){
         var slides = document.querySelectorAll('.home-hero-slide');
@@ -493,11 +502,12 @@
 (function() {
   // ── Config ──
   var WEBHOOK = 'https://n8n-giez.srv1499541.hstgr.cloud/webhook/silverframe-chat';
-  var DEMO_MODE = false; // false = live n8n | true = scripted demo responses
-
+  var DEMO_MODE = false;
+  var STORAGE_KEY = 'sf_chat_v1';
+  var MAX_MESSAGES = 60;
+  var SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours
 
   // ── State ──
-  var sessionId = 'sf-' + Math.random().toString(36).substring(2, 10);
   var isOpen = false;
   var isSending = false;
 
@@ -508,13 +518,56 @@
   var sendBtn  = document.getElementById('sfSendBtn');
   var quickEl  = document.getElementById('sfQuickReplies');
 
+  // ── Persistence ──
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var s = JSON.parse(raw);
+      if (Date.now() - s.ts > SESSION_TTL) { localStorage.removeItem(STORAGE_KEY); return null; }
+      return s;
+    } catch(e) { return null; }
+  }
+
+  function saveState() {
+    try {
+      var history = [];
+      msgs.querySelectorAll('.sf-message:not(.typing)').forEach(function(el) {
+        history.push({ role: el.classList.contains('user') ? 'user' : 'bot', text: el.textContent });
+      });
+      if (history.length > MAX_MESSAGES) history = history.slice(-MAX_MESSAGES);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ sessionId: sessionId, history: history, open: isOpen, ts: Date.now() }));
+    } catch(e) {}
+  }
+
+  var stored = loadState();
+  var sessionId = stored ? stored.sessionId : ('sf-' + Math.random().toString(36).substring(2, 10));
+
+  // ── Restore history ──
+  if (stored && stored.history && stored.history.length) {
+    stored.history.forEach(function(m) { addMsgDirect(m.role, m.text); });
+  }
+
   // ── Toggle ──
   toggle.addEventListener('click', function() {
     isOpen = !isOpen;
     toggle.classList.toggle('open', isOpen);
     win.classList.toggle('open', isOpen);
-    if (isOpen) { input.focus(); if (msgs.children.length === 0) showWelcome(); }
+    if (isOpen) {
+      input.focus();
+      msgs.scrollTop = msgs.scrollHeight;
+      if (msgs.querySelectorAll('.sf-message').length === 0) showWelcome();
+    }
+    saveState();
   });
+
+  // Restore open state
+  if (stored && stored.open) {
+    isOpen = true;
+    toggle.classList.add('open');
+    win.classList.add('open');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
 
   // ── Welcome ──
   function showWelcome() {
@@ -523,12 +576,17 @@
   }
 
   // ── Messages ──
-  function addMsg(role, text) {
+  function addMsgDirect(role, text) {
     var d = document.createElement('div');
     d.className = 'sf-message ' + role;
     d.textContent = text;
     msgs.appendChild(d);
+  }
+
+  function addMsg(role, text) {
+    addMsgDirect(role, text);
     msgs.scrollTop = msgs.scrollHeight;
+    saveState();
   }
 
   function showTyping() {
@@ -561,7 +619,7 @@
     var lower = t.toLowerCase();
 
     if (DEMO_MODE) {
-      getDemoReply(lower).then(function(r) { hideTyping(); addMsg('bot', r); setFollowUp(lower); isSending = false; sendBtn.disabled = false; input.focus(); });
+      getDemoReply(lower).then(function(r) { hideTyping(); addMsg('bot', r); setFollowUp(lower); isSending = false; sendBtn.disabled = false; input.focus(); saveState(); });
       return;
     }
 
@@ -582,7 +640,7 @@
     .catch(function() { return getDemoReply(lower); })
     .then(function(r) {
       hideTyping(); addMsg('bot', r); setFollowUp(lower);
-      isSending = false; sendBtn.disabled = false; input.focus();
+      isSending = false; sendBtn.disabled = false; input.focus(); saveState();
     });
   }
 
