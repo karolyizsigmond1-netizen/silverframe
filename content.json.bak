@@ -19,7 +19,9 @@
       "num": "01",
       "portfolioId": "portrait",
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
-      "img": "uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg"
+      "img": "uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg",
+      "arakTagline": "Profi képek, természetes kisugárzás",
+      "arakBadge": "Legnépszerűbb"
     },
     {
       "id": "maternity",
@@ -27,7 +29,9 @@
       "num": "02",
       "portfolioId": "maternity",
       "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80",
-      "img": "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg"
+      "img": "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg",
+      "arakTagline": "Az anyaság szépségének megörökítése",
+      "arakBadge": ""
     },
     {
       "id": "boudoir",
@@ -35,7 +39,9 @@
       "num": "03",
       "portfolioId": "boudoir",
       "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80",
-      "img": "uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg"
+      "img": "uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg",
+      "arakTagline": "Elegáns, bizalmas, magabiztos",
+      "arakBadge": ""
     },
     {
       "id": "family",
@@ -43,15 +49,19 @@
       "num": "04",
       "portfolioId": "family",
       "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
-      "img": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg"
+      "img": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg",
+      "arakTagline": "Valódi pillanatok, örök emlékek",
+      "arakBadge": ""
     },
     {
       "id": "couple",
-      "name": "Páros",
+      "name": "Páros jegyes",
       "num": "05",
       "portfolioId": "couple",
       "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
-      "img": "uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg"
+      "img": "uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg",
+      "arakTagline": "A szerelem pillanatai örökre",
+      "arakBadge": ""
     },
     {
       "id": "business",
@@ -59,7 +69,9 @@
       "num": "06",
       "portfolioId": "business",
       "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-      "img": "uploads/015b522c5a9c-_DSC6748.jpg"
+      "img": "uploads/015b522c5a9c-_DSC6748.jpg",
+      "arakTagline": "Profi megjelenés minden platformon",
+      "arakBadge": ""
     },
     {
       "id": "real-estate",
@@ -67,7 +79,9 @@
       "num": "07",
       "portfolioId": "real-estate",
       "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-      "img": "uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg"
+      "img": "uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg",
+      "arakTagline": "Eladható ingatlanok, megnyerő képek",
+      "arakBadge": "Legjobb ár"
     },
     {
       "id": "wedding",
@@ -75,7 +89,9 @@
       "num": "08",
       "portfolioId": "wedding",
       "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-      "img": "uploads/6b6ba1e96c51-eskuvoi-fotozas-szeged__16_.jpg"
+      "img": "uploads/6b6ba1e96c51-eskuvoi-fotozas-szeged__16_.jpg",
+      "arakTagline": "A nagy nap, örökre megörökítve",
+      "arakBadge": "Prémium"
     },
     {
       "id": "wedding-creative",
@@ -83,7 +99,9 @@
       "num": "09",
       "portfolioId": "wedding-creative",
       "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
-      "img": "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg"
+      "img": "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg",
+      "arakTagline": "Mesebeli esküvői portrék",
+      "arakBadge": ""
     },
     {
       "id": "event",
@@ -91,7 +109,9 @@
       "num": "10",
       "portfolioId": "event",
       "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
-      "img": "uploads/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg"
+      "img": "uploads/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg",
+      "arakTagline": "Céges és személyes események",
+      "arakBadge": ""
     },
     {
       "id": "pet",
@@ -99,7 +119,9 @@
       "num": "11",
       "portfolioId": "pet",
       "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
-      "img": "uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg"
+      "img": "uploads/56bb5b232b96-kutya-fotozas-szeged-studio__7_.jpg",
+      "arakTagline": "A négylábú barát örök emléke",
+      "arakBadge": ""
     },
     {
       "id": "product",
@@ -107,13 +129,15 @@
       "num": "12",
       "portfolioId": "product",
       "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
-      "img": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg"
+      "img": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
+      "arakTagline": "Fotók, amik eladnak",
+      "arakBadge": ""
     }
   ],
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
+      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros jegyes, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -176,7 +200,7 @@
           "author": "— Dóra, Szeged"
         },
         {
-          "text": "Páros fotózásra jöttünk, és már az első perctől kezdve természetesen éreztük magunkat. A képek pont azt adják vissza, amit a valóságban éreztünk.",
+          "text": "Páros jegyes fotózásra jöttünk, és már az első perctől kezdve természetesen éreztük magunkat. A képek pont azt adják vissza, amit a valóságban éreztünk.",
           "author": "— Gábor és Eszter, Szeged"
         },
         {
@@ -285,8 +309,8 @@
         {
           "href": "portfolio/couple.html",
           "image": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
-          "alt": "Páros fotózás",
-          "cat": "Páros",
+          "alt": "Páros jegyes fotózás",
+          "cat": "Páros jegyes",
           "title": "Összetartozás",
           "wide": false
         },
@@ -312,7 +336,7 @@
     },
     "services": {
       "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
-      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
+      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros jegyes, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
@@ -346,6 +370,18 @@
       "formTitle": "Beszéljük<br>meg",
       "formDesc": "Legyen szó bármilyen fotózásról, szívesen válaszolok a kérdéseidre. Minden jó kép egy beszélgetéssel kezdődik.",
       "availability": "2026 – 2027 foglalható  Tel: +3620/3799-814"
+    },
+    "arak": {
+      "title": "Árak — Silverframe Studio | Fotózás Szegeden",
+      "metaDesc": "Silverframe Studio fotózás árak 45.000 Ft-tól. Portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, nincsenek rejtett díjak. Foglalj időpontot!",
+      "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Árak & Csomagok",
+      "ctaLabel": "Készen állsz?",
+      "ctaTitle": "Foglald le a szabad időpontod",
+      "ctaDesc": "Egy rövid egyeztetés elég — elmondom, mire számíthatsz, és megtaláljuk a legjobb időpontot. Semmi kötelezettség.",
+      "customBandTitle": "Egyedi ajánlatot szeretnél?",
+      "customBandDesc": "Az esküvői és rendezvény fotózás minden esetben személyre szabott — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
     }
   },
   "servicePages": {
@@ -2216,16 +2252,16 @@
       "prevTitle": "Boudoir",
       "prevLabel": "Előző",
       "nextService": "couple",
-      "nextTitle": "Páros"
+      "nextTitle": "Páros jegyes"
     },
     "couple": {
-      "title": "Páros / Jegyes Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Páros és jegyes fotózás Szegeden 70.000 Ft. 60 perc fotózás, 20 retusált fotó.",
+      "title": "Páros jegyes Fotózás — Silverframe Studio | Szeged",
+      "metaDesc": "Páros jegyes fotózás Szegeden 70.000 Ft. 60 perc fotózás, 20 retusált fotó.",
       "ogImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1200&q=80",
       "heroImage": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1600&q=80",
       "heroLabel": "Szolgáltatások / 05",
-      "heroTitle": "Páros / Jegyes",
-      "breadcrumb": "Páros",
+      "heroTitle": "Páros jegyes",
+      "breadcrumb": "Páros jegyes",
       "introLabel": "Szerelem minden képkockában",
       "introTitle": "A szerelem a legszebb<br>történet",
       "introDesc": [
@@ -2234,11 +2270,11 @@
       ],
       "introImage": {
         "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=700&q=80",
-        "alt": "Páros fotózás"
+        "alt": "Páros jegyes fotózás"
       },
       "packages": [
         {
-          "name": "Páros csomag — 70.000 Ft",
+          "name": "Páros jegyes csomag — 70.000 Ft",
           "desc": "",
           "items": [
             {
@@ -2263,7 +2299,7 @@
       "gallery": [
         {
           "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80",
-          "alt": "Páros fotó"
+          "alt": "Páros jegyes fotó"
         },
         {
           "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
@@ -2275,7 +2311,7 @@
         },
         {
           "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "Páros a természetben"
+          "alt": "Páros jegyes a természetben"
         },
         {
           "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
@@ -2283,7 +2319,7 @@
         },
         {
           "src": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80",
-          "alt": "Páros portré"
+          "alt": "Páros jegyes portré"
         }
       ],
       "ctaLabel": "Szerelmes fotózás",
@@ -2389,7 +2425,7 @@
       "ctaTitle": "Profi képek, amik<br>tényleg téged mutatnak",
       "ctaButton": "Időpontfoglalás",
       "prevService": "couple",
-      "prevTitle": "Páros",
+      "prevTitle": "Páros jegyes",
       "prevLabel": "Előző",
       "nextService": "real-estate",
       "nextTitle": "Ingatlan"
@@ -3374,12 +3410,12 @@
       "ctaLink": "services/family.html"
     },
     "couple": {
-      "title": "Páros Galéria — Silverframe Studio",
-      "metaDesc": "Páros/jegyes fotózás galéria.",
+      "title": "Páros jegyes Galéria — Silverframe Studio",
+      "metaDesc": "Páros jegyes fotózás galéria.",
       "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
       "heroLabel": "Portfólió",
-      "heroTitle": "Páros",
-      "breadcrumb": "Páros",
+      "heroTitle": "Páros jegyes",
+      "breadcrumb": "Páros jegyes",
       "gallery": [
         {
           "src": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
@@ -6664,7 +6700,7 @@
               "alt": ""
             },
             {
-              "src": "uploads/3cf3bae923d6-D_B-fotos-eskuvo-gereby-kuria-szeged__80_.jpg",
+              "src": "uploads/2a5dd07f5627-eskuvo-kreativ-fotozas-szeged-balaton-budapest__16_.jpg",
               "alt": ""
             },
             {
@@ -6704,7 +6740,7 @@
               "alt": ""
             },
             {
-              "src": "uploads/d2e56f860193-D_B-fotos-eskuvo-gereby-kuria-szeged__90_.jpg",
+              "src": "uploads/58201b15db39-eskuvo-kreativ-fotozas-szeged-balaton-budapest__26_.jpg",
               "alt": ""
             },
             {
@@ -11532,6 +11568,7 @@
     "uploads/6a301d589258-modell-fotozas-kulter-divat-szegedjpg__152_.jpg": "49% 9%",
     "uploads/2a2b947179e1-14570382_1433141726713124_5213103682742096301_n.jpg": "31% 7%",
     "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg": "66% 42%",
-    "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg": "76% 52%"
+    "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg": "76% 52%",
+    "uploads/c361bbf9aa0b-www.karolyifoto.hu__4_of_25_-topaz-sharpen-face.jpg": "16% 55%"
   }
 }
