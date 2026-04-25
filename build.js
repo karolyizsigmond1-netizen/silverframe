@@ -239,6 +239,7 @@ function headerHtml(prefix, activePage, activeService) {
             <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
             <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             ${navDropdown(prefix, activeService)}
+            <a href="${prefix}arak.html"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
             <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
             <a href="${prefix}contact.html" class="header-cta">Időpontfoglalás</a>
         </nav>
@@ -256,6 +257,7 @@ function mobileNavHtml(prefix) {
     `\n            <a href="${prefix}services/${c.id}.html">${c.name}</a>`
   ).join('')}
         </div>
+        <a href="${prefix}arak.html">Árak</a>
         <a href="${prefix}contact.html">Kapcsolat</a>
     </nav>`;
 }
@@ -899,6 +901,280 @@ ${chatbotHtml()}
 </html>`;
 }
 
+
+function buildArakPage() {
+  const p = data.pages.arak;
+  if (!p) return '';
+
+  const galleryIcon = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>';
+
+  const stats = (data.pages.about && data.pages.about.stats) || [
+    { num: '15+', label: 'Év tapasztalat' },
+    { num: '500+', label: 'Elégedett ügyfél' },
+    { num: '12', label: 'Szolgáltatás' },
+    { num: '45e Ft', label: 'Ártól' },
+  ];
+  const statsHtml = stats.map((s, i) => `
+                    <div class="ahs-item" style="--si:${i}">
+                        <span class="ahs-num">${s.num}</span>
+                        <span class="ahs-label">${s.label}</span>
+                    </div>`).join('');
+
+  // Build service cards
+  const cardsHtml = cats.map((cat, i) => {
+    const sp = data.servicePages[cat.id] || {};
+    const pkgs = sp.packages || [];
+    const badge = cat.arakBadge || '';
+    const tagline = cat.arakTagline || '';
+    const img = cat.img || cat.image || '';
+    const galleryId = cat.portfolioId || cat.id;
+
+    const hasMultiPkg = pkgs.length > 1;
+    const firstPkgName = pkgs.length ? pkgs[0].name : '';
+    const isCustom = firstPkgName.includes('Egyedi ajánlat');
+    const priceMatch = firstPkgName.match(/[\d.,]+\.?\d*\s*Ft|Egyedi ajánlat/);
+    const priceLabel = priceMatch ? priceMatch[0] : '';
+
+    const badgeHtml = badge ? `<span class="pc-badge">${badge}</span>` : '';
+    const popularCls = badge ? ' pc-popular' : '';
+    const priceRowHtml = hasMultiPkg && !isCustom
+      ? `<span class="pc-price-row">${priceLabel}<span class="pc-from">tól</span></span>`
+      : `<span class="pc-price-row">${priceLabel}</span>`;
+
+    let bodyContent;
+    if (hasMultiPkg) {
+      const pkgBlocks = pkgs.map((pkg, pi) => {
+        const pm = pkg.name.match(/[\d.,]+\.?\d*\s*Ft|Egyedi ajánlat/);
+        const pkgPrice = pm ? pm[0] : '';
+        const pkgName = pkg.name.replace(/\s*—\s*[\d.,]+\.?\d*\s*Ft/, '').replace(/\s*—\s*Egyedi ajánlat/, '');
+        const hlCls = pi > 0 ? ' pkg-highlight' : '';
+        const feats = (pkg.items || []).map(it => `<li>${it.title}</li>`).join('');
+        return `<div class="pkg-block${hlCls}">
+                            <div class="pkg-block-header">
+                                <span class="pkg-block-name">${pkgName}</span>
+                                <span class="pkg-block-price">${pkgPrice}</span>
+                            </div>
+                            <ul class="pc-features">${feats}</ul>
+                        </div>`;
+      }).join('');
+      bodyContent = `<div class="pkg-list">${pkgBlocks}</div>`;
+    } else {
+      const feats = (pkgs[0] && pkgs[0].items || []).map(it => `<li>${it.title}</li>`).join('');
+      bodyContent = `<ul class="pc-features pc-features-single">${feats}</ul>`;
+    }
+
+    const ctaLabel = isCustom ? 'Ajánlatot kérek' : 'Foglalj időpontot';
+
+    return `
+                    <div class="price-card2${popularCls}" style="--i:${i}">
+                        <div class="pc-img-wrap">
+                            <img src="${imgSrc(img, '')}" alt="${cat.name} fotózás" loading="lazy">
+                            <div class="pc-img-overlay"></div>
+                            ${badgeHtml}
+                            <div class="pc-price-badge">${priceRowHtml}</div>
+                        </div>
+                        <div class="pc-body">
+                            <div class="pc-header">
+                                <span class="pc-num">${cat.num}</span>
+                                <div>
+                                    <h3 class="pc-title">${cat.name}</h3>
+                                    <p class="pc-tagline">${tagline}</p>
+                                </div>
+                            </div>
+                            ${bodyContent}
+                            <div class="pc-actions">
+                                <a href="contact.html" class="btn btn-solid pc-cta"><span>${ctaLabel}</span>${arrowSvg}</a>
+                                <a href="portfolio/${galleryId}.html" class="btn pc-gallery-btn">${galleryIcon}<span>Galéria</span></a>
+                            </div>
+                        </div>
+                    </div>`;
+  }).join('');
+
+  // Testimonials
+  const testis = ((data.pages.index && data.pages.index.testimonials) || []).slice(0, 3);
+  const testiHtml = testis.map(t => `
+                <div class="testi-card reveal">
+                    <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testi-text">"${t.text}"</p>
+                    <span class="testi-author">${t.author}</span>
+                </div>`).join('');
+
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": p.title,
+    "description": p.metaDesc,
+    "url": `${g.baseUrl}/arak.html`
+  });
+
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/arak.html', p.title, p.metaDesc, 'website', g.baseUrl + '/arak.html', null, 'css/style.css', jsonLd)}
+    <style>
+    .arak-hero-stats { display:flex; gap:2.5rem; justify-content:center; margin-top:2rem; flex-wrap:wrap; }
+    .ahs-item { text-align:center; opacity:0; animation:fadeUp 0.7s var(--ease-dramatic) forwards; animation-delay:calc(var(--si)*150ms + 800ms); }
+    .ahs-num { font-family:var(--serif); font-size:2.2rem; font-weight:300; color:var(--accent-light); line-height:1; display:block; }
+    .ahs-label { font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); display:block; margin-top:0.3rem; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .trust-strip { background:var(--bg-elevated); border-top:1px solid rgba(201,169,110,0.1); border-bottom:1px solid rgba(201,169,110,0.1); padding:1.4rem 0; overflow:hidden; }
+    .trust-strip-inner { display:flex; justify-content:center; flex-wrap:wrap; }
+    .trust-item { display:flex; align-items:center; gap:0.7rem; padding:0.6rem 2rem; font-size:0.8rem; color:var(--text-body); border-right:1px solid rgba(255,255,255,0.06); white-space:nowrap; }
+    .trust-item:last-child { border-right:none; }
+    .trust-icon { width:18px; height:18px; color:var(--accent); flex-shrink:0; }
+    .pc-section { padding:5rem 0 6rem; }
+    .pc-intro { text-align:center; margin-bottom:4rem; }
+    .pc-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.8rem; }
+    .pc-intro p { color:var(--text-body); font-size:0.9rem; max-width:480px; margin:0 auto; }
+    .pc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+    @media(max-width:1100px){.pc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.pc-grid{grid-template-columns:1fr}}
+    .price-card2 { background:var(--bg-card); border:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; overflow:hidden; transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; opacity:0; transform:translateY(36px); animation:pcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*70ms + 100ms); border-radius:2px; }
+    @keyframes pcIn{to{opacity:1;transform:translateY(0)}}
+    .price-card2:hover { transform:translateY(-8px); box-shadow:0 28px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(201,169,110,0.2); }
+    .price-card2.pc-popular { border-color:rgba(201,169,110,0.35); box-shadow:0 0 0 1px rgba(201,169,110,0.15); }
+    .pc-img-wrap { position:relative; aspect-ratio:3/2; overflow:hidden; flex-shrink:0; }
+    .pc-img-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; transition:transform 0.7s var(--ease-smooth); }
+    .price-card2:hover .pc-img-wrap img { transform:scale(1.06); }
+    .pc-img-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(11,12,16,0) 25%,rgba(11,12,16,0.6) 65%,rgba(11,12,16,0.93) 100%); }
+    .pc-badge { position:absolute; top:1rem; right:1rem; background:var(--accent); color:var(--bg); font-size:0.62rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:0.28rem 0.65rem; border-radius:2px; }
+    .pc-price-badge { position:absolute; bottom:1rem; left:1.2rem; font-family:var(--serif); font-size:1.5rem; font-weight:300; color:var(--text-primary); line-height:1; }
+    .pc-price-row { display:flex; align-items:baseline; gap:0.3rem; }
+    .pc-from { font-size:0.78rem; color:rgba(240,236,228,0.55); font-style:italic; font-family:var(--serif); }
+    .pc-body { padding:1.4rem 1.5rem 1.5rem; display:flex; flex-direction:column; flex:1; gap:1rem; }
+    .pc-header { display:flex; align-items:flex-start; gap:0.8rem; }
+    .pc-num { font-family:var(--serif); font-size:0.65rem; color:var(--accent); letter-spacing:0.12em; opacity:0.5; padding-top:0.2rem; flex-shrink:0; }
+    .pc-title { font-family:var(--serif); font-size:1.18rem; font-weight:400; color:var(--text-primary); line-height:1.15; margin:0; }
+    .pc-tagline { font-size:0.76rem; color:var(--text-muted); margin:0.2rem 0 0; line-height:1.4; }
+    .pc-features { display:flex; flex-direction:column; gap:0.45rem; flex:1; }
+    .pc-features li { font-size:0.81rem; color:var(--text-body); display:flex; align-items:flex-start; gap:0.55rem; line-height:1.4; }
+    .pc-features li::before { content:''; width:14px; height:14px; flex-shrink:0; margin-top:1px; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='5.5' stroke='%23c9a96e' stroke-opacity='0.45'/%3E%3Cpath d='M4.5 7l1.8 1.8L9.5 5' stroke='%23c9a96e' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size:contain; background-repeat:no-repeat; }
+    .pkg-list { display:flex; flex-direction:column; gap:0; flex:1; }
+    .pkg-block { padding:0.9rem 1rem; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.06); border-radius:2px; }
+    .pkg-block+.pkg-block { margin-top:0.6rem; }
+    .pkg-block.pkg-highlight { background:rgba(201,169,110,0.06); border-color:rgba(201,169,110,0.22); }
+    .pkg-block-header { display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem; margin-bottom:0.65rem; }
+    .pkg-block-name { font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); font-family:var(--sans); }
+    .pkg-block.pkg-highlight .pkg-block-name { color:var(--accent); }
+    .pkg-block-price { font-family:var(--serif); font-size:1.15rem; font-weight:300; color:var(--accent-light); white-space:nowrap; line-height:1; }
+    .pkg-block .pc-features { flex:none; }
+    .pc-actions { display:flex; gap:0.6rem; margin-top:auto; padding-top:0.2rem; }
+    .pc-cta { flex:1; justify-content:center; text-align:center; font-size:0.8rem; padding:0.75rem 1rem; gap:0.4rem; }
+    .pc-gallery-btn { display:flex; align-items:center; gap:0.4rem; padding:0.75rem 0.9rem; border:1px solid rgba(201,169,110,0.25); color:var(--text-muted); font-size:0.78rem; border-radius:var(--btn-r,0); transition:border-color 0.25s,color 0.25s,background 0.25s; white-space:nowrap; flex-shrink:0; }
+    .pc-gallery-btn:hover { border-color:var(--accent); color:var(--accent); background:rgba(201,169,110,0.06); }
+    .testi-section { padding:5rem 0; background:var(--bg-elevated); border-top:1px solid rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.04); }
+    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    @media(max-width:900px){.testi-grid{grid-template-columns:1fr;max-width:520px;margin-inline:auto}}
+    .testi-card { background:var(--bg-card); padding:1.8rem; border:1px solid rgba(255,255,255,0.05); border-top:2px solid rgba(201,169,110,0.2); display:flex; flex-direction:column; gap:1rem; }
+    .testi-stars { font-size:0.85rem; letter-spacing:0.05em; }
+    .testi-text { font-family:var(--serif); font-size:1rem; font-weight:300; font-style:italic; color:var(--text-primary); line-height:1.65; flex:1; }
+    .testi-author { font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; }
+    .custom-band { padding:5rem 0; }
+    .custom-band-inner { background:var(--bg-card); border:1px solid rgba(201,169,110,0.15); padding:3.5rem; display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; }
+    @media(max-width:700px){.custom-band-inner{grid-template-columns:1fr;text-align:center}.custom-band-inner .btn{width:100%;justify-content:center}}
+    .custom-band h2 { font-family:var(--serif); font-size:clamp(1.6rem,3vw,2.2rem); font-weight:300; margin-bottom:0.6rem; line-height:1.2; }
+    .custom-band p { color:var(--text-body); font-size:0.88rem; max-width:520px; line-height:1.7; }
+    .custom-band-btns { display:flex; flex-direction:column; gap:0.7rem; flex-shrink:0; }
+    .custom-band-btns .btn { white-space:nowrap; font-size:0.82rem; padding:0.8rem 1.5rem; }
+    .final-cta { padding:6rem 0; text-align:center; position:relative; overflow:hidden; }
+    .final-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,169,110,0.07) 0%,transparent 70%); pointer-events:none; }
+    .final-cta-label { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:1.2rem; }
+    .final-cta h2 { font-family:var(--serif); font-size:clamp(2.2rem,5vw,3.8rem); font-weight:300; line-height:1.1; margin-bottom:1.2rem; }
+    .final-cta h2 em { font-style:italic; color:var(--accent-light); }
+    .final-cta p { color:var(--text-body); font-size:0.9rem; max-width:440px; margin:0 auto 2.5rem; line-height:1.8; }
+    .final-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .final-cta-btns .btn { font-size:0.85rem; padding:0.95rem 2rem; }
+    .no-hidden-fees { margin-top:1.5rem; font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+    .no-hidden-fees svg { color:var(--accent); }
+    </style>
+${bodyTag()}
+${boilerplate()}
+${headerHtml('', 'arak', null)}
+${mobileNavHtml('')}
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-bg" style="${bgStyle(p.heroImage, '')}"></div>
+            <div class="page-hero-content">
+                <span class="page-hero-label">${p.heroLabel}</span>
+                <h1 class="page-hero-title">${p.heroTitle}</h1>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Főoldal</a> <span>/</span> Árak</nav>
+                <div class="arak-hero-stats">${statsHtml}
+                </div>
+            </div>
+        </section>
+
+        <div class="trust-strip">
+            <div class="trust-strip-inner">
+                <div class="trust-item"><svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Nincsenek rejtett díjak</div>
+                <div class="trust-item"><svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Gyors képátadás</div>
+                <div class="trust-item"><svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>Barátságos légkör</div>
+                <div class="trust-item"><svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Kötelezettségmentes egyeztetés</div>
+                <div class="trust-item"><svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>15+ év profi tapasztalat</div>
+            </div>
+        </div>
+
+        <section class="pc-section">
+            <div class="container">
+                <div class="pc-intro reveal">
+                    <span class="section-label">12 kategória — 1 fotós</span>
+                    <h2>Válaszd ki a<br>neked valót</h2>
+                    <p>Minden csomag tartalmazza a fotózást, professzionális retusálást és digitális átadást.</p>
+                </div>
+                <div class="pc-grid">${cardsHtml}
+                </div>
+            </div>
+        </section>
+
+        <section class="testi-section">
+            <div class="container">
+                <div class="reveal" style="text-align:center;">
+                    <span class="section-label">Ügyfeleink mondják</span>
+                    <h2 class="section-title">500+ elégedett ügyfél<br>nem tévedhet</h2>
+                </div>
+                <div class="testi-grid">${testiHtml}
+                </div>
+            </div>
+        </section>
+
+        <section class="custom-band">
+            <div class="container">
+                <div class="custom-band-inner reveal">
+                    <div>
+                        <span class="section-label" style="margin-bottom:0.7rem;display:block;">Esküvő &amp; Rendezvény</span>
+                        <h2>${p.customBandTitle}</h2>
+                        <p>${p.customBandDesc}</p>
+                    </div>
+                    <div class="custom-band-btns">
+                        <a href="contact.html" class="btn btn-solid"><span>Ajánlatot kérek</span>${arrowSvg}</a>
+                        <a href="services/wedding.html" class="btn btn-outline"><span>Esküvői részletek</span>${arrowSvg}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <div class="container">
+                <span class="final-cta-label">${p.ctaLabel}</span>
+                <h2>Foglald le a<br><em>szabad időpontod</em></h2>
+                <p>${p.ctaDesc}</p>
+                <div class="final-cta-btns">
+                    <a href="contact.html" class="btn btn-solid"><span>Időpontfoglalás</span>${arrowSvg}</a>
+                    <a href="portfolio.html" class="btn btn-outline"><span>Galéria megtekintése</span>${arrowSvg}</a>
+                </div>
+                <p class="no-hidden-fees">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Nincsenek rejtett díjak — amit látod, azt fizeted
+                </p>
+            </div>
+        </section>
+    </main>
+
+${footerHtml('')}
+${lightboxHtml()}
+    <script src="js/main.js" defer></script>
+${chatbotHtml()}
+</body>
+</html>`;
+}
+
 // ── Write all files ──
 
 function writeFile(filePath, content) {
@@ -947,6 +1223,7 @@ writeFile(path.join(__dirname, 'about.html'), buildAbout());
 writeFile(path.join(__dirname, 'portfolio.html'), buildPortfolio());
 writeFile(path.join(__dirname, 'services.html'), buildServices());
 writeFile(path.join(__dirname, 'contact.html'), buildContact());
+writeFile(path.join(__dirname, 'arak.html'), buildArakPage());
 
 // Service pages
 cats.forEach(c => {
@@ -962,4 +1239,4 @@ Object.keys(data.portfolioPages).forEach(id => {
 writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
 writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
-console.log(`\n  Done! ${5 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
+console.log(`\n  Done! ${6 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
