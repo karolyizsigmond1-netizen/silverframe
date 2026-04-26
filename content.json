@@ -3055,8 +3055,8 @@
     "business": {
       "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
-      "ogImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80",
+      "ogImage": "uploads/015b522c5a9c-_DSC6748.jpg",
+      "heroImage": "uploads/12cdccd47540-www.silverframe.hu__640_of_869_.jpg",
       "heroLabel": "Szolgáltatások / 06",
       "heroTitle": "Üzleti portré",
       "breadcrumb": "Üzleti portré",
@@ -3067,7 +3067,7 @@
         "Az eredmény: hiteles, profi képek, amik tényleg téged mutatnak."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80",
+        "src": "uploads/fa5959dd59f4-www.silverframe.hu__2586_of_5516_.jpg",
         "alt": "Üzleti portré fotózás"
       },
       "packages": [
@@ -3113,33 +3113,131 @@
               "title": "Marketing anyag",
               "desc": "Egységes, profi vizuális anyag weboldalra, social médiára."
             }
-          ]
+          ],
+          "image": "uploads/c73c297c466a-www.silverframe.hu__2604_of_5516_.jpg",
+          "imageSide": "right"
         }
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
-          "alt": "Üzleti portré"
+          "src": "uploads/37df783a5ad4-_DSC6731.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
-          "alt": "Vállalati fotó"
+          "src": "uploads/f048bc405d13-_DSC6738.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "LinkedIn portré"
+          "src": "uploads/015b522c5a9c-_DSC6748.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Profi portré"
+          "src": "uploads/fdf85d056857-_DSC6760.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80",
-          "alt": "Üzleti fotó"
+          "src": "uploads/793b13485947-_DSC6762.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80",
-          "alt": "Céges portré"
+          "src": "uploads/0a39d20ccc68-_DSC6770.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b364c898a609-www.silverframe.hu__632_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d48dce51db6-www.silverframe.hu__634_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ccccfda49087-www.silverframe.hu__636_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/011bd1d73680-www.silverframe.hu__637_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e746971aee2e-www.silverframe.hu__638_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/12cdccd47540-www.silverframe.hu__640_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/feb9ba28aa8c-www.silverframe.hu__642_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/96bcaf0f8b18-www.silverframe.hu__646_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7336d051c217-www.silverframe.hu__647_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1069a533520f-www.silverframe.hu__649_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d93c7c25907-www.silverframe.hu__651_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ee4a8d5aa8cf-www.silverframe.hu__653_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/80a1a28b6113-www.silverframe.hu__656_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/70a6d65f3420-www.silverframe.hu__657_of_869_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/573ff3a9acd9-www.silverframe.hu__2490_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/760e26942a3d-www.silverframe.hu__2520_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/852a67b4a184-www.silverframe.hu__2538_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/894c58facaec-www.silverframe.hu__2580_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8c47a2b945dd-www.silverframe.hu__2592_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c35613fb0548-www.silverframe.hu__2596_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c73c297c466a-www.silverframe.hu__2604_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fdd8d0d9bb66-www.silverframe.hu__2646_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e0ab2d040439-www.silverframe.hu__4176_of_5516_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e822329631de-www.silverframe.hu__4177_of_5516_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Emeld a márkád!",
