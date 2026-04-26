@@ -287,7 +287,7 @@
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portré fotózás",
           "cat": "Portfólió / Modell",
-          "title": "Stúdió portré",
+          "title": "",
           "wide": true
         },
         {
@@ -295,7 +295,7 @@
           "image": "uploads/1774723268615-www.karolyifoto.hu__3_of_25_.jpg",
           "alt": "Esküvői fotózás",
           "cat": "Esküvő",
-          "title": "Az első tánc",
+          "title": "",
           "wide": false
         },
         {
@@ -303,7 +303,7 @@
           "image": "uploads/2d93faa84d93-kutya-fotozas-szeged-studio__199_.jpg",
           "alt": "Kisállat fotózás",
           "cat": "Kisállat",
-          "title": "Legjobb barát",
+          "title": "",
           "wide": false
         },
         {
@@ -311,7 +311,7 @@
           "image": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
           "alt": "Páros jegyes fotózás",
           "cat": "Páros jegyes",
-          "title": "Összetartozás",
+          "title": "",
           "wide": false
         },
         {
@@ -319,7 +319,7 @@
           "image": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
           "alt": "Termékfotózás",
           "cat": "Termékfotó",
-          "title": "Fejhallgató kampány",
+          "title": "",
           "wide": true
         },
         {
@@ -327,7 +327,7 @@
           "image": "uploads/2cd7c3298426-csaladi-fotozas-szeged___208_.jpg",
           "alt": "Családi fotózás",
           "cat": "Családi",
-          "title": "Vasárnap délután",
+          "title": "",
           "wide": false
         }
       ],

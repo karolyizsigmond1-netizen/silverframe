@@ -18,7 +18,7 @@
                 { id: 'global', title: 'Globális beállítások' },
                 { id: 'pages.index', title: 'Főoldal' },
                 { id: 'pages.about', title: 'Rólam' },
-                { id: 'pages.portfolio', title: 'Portfólió' },
+                { id: 'pages.portfolio', title: 'Galéria' },
                 { id: 'pages.services', title: 'Szolgáltatások' },
                 { id: 'pages.contact', title: 'Kapcsolat' },
                 { id: 'pages.arak', title: 'Árak oldal' },
@@ -41,7 +41,7 @@
             ]
         },
         {
-            label: 'Portfólió galériák', items: [
+            label: 'Galériák', items: [
                 { id: 'portfolioPages.portrait', title: 'Portré' },
                 { id: 'portfolioPages.maternity', title: 'Kismama' },
                 { id: 'portfolioPages.boudoir', title: 'Boudoir' },
@@ -257,6 +257,8 @@
             area.innerHTML = renderServicePageEditor(data, pageId);
         } else if (pageId.startsWith('portfolioPages.')) {
             area.innerHTML = renderPortfolioPageEditor(data, pageId);
+        } else if (pageId === 'pages.portfolio') {
+            area.innerHTML = renderGaleriaEditor(data, pageId);
         } else if (pageId === 'pages.arak') {
             area.innerHTML = renderArakEditor(data, pageId);
         } else {
@@ -341,6 +343,88 @@
         </div>`;
     }
 
+
+    // ── Galéria page editor ──
+    function renderGaleriaEditor(data, pageId) {
+        let html = '';
+
+        // SEO
+        html += '<div class="field-section"><div class="field-section-title">SEO & Meta</div>';
+        html += textField('Oldal cím', pageId + '.title', data.title);
+        html += textareaField('Meta leírás', pageId + '.metaDesc', data.metaDesc);
+        html += '</div>';
+
+        // Hero
+        html += '<div class="field-section"><div class="field-section-title">Hero szekció</div>';
+        html += imageField('Hero háttérkép', pageId + '.heroImage', data.heroImage);
+        html += textField('Hero felső szöveg', pageId + '.heroLabel', data.heroLabel);
+        html += textField('Hero cím', pageId + '.heroTitle', data.heroTitle);
+        html += '</div>';
+
+        // Accordion
+        html += '<div class="field-section"><div class="field-section-title">Kategória szekció</div>';
+        html += textField('Felső szöveg', pageId + '.accordionLabel', data.accordionLabel);
+        html += textField('Cím', pageId + '.accordionTitle', data.accordionTitle);
+        html += textField('Tipp szöveg', pageId + '.accordionHint', data.accordionHint);
+        html += '</div>';
+
+        // Stats
+        html += '<div class="field-section"><div class="field-section-title">Statisztikák</div>';
+        html += '<div class="array-list" data-array-path="' + pageId + '.stats">';
+        (data.stats || []).forEach((s, i) => {
+            html += `<div class="array-item" draggable="false" data-index="${i}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Stat #${i + 1}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${pageId}.stats" data-index="${i}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                ${textField('Szám', pageId + '.stats.' + i + '.num', s.num)}
+                ${textField('Felirat', pageId + '.stats.' + i + '.label', s.label)}
+            </div>`;
+        });
+        html += '</div>';
+        html += `<button class="btn-add" data-add-array="${pageId}.stats" data-template='{"num":"","label":""}'>+ Stat hozzáadása</button>`;
+        html += '</div>';
+
+        // Highlights
+        html += '<div class="field-section"><div class="field-section-title">Kiemelt munkák</div>';
+        html += textField('Felső szöveg', pageId + '.highlightsLabel', data.highlightsLabel);
+        html += textField('Cím', pageId + '.highlightsTitle', data.highlightsTitle);
+        html += '<div class="array-list" data-array-path="' + pageId + '.highlights">';
+        (data.highlights || []).forEach((h, i) => {
+            html += `<div class="array-item" draggable="false" data-index="${i}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Kép #${i + 1}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${pageId}.highlights" data-index="${i}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                ${imageField('Kép', pageId + '.highlights.' + i + '.image', h.image)}
+                ${textField('Alt szöveg', pageId + '.highlights.' + i + '.alt', h.alt)}
+                ${textField('Kategória', pageId + '.highlights.' + i + '.cat', h.cat)}
+                ${textField('Cím', pageId + '.highlights.' + i + '.title', h.title)}
+                ${textField('Link (href)', pageId + '.highlights.' + i + '.href', h.href)}
+                ${selectField('Széles kártya', pageId + '.highlights.' + i + '.wide', h.wide ? 'true' : 'false', [
+                    { value: 'false', label: 'Normál' },
+                    { value: 'true', label: 'Széles' }
+                ])}
+            </div>`;
+        });
+        html += '</div>';
+        html += `<button class="btn-add" data-add-array="${pageId}.highlights" data-template='{"href":"","image":"","alt":"","cat":"","title":"","wide":false}'>+ Kép hozzáadása</button>`;
+        html += '</div>';
+
+        // CTA
+        html += '<div class="field-section"><div class="field-section-title">Lezáró CTA</div>';
+        html += textField('Felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
+        html += textField('Cím', pageId + '.ctaTitle', data.ctaTitle);
+        html += '</div>';
+
+        return html;
+    }
 
     // ── Árak page editor ──
     function renderArakEditor(data, pageId) {
@@ -3235,7 +3319,7 @@
                 if (page.gallery) {
                     const navItem = NAV.flatMap(g => g.items).find(i => i.id === 'portfolioPages.' + key);
                     const label = navItem ? navItem.title : key;
-                    options += `<option value="portfolioPages.${key}.gallery">${label} (portfólió)</option>`;
+                    options += `<option value="portfolioPages.${key}.gallery">${label} (galéria)</option>`;
                 }
             }
         }
