@@ -2180,8 +2180,8 @@
     "family": {
       "title": "Családi Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Családi fotózás Szegeden 60.000 Ft-tól. Természetes, vidám családi portrék szabadtéren.",
-      "ogImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1600&q=80",
+      "ogImage": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg",
+      "heroImage": "uploads/a09ed00bba9d-csaladi-fotozas-szeged___73_of_108_.jpg",
       "heroLabel": "Szolgáltatások / 04",
       "heroTitle": "Családi fotózás",
       "breadcrumb": "Családi",
@@ -2192,7 +2192,7 @@
         "Legyen szó a kicsik játékáról, a nagyobb gyerekek mosolyáról, vagy arról, hogy együtt vagytok a pároddal."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=700&q=80",
+        "src": "uploads/16c97c741e6c-csaladi-fotozas-szeged___102_of_108_.jpg",
         "alt": "Családi fotózás"
       },
       "packages": [
@@ -2221,28 +2221,296 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&q=80",
-          "alt": "Családi fotó"
+          "src": "uploads/4ba5d399aa26-csaladi-fotozas-szeged___17_of_108_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80",
-          "alt": "Családi pillanat"
+          "src": "uploads/5d9e0f3114c4-csaladi-fotozas-szeged___20_of_108_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80",
-          "alt": "Család a természetben"
+          "src": "uploads/f8bfc82cdfa4-csaladi-fotozas-szeged___21_of_108_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80",
-          "alt": "Gyerekfotó"
+          "src": "uploads/faebeeeefcb4-csaladi-fotozas-szeged___28_of_108_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
-          "alt": "Családi ölelés"
+          "src": "uploads/1d6a096f2dc1-csaladi-fotozas-szeged___33_of_108_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80",
-          "alt": "Család szabadtéren"
+          "src": "uploads/b55141277597-csaladi-fotozas-szeged___40_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/674e7bf4127a-csaladi-fotozas-szeged___56_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b5dc68161a86-csaladi-fotozas-szeged___64_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a09ed00bba9d-csaladi-fotozas-szeged___73_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/85f6cd31c022-csaladi-fotozas-szeged___74_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/87c5df6eea29-csaladi-fotozas-szeged___80_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d9dbff98f366-csaladi-fotozas-szeged___93_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/16c97c741e6c-csaladi-fotozas-szeged___102_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cd470efc4556-csaladi-fotozas-szeged___104_of_108_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8ad99e673851-csaladi-fotozas-szeged___197_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ee0231765b8e-csaladi-fotozas-szeged___198_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/db5f51f454ca-csaladi-fotozas-szeged___199_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/31ee016b7c77-csaladi-fotozas-szeged___200_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c9ae25fca2cc-csaladi-fotozas-szeged___201_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/62c68d206ac1-csaladi-fotozas-szeged___202_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f91da1e5340c-csaladi-fotozas-szeged___203_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/023f946cdf8c-csaladi-fotozas-szeged___204_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cd1d475f6e74-csaladi-fotozas-szeged___205_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3637444de1eb-csaladi-fotozas-szeged___206_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2cd7c3298426-csaladi-fotozas-szeged___208_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/577b93fbe142-csaladi-fotozas-szeged___209_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e92dd830177d-csaladi-fotozas-szeged___210_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/db2e0746df3e-csaladi-fotozas-szeged___211_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1a6dd158cbd3-csaladi-fotozas-szeged___212_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c98a71c9b3a1-csaladi-fotozas-szeged___213_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/86ff4cda85e6-csaladi-fotozas-szeged___214_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e1ba615c91ab-csaladi-fotozas-szeged___215_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d95651e8a31b-csaladi-fotozas-szeged___216_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5eec20584474-csaladi-fotozas-szeged___217_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d1d756998923-csaladi-fotozas-szeged___218_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2b403fe41edb-csaladi-fotozas-szeged___219_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a55f8f7ef0ae-csaladi-fotozas-szeged___221_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3c39ba69e547-csaladi-fotozas-szeged___222_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/52f48073edcf-csaladi-fotozas-szeged___223_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1c94dd155254-csaladi-fotozas-szeged___224_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/52f98a007d09-csaladi-fotozas-szeged___225_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9cfae9a486ef-csaladi-fotozas-szeged___226_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e2c42635fc23-csaladi-fotozas-szeged___227_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ea72a805cac1-csaladi-fotozas-szeged-park__1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4dd36f141636-csaladi-fotozas-szeged-park__2_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9b8130f20191-csaladi-fotozas-szeged-park__3_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f03fab8bbc93-csaladi-fotozas-szeged-park__4_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b444ec4f4c3f-csaladi-fotozas-szeged-park__5_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b6d8b967295a-csaladi-fotozas-szeged-park__6_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/61ac76929f3b-csaladi-fotozas-szeged-park__7_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4670e1f75b11-csaladi-fotozas-szeged-park__8_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/dda21013aec0-csaladi-fotozas-szeged-park__9_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e3e7a6f7d029-csaladi-fotozas-szeged-park__10_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/37635eb987b3-csaladi-fotozas-szeged-park__11_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d9bce59c29b9-csaladi-fotozas-szeged-park__12_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5a7a7ab2dcf2-csaladi-fotozas-szeged-park__13_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/de657c896413-csaladi-fotozas-szeged-park__14_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/26f766cd06fe-csaladi-fotozas-szeged-park__15_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/66492c5adfa1-csaladi-fotozas-szeged-park__16_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fa42f84624d3-csaladi-fotozas-szeged-park__17_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3f031d38b6a0-csaladi-fotozas-szeged-park__18_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b87a0c572cc4-csaladi-fotozas-szeged-park__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/18e655a1c07d-csaladi-fotozas-szeged-park__20_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/edf8e4d957a1-csaladi-fotozas-szeged-park__21_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2594c7b31f51-csaladi-fotozas-szeged-park__22_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b40f6ed41133-csaladi-fotozas-szeged-park__23_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2b5bf45c55ee-csaladi-fotozas-szeged-park__24_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bd51fc557463-csaladi-fotozas-szeged-park__25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/25f7e9eb9b98-csaladi-fotozas-szeged-park__26_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/33a40aefea38-csaladi-fotozas-szeged-park__27_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9b4f668a8026-csaladi-fotozas-szeged-park__28_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Családi fotózás",
