@@ -3293,10 +3293,6 @@
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&q=80",
-          "alt": "Ingatlan fotó"
-        },
-        {
           "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
           "alt": "Ház fotózás"
         },
@@ -3309,12 +3305,140 @@
           "alt": "Lakás fotó"
         },
         {
-          "src": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=80",
-          "alt": "Konyha fotó"
+          "src": "uploads/0e5e31c9cf86-ingatlan-fotozas-szeged-kert__18_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=500&q=80",
-          "alt": "Nappali fotó"
+          "src": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6627225b8037-ingatlan-fotozas-szeged-kert__25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/41a55cc8f33d-ingatlan-fotozas-szeged-kert__80_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b2bee87bbd24-ingatlan-fotozas-szeged-kert__81_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d2d4a6d375f4-ingatlan-fotozas-szeged-kert__82_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/46f34813a61d-ingatlan-fotozas-szeged-kert__84_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/04b1b287889e-ingatlan-fotozas-szeged-kert__90_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/607436647256-ingatlan-fotozas-szeged-kert__92_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/17f36f315c60-ingatlan-fotozas-szeged-kert__98_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b6fc4509b750-ingatlan-fotozas-szeged-kert__99_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/551110f8292e-ingatlan-fotozas-szeged-kert__101_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/12cbb741d040-ingatlan-fotozas-szeged-kert__102_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/82a6f2649152-ingatlan-fotozas-szeged-nappali__2_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1c06c7943d87-ingatlan-fotozas-szeged-nappali__4_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/947ce856477a-ingatlan-fotozas-szeged-nappali__5_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c634d75fb217-ingatlan-fotozas-szeged-nappali__11_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/af4d97c18c42-ingatlan-fotozas-szeged-nappali__14_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c28aba9da69e-ingatlan-fotozas-szeged-nappali__16_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e81697fcbe2a-ingatlan-fotozas-szeged-nappali__18_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2feb00997ada-ingatlan-fotozas-szeged-nappali__22_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5717c8f76f30-ingatlan-fotozas-szeged-nappali__23_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ab77621fd2c9-ingatlan-fotozas-szeged-nappali__24_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/227a7c016618-ingatlan-fotozas-szeged-nappali__25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5073909b0292-ingatlan-fotozas-szeged-nappali__27_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8f433e89544b-ingatlan-fotozas-szeged-nappali__30_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/919c9dad05a2-ingatlan-fotozas-szeged-nappali__32_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3393bf1aeec1-ingatlan-fotozas-szeged-nappali__36_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4370a331b8e9-ingatlan-fotozas-szeged-nappali__37_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ef9ecea72513-ingatlan-fotozas-szeged-nappali__38_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e2579f0a4c20-ingatlan-fotozas-szeged-nappali__41_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5af356716e0a-ingatlan-fotozas-szeged-nappali__43_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5eb9f59cb2a9-ingatlan-fotozas-szeged-nappali__44_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/51d6b94afe8c-ingatlan-fotozas-szeged-nappali__45_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Gyorsabban eladnád?",
