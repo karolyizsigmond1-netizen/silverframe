@@ -3554,8 +3554,8 @@
     "wedding-creative": {
       "title": "Esküvői Kreatív Fotózás — Silverframe Studio | Szeged",
       "metaDesc": "Esküvői kreatív fotózás Szegeden 70.000 Ft. 90 perc szabadtéri fotózás, 50 kidolgozott kép.",
-      "ogImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600&q=80",
+      "ogImage": "uploads/8a465945322b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__3_.jpg",
+      "heroImage": "uploads/ec44ed27e5c0-eskuvo-kreativ-fotozas-szeged-balaton-budapest__33_.jpg",
       "heroLabel": "Szolgáltatások / 09",
       "heroTitle": "Esküvői kreatív",
       "breadcrumb": "Esküvői kreatív",
@@ -3566,7 +3566,7 @@
         "Akár az esküvő napján, akár egy külön napon készítjük el, itt nincs kapkodás, nincs időnyomás."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=700&q=80",
+        "src": "uploads/4336899cda9b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__110_.jpg",
         "alt": "Esküvői kreatív fotózás"
       },
       "packages": [
@@ -3590,36 +3590,205 @@
               "title": "Személyes hangulat",
               "desc": "A lényeg, hogy rólatok szóljon."
             }
-          ]
+          ],
+          "image": "uploads/746711d75527-eskuvo-kreativ-fotozas-szeged-balaton-budapest__169_.jpg"
         }
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80",
-          "alt": "Esküvői kreatív fotó"
+          "src": "uploads/8a465945322b-eskuvo-kreativ-fotozas-szeged-balaton-budapest__3_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
-          "alt": "Kreatív esküvői pár"
+          "src": "uploads/a3e222dd3fea-eskuvo-kreativ-fotozas-szeged-balaton-budapest__4_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80",
-          "alt": "Esküvői portré"
+          "src": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80",
-          "alt": "Kreatív pillanat"
+          "src": "uploads/7a854161433a-eskuvo-kreativ-fotozas-szeged-balaton-budapest__11_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
-          "alt": "Művészi esküvői kép"
+          "src": "uploads/dd07afcbc56f-eskuvo-kreativ-fotozas-szeged-balaton-budapest__15_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=500&q=80",
-          "alt": "Esküvői kreatív portré"
+          "src": "uploads/2a5dd07f5627-eskuvo-kreativ-fotozas-szeged-balaton-budapest__16_.jpg",
+          "alt": ""
         },
         {
-          "src": "",
+          "src": "uploads/e1f1bf571571-eskuvo-kreativ-fotozas-szeged-balaton-budapest__18_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7ed02f588fb5-eskuvo-kreativ-fotozas-szeged-balaton-budapest__20_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/33426fa26cda-eskuvo-kreativ-fotozas-szeged-balaton-budapest__22_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/50e1c3fdc2f1-eskuvo-kreativ-fotozas-szeged-balaton-budapest__31_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ec44ed27e5c0-eskuvo-kreativ-fotozas-szeged-balaton-budapest__33_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1c5b3b79906a-eskuvo-kreativ-fotozas-szeged-balaton-budapest__42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1943e47446f2-eskuvo-kreativ-fotozas-szeged-balaton-budapest__66_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cf612c4c6365-eskuvo-kreativ-fotozas-szeged-balaton-budapest__91_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/206021d5d506-eskuvo-kreativ-fotozas-szeged-balaton-budapest__102_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/25db5852dda9-eskuvo-kreativ-fotozas-szeged-balaton-budapest__104_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2301cebf0361-eskuvo-kreativ-fotozas-szeged-balaton-budapest__167_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f0f91ff05717-eskuvo-kreativ-fotozas-szeged-balaton-budapest__170_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8e61667d80e2-eskuvo-kreativ-fotozas-szeged-balaton-budapest__175_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b3bb26faf917-eskuvo-kreativ-fotozas-szeged-balaton-budapest__193_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ae6e25982af6-eskuvo-kreativ-fotozas-szeged-balaton-budapest__219_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/68adc8f93e02-eskuvo-kreativ-fotozas-szeged-balaton-budapest__223_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/33d950ed6831-eskuvo-kreativ-fotozas-szeged-balaton-budapest__239_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7bcdf488763f-eskuvo-kreativ-fotozas-szeged-balaton-budapest__240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f1d9df43564f-eskuvo-kreativ-fotozas-szeged-balaton-budapest__251_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7fce6894f787-eskuvo-kreativ-fotozas-szeged-balaton-budapest__260_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c97763f3f5b8-eskuvo-kreativ-fotozas-szeged-balaton-budapest__263_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4dd51d1cd823-eskuvo-kreativ-fotozas-szeged-balaton-budapest__266_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/50e337c9effb-eskuvo-kreativ-fotozas-szeged-balaton-budapest__270_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f859a1a1c2b7-kreativ-fotozas-szeged-balaton__11_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e32d9a2aaa52-kreativ-fotozas-szeged-budapest___1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/eaf5ac91186e-kreativ-fotozas-szeged-budapest__19_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/467a81874d1c-kreativ-fotozas-szeged-budapest__20_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9fdfd7835085-kreativ-fotozas-szeged-budapest__21_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c78505589fb3-kreativ-fotozas-szeged-budapest__22_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6083f4066b4a-menyasszony-volegeny-portre-eskuvo__1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b3470ddc78c4-menyasszony-volegeny-portre-eskuvo__2_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/aecdf88aed74-menyasszony-volegeny-portre-eskuvo__4_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/df92a5f41d5b-menyasszony-volegeny-portre-eskuvo__7_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/62e7126e6a2b-menyasszony-volegeny-portre-eskuvo__9_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ee91cf2887a3-menyasszony-volegeny-portre-eskuvo__12_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1843784462a0-menyasszony-volegeny-portre-eskuvo__14_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1d8c20b9afeb-menyasszony-volegeny-portre-eskuvo__31_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d15a276b64cc-menyasszony-volegeny-portre-eskuvo__41_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/477847f96b3d-menyasszony-volegeny-portre-eskuvo__51_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/eac0b9442539-menyasszony-volegeny-portre-eskuvo__63_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c713d2e119d0-menyasszony-volegeny-portre-eskuvo__67_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/1e2d0f34ddb2-menyasszony-volegeny-portre-eskuvo__80_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f3acc633c302-menyasszony-volegeny-portre-eskuvo__84_.jpg",
           "alt": ""
         }
       ],
