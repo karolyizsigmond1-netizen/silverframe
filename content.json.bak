@@ -589,7 +589,7 @@
     },
     "maternity": {
       "title": "Kismama Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Kismama fotózás Szegeden. Alap csomag 70.000 Ft, Prémium csomag 90.000 Ft.",
+      "metaDesc": "Kismama fotózás Szegeden. Alap csomag 60.000 Ft, Prémium csomag 90.000 Ft.",
       "ogImage": "uploads/584568e4677a-kismama-fotozas-szeged-studio__14_.jpg",
       "heroImage": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
       "heroLabel": "Szolgáltatások / 02",
@@ -607,7 +607,7 @@
       },
       "packages": [
         {
-          "name": "Alap csomag — 70.000 Ft",
+          "name": "Alap csomag — 60.000 Ft",
           "desc": "",
           "items": [
             {
