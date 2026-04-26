@@ -2932,6 +2932,652 @@
       "breadcrumb": "Portfólió / Modell",
       "gallery": [
         {
+          "type": "bundle",
+          "cover": "uploads/12db7667bcc1-ferfi-modell-fotozas-kulter-divat-szegedjpg__650_.jpg",
+          "alt": "",
+          "title": "Gábor",
+          "subtitle": "Divatfotózás",
+          "images": [
+            {
+              "src": "uploads/1502e995cf1d-ferfi-modell-fotozas-kulter-divat-szegedjpg__628_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bcfce8ba12b7-ferfi-modell-fotozas-kulter-divat-szegedjpg__629_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/01ba9c09adfe-ferfi-modell-fotozas-kulter-divat-szegedjpg__630_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/857f3aa6827b-ferfi-modell-fotozas-kulter-divat-szegedjpg__631_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e2bae2612d3-ferfi-modell-fotozas-kulter-divat-szegedjpg__632_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4fdb4473232d-ferfi-modell-fotozas-kulter-divat-szegedjpg__633_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a6d07a581005-ferfi-modell-fotozas-kulter-divat-szegedjpg__634_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/885bea2269fb-ferfi-modell-fotozas-kulter-divat-szegedjpg__635_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c1797cc5b456-ferfi-modell-fotozas-kulter-divat-szegedjpg__636_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a6b9d1d3701c-ferfi-modell-fotozas-kulter-divat-szegedjpg__637_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6316ab8c46fd-ferfi-modell-fotozas-kulter-divat-szegedjpg__638_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06c609c7af90-ferfi-modell-fotozas-kulter-divat-szegedjpg__639_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bf214b7ebbd8-ferfi-modell-fotozas-kulter-divat-szegedjpg__640_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/16d94e8b08f0-ferfi-modell-fotozas-kulter-divat-szegedjpg__641_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/17251c99602e-ferfi-modell-fotozas-kulter-divat-szegedjpg__642_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/598f8f1141ac-ferfi-modell-fotozas-kulter-divat-szegedjpg__643_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/020627c6e4be-ferfi-modell-fotozas-kulter-divat-szegedjpg__644_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/846b760040df-ferfi-modell-fotozas-kulter-divat-szegedjpg__645_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c8c0d73a414-ferfi-modell-fotozas-kulter-divat-szegedjpg__646_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3588481edb59-ferfi-modell-fotozas-kulter-divat-szegedjpg__647_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3466b607e3c-ferfi-modell-fotozas-kulter-divat-szegedjpg__648_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1323d27807e4-ferfi-modell-fotozas-kulter-divat-szegedjpg__649_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/12db7667bcc1-ferfi-modell-fotozas-kulter-divat-szegedjpg__650_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/c567d4bab0b2-modell-fotozas-kulter-divat-szegedjpg__75_.jpg",
+          "alt": "",
+          "title": "Dia",
+          "subtitle": "Modellfotózás",
+          "images": [
+            {
+              "src": "uploads/4fb2cfca0e23-modell-fotozas-kulter-divat-szegedjpg__1_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/da4b0cf3825a-modell-fotozas-kulter-divat-szegedjpg__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8520e9ea935c-modell-fotozas-kulter-divat-szegedjpg__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9ad0ab218772-modell-fotozas-kulter-divat-szegedjpg__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/344ff9d18707-modell-fotozas-kulter-divat-szegedjpg__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/055c7465115f-modell-fotozas-kulter-divat-szegedjpg__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9449d776b865-modell-fotozas-kulter-divat-szegedjpg__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/728dc1c3cbd4-modell-fotozas-kulter-divat-szegedjpg__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e14fa9d9bcbc-modell-fotozas-kulter-divat-szegedjpg__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/167217b51f9b-modell-fotozas-kulter-divat-szegedjpg__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0ff77b83c2d8-modell-fotozas-kulter-divat-szegedjpg__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0449c83656f9-modell-fotozas-kulter-divat-szegedjpg__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f56bad7361db-modell-fotozas-kulter-divat-szegedjpg__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5a35caa434dc-modell-fotozas-kulter-divat-szegedjpg__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6ce495da0072-modell-fotozas-kulter-divat-szegedjpg__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d188cfe8b952-modell-fotozas-kulter-divat-szegedjpg__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/127673a97ca4-modell-fotozas-kulter-divat-szegedjpg__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/75553ef4e721-modell-fotozas-kulter-divat-szegedjpg__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1940e7b16f4c-modell-fotozas-kulter-divat-szegedjpg__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/373c23a5da0c-modell-fotozas-kulter-divat-szegedjpg__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e9e259793e4-modell-fotozas-kulter-divat-szegedjpg__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/62e958954ec5-modell-fotozas-kulter-divat-szegedjpg__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f12ae6449838-modell-fotozas-kulter-divat-szegedjpg__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1786f91f07e1-modell-fotozas-kulter-divat-szegedjpg__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d59e63011744-modell-fotozas-kulter-divat-szegedjpg__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a3f29886a7ad-modell-fotozas-kulter-divat-szegedjpg__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/90695a9e6360-modell-fotozas-kulter-divat-szegedjpg__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/72813c17ad91-modell-fotozas-kulter-divat-szegedjpg__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/95a6ec39b2be-modell-fotozas-kulter-divat-szegedjpg__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7df507eb8fd8-modell-fotozas-kulter-divat-szegedjpg__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/033f4eed6626-modell-fotozas-kulter-divat-szegedjpg__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e78bbb56faee-modell-fotozas-kulter-divat-szegedjpg__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3055838900dd-modell-fotozas-kulter-divat-szegedjpg__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5273b3d4cf65-modell-fotozas-kulter-divat-szegedjpg__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d95467ec5e4f-modell-fotozas-kulter-divat-szegedjpg__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ced736ab8613-modell-fotozas-kulter-divat-szegedjpg__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ddde39ff71b3-modell-fotozas-kulter-divat-szegedjpg__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1b03dce2766c-modell-fotozas-kulter-divat-szegedjpg__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c62032441ca4-modell-fotozas-kulter-divat-szegedjpg__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d9c69df0bb3-modell-fotozas-kulter-divat-szegedjpg__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cd9d70799994-modell-fotozas-kulter-divat-szegedjpg__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/200671c5fc34-modell-fotozas-kulter-divat-szegedjpg__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4cfd6fefa23e-modell-fotozas-kulter-divat-szegedjpg__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a419080bce09-modell-fotozas-kulter-divat-szegedjpg__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/390043c99748-modell-fotozas-kulter-divat-szegedjpg__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8c02c39d3341-modell-fotozas-kulter-divat-szegedjpg__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cf252a4d8a83-modell-fotozas-kulter-divat-szegedjpg__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/58dda2704f56-modell-fotozas-kulter-divat-szegedjpg__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a0502807d397-modell-fotozas-kulter-divat-szegedjpg__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d25878588226-modell-fotozas-kulter-divat-szegedjpg__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9dcb8fd9a39e-modell-fotozas-kulter-divat-szegedjpg__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2e567c6cfa71-modell-fotozas-kulter-divat-szegedjpg__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0296e33410ab-modell-fotozas-kulter-divat-szegedjpg__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6be90a781c67-modell-fotozas-kulter-divat-szegedjpg__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b90f01331809-modell-fotozas-kulter-divat-szegedjpg__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/db73320e3ebb-modell-fotozas-kulter-divat-szegedjpg__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/259fe6fb54c0-modell-fotozas-kulter-divat-szegedjpg__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d44477cefafc-modell-fotozas-kulter-divat-szegedjpg__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4f92c82201d5-modell-fotozas-kulter-divat-szegedjpg__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3ca3eb5ead5-modell-fotozas-kulter-divat-szegedjpg__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/adac61eb0bcf-modell-fotozas-kulter-divat-szegedjpg__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/65334a830aca-modell-fotozas-kulter-divat-szegedjpg__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3592084a11f4-modell-fotozas-kulter-divat-szegedjpg__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/28a73aba7553-modell-fotozas-kulter-divat-szegedjpg__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fde83619ab33-modell-fotozas-kulter-divat-szegedjpg__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cb6d5183af41-modell-fotozas-kulter-divat-szegedjpg__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/649e97298643-modell-fotozas-kulter-divat-szegedjpg__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c6b2c0bfaf3a-modell-fotozas-kulter-divat-szegedjpg__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e9620b786b24-modell-fotozas-kulter-divat-szegedjpg__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a01f7358c4d3-modell-fotozas-kulter-divat-szegedjpg__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c9d587f69f77-modell-fotozas-kulter-divat-szegedjpg__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/961e3ee93847-modell-fotozas-kulter-divat-szegedjpg__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4631c6f744f9-modell-fotozas-kulter-divat-szegedjpg__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/37791ca0009c-modell-fotozas-kulter-divat-szegedjpg__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c567d4bab0b2-modell-fotozas-kulter-divat-szegedjpg__75_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/71f6da3bcbc2-modell-fotozas-kulter-divat-szegedjpg__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f9b6f27b4479-modell-fotozas-kulter-divat-szegedjpg__77_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6b0c7fbab84b-modell-fotozas-kulter-divat-szegedjpg__78_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5b5ee0d5ace5-modell-fotozas-kulter-divat-szegedjpg__79_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d10ee3d8fc71-modell-fotozas-kulter-divat-szegedjpg__80_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f890e4266c95-modell-fotozas-kulter-divat-szegedjpg__81_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/deb34a04420a-modell-fotozas-kulter-divat-szegedjpg__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aee2c5af69a2-modell-fotozas-kulter-divat-szegedjpg__83_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c28ac9630d77-modell-fotozas-kulter-divat-szegedjpg__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b12364c3559-modell-fotozas-kulter-divat-szegedjpg__85_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3130070a9632-modell-fotozas-kulter-divat-szegedjpg__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bf1436a88d35-modell-fotozas-kulter-divat-szegedjpg__87_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0360a6287087-modell-fotozas-kulter-divat-szegedjpg__88_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6bb85e8f92d3-modell-fotozas-kulter-divat-szegedjpg__89_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e369c6349df-modell-fotozas-kulter-divat-szegedjpg__90_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4f4fab702045-modell-fotozas-kulter-divat-szegedjpg__91_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e5cdc227965c-modell-fotozas-kulter-divat-szegedjpg__92_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7d6d0db9661d-modell-fotozas-kulter-divat-szegedjpg__93_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0a60660af388-modell-fotozas-kulter-divat-szegedjpg__94_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4458552ba4af-modell-fotozas-kulter-divat-szegedjpg__95_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/863047859155-modell-fotozas-kulter-divat-szegedjpg__96_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c85ad24581d2-modell-fotozas-kulter-divat-szegedjpg__97_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/915adf9ea9c8-modell-fotozas-kulter-divat-szegedjpg__98_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/de16006bd97d-modell-fotozas-kulter-divat-szegedjpg__99_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/98f3e7a8b7b8-modell-fotozas-kulter-divat-szegedjpg__100_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f9f1cc288d94-modell-fotozas-kulter-divat-szegedjpg__101_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cfa1216903af-modell-fotozas-kulter-divat-szegedjpg__102_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5e7143c7be02-modell-fotozas-kulter-divat-szegedjpg__103_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/52b17e39c0cc-modell-fotozas-kulter-divat-szegedjpg__104_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3f981e90c64f-modell-fotozas-kulter-divat-szegedjpg__105_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4bf357c5eee5-modell-fotozas-kulter-divat-szegedjpg__106_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/709d55a95130-modell-fotozas-kulter-divat-szegedjpg__107_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba53dbe37171-modell-fotozas-kulter-divat-szegedjpg__108_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5bd5636ed1f4-modell-fotozas-kulter-divat-szegedjpg__109_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ede94c32ad57-modell-fotozas-kulter-divat-szegedjpg__110_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b5bd0168f6c9-modell-fotozas-kulter-divat-szegedjpg__111_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a2d8cecce680-modell-fotozas-kulter-divat-szegedjpg__112_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8b8357dcd121-modell-fotozas-kulter-divat-szegedjpg__114_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/439d0ce3e7da-modell-fotozas-kulter-divat-szegedjpg__115_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d599a25f2ab-modell-fotozas-kulter-divat-szegedjpg__116_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/459eeed446b6-modell-fotozas-kulter-divat-szegedjpg__117_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/348e663f09c3-modell-fotozas-kulter-divat-szegedjpg__118_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0f84d58069f0-modell-fotozas-kulter-divat-szegedjpg__119_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/83efbb232da2-modell-fotozas-kulter-divat-szegedjpg__120_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f991aacf4960-modell-fotozas-kulter-divat-szegedjpg__121_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06253ec57d66-modell-fotozas-kulter-divat-szegedjpg__122_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3a03fcf7b20-modell-fotozas-kulter-divat-szegedjpg__123_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/85c55d2761ed-modell-fotozas-kulter-divat-szegedjpg__124_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b8ce376cdcba-modell-fotozas-kulter-divat-szegedjpg__125_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f8e218bb4158-modell-fotozas-kulter-divat-szegedjpg__126_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5b62af38aaf2-modell-fotozas-kulter-divat-szegedjpg__127_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77399cfb1bcf-modell-fotozas-kulter-divat-szegedjpg__128_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/891f5001ec11-modell-fotozas-kulter-divat-szegedjpg__129_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/557dbcc20216-modell-fotozas-kulter-divat-szegedjpg__130_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c038fcc85b9a-modell-fotozas-kulter-divat-szegedjpg__131_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dace636ca225-modell-fotozas-kulter-divat-szegedjpg__132_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c1cfd1d298ba-modell-fotozas-kulter-divat-szegedjpg__133_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0e8e6a3e0631-modell-fotozas-kulter-divat-szegedjpg__134_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/745e583d59cb-modell-fotozas-kulter-divat-szegedjpg__135_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
           "src": "uploads/2389d8890250-modell-fotozas-kulter-divat-szegedjpg__203_.jpg",
           "alt": "",
           "title": "",
@@ -3092,6 +3738,314 @@
           "alt": "",
           "title": "",
           "subtitle": ""
+        },
+        {
+          "src": "uploads/5233c3d7a1a1-modell-fotozas-kulter-divat-szegedjpg__230_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d84e189e29e0-modell-fotozas-kulter-divat-szegedjpg__231_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f44921d1eea2-modell-fotozas-kulter-divat-szegedjpg__232_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/54bfba2dea27-modell-fotozas-kulter-divat-szegedjpg__233_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/92fa22a80526-modell-fotozas-kulter-divat-szegedjpg__234_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/47c5f206f353-modell-fotozas-kulter-divat-szegedjpg__235_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e76fe31ecab4-modell-fotozas-kulter-divat-szegedjpg__236_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/814c0a8aa7b4-modell-fotozas-kulter-divat-szegedjpg__237_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9de48f5f586d-modell-fotozas-kulter-divat-szegedjpg__238_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/120fb699f686-modell-fotozas-kulter-divat-szegedjpg__239_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a1992798c8c4-modell-fotozas-kulter-divat-szegedjpg__240_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2e4bda3d2521-modell-fotozas-kulter-divat-szegedjpg__241_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2970fb66db40-modell-fotozas-kulter-divat-szegedjpg__242_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7d092f41187e-modell-fotozas-kulter-divat-szegedjpg__243_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6d0ed99b1ad8-modell-fotozas-kulter-divat-szegedjpg__244_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5d6ffa3190ef-modell-fotozas-kulter-divat-szegedjpg__245_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/862d664f7f22-modell-fotozas-kulter-divat-szegedjpg__246_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/37fb862ccd9b-modell-fotozas-kulter-divat-szegedjpg__247_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6ab4626c689d-modell-fotozas-kulter-divat-szegedjpg__248_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3231bb72f6d1-modell-fotozas-kulter-divat-szegedjpg__249_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/bfe573748fac-modell-fotozas-kulter-divat-szegedjpg__250_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/284f064101a0-modell-fotozas-kulter-divat-szegedjpg__251_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0e33e1cf9e9e-modell-fotozas-kulter-divat-szegedjpg__252_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cf0c0892cd18-modell-fotozas-kulter-divat-szegedjpg__253_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3f0a36fb86dd-modell-fotozas-kulter-divat-szegedjpg__254_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/7cbe22cbdefd-modell-fotozas-kulter-divat-szegedjpg__255_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f97316e2bfc4-modell-fotozas-kulter-divat-szegedjpg__256_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c74f4536c061-modell-fotozas-kulter-divat-szegedjpg__257_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b31c013a6d25-modell-fotozas-kulter-divat-szegedjpg__258_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/9fd6cd81603f-modell-fotozas-kulter-divat-szegedjpg__259_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0f02ca1e16f1-modell-fotozas-kulter-divat-szegedjpg__260_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4f4c33414598-modell-fotozas-kulter-divat-szegedjpg__261_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cd63450e57bc-modell-fotozas-kulter-divat-szegedjpg__262_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8f8073b7e45f-modell-fotozas-kulter-divat-szegedjpg__263_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6e5d8d18360a-modell-fotozas-kulter-divat-szegedjpg__264_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/566b419ca24d-modell-fotozas-kulter-divat-szegedjpg__265_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/007d5ae3d4ae-modell-fotozas-kulter-divat-szegedjpg__266_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/46049aeb763e-modell-fotozas-kulter-divat-szegedjpg__267_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fcdde2aba967-modell-fotozas-kulter-divat-szegedjpg__268_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4693644eec92-modell-fotozas-kulter-divat-szegedjpg__269_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fda0e206b3ac-modell-fotozas-kulter-divat-szegedjpg__270_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b4f047763a1b-modell-fotozas-kulter-divat-szegedjpg__271_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d454dd0e126c-modell-fotozas-kulter-divat-szegedjpg__272_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/236b20a28941-modell-fotozas-kulter-divat-szegedjpg__273_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e36843268b85-modell-fotozas-kulter-divat-szegedjpg__274_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a40edf2ae1ec-modell-fotozas-kulter-divat-szegedjpg__275_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/affd7e9ddaee-modell-fotozas-kulter-divat-szegedjpg__276_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/805af2d5fadc-modell-fotozas-kulter-divat-szegedjpg__277_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6fd978988094-modell-fotozas-kulter-divat-szegedjpg__278_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/db7b7ef55044-modell-fotozas-kulter-divat-szegedjpg__279_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6c8333878407-modell-fotozas-kulter-divat-szegedjpg__280_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f1de70dcf2ee-modell-fotozas-kulter-divat-szegedjpg__281_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/030263f47501-modell-fotozas-kulter-divat-szegedjpg__282_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/70fbb6e98eac-modell-fotozas-kulter-divat-szegedjpg__283_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ddaa07d7867d-modell-fotozas-kulter-divat-szegedjpg__284_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/ba774852b561-modell-fotozas-kulter-divat-szegedjpg__285_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/264b3913c56c-modell-fotozas-kulter-divat-szegedjpg__286_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a21031e809cf-modell-fotozas-kulter-divat-szegedjpg__287_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3425579410fe-modell-fotozas-kulter-divat-szegedjpg__288_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3354f893b62e-modell-fotozas-kulter-divat-szegedjpg__289_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b01780774467-modell-fotozas-kulter-divat-szegedjpg__290_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/97ba20e8aeed-modell-fotozas-kulter-divat-szegedjpg__291_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/06dd303b4856-modell-fotozas-kulter-divat-szegedjpg__292_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/a4b544cef14b-modell-fotozas-kulter-divat-szegedjpg__293_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0588b455594d-modell-fotozas-kulter-divat-szegedjpg__294_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cd1035727dfd-modell-fotozas-kulter-divat-szegedjpg__295_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b6c87a2dc913-modell-fotozas-kulter-divat-szegedjpg__296_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0935fd840cde-modell-fotozas-kulter-divat-szegedjpg__297_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5d5b0d40be50-modell-fotozas-kulter-divat-szegedjpg__298_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6a6c0c0725bd-modell-fotozas-kulter-divat-szegedjpg__299_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/39c613cd95c0-modell-fotozas-kulter-divat-szegedjpg__300_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e06f2ae7620c-modell-fotozas-kulter-divat-szegedjpg__301_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0e1a36581990-modell-fotozas-kulter-divat-szegedjpg__302_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/82c22d92e22e-modell-fotozas-kulter-divat-szegedjpg__303_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c727073c3303-modell-fotozas-kulter-divat-szegedjpg__304_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/2ba1d07a592b-modell-fotozas-kulter-divat-szegedjpg__305_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f0e0ae37dcd3-modell-fotozas-kulter-divat-szegedjpg__306_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Tetszik, amit látsz?",
@@ -11569,6 +12523,8 @@
     "uploads/2a2b947179e1-14570382_1433141726713124_5213103682742096301_n.jpg": "31% 7%",
     "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg": "66% 42%",
     "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg": "76% 52%",
-    "uploads/c361bbf9aa0b-www.karolyifoto.hu__4_of_25_-topaz-sharpen-face.jpg": "16% 55%"
+    "uploads/c361bbf9aa0b-www.karolyifoto.hu__4_of_25_-topaz-sharpen-face.jpg": "16% 55%",
+    "uploads/12db7667bcc1-ferfi-modell-fotozas-kulter-divat-szegedjpg__650_.jpg": "50% 33%",
+    "uploads/c567d4bab0b2-modell-fotozas-kulter-divat-szegedjpg__75_.jpg": "50% 28%"
   }
 }
