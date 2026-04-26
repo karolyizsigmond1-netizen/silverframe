@@ -7459,6 +7459,1316 @@
       "breadcrumb": "Páros jegyes",
       "gallery": [
         {
+          "type": "bundle",
+          "cover": "uploads/c0030f9a5bf0-jegyes-fotozas-naplemente-par__82_.jpg",
+          "alt": "",
+          "title": "Bianka&Máté",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/da9838bc7b8d-jegyes-fotozas-naplemente-par__1_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c9c6e7e73da3-jegyes-fotozas-naplemente-par__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a0dd9d40c86-jegyes-fotozas-naplemente-par__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4a548fe20e2f-jegyes-fotozas-naplemente-par__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3d5cc70a3062-jegyes-fotozas-naplemente-par__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b701c2311ac6-jegyes-fotozas-naplemente-par__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/96f6d6308393-jegyes-fotozas-naplemente-par__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2e31c15924ad-jegyes-fotozas-naplemente-par__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/783ccf1c6d88-jegyes-fotozas-naplemente-par__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/000cbef7f893-jegyes-fotozas-naplemente-par__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a7fc45ec0bcd-jegyes-fotozas-naplemente-par__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d5382b489ad4-jegyes-fotozas-naplemente-par__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0a43ceb2a1ae-jegyes-fotozas-naplemente-par__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/df20cb486689-jegyes-fotozas-naplemente-par__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ea403d65bac1-jegyes-fotozas-naplemente-par__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6bb0329baf53-jegyes-fotozas-naplemente-par__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f0c1255d955e-jegyes-fotozas-naplemente-par__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2683f49b0da8-jegyes-fotozas-naplemente-par__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77b09caee96d-jegyes-fotozas-naplemente-par__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6c0e7ef86da8-jegyes-fotozas-naplemente-par__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/35a2a5bddc1b-jegyes-fotozas-naplemente-par__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0030f9a5bf0-jegyes-fotozas-naplemente-par__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bc207efe96e8-jegyes-fotozas-naplemente-par__88_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/17109d662271-jegyes-fotozas-naplemente-par__95_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b0b3bcc7501a-jegyes-fotozas-naplemente-par__105_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/661e5d72bba6-jegyes-fotozas-naplemente-par__110_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d92b0ac47ea2-jegyes-fotozas-naplemente-par__129_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4396bfeda214-jegyes-fotozas-naplemente-par__132_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4af5dee3bb5-jegyes-fotozas-naplemente-par__137_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d2ce2d0d3797-jegyes-fotozas-naplemente-par__141_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9d7b6ec0236a-jegyes-fotozas-szeged-park__76_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/83f712fed444-jegyes-fotozas-szeged-park__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/644e1d8bbea1-jegyes-fotozas-szeged-park__91_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/63dd4fbe6891-jegyes-fotozas-szeged-park__94_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/407ff0a4aee0-jegyes-fotozas-szeged-park__97_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fe87f71d331b-jegyes-fotozas-szeged-park__106_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e9ee41f383e-jegyes-fotozas-szeged-park__113_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aa16f7a83c0c-jegyes-fotozas-szeged-park__123_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e9fcdb12ee3d-jegyes-fotozas-szeged-park__126_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/91b73798c791-jegyes-fotozas-szeged-park__133_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c2ed9903d38e-jegyes-fotozas-szeged-park__138_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/f6e503bb6f53-jegyes-fotozas-naplemente-par__296_.jpg",
+          "alt": "",
+          "title": "Janka&Máté",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/74f07f76aa79-jegyes-fotozas-naplemente-par__149_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cbed6713e734-jegyes-fotozas-naplemente-par__150_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a8e06d5caa47-jegyes-fotozas-naplemente-par__154_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/66005b4e5cad-jegyes-fotozas-naplemente-par__155_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f67c81a944ee-jegyes-fotozas-naplemente-par__157_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4a295d148e4a-jegyes-fotozas-naplemente-par__159_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b0a1ffa481a-jegyes-fotozas-naplemente-par__160_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d454f936d1e2-jegyes-fotozas-naplemente-par__168_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f42d9244671e-jegyes-fotozas-naplemente-par__169_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a4c6b7dda79e-jegyes-fotozas-naplemente-par__174_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8ffe334cfc0b-jegyes-fotozas-naplemente-par__175_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f1ef32caddd0-jegyes-fotozas-naplemente-par__177_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c4d645f9d7a-jegyes-fotozas-naplemente-par__178_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7ba9c82af6b3-jegyes-fotozas-naplemente-par__182_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/467bcfeca71e-jegyes-fotozas-naplemente-par__183_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5ce13d16902e-jegyes-fotozas-naplemente-par__187_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d9598951be7b-jegyes-fotozas-naplemente-par__188_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/725d66e26d04-jegyes-fotozas-naplemente-par__191_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0276e056b39-jegyes-fotozas-naplemente-par__192_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/302c707f2a35-jegyes-fotozas-naplemente-par__193_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d9c465312e45-jegyes-fotozas-naplemente-par__195_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ceef68231a42-jegyes-fotozas-naplemente-par__197_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e05d9217c71-jegyes-fotozas-naplemente-par__198_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5a1d66a5bc30-jegyes-fotozas-naplemente-par__200_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b2a6f70ae93-jegyes-fotozas-naplemente-par__202_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3762ccbc90ad-jegyes-fotozas-naplemente-par__204_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fe287a009045-jegyes-fotozas-naplemente-par__206_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e07c49b658c-jegyes-fotozas-naplemente-par__211_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bdfb1834f78f-jegyes-fotozas-naplemente-par__213_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9a5a6765be27-jegyes-fotozas-naplemente-par__214_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b7505c7833ac-jegyes-fotozas-naplemente-par__215_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3fa0627aa5d2-jegyes-fotozas-naplemente-par__216_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d25eef6bbbf3-jegyes-fotozas-naplemente-par__218_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/698008ae3664-jegyes-fotozas-naplemente-par__220_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/02bd49ab3088-jegyes-fotozas-naplemente-par__223_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a9faf45ffe87-jegyes-fotozas-naplemente-par__225_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f046ea8e6c09-jegyes-fotozas-naplemente-par__228_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5df61ae38080-jegyes-fotozas-naplemente-par__229_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/044825c3d3cf-jegyes-fotozas-naplemente-par__230_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2b2153abb3f6-jegyes-fotozas-naplemente-par__237_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e37cdff82da0-jegyes-fotozas-naplemente-par__239_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/49ff2d6e71e9-jegyes-fotozas-naplemente-par__242_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b4329ef43d17-jegyes-fotozas-naplemente-par__245_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4e299189ead0-jegyes-fotozas-naplemente-par__250_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d6d141f6b314-jegyes-fotozas-naplemente-par__252_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/39329f1fe1f6-jegyes-fotozas-naplemente-par__253_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/55cec626f642-jegyes-fotozas-naplemente-par__256_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aa90b61c0863-jegyes-fotozas-naplemente-par__259_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c5ded3eed56-jegyes-fotozas-naplemente-par__262_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4b95af2ad0a3-jegyes-fotozas-naplemente-par__263_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/15c589f29583-jegyes-fotozas-naplemente-par__264_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9b3efa4e5692-jegyes-fotozas-naplemente-par__267_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fd75f83d6aeb-jegyes-fotozas-naplemente-par__274_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6a32960ab6ca-jegyes-fotozas-naplemente-par__284_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/74e501551650-jegyes-fotozas-naplemente-par__287_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0802397bb5c7-jegyes-fotozas-naplemente-par__289_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/14b3a9c0c9b5-jegyes-fotozas-naplemente-par__295_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4f8ab04a8f3d-jegyes-fotozas-naplemente-par__299_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aac136bf660d-jegyes-fotozas-naplemente-par__300_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e7fd7238a4d1-jegyes-fotozas-naplemente-par__301_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b8a8365798c1-jegyes-fotozas-naplemente-par__303_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06d6a86e5757-jegyes-fotozas-naplemente-par__305_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c026dfa3d8ac-jegyes-fotozas-naplemente-par__307_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2ddf133307c3-jegyes-fotozas-naplemente-par__308_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d0f29649a958-jegyes-fotozas-naplemente-par__309_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/48581bb3c8b4-jegyes-fotozas-naplemente-par__316_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/adee0690521f-jegyes-fotozas-naplemente-par__319_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6bb3044b6406-jegyes-fotozas-naplemente-par__320_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/72989be6f3c2-jegyes-fotozas-naplemente-par__321_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/25c06c325cc5-jegyes-fotozas-naplemente-par__322_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9adcbce44620-jegyes-fotozas-naplemente-par__323_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/39d21389076f-jegyes-fotozas-naplemente-par__324_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bcf4fd4579ea-jegyes-fotozas-naplemente-par__325_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a13548a45bbc-jegyes-fotozas-naplemente-par__326_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ffb879351f5d-jegyes-fotozas-naplemente-par__327_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3b6d4b808d45-jegyes-fotozas-naplemente-par__328_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/887741d4d8ac-jegyes-fotozas-szeged-park__13_.jpg",
+          "alt": "",
+          "title": "Adri&Tomi",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/2e9879d4d479-jegyes-fotozas-szeged-park__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/09d5beb5eb1c-jegyes-fotozas-szeged-park__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/06d52bb72e50-jegyes-fotozas-szeged-park__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9ee16b8aee90-jegyes-fotozas-szeged-park__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a45c07b8592a-jegyes-fotozas-szeged-park__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/74251c79affc-jegyes-fotozas-szeged-park__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2082ebae5fef-jegyes-fotozas-szeged-park__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/887741d4d8ac-jegyes-fotozas-szeged-park__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2219f0830dde-jegyes-fotozas-szeged-park__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/69f792fe0545-jegyes-fotozas-szeged-park__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bbc86a318e2b-jegyes-fotozas-szeged-park__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/628fb2dfe321-jegyes-fotozas-szeged-park__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a1991194cb0b-jegyes-fotozas-szeged-park__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/47155956567a-jegyes-fotozas-szeged-park__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4de744bbfe10-jegyes-fotozas-szeged-park__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3838515106ed-jegyes-fotozas-szeged-park__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/647b4baf00a1-jegyes-fotozas-szeged-park__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d4e2898d21d8-jegyes-fotozas-szeged-park__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2d441cef94e6-jegyes-fotozas-szeged-park__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fdbb166a4bb1-jegyes-fotozas-szeged-park__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c871d768ff9a-jegyes-fotozas-szeged-park__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/84b617273c2a-jegyes-fotozas-szeged-park__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bcffd76b94c8-jegyes-fotozas-szeged-park__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d787d3f74925-jegyes-fotozas-szeged-park__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/87603b7eb742-jegyes-fotozas-szeged-park__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6f241a9a3ba3-jegyes-fotozas-szeged-park__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1d626d277be1-jegyes-fotozas-szeged-park__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3c519c3254bc-jegyes-fotozas-szeged-park__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/334538c5e2ab-jegyes-fotozas-szeged-park__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/334da23c614d-jegyes-fotozas-szeged-park__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c831b6ef984e-jegyes-fotozas-szeged-park__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dcc081357857-jegyes-fotozas-szeged-park__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/af72fab48c27-jegyes-fotozas-szeged-park__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/086c68729a25-jegyes-fotozas-szeged-park__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/db0b633950b3-jegyes-fotozas-szeged-park__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/adb5b7a83fae-jegyes-fotozas-szeged-park__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e55948db93ea-jegyes-fotozas-szeged-park__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/48e245f5091f-jegyes-fotozas-szeged-park__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c234c55369b1-jegyes-fotozas-szeged-park__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f2e6e5ac001c-jegyes-fotozas-szeged-park__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3a5f93c5796-jegyes-fotozas-szeged-park__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cae5d8062913-jegyes-fotozas-szeged-park__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/600e2db44447-jegyes-fotozas-szeged-park__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/afd62d5b84c4-jegyes-fotozas-szeged-park__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b0f993f7f3cd-jegyes-fotozas-szeged-park__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cbe96436a80f-jegyes-fotozas-szeged-park__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/35057afae45b-jegyes-fotozas-szeged-park__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1e87629fa197-jegyes-fotozas-szeged-park__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f922508e2bc9-jegyes-fotozas-szeged-park__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b0c40ad2d243-jegyes-fotozas-szeged-park__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b04af3e644be-jegyes-fotozas-szeged-park__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/71aef6fbae1d-jegyes-fotozas-szeged-park__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4bc6174e4cd3-jegyes-fotozas-szeged-park__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ce70bb97d168-jegyes-fotozas-szeged-park__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/acc66a1eefaa-jegyes-fotozas-szeged-park__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9726829e6932-jegyes-fotozas-szeged-park__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/40fde63132d2-jegyes-fotozas-szeged-park__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ae50c972f0df-jegyes-fotozas-szeged-park__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/931feab9c902-jegyes-fotozas-szeged-park__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/87cb0f8fb97f-jegyes-fotozas-szeged-park__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fb6a96c3fe98-jegyes-fotozas-szeged-park__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5933d70ca6cd-jegyes-fotozas-szeged-park__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7d9e15f8c6bd-jegyes-fotozas-szeged-park__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45c396cb2187-jegyes-fotozas-szeged-park__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/009183492303-jegyes-fotozas-szeged-park__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/673757e088c4-jegyes-fotozas-szeged-park__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/622256a0229d-jegyes-fotozas-szeged-park__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/becac1779f4d-jegyes-fotozas-szeged-park__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2d654c9336d3-jegyes-fotozas-szeged-park__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b1ddd5756274-jegyes-fotozas-szeged-park__75_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/a89c36f119c5-karolyifoto_jegyesfotozas__5_.JPG",
+          "alt": "",
+          "title": "Niki&Laci",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/ac4c28eca2e1-karolyifoto_jegyesfotozas__1_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bc7e5fe778ad-karolyifoto_jegyesfotozas__2_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a49227430b2-karolyifoto_jegyesfotozas__3_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/69208580594c-karolyifoto_jegyesfotozas__4_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a89c36f119c5-karolyifoto_jegyesfotozas__5_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/eeb52fa7d1cf-karolyifoto_jegyesfotozas__6_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/55c867b9f894-karolyifoto_jegyesfotozas__7_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/da3d43979047-karolyifoto_jegyesfotozas__8_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a049cf3a3bcd-karolyifoto_jegyesfotozas__9_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a95fa01d743f-karolyifoto_jegyesfotozas__10_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1f7fa7ed1732-karolyifoto_jegyesfotozas__11_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/77f511433a26-karolyifoto_jegyesfotozas__12_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a136955f3b4-karolyifoto_jegyesfotozas__13_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e1a05e68681e-karolyifoto_jegyesfotozas__14_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7e7640c9282e-karolyifoto_jegyesfotozas__15_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f4e8d15bde49-karolyifoto_jegyesfotozas__16_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/34ac54df5102-karolyifoto_jegyesfotozas__17_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ef23c620f0f8-karolyifoto_jegyesfotozas__18_.JPG",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0a6b297d34b-karolyifoto_jegyesfotozas__19_.JPG",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg",
+          "alt": "",
+          "title": "Eliza&Zsolt",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/d2fbeb14487e-paros-fotozas-termeszetben__1_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/57b182b63de1-paros-fotozas-termeszetben__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d9f401014708-paros-fotozas-termeszetben__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/97d831007d5d-paros-fotozas-termeszetben__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fc94f0039241-paros-fotozas-termeszetben__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/35444139964a-paros-fotozas-termeszetben__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0c7f959ec3ab-paros-fotozas-termeszetben__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9c498991acb2-paros-fotozas-termeszetben__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0b1646752ef2-paros-fotozas-termeszetben__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bec2d0a218ae-paros-fotozas-termeszetben__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/78719bdbe0db-paros-fotozas-termeszetben__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/213d6e6c402e-paros-fotozas-termeszetben__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d092b0288b2c-paros-fotozas-termeszetben__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a999b08aabcb-paros-fotozas-termeszetben__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/15fcb26fd03b-paros-fotozas-termeszetben__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3ea983cc5fe6-paros-fotozas-termeszetben__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a26b6c2fe1da-paros-fotozas-termeszetben__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/83d3406e00f8-paros-fotozas-termeszetben__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/beaebd8212c2-paros-fotozas-termeszetben__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/92050337f516-paros-fotozas-termeszetben__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3ca374f8b3a4-paros-fotozas-termeszetben__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d8ff8efba7b6-paros-fotozas-termeszetben__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/887d94cdcb82-paros-fotozas-termeszetben__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9c9bb0c1341a-paros-fotozas-termeszetben__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0d7591df191d-paros-fotozas-termeszetben__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f19f976fb948-paros-fotozas-termeszetben__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/721e5d0231e3-paros-fotozas-termeszetben__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1bc717b8c1a5-paros-fotozas-termeszetben__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4a585d87077-paros-fotozas-termeszetben__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ee6cc45253b2-paros-fotozas-termeszetben__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/62b0cd5fa4db-paros-fotozas-termeszetben__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5c70c0a7a383-paros-fotozas-termeszetben__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/905825a52954-paros-fotozas-termeszetben__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/01a1e8815f8e-paros-fotozas-termeszetben__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4204ed647d4a-paros-fotozas-termeszetben__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3d677b29db6c-paros-fotozas-termeszetben__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/140c64b0abbe-paros-fotozas-termeszetben__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0c953b2f1720-paros-fotozas-termeszetben__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1b1a80332080-paros-fotozas-termeszetben__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4163f1facda7-paros-fotozas-termeszetben__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/bb0cbad49642-paros-fotozas-termeszetben__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dc7e90cfb565-paros-fotozas-termeszetben__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/96593e3143fa-paros-fotozas-termeszetben__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8ea330b421cf-paros-fotozas-termeszetben__45_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d1e027503b1e-paros-fotozas-termeszetben__46_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b7ab9ef09d0b-paros-fotozas-termeszetben__47_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/519048f5ef6b-paros-fotozas-termeszetben__48_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e5fcfa0198b8-paros-fotozas-termeszetben__49_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4dc596ec9930-paros-fotozas-termeszetben__50_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/57aa25095ef0-paros-fotozas-termeszetben__51_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a368858fed1e-paros-fotozas-termeszetben__52_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2a41b6f34a56-paros-fotozas-termeszetben__54_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4ab69a636cee-paros-fotozas-termeszetben__55_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aa89840e0e59-paros-fotozas-termeszetben__56_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/05cc860c0b99-paros-fotozas-termeszetben__57_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/88b037518906-paros-fotozas-termeszetben__58_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/dced0913b03e-paros-fotozas-termeszetben__59_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/05b45961ea2a-paros-fotozas-termeszetben__60_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/25ec60eb8e7b-paros-fotozas-termeszetben__61_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7be26f07718e-paros-fotozas-termeszetben__62_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d8e6a5cd4897-paros-fotozas-termeszetben__63_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3a30bb8a3c66-paros-fotozas-termeszetben__64_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5418358eee80-paros-fotozas-termeszetben__65_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/242ec51acbeb-paros-fotozas-termeszetben__66_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/537010a194f9-paros-fotozas-termeszetben__67_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/596a73af7e54-paros-fotozas-termeszetben__68_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0049aafa7c6d-paros-fotozas-termeszetben__69_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e44177859755-paros-fotozas-termeszetben__70_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c4409a679d18-paros-fotozas-termeszetben__71_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1515a5c64849-paros-fotozas-termeszetben__72_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f0595264e7f8-paros-fotozas-termeszetben__73_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ce15d23e536f-paros-fotozas-termeszetben__74_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0e5cf49e5365-paros-fotozas-termeszetben__75_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3664e8c7e1ee-paros-fotozas-termeszetben__76_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/8108ae25bc36-paros-fotozas-termeszetben__89_.jpg",
+          "alt": "",
+          "title": "Felícia&Berci",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/092ef45d53d3-paros-fotozas-termeszetben__80_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a05caee7522f-paros-fotozas-termeszetben__81_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/37ea5bd4d848-paros-fotozas-termeszetben__82_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7dd0a52029b4-paros-fotozas-termeszetben__83_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c2ca64280095-paros-fotozas-termeszetben__84_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8635c3cf6500-paros-fotozas-termeszetben__85_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b91333f29859-paros-fotozas-termeszetben__86_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/04747b672528-paros-fotozas-termeszetben__87_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/476683264bda-paros-fotozas-termeszetben__88_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8108ae25bc36-paros-fotozas-termeszetben__89_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1241781fd937-paros-fotozas-termeszetben__90_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/71983997a5d6-paros-fotozas-termeszetben__91_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/56576c8da305-paros-fotozas-termeszetben__92_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/308eb879ec4c-paros-fotozas-termeszetben__93_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0a8a1d1477c5-paros-fotozas-termeszetben__94_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/0ec9580b24e6-paros-fotozas-termeszetben__95_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45117a5650c5-paros-fotozas-termeszetben__96_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7d7d8b675b93-paros-fotozas-termeszetben__97_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b6c1bee2f01a-paros-fotozas-termeszetben__98_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a1e5ed3a8f0e-paros-fotozas-termeszetben__99_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1a350b82d126-paros-fotozas-termeszetben__100_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/9a2f4eebf935-paros-fotozas-termeszetben__101_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/51104b9edb54-paros-fotozas-termeszetben__102_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6d8566af49b8-paros-fotozas-termeszetben__103_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/3894e0dbcee6-paros-fotozas-termeszetben__104_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4bd7580a7c78-paros-fotozas-termeszetben__105_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/5df5d564339d-paros-fotozas-termeszetben__106_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/618c157a74f0-paros-fotozas-termeszetben__107_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7a54a7a0b775-paros-fotozas-termeszetben__108_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "",
+          "alt": "",
+          "title": "",
+          "subtitle": "",
+          "images": []
+        },
+        {
           "src": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
           "alt": "Bianka & Máté "
         },
