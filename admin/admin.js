@@ -22,6 +22,7 @@
                 { id: 'pages.services', title: 'Szolgáltatások' },
                 { id: 'pages.contact', title: 'Kapcsolat' },
                 { id: 'pages.arak', title: 'Árak' },
+                { id: 'pages.booking', title: 'Időpontfoglalás' },
             ]
         },
         {

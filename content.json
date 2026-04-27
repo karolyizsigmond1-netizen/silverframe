@@ -382,6 +382,13 @@
       "ctaDesc": "Egy rövid egyeztetés elég — elmondom, mire számíthatsz, és megtaláljuk a legjobb időpontot. Semmi kötelezettség.",
       "customBandTitle": "Egyedi ajánlatot szeretnél?",
       "customBandDesc": "Az esküvői és rendezvény fotózás minden esetben személyre szabott — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
+    },
+    "booking": {
+      "title": "Időpontfoglalás — Silverframe Studio | Fotózás Szeged",
+      "metaDesc": "Foglalj időpontot online fotózásra Szegeden. Válaszd ki a szolgáltatást, az időpontot, és küld el kérelmedet – gyors és egyszerű.",
+      "heroImage": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1600&q=80",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Foglalj időpontot"
     }
   },
   "servicePages": {

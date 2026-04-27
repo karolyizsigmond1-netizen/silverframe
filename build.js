@@ -241,7 +241,7 @@ function headerHtml(prefix, activePage, activeService) {
             ${navDropdown(prefix, activeService)}
             <a href="${prefix}arak.html"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
             <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
-            <a href="${prefix}contact.html" class="header-cta">Időpontfoglalás</a>
+            <a href="${prefix}booking.html" class="header-cta">Időpontfoglalás</a>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
     </header>`;
@@ -258,6 +258,7 @@ function mobileNavHtml(prefix) {
   ).join('')}
         </div>
         <a href="${prefix}arak.html">Árak</a>
+        <a href="${prefix}booking.html">Időpontfoglalás</a>
         <a href="${prefix}contact.html">Kapcsolat</a>
     </nav>`;
 }
@@ -947,6 +948,324 @@ ${chatbotHtml()}
 }
 
 
+function buildBookingPage() {
+  const p = data.pages.booking || {};
+
+  return `${headHtml(
+    p.title || 'Időpontfoglalás — Silverframe Studio',
+    p.metaDesc || 'Foglalj időpontot online – válaszd ki a fotózás típusát, az időpontot, és küldd el kérelmedet.',
+    g.baseUrl + '/booking.html', p.title, p.metaDesc, 'website',
+    g.baseUrl + '/booking.html', null, 'css/style.css'
+  )}
+${bodyTag()}
+${boilerplate()}
+${headerHtml('', 'booking', null)}
+${mobileNavHtml('')}
+
+<style>
+.bk-section{padding:5rem 0 6rem;background:var(--bg)}
+.bk-container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+.bk-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:3.5rem;flex-wrap:wrap;gap:.5rem}
+.bk-progress-step{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:.35;transition:opacity .3s}
+.bk-progress-step.active,.bk-progress-step.done{opacity:1}
+.bk-progress-step span{width:2.2rem;height:2.2rem;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--accent);font-family:var(--font-body);transition:background .3s,color .3s}
+.bk-progress-step.active span{background:var(--accent);color:#0e0e0e;font-weight:600}
+.bk-progress-step.done span{background:var(--accent);color:#0e0e0e}
+.bk-progress-step em{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-style:normal}
+.bk-progress-line{width:3rem;height:1px;background:rgba(201,169,110,.25);flex-shrink:0}
+.booking-step{display:none}.booking-step.active{display:block}
+.bk-step-title{font-family:var(--font-display);font-size:1.9rem;font-weight:300;color:var(--text);margin-bottom:2rem;text-align:center}
+/* Service cards */
+.bk-services{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1rem}
+.bk-svc-card{border:1px solid rgba(255,255,255,.07);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .2s;background:rgba(255,255,255,.03)}
+.bk-svc-card:hover{border-color:rgba(201,169,110,.5);transform:translateY(-2px)}
+.bk-svc-card.selected{border-color:var(--accent);background:rgba(201,169,110,.07)}
+.bk-svc-img{aspect-ratio:4/3;overflow:hidden}
+.bk-svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.bk-svc-card:hover .bk-svc-img img{transform:scale(1.05)}
+.bk-svc-name{padding:.6rem .8rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:center;transition:color .25s}
+.bk-svc-card.selected .bk-svc-name,.bk-svc-card:hover .bk-svc-name{color:var(--accent)}
+/* Step 2 layout */
+.bk-datetime{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+@media(max-width:600px){.bk-datetime{grid-template-columns:1fr}}
+/* Calendar */
+.bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.bk-cal-nav button{background:none;border:1px solid rgba(201,169,110,.3);color:var(--accent);width:2rem;height:2rem;border-radius:2px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.bk-cal-nav button:hover{background:rgba(201,169,110,.1)}
+.bk-cal-month{font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
+.bk-cal-dow{text-align:center;font-size:.68rem;letter-spacing:.05em;color:var(--text-muted);padding:.4rem 0;text-transform:uppercase}
+.bk-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.bk-day{text-align:center;padding:.55rem .2rem;font-size:.85rem;border-radius:2px;cursor:pointer;color:var(--text);transition:background .2s,color .2s;user-select:none}
+.bk-day:hover:not(.past){background:rgba(201,169,110,.15);color:var(--accent)}
+.bk-day.past{opacity:.25;cursor:default}
+.bk-day.today{color:var(--accent)}
+.bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
+/* Time slots */
+.bk-time-title{font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
+.bk-time-hint{font-size:.82rem;color:rgba(255,255,255,.3);margin-bottom:1rem}
+.bk-slots{display:flex;flex-wrap:wrap;gap:.5rem}
+.bk-slot{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:.5rem 1rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;transition:all .2s}
+.bk-slot:hover{border-color:rgba(201,169,110,.5);color:var(--accent)}
+.bk-slot.selected{background:var(--accent);border-color:var(--accent);color:#0e0e0e;font-weight:600}
+/* Step nav */
+.bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
+/* Summary bar */
+.bk-summary{display:flex;gap:1.5rem;flex-wrap:wrap;background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:4px;padding:.9rem 1.2rem;margin-bottom:2rem;font-size:.85rem;color:var(--text-muted)}
+.bk-summary span{display:flex;align-items:center;gap:.4rem}
+/* Success */
+.bk-success{text-align:center;padding:3rem 1rem}
+.bk-success-icon{width:5rem;height:5rem;border-radius:50%;background:rgba(201,169,110,.1);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--accent);margin:0 auto 1.5rem}
+.bk-success h2{font-family:var(--font-display);font-size:2.2rem;font-weight:300;margin-bottom:1rem}
+.bk-success p{color:var(--text-muted);margin-bottom:2rem}
+.bk-gcal-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem}
+</style>
+
+    <main>
+${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — Szeged', p.heroTitle || 'Időpontfoglalás', `<a href="index.html">Főoldal</a> <span>/</span> Időpontfoglalás`)}
+
+        <section class="bk-section">
+            <div class="bk-container">
+
+                <!-- Progress -->
+                <div class="bk-progress">
+                    <div class="bk-progress-step active" id="bkprog1"><span>1</span><em>Szolgáltatás</em></div>
+                    <div class="bk-progress-line"></div>
+                    <div class="bk-progress-step" id="bkprog2"><span>2</span><em>Időpont</em></div>
+                    <div class="bk-progress-line"></div>
+                    <div class="bk-progress-step" id="bkprog3"><span>3</span><em>Adatok</em></div>
+                    <div class="bk-progress-line"></div>
+                    <div class="bk-progress-step" id="bkprog4"><span>4</span><em>Kész</em></div>
+                </div>
+
+                <!-- Step 1: Service -->
+                <div class="booking-step active" id="bkstep1">
+                    <h2 class="bk-step-title">Milyen fotózást szeretnél?</h2>
+                    <div class="bk-services">
+                        ${cats.map(cat => `<div class="bk-svc-card" data-id="${cat.id}" data-name="${cat.name}">
+                            <div class="bk-svc-img"><img src="${cat.img || ''}" alt="${cat.name}" loading="lazy" width="320" height="240"></div>
+                            <div class="bk-svc-name">${cat.name}</div>
+                        </div>`).join('\n                        ')}
+                    </div>
+                </div>
+
+                <!-- Step 2: Date & time -->
+                <div class="booking-step" id="bkstep2">
+                    <h2 class="bk-step-title">Mikor szeretnéd?</h2>
+                    <div class="bk-datetime">
+                        <div>
+                            <div class="bk-cal-nav">
+                                <button type="button" id="bkCalPrev">&#8249;</button>
+                                <span class="bk-cal-month" id="bkCalLabel"></span>
+                                <button type="button" id="bkCalNext">&#8250;</button>
+                            </div>
+                            <div class="bk-cal-grid">
+                                <div class="bk-cal-dow">H</div><div class="bk-cal-dow">K</div><div class="bk-cal-dow">Sze</div>
+                                <div class="bk-cal-dow">Cs</div><div class="bk-cal-dow">P</div><div class="bk-cal-dow">Szo</div><div class="bk-cal-dow">V</div>
+                            </div>
+                            <div class="bk-cal-days" id="bkCalDays"></div>
+                        </div>
+                        <div>
+                            <p class="bk-time-title">Időpont</p>
+                            <p class="bk-time-hint" id="bkTimeHint">Először válassz egy napot</p>
+                            <div class="bk-slots" id="bkSlots"></div>
+                        </div>
+                    </div>
+                    <div class="bk-step-nav">
+                        <button class="btn" type="button" id="bkBack1">&#8592; Vissza</button>
+                        <button class="btn btn-solid" type="button" id="bkNext2" disabled>Tovább &#8594;</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Details -->
+                <div class="booking-step" id="bkstep3">
+                    <h2 class="bk-step-title">Adataid</h2>
+                    <div class="bk-summary" id="bkSummary" style="display:none"></div>
+                    <form class="contact-form" id="bkForm" style="max-width:520px;margin:0 auto">
+                        <div class="form-group"><input type="text" id="bkName" name="name" placeholder=" " required><label for="bkName">Neved *</label></div>
+                        <div class="form-group"><input type="email" id="bkEmail" name="email" placeholder=" " required><label for="bkEmail">E-mail *</label></div>
+                        <div class="form-group"><input type="tel" id="bkPhone" name="phone" placeholder=" "><label for="bkPhone">Telefonszám</label></div>
+                        <div class="form-group"><textarea id="bkNote" name="message" placeholder=" " rows="3"></textarea><label for="bkNote">Megjegyzés (opcionális)</label></div>
+                        <div class="bk-step-nav">
+                            <button class="btn" type="button" id="bkBack2">&#8592; Vissza</button>
+                            <button class="btn btn-solid" type="submit" id="bkSubmit"><span>Foglalás elküldése</span></button>
+                        </div>
+                        <p id="bkError" style="color:#e07070;margin-top:1rem;display:none;text-align:right"></p>
+                    </form>
+                </div>
+
+                <!-- Step 4: Success -->
+                <div class="booking-step" id="bkstep4">
+                    <div class="bk-success">
+                        <div class="bk-success-icon">✓</div>
+                        <h2>Köszönöm a foglalást!</h2>
+                        <p>Hamarosan felveszem veled a kapcsolatot a részletek egyeztetéséhez.</p>
+                        <div id="bkSuccessDetails"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+${footerHtml('')}
+<script src="js/main.js" defer></script>
+<script>
+(function(){
+  var FORMSPREE='https://formspree.io/f/mjgjqbar';
+  var SLOTS=['9:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00','18:00'];
+  var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
+  var selSvc=null,selSvcName=null,selDate=null,selTime=null;
+  var cy,cm;
+  var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
+
+  function goStep(n){
+    [1,2,3,4].forEach(function(i){
+      var s=document.getElementById('bkstep'+i);
+      var p=document.getElementById('bkprog'+i);
+      if(s) s.classList.toggle('active',i===n);
+      if(p){
+        p.classList.toggle('active',i===n);
+        p.classList.toggle('done',i<n);
+      }
+    });
+    var sec=document.querySelector('.bk-section');
+    if(sec) window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
+  }
+
+  // Step 1: service select
+  document.querySelectorAll('.bk-svc-card').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
+      c.classList.add('selected');
+      selSvc=c.dataset.id; selSvcName=c.dataset.name;
+      setTimeout(function(){goStep(2);},220);
+    });
+  });
+
+  // Calendar
+  function renderCal(){
+    document.getElementById('bkCalLabel').textContent=MONTHS[cm]+' '+cy;
+    var today=new Date(); today.setHours(0,0,0,0);
+    var first=new Date(cy,cm,1).getDay();
+    var startDay=first===0?6:first-1;
+    var dim=new Date(cy,cm+1,0).getDate();
+    var html='';
+    for(var i=0;i<startDay;i++) html+='<div></div>';
+    for(var d=1;d<=dim;d++){
+      var dt=new Date(cy,cm,d);
+      var past=dt<today;
+      var sel=selDate&&dt.toDateString()===selDate.toDateString();
+      var tod=dt.toDateString()===today.toDateString();
+      html+='<div class="bk-day'+(past?' past':'')+(sel?' selected':'')+(tod?' today':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
+    }
+    document.getElementById('bkCalDays').innerHTML=html;
+    document.querySelectorAll('.bk-day:not(.past)').forEach(function(el){
+      el.addEventListener('click',function(){
+        selDate=new Date(parseInt(el.dataset.ts));
+        selTime=null;
+        document.getElementById('bkNext2').disabled=true;
+        renderCal(); renderSlots();
+      });
+    });
+  }
+
+  function renderSlots(){
+    var hint=document.getElementById('bkTimeHint');
+    var wrap=document.getElementById('bkSlots');
+    if(!selDate){wrap.innerHTML='';hint.style.display='block';return;}
+    hint.style.display='none';
+    wrap.innerHTML=SLOTS.map(function(t){
+      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'">'+t+'</button>';
+    }).join('');
+    wrap.querySelectorAll('.bk-slot').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        selTime=btn.dataset.t;
+        document.getElementById('bkNext2').disabled=false;
+        renderSlots();
+      });
+    });
+  }
+
+  document.getElementById('bkCalPrev').addEventListener('click',function(){
+    cm--; if(cm<0){cm=11;cy--;} renderCal();
+  });
+  document.getElementById('bkCalNext').addEventListener('click',function(){
+    cm++; if(cm>11){cm=0;cy++;} renderCal();
+  });
+
+  function fmtDate(d){
+    return cy+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
+  }
+
+  function showSummary(){
+    var el=document.getElementById('bkSummary');
+    if(!el) return;
+    el.style.display='flex';
+    el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+fmtDate(selDate)+'</span><span>🕐 '+selTime+'</span>';
+  }
+
+  document.getElementById('bkBack1').addEventListener('click',function(){goStep(1);});
+  document.getElementById('bkNext2').addEventListener('click',function(){showSummary();goStep(3);});
+  document.getElementById('bkBack2').addEventListener('click',function(){goStep(2);});
+
+  // Form submit
+  document.getElementById('bkForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var btn=document.getElementById('bkSubmit');
+    var err=document.getElementById('bkError');
+    btn.querySelector('span').textContent='Küldés...';
+    btn.disabled=true; err.style.display='none';
+    var dateStr=selDate?fmtDate(selDate):'—';
+    try{
+      var res=await fetch(FORMSPREE,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          _subject:'[Silverframe Foglalás] '+selSvcName+' — '+dateStr+' '+selTime,
+          szolgáltatás:selSvcName,
+          dátum:dateStr,
+          időpont:selTime,
+          név:document.getElementById('bkName').value,
+          email:document.getElementById('bkEmail').value,
+          telefon:document.getElementById('bkPhone').value,
+          megjegyzés:document.getElementById('bkNote').value
+        })
+      });
+      if(res.ok){
+        var gcStart=new Date(selDate.getFullYear(),selDate.getMonth(),selDate.getDate(),parseInt(selTime),0);
+        var gcEnd=new Date(gcStart.getTime()+2*60*60*1000);
+        var fmt=function(d){return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';};
+        var gcUrl='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Silverframe fotózás')+'&dates='+fmt(gcStart)+'/'+fmt(gcEnd)+'&details='+encodeURIComponent(selSvcName+' — Silverframe Studio, '+g_email)+'&location='+encodeURIComponent(g_city);
+        document.getElementById('bkSuccessDetails').innerHTML=
+          '<div style="margin:.5rem 0;color:var(--text-muted)">'+selSvcName+' · '+dateStr+' · '+selTime+'</div>'+
+          '<a href="'+gcUrl+'" target="_blank" rel="noopener" class="btn bk-gcal-btn">📅 Mentés Google Naptárba</a>';
+        goStep(4);
+      } else {
+        btn.querySelector('span').textContent='Foglalás elküldése';
+        btn.disabled=false;
+        err.textContent='Hiba történt, kérlek próbáld újra.';
+        err.style.display='block';
+      }
+    } catch(ex){
+      btn.querySelector('span').textContent='Foglalás elküldése';
+      btn.disabled=false;
+      err.textContent='Kapcsolódási hiba.';
+      err.style.display='block';
+    }
+  });
+
+  renderCal();
+  renderSlots();
+  var g_email='${g.email}';
+  var g_city='${g.city}';
+})();
+</script>
+
+</body>
+</html>`;
+}
+
 function buildArakPage() {
   const p = data.pages.arak;
   if (!p) return '';
@@ -1269,6 +1588,7 @@ writeFile(path.join(__dirname, 'portfolio.html'), buildPortfolio());
 writeFile(path.join(__dirname, 'services.html'), buildServices());
 writeFile(path.join(__dirname, 'contact.html'), buildContact());
 writeFile(path.join(__dirname, 'arak.html'), buildArakPage());
+writeFile(path.join(__dirname, 'booking.html'), buildBookingPage());
 
 // Service pages
 cats.forEach(c => {
@@ -1284,4 +1604,4 @@ Object.keys(data.portfolioPages).forEach(id => {
 writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
 writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
-console.log(`\n  Done! ${6 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
+console.log(`\n  Done! ${7 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
