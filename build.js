@@ -986,32 +986,36 @@ ${mobileNavHtml('')}
 .bk-svc-name{padding:.6rem .8rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:center;transition:color .25s}
 .bk-svc-card.selected .bk-svc-name,.bk-svc-card:hover .bk-svc-name{color:var(--accent)}
 /* Step 2 layout */
-.bk-datetime{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
-@media(max-width:600px){.bk-datetime{grid-template-columns:1fr}}
+.bk-datetime{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2rem;border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
+.bk-cal-panel{padding:1.8rem;border-right:1px solid rgba(255,255,255,.07)}
+.bk-slots-panel{padding:1.8rem}
+@media(max-width:640px){.bk-datetime{grid-template-columns:1fr}.bk-cal-panel{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}}
 /* Calendar */
-.bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.bk-cal-nav button{background:none;border:1px solid rgba(201,169,110,.3);color:var(--accent);width:2rem;height:2rem;border-radius:2px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.bk-cal-nav button:hover{background:rgba(201,169,110,.1)}
-.bk-cal-month{font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
-.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
-.bk-cal-dow{text-align:center;font-size:.68rem;letter-spacing:.05em;color:var(--text-muted);padding:.4rem 0;text-transform:uppercase}
-.bk-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.bk-day{text-align:center;padding:.55rem .2rem;font-size:.85rem;border-radius:2px;cursor:pointer;color:var(--text);transition:background .2s,color .2s;user-select:none}
-.bk-day:hover:not(.past){background:rgba(201,169,110,.15);color:var(--accent)}
-.bk-day.past{opacity:.25;cursor:default}
-.bk-day.busy{opacity:.2;cursor:default}
-.bk-day.suggested{outline:1px solid rgba(201,169,110,.5)}
-.bk-day.today{color:var(--accent)}
-.bk-cal-loading{grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-muted);font-size:.8rem;letter-spacing:.05em}
+.bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.bk-cal-nav button{background:none;border:none;color:rgba(255,255,255,.4);width:2rem;height:2rem;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s;border-radius:4px}
+.bk-cal-nav button:hover{color:var(--accent);background:rgba(201,169,110,.08)}
+.bk-cal-month{font-family:var(--font-display);font-size:1rem;font-weight:300;color:var(--text);letter-spacing:.03em}
+.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
+.bk-cal-dow{text-align:center;font-size:.65rem;letter-spacing:.08em;color:rgba(255,255,255,.25);padding:.5rem 0;text-transform:uppercase;font-weight:500}
+.bk-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.bk-day{position:relative;text-align:center;padding:.6rem .2rem;font-size:.88rem;border-radius:6px;cursor:pointer;color:rgba(255,255,255,.85);transition:background .15s,color .15s;user-select:none;font-weight:400}
+.bk-day:hover:not(.past):not(.busy){background:rgba(201,169,110,.12);color:var(--accent)}
+.bk-day.past{opacity:.18;cursor:default}
+.bk-day.busy{opacity:.18;cursor:default}
+.bk-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent)}
 .bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
+.bk-day.selected::after{display:none}
+.bk-cal-loading{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:rgba(255,255,255,.2);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
 /* Time slots */
-.bk-time-title{font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
-.bk-time-hint{font-size:.82rem;color:rgba(255,255,255,.3);margin-bottom:1rem}
-.bk-slots{display:flex;flex-wrap:wrap;gap:.5rem}
-.bk-slot{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:.5rem 1rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;transition:all .2s}
-.bk-slot:hover:not(:disabled){border-color:rgba(201,169,110,.5);color:var(--accent)}
+.bk-slots-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;font-weight:500}
+.bk-slots-date{font-family:var(--font-display);font-size:1rem;font-weight:300;color:var(--text);margin-bottom:1.2rem}
+.bk-time-hint{font-size:.85rem;color:rgba(255,255,255,.2);margin-top:2rem;text-align:center;line-height:1.6}
+.bk-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.bk-slot{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.7rem .4rem;font-size:.9rem;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;text-align:center;font-weight:400}
+.bk-slot:hover:not(:disabled){border-color:rgba(201,169,110,.4);color:var(--accent);background:rgba(201,169,110,.05)}
 .bk-slot.selected{background:var(--accent);border-color:var(--accent);color:#0e0e0e;font-weight:600}
-.bk-slot:disabled{opacity:.2;cursor:default;text-decoration:line-through}
+.bk-slot:disabled{opacity:.15;cursor:default}
+.bk-no-slots{grid-column:1/-1;font-size:.85rem;color:rgba(255,255,255,.25);text-align:center;padding:1.5rem 0}
 /* Step nav */
 .bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
 /* Summary bar */
@@ -1057,7 +1061,7 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                 <div class="booking-step" id="bkstep2">
                     <h2 class="bk-step-title">Mikor szeretnéd?</h2>
                     <div class="bk-datetime">
-                        <div>
+                        <div class="bk-cal-panel">
                             <div class="bk-cal-nav">
                                 <button type="button" id="bkCalPrev">&#8249;</button>
                                 <span class="bk-cal-month" id="bkCalLabel"></span>
@@ -1069,9 +1073,10 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                             </div>
                             <div class="bk-cal-days" id="bkCalDays"></div>
                         </div>
-                        <div>
-                            <p class="bk-time-title">Időpont</p>
-                            <p class="bk-time-hint" id="bkTimeHint">Először válassz egy napot</p>
+                        <div class="bk-slots-panel">
+                            <div class="bk-slots-label">Időpont</div>
+                            <div class="bk-slots-date" id="bkSlotsDate">&nbsp;</div>
+                            <p class="bk-time-hint" id="bkTimeHint">Válassz egy napot<br>a szabad időpontok megtekintéséhez</p>
                             <div class="bk-slots" id="bkSlots"></div>
                         </div>
                     </div>
@@ -1208,16 +1213,18 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   function renderSlots(){
     var hint=document.getElementById('bkTimeHint');
     var wrap=document.getElementById('bkSlots');
-    if(!selDate){wrap.innerHTML='';hint.style.display='block';return;}
+    var dateEl=document.getElementById('bkSlotsDate');
+    if(!selDate){wrap.innerHTML='';hint.style.display='block';if(dateEl)dateEl.innerHTML='&nbsp;';return;}
     hint.style.display='none';
     var daySlots=getSlotsForDay(selDate);
+    var dateEl=document.getElementById('bkSlotsDate');
+    if(dateEl) dateEl.textContent=fmtDate(selDate);
     if(!daySlots.length){
-      wrap.innerHTML='<p style="color:var(--text-muted);font-size:.85rem">Ezen a napon nincs szabad időpont.</p>';
+      wrap.innerHTML='<div class="bk-no-slots">Ezen a napon nincs szabad időpont.</div>';
       return;
     }
     wrap.innerHTML=daySlots.map(function(t){
-      var isSugg=suggestedSlot&&suggestedSlot.date===dateKey(selDate)&&suggestedSlot.time===t;
-      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+(isSugg?' suggested':'')+'" data-t="'+t+'">'+t+(isSugg?' ⭐':'')+'</button>';
+      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'">'+t+'</button>';
     }).join('');
     wrap.querySelectorAll('.bk-slot').forEach(function(btn){
       btn.addEventListener('click',function(){
