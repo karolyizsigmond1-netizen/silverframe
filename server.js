@@ -383,18 +383,20 @@ const server = http.createServer((req, res) => {
                     res.end(JSON.stringify({ success: false, message: 'Hiányzó mezők.' }));
                     return;
                 }
-                if (!nodemailer || !process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+                if (!nodemailer || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
                     res.writeHead(503, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: false, message: 'Email nincs beállítva a szerveren.' }));
                     return;
                 }
                 const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD }
+                    host: process.env.SMTP_HOST || 'smtp.rackhost.hu',
+                    port: parseInt(process.env.SMTP_PORT) || 465,
+                    secure: (parseInt(process.env.SMTP_PORT) || 465) === 465,
+                    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
                 });
                 await transporter.sendMail({
-                    from: `"Silverframe Studio" <${process.env.GMAIL_USER}>`,
-                    to: process.env.CONTACT_TO || process.env.GMAIL_USER,
+                    from: `"Silverframe Studio" <${process.env.SMTP_USER}>`,
+                    to: process.env.CONTACT_TO || process.env.SMTP_USER,
                     replyTo: email,
                     subject: `[Silverframe] ${subject || 'Üzenet a weboldalról'} — ${name}`,
                     html: `
