@@ -121,9 +121,9 @@
                     btnSpan.textContent = 'Küldés...';
                     status.style.display = 'none';
                     try {
-                        const res = await fetch('/api/contact', {
+                        const res = await fetch('https://formspree.io/f/mjgjqbar', {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                             body: JSON.stringify({
                                 name: this.name.value,
                                 email: this.email.value,
@@ -133,7 +133,7 @@
                             })
                         });
                         const data = await res.json();
-                        if (data.success) {
+                        if (res.ok) {
                             btnSpan.textContent = 'Elküldve!';
                             status.style.color = '#7ec47e';
                             status.textContent = 'Üzeneted megérkezett, hamarosan felveszem veled a kapcsolatot!';
