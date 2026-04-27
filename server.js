@@ -3,9 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
-require('dotenv').config();
 let sharp; try { sharp = require('sharp'); } catch(e) { sharp = null; }
-let nodemailer; try { nodemailer = require('nodemailer'); } catch(e) { nodemailer = null; }
 
 async function compressImage(buf, ext) {
     if (!sharp) return buf;
@@ -366,57 +364,6 @@ const server = http.createServer((req, res) => {
             } catch (e) {
                 res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: e.message }));
-            }
-        });
-        return;
-    }
-
-    // API: Contact form
-    if (req.method === 'POST' && req.url === '/api/contact') {
-        let body = '';
-        req.on('data', chunk => body += chunk);
-        req.on('end', async () => {
-            try {
-                const { name, email, phone, subject, message } = JSON.parse(body);
-                if (!name || !email || !message) {
-                    res.writeHead(400, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ success: false, message: 'Hiányzó mezők.' }));
-                    return;
-                }
-                if (!nodemailer || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-                    res.writeHead(503, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ success: false, message: 'Email nincs beállítva a szerveren.' }));
-                    return;
-                }
-                const transporter = nodemailer.createTransport({
-                    host: process.env.SMTP_HOST || 'smtp.rackhost.hu',
-                    port: parseInt(process.env.SMTP_PORT) || 465,
-                    secure: (parseInt(process.env.SMTP_PORT) || 465) === 465,
-                    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-                });
-                await transporter.sendMail({
-                    from: `"Silverframe Studio" <${process.env.SMTP_USER}>`,
-                    to: process.env.CONTACT_TO || process.env.SMTP_USER,
-                    replyTo: email,
-                    subject: `[Silverframe] ${subject || 'Üzenet a weboldalról'} — ${name}`,
-                    html: `
-                        <h2 style="color:#c9a96e">Új üzenet a weboldalról</h2>
-                        <table style="font-family:sans-serif;font-size:15px;border-collapse:collapse">
-                            <tr><td style="padding:6px 16px 6px 0;color:#888">Név:</td><td><strong>${name}</strong></td></tr>
-                            <tr><td style="padding:6px 16px 6px 0;color:#888">Email:</td><td><a href="mailto:${email}">${email}</a></td></tr>
-                            ${phone ? `<tr><td style="padding:6px 16px 6px 0;color:#888">Telefon:</td><td>${phone}</td></tr>` : ''}
-                            ${subject ? `<tr><td style="padding:6px 16px 6px 0;color:#888">Tárgy:</td><td>${subject}</td></tr>` : ''}
-                        </table>
-                        <hr style="margin:16px 0;border-color:#eee">
-                        <p style="font-family:sans-serif;font-size:15px;white-space:pre-wrap">${message.replace(/</g,'&lt;')}</p>
-                    `
-                });
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true }));
-            } catch (e) {
-                console.error('Email hiba:', e.message);
-                res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: false, message: 'Email küldési hiba.' }));
             }
         });
         return;
