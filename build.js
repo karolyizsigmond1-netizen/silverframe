@@ -249,17 +249,28 @@ function headerHtml(prefix, activePage, activeService) {
 
 function mobileNavHtml(prefix) {
   return `    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció">
-        <a href="${prefix}index.html">Főoldal</a>
-        <a href="${prefix}about.html">Rólam</a>
-        <a href="${prefix}portfolio.html">Galéria</a>
-        <a href="${prefix}services.html">Szolgáltatások</a>
-        <div class="mobile-nav-sub">${cats.map(c =>
-    `\n            <a href="${prefix}services/${c.id}.html">${c.name}</a>`
-  ).join('')}
+        <div class="mn-inner">
+            <div class="mn-logo">${g.siteName}</div>
+
+            <div class="mn-main">
+                <a class="mn-link" href="${prefix}index.html">Főoldal</a>
+                <a class="mn-link" href="${prefix}about.html">Rólam</a>
+                <a class="mn-link" href="${prefix}portfolio.html">Galéria</a>
+                <a class="mn-link" href="${prefix}arak.html">Árak</a>
+                <a class="mn-link" href="${prefix}contact.html">Kapcsolat</a>
+            </div>
+
+            <div class="mn-services">
+                <div class="mn-services-label">Szolgáltatások</div>
+                <div class="mn-services-grid">
+                    ${cats.map(c =>
+    `<a href="${prefix}services/${c.id}.html">${c.name}</a>`
+  ).join('\n                    ')}
+                </div>
+            </div>
+
+            <a href="${prefix}booking.html" class="mn-cta">Időpontfoglalás</a>
         </div>
-        <a href="${prefix}arak.html">Árak</a>
-        <a href="${prefix}booking.html">Időpontfoglalás</a>
-        <a href="${prefix}contact.html">Kapcsolat</a>
     </nav>`;
 }
 
