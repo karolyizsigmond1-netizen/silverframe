@@ -976,7 +976,8 @@ ${mobileNavHtml('')}
 .booking-step{display:none}.booking-step.active{display:block}
 .bk-step-title{font-family:var(--font-display);font-size:clamp(1.4rem,5vw,1.9rem);font-weight:300;color:var(--text);margin-bottom:2rem;text-align:center}
 /* Service cards */
-.bk-services{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-bottom:1rem}
+.bk-services{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1rem}
+@media(max-width:700px){.bk-services{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:480px){.bk-services{grid-template-columns:repeat(2,1fr);gap:0.6rem}}
 @media(max-width:320px){.bk-services{grid-template-columns:1fr}}
 .bk-svc-card{border:1px solid rgba(255,255,255,.07);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .2s;background:rgba(255,255,255,.03)}
