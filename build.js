@@ -714,14 +714,59 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                     <div class="contact-detail"><label>Helyszín</label><span>${g.city}</span></div>
                     <div class="contact-detail"><label>Elérhetőség</label><span>${p.availability}</span></div>
                 </div>
-                <form class="contact-form reveal reveal-delay-1" onsubmit="event.preventDefault(); this.querySelector('.btn span').textContent='Üzenet elküldve!'; return false;" aria-label="Kapcsolatfelvételi űrlap">
+                <form class="contact-form reveal reveal-delay-1" id="contactForm" aria-label="Kapcsolatfelvételi űrlap">
                     <div class="form-group"><input type="text" id="name" name="name" placeholder=" " required autocomplete="name"><label for="name">Neved</label></div>
                     <div class="form-group"><input type="email" id="email" name="email" placeholder=" " required autocomplete="email"><label for="email">E-mail címed</label></div>
                     <div class="form-group"><input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel"><label for="phone">Telefonszám (opcionális)</label></div>
                     <div class="form-group"><input type="text" id="subject" name="subject" placeholder=" "><label for="subject">Tárgy</label></div>
                     <div class="form-group"><textarea id="message" name="message" placeholder=" " rows="4" required></textarea><label for="message">Üzeneted</label></div>
-                    <button type="submit" class="btn btn-solid"><span>Üzenet küldése</span></button>
+                    <button type="submit" class="btn btn-solid" id="contactBtn"><span>Üzenet küldése</span></button>
+                    <p id="contactStatus" style="margin-top:1rem;font-size:0.95rem;display:none"></p>
                 </form>
+                <script>
+                document.getElementById('contactForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('contactBtn');
+                    const status = document.getElementById('contactStatus');
+                    const btnSpan = btn.querySelector('span');
+                    btn.disabled = true;
+                    btnSpan.textContent = 'Küldés...';
+                    status.style.display = 'none';
+                    try {
+                        const res = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: this.name.value,
+                                email: this.email.value,
+                                phone: this.phone.value,
+                                subject: this.subject.value,
+                                message: this.message.value
+                            })
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            btnSpan.textContent = 'Elküldve!';
+                            status.style.color = '#7ec47e';
+                            status.textContent = 'Üzeneted megérkezett, hamarosan felveszem veled a kapcsolatot!';
+                            status.style.display = 'block';
+                            this.reset();
+                        } else {
+                            btnSpan.textContent = 'Üzenet küldése';
+                            btn.disabled = false;
+                            status.style.color = '#e07070';
+                            status.textContent = 'Hiba történt, kérlek próbáld újra vagy írj emailt közvetlenül.';
+                            status.style.display = 'block';
+                        }
+                    } catch(err) {
+                        btnSpan.textContent = 'Üzenet küldése';
+                        btn.disabled = false;
+                        status.style.color = '#e07070';
+                        status.textContent = 'Kapcsolódási hiba. Kérlek próbáld újra.';
+                        status.style.display = 'block';
+                    }
+                });
+                </script>
             </div>
         </section>
     </main>
