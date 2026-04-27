@@ -1498,3 +1498,45 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     .service-nav { grid-template-columns: 1fr; }
     .service-nav-link.next { text-align: left; align-items: flex-start; border-top: 1px solid rgba(255,255,255,0.04); }
 }
+
+/* ═══════════════════════════════════════════
+   GLOBAL MOBILE FIXES
+   ═══════════════════════════════════════════ */
+
+/* Gallery preview — 1 col on tiny screens */
+@media (max-width: 480px) {
+    .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); gap: 0.3rem; }
+}
+@media (max-width: 360px) {
+    .gallery-preview-grid { grid-template-columns: 1fr; }
+}
+
+/* Page hero — smaller on mobile */
+@media (max-width: 600px) {
+    .page-hero { height: 40vh; min-height: 260px; }
+    .page-hero-title { font-size: clamp(1.8rem, 8vw, 3rem); }
+}
+
+/* Intro strip — tighter padding on mobile */
+@media (max-width: 600px) {
+    .intro-strip { padding: 4rem 0; gap: 2rem; }
+}
+
+/* About page */
+@media (max-width: 480px) {
+    .about-content { gap: 2rem; }
+}
+
+/* Filter buttons — proper touch targets */
+.filter-btn { min-height: 44px; padding: 0.6rem 1.2rem; }
+
+/* Testimonials — full width on mobile */
+@media (max-width: 500px) {
+    .testimonial-card { padding: 1.5rem 1.2rem; }
+}
+
+/* Container padding on very small screens */
+@media (max-width: 380px) {
+    .container { padding: 0 1rem; }
+    .section-label { font-size: 0.62rem; }
+}
