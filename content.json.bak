@@ -21,7 +21,9 @@
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
       "img": "uploads/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg",
       "arakTagline": "Profi képek, természetes kisugárzás",
-      "arakBadge": "Legnépszerűbb"
+      "arakBadge": "Legnépszerűbb",
+      "bookingType": "hourly",
+      "bookingDuration": 2
     },
     {
       "id": "maternity",
@@ -31,7 +33,9 @@
       "image": "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80",
       "img": "uploads/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg",
       "arakTagline": "Az anyaság szépségének megörökítése",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 2
     },
     {
       "id": "boudoir",
@@ -41,7 +45,9 @@
       "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80",
       "img": "uploads/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg",
       "arakTagline": "Elegáns, bizalmas, magabiztos",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 3
     },
     {
       "id": "family",
@@ -51,7 +57,9 @@
       "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&q=80",
       "img": "uploads/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg",
       "arakTagline": "Valódi pillanatok, örök emlékek",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 3
     },
     {
       "id": "couple",
@@ -61,17 +69,21 @@
       "image": "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80",
       "img": "uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg",
       "arakTagline": "A szerelem pillanatai örökre",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 3
     },
     {
       "id": "business",
-      "name": "Üzleti portré",
+      "name": "Céges arculati brandfotózás",
       "num": "06",
       "portfolioId": "business",
       "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
       "img": "uploads/015b522c5a9c-_DSC6748.jpg",
       "arakTagline": "Profi megjelenés minden platformon",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 2
     },
     {
       "id": "real-estate",
@@ -81,7 +93,9 @@
       "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
       "img": "uploads/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg",
       "arakTagline": "Eladható ingatlanok, megnyerő képek",
-      "arakBadge": "Legjobb ár"
+      "arakBadge": "Legjobb ár",
+      "bookingType": "hourly",
+      "bookingDuration": 2
     },
     {
       "id": "wedding",
@@ -91,7 +105,9 @@
       "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
       "img": "uploads/6b6ba1e96c51-eskuvoi-fotozas-szeged__16_.jpg",
       "arakTagline": "A nagy nap, örökre megörökítve",
-      "arakBadge": "Prémium"
+      "arakBadge": "Prémium",
+      "bookingType": "fullday",
+      "bookingDuration": 10
     },
     {
       "id": "wedding-creative",
@@ -101,7 +117,9 @@
       "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
       "img": "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg",
       "arakTagline": "Mesebeli esküvői portrék",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 4
     },
     {
       "id": "event",
@@ -111,7 +129,9 @@
       "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
       "img": "uploads/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg",
       "arakTagline": "Céges és személyes események",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "multiday",
+      "bookingDuration": 1
     },
     {
       "id": "pet",
@@ -121,7 +141,9 @@
       "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
       "img": "uploads/9f208a7abf55-kutya-fotozas-termeszetben__29_.jpg",
       "arakTagline": "A négylábú barát örök emléke",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 2
     },
     {
       "id": "product",
@@ -131,7 +153,9 @@
       "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
       "img": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
       "arakTagline": "Fotók, amik eladnak",
-      "arakBadge": ""
+      "arakBadge": "",
+      "bookingType": "hourly",
+      "bookingDuration": 3
     }
   ],
   "pages": {
@@ -382,6 +406,13 @@
       "ctaDesc": "Egy rövid egyeztetés elég — elmondom, mire számíthatsz, és megtaláljuk a legjobb időpontot. Semmi kötelezettség.",
       "customBandTitle": "Egyedi ajánlatot szeretnél?",
       "customBandDesc": "Az esküvői és rendezvény fotózás minden esetben személyre szabott — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
+    },
+    "booking": {
+      "title": "Időpontfoglalás — Silverframe Studio | Fotózás Szeged",
+      "metaDesc": "Foglalj időpontot online fotózásra Szegeden. Válaszd ki a szolgáltatást, az időpontot, és küld el kérelmedet – gyors és egyszerű.",
+      "heroImage": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1600&q=80",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Foglalj időpontot"
     }
   },
   "servicePages": {
