@@ -94,6 +94,7 @@
 .bk-day{text-align:center;padding:.55rem .2rem;font-size:.85rem;border-radius:2px;cursor:pointer;color:var(--text);transition:background .2s,color .2s;user-select:none}
 .bk-day:hover:not(.past){background:rgba(201,169,110,.15);color:var(--accent)}
 .bk-day.past{opacity:.25;cursor:default}
+.bk-day.busy{opacity:.25;cursor:default;text-decoration:line-through}
 .bk-day.today{color:var(--accent)}
 .bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
 /* Time slots */
@@ -101,8 +102,9 @@
 .bk-time-hint{font-size:.82rem;color:rgba(255,255,255,.3);margin-bottom:1rem}
 .bk-slots{display:flex;flex-wrap:wrap;gap:.5rem}
 .bk-slot{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:.5rem 1rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;transition:all .2s}
-.bk-slot:hover{border-color:rgba(201,169,110,.5);color:var(--accent)}
+.bk-slot:hover:not(:disabled){border-color:rgba(201,169,110,.5);color:var(--accent)}
 .bk-slot.selected{background:var(--accent);border-color:var(--accent);color:#0e0e0e;font-weight:600}
+.bk-slot:disabled{opacity:.2;cursor:default;text-decoration:line-through}
 /* Step nav */
 .bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
 /* Summary bar */
@@ -301,10 +303,33 @@
 (function(){
   var FORMSPREE='https://formspree.io/f/mjgjqbar';
   var SLOTS=['9:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00','18:00'];
+  var SLOT_DURATION=2; // hours
   var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
   var selSvc=null,selSvcName=null,selDate=null,selTime=null;
   var cy,cm;
   var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
+  var busyPeriods=[];
+
+  function loadAvailability(year,month,cb){
+    fetch('/api/availability?year='+year+'&month='+month)
+      .then(function(r){return r.json();})
+      .then(function(d){
+        busyPeriods=(d.busy||[]).map(function(b){return{start:new Date(b.start),end:new Date(b.end)};});
+        if(cb)cb();
+      })
+      .catch(function(){busyPeriods=[];if(cb)cb();});
+  }
+
+  function slotBusy(date,slot){
+    var parts=slot.split(':');
+    var start=new Date(date.getFullYear(),date.getMonth(),date.getDate(),parseInt(parts[0]),parseInt(parts[1]));
+    var end=new Date(start.getTime()+SLOT_DURATION*60*60*1000);
+    return busyPeriods.some(function(b){return b.start<end&&b.end>start;});
+  }
+
+  function dayFullyBusy(date){
+    return SLOTS.every(function(s){return slotBusy(date,s);});
+  }
 
   function goStep(n){
     [1,2,3,4].forEach(function(i){
@@ -326,7 +351,7 @@
       document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
       c.classList.add('selected');
       selSvc=c.dataset.id; selSvcName=c.dataset.name;
-      setTimeout(function(){goStep(2);},220);
+      setTimeout(function(){goStep(2);loadAvailability(cy,cm,renderCal);},220);
     });
   });
 
@@ -342,12 +367,13 @@
     for(var d=1;d<=dim;d++){
       var dt=new Date(cy,cm,d);
       var past=dt<today;
+      var busy=!past&&dayFullyBusy(dt);
       var sel=selDate&&dt.toDateString()===selDate.toDateString();
       var tod=dt.toDateString()===today.toDateString();
-      html+='<div class="bk-day'+(past?' past':'')+(sel?' selected':'')+(tod?' today':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
+      html+='<div class="bk-day'+(past?' past':'')+(busy?' busy':'')+(sel?' selected':'')+(tod?' today':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
     }
     document.getElementById('bkCalDays').innerHTML=html;
-    document.querySelectorAll('.bk-day:not(.past)').forEach(function(el){
+    document.querySelectorAll('.bk-day:not(.past):not(.busy)').forEach(function(el){
       el.addEventListener('click',function(){
         selDate=new Date(parseInt(el.dataset.ts));
         selTime=null;
@@ -363,7 +389,8 @@
     if(!selDate){wrap.innerHTML='';hint.style.display='block';return;}
     hint.style.display='none';
     wrap.innerHTML=SLOTS.map(function(t){
-      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'">'+t+'</button>';
+      var busy=slotBusy(selDate,t);
+      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'"'+(busy?' disabled':'')+'>'+(busy?'<s>'+t+'</s>':t)+'</button>';
     }).join('');
     wrap.querySelectorAll('.bk-slot').forEach(function(btn){
       btn.addEventListener('click',function(){
@@ -375,10 +402,10 @@
   }
 
   document.getElementById('bkCalPrev').addEventListener('click',function(){
-    cm--; if(cm<0){cm=11;cy--;} renderCal();
+    cm--; if(cm<0){cm=11;cy--;} loadAvailability(cy,cm,renderCal);
   });
   document.getElementById('bkCalNext').addEventListener('click',function(){
-    cm++; if(cm>11){cm=0;cy++;} renderCal();
+    cm++; if(cm>11){cm=0;cy++;} loadAvailability(cy,cm,renderCal);
   });
 
   function fmtDate(d){

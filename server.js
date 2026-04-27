@@ -1,8 +1,22 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
+
+// Load .env
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+    fs.readFileSync(envPath, 'utf-8').split('\n').forEach(line => {
+        const eq = line.indexOf('=');
+        if (eq > 0) {
+            const k = line.slice(0, eq).trim();
+            const v = line.slice(eq + 1).trim();
+            if (k && !process.env[k]) process.env[k] = v;
+        }
+    });
+}
 let sharp; try { sharp = require('sharp'); } catch(e) { sharp = null; }
 
 async function compressImage(buf, ext) {
@@ -366,6 +380,51 @@ const server = http.createServer((req, res) => {
                 res.end(JSON.stringify({ error: e.message }));
             }
         });
+        return;
+    }
+
+    // API: Google Calendar availability (FreeBusy)
+    if (req.method === 'GET' && req.url.startsWith('/api/availability')) {
+        const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?') + 1) : '';
+        const params = Object.fromEntries(qs.split('&').map(p => p.split('=')));
+        const year  = parseInt(params.year)  || new Date().getFullYear();
+        const month = parseInt(params.month) || new Date().getMonth();
+        const calId = process.env.GOOGLE_CALENDAR_ID;
+        const apiKey = process.env.GOOGLE_CALENDAR_KEY;
+        if (!apiKey || !calId) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Calendar not configured' }));
+            return;
+        }
+        const timeMin = new Date(year, month, 1).toISOString();
+        const timeMax = new Date(year, month + 1, 0, 23, 59, 59).toISOString();
+        const postData = JSON.stringify({ timeMin, timeMax, items: [{ id: calId }] });
+        const apiReq = https.request({
+            hostname: 'www.googleapis.com',
+            path: '/calendar/v3/freeBusy?key=' + apiKey,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(postData) }
+        }, apiRes => {
+            let body = '';
+            apiRes.on('data', c => body += c);
+            apiRes.on('end', () => {
+                try {
+                    const parsed = JSON.parse(body);
+                    const busy = parsed.calendars?.[calId]?.busy || [];
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ busy }));
+                } catch(e) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Parse error', raw: body.slice(0, 200) }));
+                }
+            });
+        });
+        apiReq.on('error', e => {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: e.message }));
+        });
+        apiReq.write(postData);
+        apiReq.end();
         return;
     }
 
