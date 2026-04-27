@@ -287,7 +287,7 @@
           "image": "uploads/cc282a829b85-Portf_li__-Premium_csomag.jpg",
           "alt": "Portré fotózás",
           "cat": "Portfólió / Modell",
-          "title": "Stúdió portré",
+          "title": "",
           "wide": true
         },
         {
@@ -295,7 +295,7 @@
           "image": "uploads/1774723268615-www.karolyifoto.hu__3_of_25_.jpg",
           "alt": "Esküvői fotózás",
           "cat": "Esküvő",
-          "title": "Az első tánc",
+          "title": "",
           "wide": false
         },
         {
@@ -303,7 +303,7 @@
           "image": "uploads/2d93faa84d93-kutya-fotozas-szeged-studio__199_.jpg",
           "alt": "Kisállat fotózás",
           "cat": "Kisállat",
-          "title": "Legjobb barát",
+          "title": "",
           "wide": false
         },
         {
@@ -311,7 +311,7 @@
           "image": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
           "alt": "Páros jegyes fotózás",
           "cat": "Páros jegyes",
-          "title": "Összetartozás",
+          "title": "",
           "wide": false
         },
         {
@@ -319,7 +319,7 @@
           "image": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
           "alt": "Termékfotózás",
           "cat": "Termékfotó",
-          "title": "Fejhallgató kampány",
+          "title": "",
           "wide": true
         },
         {
@@ -327,7 +327,7 @@
           "image": "uploads/2cd7c3298426-csaladi-fotozas-szeged___208_.jpg",
           "alt": "Családi fotózás",
           "cat": "Családi",
-          "title": "Vasárnap délután",
+          "title": "",
           "wide": false
         }
       ],
@@ -4256,8 +4256,8 @@
     "product": {
       "title": "Termékfotózás — Silverframe Studio | Szeged",
       "metaDesc": "Termékfotózás Szegeden 55.000 Ft-tól. Professzionális termékfotók webshophoz.",
-      "ogImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&q=80",
+      "ogImage": "uploads/03fca3fccc24-termekfoto-webshop-termek-kep__45_.jpg",
+      "heroImage": "uploads/146605fc193b-termekfoto-webshop-termek-kep__8_.jpg",
       "heroLabel": "Szolgáltatások / 12",
       "heroTitle": "Termékfotózás",
       "breadcrumb": "Termékfotó",
@@ -4268,7 +4268,7 @@
         "Legyen szó webshop termékfotóról, katalógusképről vagy lifestyle fotóról."
       ],
       "introImage": {
-        "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80",
+        "src": "uploads/6096cd6466ef-termekfoto-webshop-termek-kep__32_.jpg",
         "alt": "Termékfotózás"
       },
       "packages": [
@@ -4292,33 +4292,110 @@
               "title": "Gyors átadás",
               "desc": "A képek rövid időn belül digitálisan átadásra kerülnek."
             }
-          ]
+          ],
+          "image": "uploads/cbc27b81d265-termekfoto-webshop-termek-kep__30_.jpg"
         }
       ],
       "gallery": [
         {
-          "src": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
-          "alt": "Termékfotó fejhallgató"
+          "src": "uploads/2a029b78e1d8-termekfoto-webshop-termek-kep__1_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80",
-          "alt": "Óra termékfotó"
+          "src": "uploads/be1a64e084e3-termekfoto-webshop-termek-kep__2_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80",
-          "alt": "Napszemüveg termékfotó"
+          "src": "uploads/9ecdc1b389ef-termekfoto-webshop-termek-kep__6_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&q=80",
-          "alt": "Kozmetikai termékfotó"
+          "src": "uploads/cdb06e119547-termekfoto-webshop-termek-kep__7_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&q=80",
-          "alt": "Cipő termékfotó"
+          "src": "uploads/146605fc193b-termekfoto-webshop-termek-kep__8_.jpg",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80",
-          "alt": "Parfüm termékfotó"
+          "src": "uploads/d4d9cf283921-termekfoto-webshop-termek-kep__9_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/5c3790ec98a2-termekfoto-webshop-termek-kep__11_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/fb5518bf6512-termekfoto-webshop-termek-kep__12_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d165de06be25-termekfoto-webshop-termek-kep__14_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cccc4993857e-termekfoto-webshop-termek-kep__21_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/227243519481-termekfoto-webshop-termek-kep__25_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c5b73acbef04-termekfoto-webshop-termek-kep__27_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/17e55c3f88c9-termekfoto-webshop-termek-kep__29_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cbc27b81d265-termekfoto-webshop-termek-kep__30_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/265924ce9ba0-termekfoto-webshop-termek-kep__31_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4bcbe89b7d84-termekfoto-webshop-termek-kep__33_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/111a14177148-termekfoto-webshop-termek-kep__35_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/cd3d73275e70-termekfoto-webshop-termek-kep__37_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e51f147b9d9a-termekfoto-webshop-termek-kep__42_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/45953504cbad-termekfoto-webshop-termek-kep__43_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/03fca3fccc24-termekfoto-webshop-termek-kep__45_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6bbef92274a7-termekfoto-webshop-termek-kep__53_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/0c1523bb9a0e-termekfoto-webshop-termek-kep__60_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8b0caa8c6a5e-termekfoto-webshop-termek-kep__61_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Profi képek kellenek?",
