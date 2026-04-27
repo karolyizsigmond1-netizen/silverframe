@@ -999,8 +999,10 @@ ${mobileNavHtml('')}
 .bk-day{text-align:center;padding:.55rem .2rem;font-size:.85rem;border-radius:2px;cursor:pointer;color:var(--text);transition:background .2s,color .2s;user-select:none}
 .bk-day:hover:not(.past){background:rgba(201,169,110,.15);color:var(--accent)}
 .bk-day.past{opacity:.25;cursor:default}
-.bk-day.busy{opacity:.25;cursor:default;text-decoration:line-through}
+.bk-day.busy{opacity:.2;cursor:default}
+.bk-day.suggested{outline:1px solid rgba(201,169,110,.5)}
 .bk-day.today{color:var(--accent)}
+.bk-cal-loading{grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-muted);font-size:.8rem;letter-spacing:.05em}
 .bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
 /* Time slots */
 .bk-time-title{font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
@@ -1096,12 +1098,12 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                     </form>
                 </div>
 
-                <!-- Step 4: Success -->
+                <!-- Step 4: Pending -->
                 <div class="booking-step" id="bkstep4">
                     <div class="bk-success">
-                        <div class="bk-success-icon">✓</div>
-                        <h2>Köszönöm a foglalást!</h2>
-                        <p>Hamarosan felveszem veled a kapcsolatot a részletek egyeztetéséhez.</p>
+                        <div class="bk-success-icon">⏳</div>
+                        <h2>Foglalás beérkezve!</h2>
+                        <p>Hamarosan emailben visszaigazolom a foglalást.</p>
                         <div id="bkSuccessDetails"></div>
                     </div>
                 </div>
@@ -1114,34 +1116,39 @@ ${footerHtml('')}
 <script src="js/main.js" defer></script>
 <script>
 (function(){
-  var FORMSPREE='https://formspree.io/f/mjgjqbar';
-  var SLOTS=['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
-  var SLOT_DURATION=2; // hours
+var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
   var selSvc=null,selSvcName=null,selDate=null,selTime=null;
   var cy,cm;
   var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
-  var busyPeriods=[];
+  var availableData={}; // { "2024-01-15": ["9:00","10:00",...] }
+  var suggestedSlot=null;
+
+  function pad(n){return String(n).padStart(2,'0');}
 
   function loadAvailability(year,month,cb){
-    fetch('/api/availability?year='+year+'&month='+month)
+    document.getElementById('bkCalDays').innerHTML='<div class="bk-cal-loading">Betöltés...</div>';
+    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||''))
       .then(function(r){return r.json();})
       .then(function(d){
-        busyPeriods=(d.busy||[]).map(function(b){return{start:new Date(b.start),end:new Date(b.end)};});
+        availableData=d.availableDays||{};
+        suggestedSlot=d.suggested||null;
         if(cb)cb();
       })
-      .catch(function(){busyPeriods=[];if(cb)cb();});
+      .catch(function(){availableData={};suggestedSlot=null;if(cb)cb();});
   }
 
-  function slotBusy(date,slot){
-    var parts=slot.split(':');
-    var start=new Date(date.getFullYear(),date.getMonth(),date.getDate(),parseInt(parts[0]),parseInt(parts[1]));
-    var end=new Date(start.getTime()+SLOT_DURATION*60*60*1000);
-    return busyPeriods.some(function(b){return b.start<end&&b.end>start;});
+  function dateKey(date){
+    return date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate());
   }
 
-  function dayFullyBusy(date){
-    return SLOTS.every(function(s){return slotBusy(date,s);});
+  function isDayAvailable(date){
+    var k=dateKey(date);
+    return availableData[k]&&availableData[k].length>0;
+  }
+
+  function getSlotsForDay(date){
+    return availableData[dateKey(date)]||[];
   }
 
   function goStep(n){
@@ -1180,10 +1187,12 @@ ${footerHtml('')}
     for(var d=1;d<=dim;d++){
       var dt=new Date(cy,cm,d);
       var past=dt<today;
-      var busy=!past&&dayFullyBusy(dt);
+      var avail=!past&&isDayAvailable(dt);
+      var busy=!past&&!avail;
       var sel=selDate&&dt.toDateString()===selDate.toDateString();
       var tod=dt.toDateString()===today.toDateString();
-      html+='<div class="bk-day'+(past?' past':'')+(busy?' busy':'')+(sel?' selected':'')+(tod?' today':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
+      var sugg=suggestedSlot&&suggestedSlot.date===dateKey(dt);
+      html+='<div class="bk-day'+(past?' past':'')+(busy?' busy':'')+(sel?' selected':'')+(tod?' today':'')+(sugg?' suggested':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
     }
     document.getElementById('bkCalDays').innerHTML=html;
     document.querySelectorAll('.bk-day:not(.past):not(.busy)').forEach(function(el){
@@ -1201,9 +1210,14 @@ ${footerHtml('')}
     var wrap=document.getElementById('bkSlots');
     if(!selDate){wrap.innerHTML='';hint.style.display='block';return;}
     hint.style.display='none';
-    wrap.innerHTML=SLOTS.map(function(t){
-      var busy=slotBusy(selDate,t);
-      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'"'+(busy?' disabled':'')+'>'+(busy?'<s>'+t+'</s>':t)+'</button>';
+    var daySlots=getSlotsForDay(selDate);
+    if(!daySlots.length){
+      wrap.innerHTML='<p style="color:var(--text-muted);font-size:.85rem">Ezen a napon nincs szabad időpont.</p>';
+      return;
+    }
+    wrap.innerHTML=daySlots.map(function(t){
+      var isSugg=suggestedSlot&&suggestedSlot.date===dateKey(selDate)&&suggestedSlot.time===t;
+      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+(isSugg?' suggested':'')+'" data-t="'+t+'">'+t+(isSugg?' ⭐':'')+'</button>';
     }).join('');
     wrap.querySelectorAll('.bk-slot').forEach(function(btn){
       btn.addEventListener('click',function(){
@@ -1236,7 +1250,7 @@ ${footerHtml('')}
   document.getElementById('bkNext2').addEventListener('click',function(){showSummary();goStep(3);});
   document.getElementById('bkBack2').addEventListener('click',function(){goStep(2);});
 
-  // Form submit
+  // Form submit → n8n
   document.getElementById('bkForm').addEventListener('submit',async function(e){
     e.preventDefault();
     var btn=document.getElementById('bkSubmit');
@@ -1244,29 +1258,27 @@ ${footerHtml('')}
     btn.querySelector('span').textContent='Küldés...';
     btn.disabled=true; err.style.display='none';
     var dateStr=selDate?fmtDate(selDate):'—';
+    var isoDate=selDate?dateKey(selDate):'';
     try{
-      var res=await fetch(FORMSPREE,{
+      var res=await fetch(N8N+'/book',{
         method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          _subject:'[Silverframe Foglalás] '+selSvcName+' — '+dateStr+' '+selTime,
-          szolgáltatás:selSvcName,
-          dátum:dateStr,
-          időpont:selTime,
-          név:document.getElementById('bkName').value,
+          service:selSvc,
+          serviceName:selSvcName,
+          date:isoDate,
+          time:selTime,
+          name:document.getElementById('bkName').value,
           email:document.getElementById('bkEmail').value,
-          telefon:document.getElementById('bkPhone').value,
-          megjegyzés:document.getElementById('bkNote').value
+          phone:document.getElementById('bkPhone').value,
+          note:document.getElementById('bkNote').value
         })
       });
       if(res.ok){
-        var gcStart=new Date(selDate.getFullYear(),selDate.getMonth(),selDate.getDate(),parseInt(selTime),0);
-        var gcEnd=new Date(gcStart.getTime()+2*60*60*1000);
-        var fmt=function(d){return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';};
-        var gcUrl='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Silverframe fotózás')+'&dates='+fmt(gcStart)+'/'+fmt(gcEnd)+'&details='+encodeURIComponent(selSvcName+' — Silverframe Studio, '+g_email)+'&location='+encodeURIComponent(g_city);
         document.getElementById('bkSuccessDetails').innerHTML=
-          '<div style="margin:.5rem 0;color:var(--text-muted)">'+selSvcName+' · '+dateStr+' · '+selTime+'</div>'+
-          '<a href="'+gcUrl+'" target="_blank" rel="noopener" class="btn bk-gcal-btn">📅 Mentés Google Naptárba</a>';
+          '<div style="margin:.8rem 0;color:var(--text-muted);font-size:.9rem">'+
+          selSvcName+' &nbsp;·&nbsp; '+dateStr+' &nbsp;·&nbsp; '+selTime+
+          '</div>';
         goStep(4);
       } else {
         btn.querySelector('span').textContent='Foglalás elküldése';
@@ -1281,11 +1293,6 @@ ${footerHtml('')}
       err.style.display='block';
     }
   });
-
-  renderCal();
-  renderSlots();
-  var g_email='${g.email}';
-  var g_city='${g.city}';
 })();
 </script>
 

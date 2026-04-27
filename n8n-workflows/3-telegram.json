@@ -1,0 +1,363 @@
+{
+  "name": "Silverframe — 3. Telegram Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message", "callback_query"],
+        "additionalFields": {}
+      },
+      "id": "sf-tg-01",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [240, 400],
+      "webhookId": "silverframe-telegram",
+      "credentials": {
+        "telegramApi": { "id": "2", "name": "Telegram Bot" }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [{
+            "id": "is-callback",
+            "leftValue": "={{ $json.body.callback_query ? 'yes' : 'no' }}",
+            "rightValue": "yes",
+            "operator": { "type": "string", "operation": "equals" }
+          }]
+        }
+      },
+      "id": "sf-tg-02",
+      "name": "Gomb vagy szöveg?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+
+    { "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const cb = $input.first().json.body.callback_query;\nconst parts = (cb.data || '').split('|');\nconst action  = parts[0]; // 'c' = confirm, 'x' = cancel\nconst eventId = parts[1] || '';\nconst email   = parts[2] || '';\nconst name    = parts[3] || '';\nconst chatId  = cb.message.chat.id;\nreturn [{ json: { action, eventId, email, name, chatId, callbackId: cb.id } }];"
+      },
+      "id": "sf-tg-03",
+      "name": "Callback adat feldolgozás",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 240]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {},
+          "conditions": [{
+            "id": "action-check",
+            "leftValue": "={{ $json.action }}",
+            "rightValue": "c",
+            "operator": { "type": "string", "operation": "equals" }
+          }]
+        }
+      },
+      "id": "sf-tg-04",
+      "name": "Megerősítés vagy elutasítás?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 240]
+    },
+
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "update",
+        "calendarId": { "__rl": true, "value": "karelxx73@gmail.com", "mode": "id" },
+        "eventId": "={{ $json.eventId }}",
+        "updateFields": {
+          "status": "confirmed",
+          "summary": "={{ '✅ ' + $json.name }}"
+        }
+      },
+      "id": "sf-tg-05",
+      "name": "Naptár: megerősítés",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [1120, 160],
+      "credentials": { "googleCalendarOAuth2Api": { "id": "1", "name": "Google Calendar OAuth2" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@silverframe.hu",
+        "toEmail": "={{ $('Callback adat feldolgozás').first().json.email }}",
+        "subject": "✅ Foglalásod megerősítve — Silverframe Studio",
+        "emailType": "html",
+        "message": "=<p>Kedves <b>{{ $('Callback adat feldolgozás').first().json.name }}</b>!</p><p>Örömmel értesítelek, hogy foglalásod <b>visszaigazolva</b>.</p><p>Ha kérdésed van, írj nekünk: <a href='mailto:info@silverframe.hu'>info@silverframe.hu</a></p><p>Silverframe Studio</p>",
+        "options": {}
+      },
+      "id": "sf-tg-06",
+      "name": "Email: megerősítés",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1340, 160],
+      "credentials": {
+        "smtp": { "id": "3", "name": "Silverframe SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('Callback adat feldolgozás').first().json.chatId }}",
+        "text": "✅ Megerősítve! Értesítés elküldve: {{ $('Callback adat feldolgozás').first().json.email }}",
+        "additionalFields": {}
+      },
+      "id": "sf-tg-07",
+      "name": "Telegram: megerősítés ack",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1560, 160],
+      "credentials": { "telegramApi": { "id": "2", "name": "Telegram Bot" } }
+    },
+
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "delete",
+        "calendarId": { "__rl": true, "value": "karelxx73@gmail.com", "mode": "id" },
+        "eventId": "={{ $json.eventId }}"
+      },
+      "id": "sf-tg-08",
+      "name": "Naptár: törlés",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [1120, 320],
+      "credentials": { "googleCalendarOAuth2Api": { "id": "1", "name": "Google Calendar OAuth2" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@silverframe.hu",
+        "toEmail": "={{ $('Callback adat feldolgozás').first().json.email }}",
+        "subject": "Foglalásod visszautasítva — Silverframe Studio",
+        "emailType": "html",
+        "message": "=<p>Kedves <b>{{ $('Callback adat feldolgozás').first().json.name }}</b>!</p><p>Sajnálattal értesítünk, hogy a kért időpontban nem tudunk fotózást vállalni.</p><p>Kérjük, próbálj egy másik időpontot: <a href='https://silverframe.hu/booking.html'>silverframe.hu/booking.html</a></p><p>Silverframe Studio</p>",
+        "options": {}
+      },
+      "id": "sf-tg-09",
+      "name": "Email: elutasítás",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1340, 320],
+      "credentials": { "smtp": { "id": "3", "name": "Silverframe SMTP" } }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('Callback adat feldolgozás').first().json.chatId }}",
+        "text": "❌ Elutasítva. Értesítés elküldve: {{ $('Callback adat feldolgozás').first().json.email }}",
+        "additionalFields": {}
+      },
+      "id": "sf-tg-10",
+      "name": "Telegram: elutasítás ack",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1560, 320],
+      "credentials": { "telegramApi": { "id": "2", "name": "Telegram Bot" } }
+    },
+
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const msg = $input.first().json.body.message || {};\nconst text = msg.text || '';\nconst chatId = msg.chat?.id || msg.from?.id;\nreturn [{ json: { text, chatId } }];"
+      },
+      "id": "sf-tg-11",
+      "name": "Szöveg kinyerése",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 560]
+    },
+    {
+      "parameters": {
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "method": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Te egy naptárkezelő asszisztens vagy egy fotós stúdió számára. Mai dátum: {{ new Date().toISOString().split('T')[0] }}.\\n\\nElemezd az üzenetet és határozd meg a szándékot.\\nLehetséges szándékok: add_event (új esemény hozzáadása), block_day (nap lezárása), unknown.\\n\\nVálaszolj CSAK JSON formátumban, semmi más:\\n{\\\"intent\\\": \\\"add_event|block_day|unknown\\\", \\\"date\\\": \\\"YYYY-MM-DD vagy null\\\", \\\"endDate\\\": \\\"YYYY-MM-DD vagy null (ha több napos)\\\", \\\"time\\\": \\\"HH:00 vagy null\\\", \\\"endTime\\\": \\\"HH:00 vagy null\\\", \\\"title\\\": \\\"esemény neve magyarul vagy null\\\", \\\"allDay\\\": true/false}\\n\\nÜzenet: {{ $json.text }}\"\n    }]\n  }],\n  \"generationConfig\": { \"response_mime_type\": \"application/json\" }\n}",
+        "options": {}
+      },
+      "id": "sf-tg-12",
+      "name": "Gemini AI értelmezés",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 560]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const raw = $input.first().json;\nconst textContent = raw.candidates?.[0]?.content?.parts?.[0]?.text || '{}';\nlet parsed;\ntry { parsed = JSON.parse(textContent); } catch(e) { parsed = { intent: 'unknown' }; }\nconst chatId = $('Szöveg kinyerése').first().json.chatId;\nreturn [{ json: { ...parsed, chatId } }];"
+      },
+      "id": "sf-tg-13",
+      "name": "AI válasz feldolgozás",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 560]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            { "conditions": { "options": {}, "conditions": [{ "leftValue": "={{ $json.intent }}", "rightValue": "add_event", "operator": { "type": "string", "operation": "equals" } }] } },
+            { "conditions": { "options": {}, "conditions": [{ "leftValue": "={{ $json.intent }}", "rightValue": "block_day", "operator": { "type": "string", "operation": "equals" } }] } }
+          ]
+        },
+        "fallbackOutput": "extra"
+      },
+      "id": "sf-tg-14",
+      "name": "Szándék switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [1340, 560]
+    },
+
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const d = $input.first().json;\nconst startISO = d.allDay\n  ? d.date\n  : new Date(`${d.date}T${d.time || '09'}:00:00`).toISOString();\nconst endISO = d.allDay\n  ? (d.endDate || d.date)\n  : new Date(`${d.date}T${d.endTime || (parseInt(d.time||9)+1)}:00:00`).toISOString();\nreturn [{ json: { ...d, startISO, endISO } }];"
+      },
+      "id": "sf-tg-15",
+      "name": "Esemény dátum előkészítés",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 480]
+    },
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "create",
+        "calendarId": { "__rl": true, "value": "karelxx73@gmail.com", "mode": "id" },
+        "start": "={{ $json.startISO }}",
+        "end": "={{ $json.endISO }}",
+        "additionalFields": {
+          "summary": "={{ $json.title || 'Esemény' }}",
+          "status": "confirmed"
+        }
+      },
+      "id": "sf-tg-16",
+      "name": "Naptár: esemény hozzáadás",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [1780, 480],
+      "credentials": { "googleCalendarOAuth2Api": { "id": "1", "name": "Google Calendar OAuth2" } }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('AI válasz feldolgozás').first().json.chatId }}",
+        "text": "=📅 Hozzáadva: <b>{{ $('Esemény dátum előkészítés').first().json.title }}</b> — {{ $('Esemény dátum előkészítés').first().json.date }}{{ $('Esemény dátum előkészítés').first().json.time ? ' ' + $('Esemény dátum előkészítés').first().json.time : '' }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "sf-tg-17",
+      "name": "Telegram: esemény ack",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [2000, 480],
+      "credentials": { "telegramApi": { "id": "2", "name": "Telegram Bot" } }
+    },
+
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const d = $input.first().json;\nconst start = d.date;\nconst end = d.endDate || d.date;\n// For multi-day Google Calendar all-day events, end date is exclusive\nconst endExclusive = new Date(new Date(end).getTime() + 86400000).toISOString().split('T')[0];\nreturn [{ json: { ...d, startDate: start, endDate: endExclusive } }];"
+      },
+      "id": "sf-tg-18",
+      "name": "Blokkolás előkészítés",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 640]
+    },
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "create",
+        "calendarId": { "__rl": true, "value": "karelxx73@gmail.com", "mode": "id" },
+        "start": "={{ $json.startDate }}",
+        "end": "={{ $json.endDate }}",
+        "additionalFields": {
+          "summary": "🚫 Foglalt",
+          "status": "confirmed"
+        }
+      },
+      "id": "sf-tg-19",
+      "name": "Naptár: nap blokkolás",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [1780, 640],
+      "credentials": { "googleCalendarOAuth2Api": { "id": "1", "name": "Google Calendar OAuth2" } }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('AI válasz feldolgozás').first().json.chatId }}",
+        "text": "=🚫 Le van zárva: <b>{{ $('Blokkolás előkészítés').first().json.date }}</b>{{ $('Blokkolás előkészítés').first().json.endDate ? ' — ' + $('Blokkolás előkészítés').first().json.date : '' }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "sf-tg-20",
+      "name": "Telegram: blokk ack",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [2000, 640],
+      "credentials": { "telegramApi": { "id": "2", "name": "Telegram Bot" } }
+    },
+
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chatId }}",
+        "text": "Nem értettem az üzenetet. Próbálj valami ilyesmit:\n• \"add: holnap 14:00 fodrász\"\n• \"le van foglalva kedd\"\n• \"hétfőtől szerdáig szabadság\"",
+        "additionalFields": {}
+      },
+      "id": "sf-tg-21",
+      "name": "Telegram: ismeretlen",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1560, 800],
+      "credentials": { "telegramApi": { "id": "2", "name": "Telegram Bot" } }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger":               { "main": [[{ "node": "Gomb vagy szöveg?", "type": "main", "index": 0 }]] },
+    "Gomb vagy szöveg?": {
+      "main": [
+        [{ "node": "Callback adat feldolgozás", "type": "main", "index": 0 }],
+        [{ "node": "Szöveg kinyerése",           "type": "main", "index": 0 }]
+      ]
+    },
+    "Callback adat feldolgozás":      { "main": [[{ "node": "Megerősítés vagy elutasítás?", "type": "main", "index": 0 }]] },
+    "Megerősítés vagy elutasítás?": {
+      "main": [
+        [{ "node": "Naptár: megerősítés", "type": "main", "index": 0 }],
+        [{ "node": "Naptár: törlés",      "type": "main", "index": 0 }]
+      ]
+    },
+    "Naptár: megerősítés":            { "main": [[{ "node": "Email: megerősítés",      "type": "main", "index": 0 }]] },
+    "Email: megerősítés":             { "main": [[{ "node": "Telegram: megerősítés ack","type": "main", "index": 0 }]] },
+    "Naptár: törlés":                 { "main": [[{ "node": "Email: elutasítás",        "type": "main", "index": 0 }]] },
+    "Email: elutasítás":              { "main": [[{ "node": "Telegram: elutasítás ack", "type": "main", "index": 0 }]] },
+    "Szöveg kinyerése":               { "main": [[{ "node": "Gemini AI értelmezés",     "type": "main", "index": 0 }]] },
+    "Gemini AI értelmezés":           { "main": [[{ "node": "AI válasz feldolgozás",    "type": "main", "index": 0 }]] },
+    "AI válasz feldolgozás":          { "main": [[{ "node": "Szándék switch",           "type": "main", "index": 0 }]] },
+    "Szándék switch": {
+      "main": [
+        [{ "node": "Esemény dátum előkészítés", "type": "main", "index": 0 }],
+        [{ "node": "Blokkolás előkészítés",     "type": "main", "index": 0 }],
+        [{ "node": "Telegram: ismeretlen",      "type": "main", "index": 0 }]
+      ]
+    },
+    "Esemény dátum előkészítés":      { "main": [[{ "node": "Naptár: esemény hozzáadás", "type": "main", "index": 0 }]] },
+    "Naptár: esemény hozzáadás":      { "main": [[{ "node": "Telegram: esemény ack",     "type": "main", "index": 0 }]] },
+    "Blokkolás előkészítés":          { "main": [[{ "node": "Naptár: nap blokkolás",     "type": "main", "index": 0 }]] },
+    "Naptár: nap blokkolás":          { "main": [[{ "node": "Telegram: blokk ack",       "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}

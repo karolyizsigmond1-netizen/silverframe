@@ -1,0 +1,85 @@
+{
+  "name": "Silverframe — 1. Szabad időpontok",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "availability",
+        "responseMode": "responseNode",
+        "options": { "allowedOrigins": "*" }
+      },
+      "id": "sf-avail-01",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const q = $input.first().json.query || {};\nconst year = parseInt(q.year) || new Date().getFullYear();\nconst month = (q.month !== undefined) ? parseInt(q.month) : new Date().getMonth();\nconst service = (q.service || '').toLowerCase();\n\nconst DURATIONS = {\n  'portfolio-model': 2, 'maternity': 2, 'boudoir': 3,\n  'family': 3, 'couple': 3, 'business': 2, 'real-estate': 2,\n  'wedding': 10, 'wedding-creative': 4, 'event': 10,\n  'pet': 2, 'product': 3\n};\nconst duration = DURATIONS[service] || 2;\nconst timeMin = new Date(year, month, 1).toISOString();\nconst timeMax = new Date(year, month + 1, 0, 23, 59, 59).toISOString();\n\nreturn [{ json: { year, month, service, duration, timeMin, timeMax } }];"
+      },
+      "id": "sf-avail-02",
+      "name": "Paraméterek",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/calendar/v3/calendars/karelxx73%40gmail.com/events",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "key", "value": "={{ $env.GOOGLE_CALENDAR_KEY }}" },
+            { "name": "timeMin", "value": "={{ $json.timeMin }}" },
+            { "name": "timeMax", "value": "={{ $json.timeMax }}" },
+            { "name": "singleEvents", "value": "true" },
+            { "name": "orderBy", "value": "startTime" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "sf-avail-03",
+      "name": "Google Naptár",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const events = ($input.first().json.items || []);\nconst { year, month, duration } = $('Paraméterek').first().json;\n\nconst START = 8, END = 20, BUFFER = 0.5;\nconst daysInMonth = new Date(year, month + 1, 0).getDate();\nconst today = new Date(); today.setHours(0, 0, 0, 0);\nconst tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);\nconst pad = n => String(n).padStart(2, '0');\n\nconst availableDays = {};\n\nfor (let d = 1; d <= daysInMonth; d++) {\n  const date = new Date(year, month, d);\n  if (date < today) continue;\n  const dateStr = `${year}-${pad(month + 1)}-${pad(d)}`;\n  const slots = [];\n\n  for (let h = START; h <= END - duration; h++) {\n    const slotStart = new Date(year, month, d, h, 0);\n    const slotEnd = new Date(slotStart.getTime() + duration * 3600000);\n\n    const free = !events.some(ev => {\n      if (!ev.start) return false;\n      if (!ev.start.dateTime) return ev.start.date === dateStr;\n      const evS = new Date(ev.start.dateTime);\n      const evE = new Date(ev.end.dateTime);\n      return slotStart < new Date(evE.getTime() + BUFFER * 3600000)\n          && slotEnd   > new Date(evS.getTime() - BUFFER * 3600000);\n    });\n\n    if (free) slots.push(`${h}:00`);\n  }\n\n  if (slots.length > 0) availableDays[dateStr] = slots;\n}\n\nlet suggested = null;\nfor (const [ds, slots] of Object.entries(availableDays)) {\n  if (new Date(ds) >= tomorrow) {\n    suggested = { date: ds, time: slots[Math.floor(slots.length / 2)] };\n    break;\n  }\n}\n\nreturn [{ json: { availableDays, suggested, duration } }];"
+      },
+      "id": "sf-avail-04",
+      "name": "Szabad helyek",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [{ "name": "Access-Control-Allow-Origin", "value": "*" }]
+          }
+        }
+      },
+      "id": "sf-avail-05",
+      "name": "Válasz",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Webhook":        { "main": [[{ "node": "Paraméterek",    "type": "main", "index": 0 }]] },
+    "Paraméterek":    { "main": [[{ "node": "Google Naptár",  "type": "main", "index": 0 }]] },
+    "Google Naptár":  { "main": [[{ "node": "Szabad helyek",  "type": "main", "index": 0 }]] },
+    "Szabad helyek":  { "main": [[{ "node": "Válasz",         "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}
