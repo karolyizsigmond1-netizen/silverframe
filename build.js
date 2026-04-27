@@ -1005,6 +1005,11 @@ ${mobileNavHtml('')}
 .bk-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent)}
 .bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
 .bk-day.selected::after{display:none}
+.bk-day.range-start{background:var(--accent);color:#0e0e0e;font-weight:600;border-radius:6px 0 0 6px}
+.bk-day.range-end{background:var(--accent);color:#0e0e0e;font-weight:600;border-radius:0 6px 6px 0}
+.bk-day.range-start.range-end{border-radius:6px}
+.bk-day.in-range{background:rgba(201,169,110,.15);border-radius:0;color:var(--text)}
+.bk-day.range-start::after,.bk-day.range-end::after{display:none}
 .bk-cal-loading{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:rgba(255,255,255,.2);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
 /* Time slots */
 .bk-slots-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;font-weight:500}
@@ -1016,6 +1021,9 @@ ${mobileNavHtml('')}
 .bk-slot.selected{background:var(--accent);border-color:var(--accent);color:#0e0e0e;font-weight:600}
 .bk-slot:disabled{opacity:.15;cursor:default}
 .bk-no-slots{grid-column:1/-1;font-size:.85rem;color:rgba(255,255,255,.25);text-align:center;padding:1.5rem 0}
+.bk-fullday-info{background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:8px;padding:1.2rem;text-align:center;color:var(--text-muted);font-size:.9rem;line-height:1.6}
+.bk-fullday-info strong{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
+.bk-range-hint{font-size:.8rem;color:rgba(255,255,255,.3);margin-top:.8rem;text-align:center;letter-spacing:.03em}
 /* Step nav */
 .bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
 /* Summary bar */
@@ -1123,17 +1131,21 @@ ${footerHtml('')}
 (function(){
 var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
-  var selSvc=null,selSvcName=null,selDate=null,selTime=null;
+  var SVC_CONFIG=${JSON.stringify(Object.fromEntries(cats.map(c=>[c.id,{type:c.bookingType||'hourly',duration:c.bookingDuration||2}])))};
+  var selSvc=null,selSvcName=null,selDate=null,selEndDate=null,selTime=null;
   var cy,cm;
   var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
-  var availableData={}; // { "2024-01-15": ["9:00","10:00",...] }
+  var availableData={};
   var suggestedSlot=null;
+
+  function getConfig(){return SVC_CONFIG[selSvc]||{type:'hourly',duration:2};}
 
   function pad(n){return String(n).padStart(2,'0');}
 
   function loadAvailability(year,month,cb){
     document.getElementById('bkCalDays').innerHTML='<div class="bk-cal-loading">Betöltés...</div>';
-    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||''))
+    var cfg=getConfig();
+    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||'')+'&duration='+cfg.duration+'&bookingType='+cfg.type)
       .then(function(r){return r.json();})
       .then(function(d){
         availableData=d.availableDays||{};
@@ -1176,6 +1188,7 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
       document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
       c.classList.add('selected');
       selSvc=c.dataset.id; selSvcName=c.dataset.name;
+      selDate=null; selEndDate=null; selTime=null;
       setTimeout(function(){goStep(2);loadAvailability(cy,cm,renderCal);},220);
     });
   });
@@ -1189,22 +1202,47 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     var dim=new Date(cy,cm+1,0).getDate();
     var html='';
     for(var i=0;i<startDay;i++) html+='<div></div>';
+    var cfg=getConfig();
     for(var d=1;d<=dim;d++){
       var dt=new Date(cy,cm,d);
       var past=dt<today;
-      var avail=!past&&isDayAvailable(dt);
+      var avail=cfg.type==='multiday'||isDayAvailable(dt);
       var busy=!past&&!avail;
-      var sel=selDate&&dt.toDateString()===selDate.toDateString();
+      var isStart=selDate&&dt.toDateString()===selDate.toDateString();
+      var isEnd=selEndDate&&dt.toDateString()===selEndDate.toDateString();
+      var inRange=selDate&&selEndDate&&dt>selDate&&dt<selEndDate;
       var tod=dt.toDateString()===today.toDateString();
-      var sugg=suggestedSlot&&suggestedSlot.date===dateKey(dt);
-      html+='<div class="bk-day'+(past?' past':'')+(busy?' busy':'')+(sel?' selected':'')+(tod?' today':'')+(sugg?' suggested':'')+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
+      var cls='bk-day';
+      if(past) cls+=' past';
+      else if(busy) cls+=' busy';
+      if(cfg.type==='multiday'){
+        if(isStart) cls+=' range-start';
+        if(isEnd) cls+=' range-end';
+        if(inRange) cls+=' in-range';
+      } else {
+        if(isStart) cls+=' selected';
+      }
+      if(tod) cls+=' today';
+      html+='<div class="'+cls+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
     }
     document.getElementById('bkCalDays').innerHTML=html;
     document.querySelectorAll('.bk-day:not(.past):not(.busy)').forEach(function(el){
       el.addEventListener('click',function(){
-        selDate=new Date(parseInt(el.dataset.ts));
-        selTime=null;
-        document.getElementById('bkNext2').disabled=true;
+        var clicked=new Date(parseInt(el.dataset.ts));
+        var cfg=getConfig();
+        if(cfg.type==='multiday'){
+          if(!selDate||selEndDate||(clicked<selDate)){
+            selDate=clicked; selEndDate=null;
+            document.getElementById('bkNext2').disabled=true;
+          } else {
+            selEndDate=clicked;
+            document.getElementById('bkNext2').disabled=false;
+          }
+        } else {
+          selDate=clicked; selTime=null;
+          document.getElementById('bkNext2').disabled=(cfg.type==='hourly');
+          if(cfg.type==='fullday') document.getElementById('bkNext2').disabled=false;
+        }
         renderCal(); renderSlots();
       });
     });
@@ -1214,11 +1252,24 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     var hint=document.getElementById('bkTimeHint');
     var wrap=document.getElementById('bkSlots');
     var dateEl=document.getElementById('bkSlotsDate');
+    var cfg=getConfig();
     if(!selDate){wrap.innerHTML='';hint.style.display='block';if(dateEl)dateEl.innerHTML='&nbsp;';return;}
     hint.style.display='none';
-    var daySlots=getSlotsForDay(selDate);
-    var dateEl=document.getElementById('bkSlotsDate');
     if(dateEl) dateEl.textContent=fmtDate(selDate);
+
+    if(cfg.type==='fullday'){
+      wrap.innerHTML='<div class="bk-fullday-info"><strong>Egész napos fotózás</strong>'+fmtDate(selDate)+'<br><span style="font-size:.8rem;opacity:.6">~'+cfg.duration+' óra</span></div>';
+      return;
+    }
+    if(cfg.type==='multiday'){
+      if(!selEndDate){
+        wrap.innerHTML='<div class="bk-fullday-info">Kezdő nap: <strong>'+fmtDate(selDate)+'</strong><br><span style="font-size:.8rem;opacity:.5">Válaszd ki a záró napot a naptárban</span></div>';
+      } else {
+        wrap.innerHTML='<div class="bk-fullday-info"><strong>'+fmtDate(selDate)+' — '+fmtDate(selEndDate)+'</strong><br><span style="font-size:.8rem;opacity:.6">Többnapos rendezvény</span></div>';
+      }
+      return;
+    }
+    var daySlots=getSlotsForDay(selDate);
     if(!daySlots.length){
       wrap.innerHTML='<div class="bk-no-slots">Ezen a napon nincs szabad időpont.</div>';
       return;
@@ -1250,7 +1301,10 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     var el=document.getElementById('bkSummary');
     if(!el) return;
     el.style.display='flex';
-    el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+fmtDate(selDate)+'</span><span>🕐 '+selTime+'</span>';
+    var cfg=getConfig();
+    var dateStr=cfg.type==='multiday'&&selEndDate?fmtDate(selDate)+' — '+fmtDate(selEndDate):fmtDate(selDate);
+    var timeStr=cfg.type==='hourly'?'<span>🕐 '+selTime+'</span>':'<span>🌅 '+( cfg.type==='fullday'?'Egész napos':'Többnapos')+'</span>';
+    el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+dateStr+'</span>'+timeStr;
   }
 
   document.getElementById('bkBack1').addEventListener('click',function(){goStep(1);});
@@ -1273,8 +1327,11 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
         body:JSON.stringify({
           service:selSvc,
           serviceName:selSvcName,
+          bookingType:getConfig().type,
           date:isoDate,
-          time:selTime,
+          endDate:selEndDate?dateKey(selEndDate):null,
+          time:getConfig().type==='hourly'?selTime:null,
+          duration:getConfig().duration,
           name:document.getElementById('bkName').value,
           email:document.getElementById('bkEmail').value,
           phone:document.getElementById('bkPhone').value,
