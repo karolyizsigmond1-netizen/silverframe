@@ -70,8 +70,8 @@
       "img": "uploads/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg",
       "arakTagline": "A szerelem pillanatai örökre",
       "arakBadge": "",
-      "bookingType": "hourly",
-      "bookingDuration": 3
+      "bookingType": "fullday",
+      "bookingDuration": 10
     },
     {
       "id": "business",
@@ -118,8 +118,8 @@
       "img": "uploads/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg",
       "arakTagline": "Mesebeli esküvői portrék",
       "arakBadge": "",
-      "bookingType": "hourly",
-      "bookingDuration": 4
+      "bookingType": "fullday",
+      "bookingDuration": 10
     },
     {
       "id": "event",
