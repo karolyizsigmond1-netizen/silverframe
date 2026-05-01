@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             items.forEach((item, idx) => {
                 const img = item.querySelector('img');
+                if (!img) return;
                 const w = parseInt(img.getAttribute('width')) || 3;
                 const h = parseInt(img.getAttribute('height')) || 2;
                 const ratio = w / h;
@@ -253,11 +254,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // ── Before/After slider ──
+    const baSlider = document.getElementById('baSlider');
+    if (baSlider) {
+        const baAfter = baSlider.querySelector('.ba-after');
+        const baHandle = document.getElementById('baHandle');
+        let dragging = false;
+
+        const setPos = (x) => {
+            const rect = baSlider.getBoundingClientRect();
+            const pct = Math.min(Math.max((x - rect.left) / rect.width * 100, 2), 98);
+            baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            baHandle.style.left = pct + '%';
+        };
+
+        baSlider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+        window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+        window.addEventListener('mouseup', () => { dragging = false; });
+        baSlider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchend', () => { dragging = false; });
+        setPos(baSlider.getBoundingClientRect().left + baSlider.offsetWidth * 0.5);
+    }
+
     // ── Active nav link ──
     const path = location.pathname;
     const currentPage = path.split('/').pop() || 'index.html';
     const isServicePage = path.includes('/services/');
-    document.querySelectorAll('.header-nav > a, .mobile-nav > a').forEach(a => {
+    document.querySelectorAll('.header-nav > a, .mobile-nav a').forEach(a => {
         const href = a.getAttribute('href');
         if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
             a.classList.add('active');
@@ -271,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mark Portfolio as active when on any portfolio subpage
     const isPortfolioPage = path.includes('/portfolio/');
     if (isPortfolioPage) {
-        document.querySelectorAll('.header-nav > a, .mobile-nav > a').forEach(a => {
+        document.querySelectorAll('.header-nav > a, .mobile-nav a').forEach(a => {
             if (a.getAttribute('href') && a.getAttribute('href').includes('portfolio.html')) {
                 a.classList.add('active');
             }

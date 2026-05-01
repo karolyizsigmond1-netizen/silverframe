@@ -220,7 +220,11 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
 }
 
 function boilerplate() {
-  return `    <div class="grain"></div><div class="cursor-dot"></div><div class="cursor-ring"></div>`;
+  const waNumber = (g.phone || '').replace(/[^0-9]/g, '').replace(/^0/, '36');
+  return `    <div class="grain"></div><div class="cursor-dot"></div><div class="cursor-ring"></div>
+    <a href="https://wa.me/${waNumber}" class="wa-btn" aria-label="WhatsApp üzenet" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.11 1.523 5.838L.057 23.8a.5.5 0 00.61.644l6.155-1.615A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.13-1.42l-.37-.22-3.795.995 1.012-3.696-.24-.38A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>`;
 }
 
 function navDropdown(prefix, activeService) {
@@ -459,6 +463,8 @@ ${p.galleryImages.map(img => `                    <div class="gallery-preview-it
             </div>
         </section>
 
+        <div class="section-divider reveal"></div>
+
         <section class="section testimonials-section" aria-label="Vélemények">
             <div class="container">
                 <div class="reveal">
@@ -466,16 +472,74 @@ ${p.galleryImages.map(img => `                    <div class="gallery-preview-it
                     <h2 class="section-title">Mit mondanak rólam</h2>
                 </div>
                 <div class="testimonial-slider reveal reveal-delay-1">
-${p.testimonials.map((t, i) => `                    <blockquote class="testimonial${i === 0 ? ' active' : ''}">
+${p.testimonials.map((t, i) => {
+  const initials = (t.author || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('');
+  const avatarHtml = t.avatar
+    ? `<img class="t-avatar" src="${t.avatar}" alt="${t.author}" loading="lazy">`
+    : `<div class="t-avatar-initials">${initials}</div>`;
+  return `                    <blockquote class="testimonial${i === 0 ? ' active' : ''}">
                         <p class="testimonial-text">${t.text}</p>
-                        <cite class="testimonial-author">${t.author}</cite>
-                    </blockquote>`).join('\n')}
+                        ${t.service ? `<span class="t-service-tag">${t.service}</span>` : ''}
+                        <div class="testimonial-author-row">
+                            ${avatarHtml}
+                            <div class="t-author-info">
+                                <span class="t-author-name">${t.author}</span>
+                                <span class="t-author-meta">${t.location || ''}</span>
+                            </div>
+                        </div>
+                    </blockquote>`;
+}).join('\n')}
                     <div class="testimonial-dots">
 ${p.testimonials.map((_, i) => `                        <button class="t-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Vélemény ${i + 1}"></button>`).join('\n')}
                     </div>
                 </div>
             </div>
         </section>
+
+        <div class="section-divider reveal"></div>
+
+${p.howItWorks ? `        <section class="hiw-section" aria-label="Hogy működik">
+            <div class="container">
+                <div class="reveal" style="text-align:center">
+                    <span class="section-label">${p.howItWorks.label}</span>
+                    <h2 class="section-title">${p.howItWorks.title}</h2>
+                </div>
+                <div class="hiw-steps">
+${p.howItWorks.steps.map(s => `                    <div class="hiw-step reveal">
+                        <div class="hiw-num-wrap"><span class="hiw-num">${s.num}</span></div>
+                        <h3 class="hiw-step-title">${s.title}</h3>
+                        <p class="hiw-step-desc">${s.desc}</p>
+                    </div>`).join('\n')}
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider reveal"></div>` : ''}
+
+${p.beforeAfterPairs && p.beforeAfterPairs.length ? `        <section class="ba-section" aria-label="Retusálás előtt és után">
+            <div class="container">
+                <div class="reveal" style="text-align:center">
+                    <span class="section-label">Professzionális retusálás</span>
+                    <h2 class="section-title">Előtt & Után</h2>
+                    <p class="section-desc" style="margin:0 auto">Minden kép egyedi retusálást kap — természetes, de megkapó végeredménnyel.</p>
+                </div>
+                <div class="ba-wrap reveal reveal-delay-1">
+                    <div class="ba-slider" id="baSlider">
+                        <img class="ba-img ba-before" src="${p.beforeAfterPairs[0].before}" alt="Előtte" loading="lazy">
+                        <img class="ba-img ba-after" src="${p.beforeAfterPairs[0].after}" alt="Utána" loading="lazy">
+                        <div class="ba-handle" id="baHandle">
+                            <div class="ba-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-labels"><span>Előtte</span><span>Utána</span></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider reveal"></div>` : ''}
 
 ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
     </main>
@@ -927,16 +991,8 @@ function buildPortfolioPage(id) {
   return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd, p.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
-    <header class="header" role="banner">
-        <a href="../index.html" class="header-logo">${g.siteName}</a>
-        <nav class="header-nav" aria-label="Fő navigáció"><a href="../about.html">Rólam</a><a href="../portfolio.html" class="active">Galéria</a>
-            <div class="nav-dropdown"><a href="../services.html">Szolgáltatások ${dropdownArrow}</a>
-                <div class="dropdown-menu">${cats.map(c => `<a href="../services/${c.id}.html">${c.name}</a>`).join('')}</div>
-            </div><a href="../contact.html">Kapcsolat</a><a href="../contact.html" class="header-cta">Időpontfoglalás</a>
-        </nav>
-        <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
-    </header>
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció"><a href="../index.html">Főoldal</a><a href="../about.html">Rólam</a><a href="../portfolio.html">Galéria</a><a href="../services.html">Szolgáltatások</a><a href="../contact.html">Kapcsolat</a></nav>
+${headerHtml('../', 'portfolio', null)}
+${mobileNavHtml('../')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Galéria</a> <span>/</span> ${p.breadcrumb}`, prefix)}
@@ -1130,7 +1186,7 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                 <!-- Step 4: Pending -->
                 <div class="booking-step" id="bkstep4">
                     <div class="bk-success">
-                        <div class="bk-success-icon">⏳</div>
+                        <div class="bk-success-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div>
                         <h2>Foglalás beérkezve!</h2>
                         <p>Hamarosan emailben visszaigazolom a foglalást.</p>
                         <div id="bkSuccessDetails"></div>
@@ -1159,7 +1215,7 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   function pad(n){return String(n).padStart(2,'0');}
 
   function loadAvailability(year,month,cb){
-    document.getElementById('bkCalDays').innerHTML='<div class="bk-cal-loading">Betöltés...</div>';
+    document.getElementById('bkCalDays').innerHTML='<div class="bk-shimmer-wrap">'+Array(28).fill('<div class="bk-shimmer-line"></div>').join('')+'</div>';
     var cfg=getConfig();
     fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||'')+'&duration='+cfg.duration+'&bookingType='+cfg.type)
       .then(function(r){return r.json();})
@@ -1310,7 +1366,7 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   });
 
   function fmtDate(d){
-    return cy+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
+    return d.getFullYear()+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
   }
 
   function showSummary(){
@@ -1398,8 +1454,14 @@ function buildArakPage() {
                         <span class="ahs-label">${s.label}</span>
                     </div>`).join('');
 
-  // Build service cards
-  const cardsHtml = cats.map((cat, i) => {
+  // Build service cards grouped
+  const pcGroups = [
+    { label: 'Esküvő & Események', ids: ['wedding', 'wedding-creative', 'event'] },
+    { label: 'Portré & Életmód',   ids: ['portfolio-model', 'maternity', 'boudoir', 'family', 'couple', 'pet'] },
+    { label: 'Üzleti & Termékek',  ids: ['business', 'real-estate', 'product'] },
+  ];
+
+  function buildCard(cat, i) {
     const sp = data.servicePages[cat.id] || {};
     const pkgs = sp.packages || [];
     const badge = cat.arakBadge || '';
@@ -1460,12 +1522,29 @@ function buildArakPage() {
                                 </div>
                             </div>
                             ${bodyContent}
+                            ${cat.deliveryTime ? `<div class="pc-delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>${cat.deliveryTime} átadás</div>` : ''}
                             <div class="pc-actions">
                                 <a href="contact.html" class="btn btn-solid pc-cta"><span>${ctaLabel}</span>${arrowSvg}</a>
                                 <a href="portfolio/${galleryId}.html" class="btn pc-gallery-btn">${galleryIcon}<span>Galéria</span></a>
                             </div>
                         </div>
                     </div>`;
+  }
+
+  let cardIndex = 0;
+  const cardsHtml = pcGroups.map(group => {
+    const groupCats = group.ids.map(id => cats.find(c => c.id === id)).filter(Boolean);
+    if (!groupCats.length) return '';
+    const cards = groupCats.map(cat => buildCard(cat, cardIndex++)).join('');
+    return `
+                <div class="pc-group">
+                    <div class="pc-group-header">
+                        <span class="pc-group-label">${group.label}</span>
+                        <div class="pc-group-line"></div>
+                    </div>
+                    <div class="pc-grid">${cards}
+                    </div>
+                </div>`;
   }).join('');
 
   // Testimonials
@@ -1562,6 +1641,10 @@ function buildArakPage() {
     .final-cta-btns .btn { font-size:0.85rem; padding:0.95rem 2rem; }
     .no-hidden-fees { margin-top:1.5rem; font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; justify-content:center; gap:0.5rem; }
     .no-hidden-fees svg { color:var(--accent); }
+    .pc-group { margin-bottom:4rem; }
+    .pc-group-header { display:flex; align-items:center; gap:1.5rem; margin-bottom:2rem; }
+    .pc-group-label { font-size:0.68rem; font-weight:400; letter-spacing:0.4em; text-transform:uppercase; color:var(--accent); white-space:nowrap; flex-shrink:0; }
+    .pc-group-line { flex:1; height:1px; background:rgba(201,169,110,0.18); }
     </style>
 ${bodyTag()}
 ${boilerplate()}
@@ -1597,8 +1680,7 @@ ${mobileNavHtml('')}
                     <h2>Válaszd ki a<br>neked valót</h2>
                     <p>Minden csomag tartalmazza a fotózást, professzionális retusálást és digitális átadást.</p>
                 </div>
-                <div class="pc-grid">${cardsHtml}
-                </div>
+                ${cardsHtml}
             </div>
         </section>
 

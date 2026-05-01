@@ -262,8 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewCards[idx].style.transform = 'translateX(0)';
         if (reviewCurrentEl) reviewCurrentEl.textContent = idx + 1;
         if (reviewProgressBar) {
-            const pct = ((idx) / reviewCards.length) * 100;
-            reviewProgressBar.style.transform = `translateX(${pct * (reviewCards.length - 1) / (reviewCards.length > 1 ? 1 : 1)}%)`;
             reviewProgressBar.style.width = (100 / reviewCards.length) + '%';
             reviewProgressBar.style.transform = `translateX(${idx * 100}%)`;
         }
@@ -384,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ══════════════════════════════════════
     const path = location.pathname;
     const currentPage = path.split('/').pop() || 'index.html';
-    document.querySelectorAll('.header-nav > a, .mobile-nav > a').forEach(a => {
+    document.querySelectorAll('.header-nav > a, .mobile-nav a').forEach(a => {
         const href = a.getAttribute('href');
         if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
             a.classList.add('active');
