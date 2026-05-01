@@ -1438,6 +1438,7 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 
 @media (max-width: 900px) {
     .service-detail-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+    .service-detail-img img { aspect-ratio: 16/9; }
 }
 
 /* What's Included */
@@ -1601,6 +1602,11 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 @media (max-width: 380px) {
     .container { padding: 0 1rem; }
     .section-label { font-size: 0.62rem; }
+}
+
+/* Masonry — prevent unsized items from overflowing on mobile */
+@media (max-width: 600px) {
+    .masonry-item { max-width: 100%; }
 }
 
 /* ── Gold section divider ── */
