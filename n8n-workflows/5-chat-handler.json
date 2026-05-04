@@ -1,0 +1,161 @@
+{
+  "meta": { "templateCredsSetupCompleted": true },
+  "name": "Silverframe Chat Handler",
+  "nodes": [
+
+    {
+      "id": "webhook-chat",
+      "name": "Webhook — POST /silverframe-chat",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "parameters": {
+        "path": "silverframe-chat",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+
+    {
+      "id": "ai-agent",
+      "name": "Silverframe AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [480, 300],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message }}",
+        "options": {
+          "systemMessage": "Te Silverframe Studio fotográfiai asszisztense vagy, aki Istvánnak (fotósnak) segít az ügyfelekkel kommunikálni.\n\n## A Stúdióról\n- Silverframe Studio, Szeged, Magyarország\n- Fotós: István\n- Email: info@silverframe.hu\n- WhatsApp: +36 20 379 9814\n- Instagram/Facebook: @silverframefoto\n- Weboldal: silverframestudio.com\n\n## Szolgáltatások\n- Esküvői fotózás (hagyományos és kreatív)\n- Portré / Modell szesszió\n- Kismama fotózás\n- Boudoir fotózás\n- Családi fotózás\n- Páros / Jegyesi fotózás\n- Kisállat fotózás\n- Üzleti / Céges arculati fotózás\n- Ingatlan fotózás\n- Termékfotózás\n- Rendezvényfotózás\n\n## Kommunikációs stílus\n- Magyarúl válaszolj\n- Barátságos, meleg, professzionális hang\n- Rövid válaszok (max 3-4 bekezdés)\n- Ha nem tudod a konkrét árat, irányíts az arak.html oldalra vagy az emailre\n\n## Foglalás kezelése\nHa az ügyfél időpontot szeretne foglalni:\n1. Kérd el ezeket az adatokat (sorban, természetes konverzációban):\n   - Neve (teljes név)\n   - Email cím\n   - Telefonszám\n   - Milyen fotózást kér (melyik szolgáltatás)\n   - Mikor (dátum: ÉÉÉÉ-HH-NN formátumban kérj)\n   - Ha portré/rövid szesszió: pontos időpont is (ÓÓ:PP)\n   - Esetleges megjegyzés, különleges kérés\n\n2. Mielőtt foglalsz, opcionálisan ellenőrizd az elérhetőséget a check_availability eszközzel.\n\n3. Ha minden adat megvan, hívd a propose_booking eszközt a pontos adatokkal.\n   A bookingType értéke: 'hourly' (ha van konkrét óra), 'fullday' (egész napos), 'multiday' (többnapos)\n   A service értéke angolul: wedding, portrait, maternity, boudoir, family, couple, pet, business, real-estate, product, event\n\n4. Miután a propose_booking sikeresen lefutott, mondd az ügyfélnek:\n   'A foglalási kérelmed elküldtük! István 24 órán belül visszaigazol emailben. Ha sürgős, írj Instagramon (@silverframefoto) vagy WhatsApp-on (+36 20 379 9814).'\n\n## Fontos\n- Ne találj ki árat ha nem tudod\n- Ha az ügyfél nem akar foglalni, csak válaszolj a kérdéseire\n- Ha agresszív vagy sértő üzenetet kapsz, udvariasan köszönj el\n- Soha ne ígérj konkrét időpontot foglalás elfogadása előtt"
+        }
+      }
+    },
+
+    {
+      "id": "gemini-model",
+      "name": "Gemini Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [480, 520],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "REPLACE_GEMINI_CRED_ID",
+          "name": "Silverframe Gemini"
+        }
+      },
+      "parameters": {
+        "modelName": "gemini-2.0-flash",
+        "options": {
+          "temperature": 0.7,
+          "maxOutputTokens": 600
+        }
+      }
+    },
+
+    {
+      "id": "chat-memory",
+      "name": "Conversation Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [680, 520],
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook — POST /silverframe-chat').item.json.sessionId }}",
+        "contextWindowLength": 20
+      }
+    },
+
+    {
+      "id": "tool-check-availability",
+      "name": "Tool: Check Availability",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [280, 520],
+      "parameters": {
+        "url": "https://n8n-giez.srv1499541.hstgr.cloud/webhook/availability",
+        "description": "Lekéri egy adott hónap szabad időpontjait. Hívd ezt ha az ügyfél rákérdez szabad időpontokra, vagy mielőtt foglalást rögzítesz. Paraméterek: year (év, pl: 2026), month (hónap 0-11 között, január=0).",
+        "method": "GET",
+        "authentication": "none",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "year",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('year', 'Az év 4 számjegyű formátumban, pl. 2026', 'number') }}"
+            },
+            {
+              "name": "month",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('month', 'A hónap sorszáma 0-11 között (0=január, 11=december)', 'number') }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+
+    {
+      "id": "tool-propose-booking",
+      "name": "Tool: Propose Booking",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [880, 520],
+      "parameters": {
+        "url": "https://n8n-giez.srv1499541.hstgr.cloud/webhook/book",
+        "description": "Elküldi a foglalási kérelmet. Csak akkor hívd, ha MINDEN adat megvan: name, email, phone, service, serviceName, bookingType, date. Hiányos adattal NE hívd — előbb kérd el az ügyfélttől.",
+        "method": "POST",
+        "authentication": "none",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  name: /*n8n-auto-generated-fromAI-override*/ $fromAI('name', 'Az ügyfél teljes neve', 'string'),\n  email: /*n8n-auto-generated-fromAI-override*/ $fromAI('email', 'Az ügyfél email címe', 'string'),\n  phone: /*n8n-auto-generated-fromAI-override*/ $fromAI('phone', 'Az ügyfél telefonszáma', 'string'),\n  service: /*n8n-auto-generated-fromAI-override*/ $fromAI('service', 'A szolgáltatás kódja angolul: wedding, portrait, maternity, boudoir, family, couple, pet, business, real-estate, product, event', 'string'),\n  serviceName: /*n8n-auto-generated-fromAI-override*/ $fromAI('serviceName', 'A szolgáltatás neve magyarul', 'string'),\n  bookingType: /*n8n-auto-generated-fromAI-override*/ $fromAI('bookingType', 'hourly (ha konkrét időpont), fullday (egész nap), multiday (több nap)', 'string'),\n  date: /*n8n-auto-generated-fromAI-override*/ $fromAI('date', 'A fotózás dátuma YYYY-MM-DD formátumban', 'string'),\n  time: /*n8n-auto-generated-fromAI-override*/ $fromAI('time', 'Kezdési időpont HH:MM formátumban, csak hourly típusnál, egyébként null', 'string'),\n  duration: /*n8n-auto-generated-fromAI-override*/ $fromAI('duration', 'Becsült időtartam órákban, pl. 2', 'number'),\n  note: /*n8n-auto-generated-fromAI-override*/ $fromAI('note', 'Az ügyfél megjegyzése vagy különleges kérése', 'string'),\n  source: 'chat'\n}) }}",
+        "options": {}
+      }
+    },
+
+    {
+      "id": "respond-chat",
+      "name": "Respond to Chat",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ reply: $json.output }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" },
+              { "name": "Content-Type", "value": "application/json" }
+            ]
+          }
+        }
+      }
+    }
+
+  ],
+  "connections": {
+    "Webhook — POST /silverframe-chat": {
+      "main": [[{ "node": "Silverframe AI Agent", "type": "main", "index": 0 }]]
+    },
+    "Silverframe AI Agent": {
+      "main": [[{ "node": "Respond to Chat", "type": "main", "index": 0 }]]
+    },
+    "Gemini Model": {
+      "ai_languageModel": [[{ "node": "Silverframe AI Agent", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Conversation Memory": {
+      "ai_memory": [[{ "node": "Silverframe AI Agent", "type": "ai_memory", "index": 0 }]]
+    },
+    "Tool: Check Availability": {
+      "ai_tool": [[{ "node": "Silverframe AI Agent", "type": "ai_tool", "index": 0 }]]
+    },
+    "Tool: Propose Booking": {
+      "ai_tool": [[{ "node": "Silverframe AI Agent", "type": "ai_tool", "index": 1 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "id": "silverframe-chat-handler",
+  "tags": [{ "name": "silverframe" }]
+}
