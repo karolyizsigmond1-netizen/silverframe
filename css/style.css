@@ -1512,7 +1512,8 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 
 @media (max-width: 900px) {
     .service-includes-grid { grid-template-columns: repeat(2, 1fr); }
-    .service-includes.has-image { grid-template-columns: 1fr; gap: 2rem; }
+    .service-includes.has-image,
+    .service-includes.has-image.img-right { grid-template-columns: 1fr; gap: 2rem; }
     .service-includes.has-image .service-includes-grid { grid-template-columns: repeat(2, 1fr); }
     .service-includes-img { aspect-ratio: 16/9; height: auto; min-height: 0; }
 }
@@ -1599,8 +1600,11 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 }
 
 /* Container padding on very small screens */
+@media (max-width: 500px) {
+    .container { padding-inline: 1.25rem; }
+}
 @media (max-width: 380px) {
-    .container { padding: 0 1rem; }
+    .container { padding-inline: 1rem; }
     .section-label { font-size: 0.62rem; }
 }
 
@@ -1608,6 +1612,59 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
 @media (max-width: 600px) {
     .masonry-item { max-width: 100%; }
 }
+
+/* ─────────────────────────────────────────────
+   GLOBAL OVERFLOW SAFETY (all devices)
+   ───────────────────────────────────────────── */
+/* Long words / URLs / emails can't punch out of their container */
+body, p, h1, h2, h3, h4, h5, h6, a, span, li, td, th, dd, dt {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+/* Flex/grid children must be allowed to shrink below their content */
+.container > *, main > *, section > *, .footer-grid > *,
+.contact-content > *, .about-content > *, .service-detail-intro > *,
+.service-includes > *, .service-includes-content > *,
+.service-row > *, .intro-strip > *, .footer > * {
+    min-width: 0;
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE TEXT/SPACING TIGHTENING (≤600px)
+   ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+    /* Spacy uppercase labels overflow with long Hungarian words → tighten */
+    .page-hero-label { letter-spacing: 0.3em; font-size: 0.62rem; }
+    .section-label { letter-spacing: 0.28em; }
+    .breadcrumb { letter-spacing: 0.1em; font-size: 0.65rem; }
+    /* Decorative giant quote mark — clip instead of pushing layout */
+    .testimonials-section::before { font-size: 10rem; }
+    /* Section titles: cap line length for predictable wrapping */
+    .section-title, .page-hero-title { max-width: 100%; }
+    /* Pricing / CTA buttons sometimes have long labels */
+    .btn { white-space: normal; text-align: center; line-height: 1.3; }
+}
+
+@media (max-width: 380px) {
+    /* Even tighter on small phones (e.g. iPhone SE, Galaxy Fold) */
+    .page-hero-label { letter-spacing: 0.2em; font-size: 0.58rem; }
+    .section-label { letter-spacing: 0.2em; font-size: 0.58rem; }
+    .footer-heading { letter-spacing: 0.15em; }
+    .testimonials-section::before { font-size: 7rem; }
+}
+
+/* ── Legal pages (adatvedelem etc.) ── */
+.legal-content .legal-heading {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--accent);
+    margin: 2.4rem 0 0.8rem;
+    letter-spacing: 0.02em;
+}
+.legal-content .section-desc { margin-bottom: 1.1rem; }
+.footer-legal-link { color: var(--text-muted); margin-left: 0.4rem; }
+.footer-legal-link:hover { color: var(--accent); }
 
 /* ── Gold section divider ── */
 .section-divider {

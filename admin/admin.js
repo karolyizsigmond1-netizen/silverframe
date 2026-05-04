@@ -27,7 +27,7 @@
         },
         {
             label: 'Szolgáltatás oldalak', items: [
-                { id: 'servicePages.portfolio-model', title: 'Portfólió / Modell' },
+                { id: 'servicePages.portfolio-model', title: 'Galéria / Modell' },
                 { id: 'servicePages.maternity', title: 'Kismama' },
                 { id: 'servicePages.boudoir', title: 'Boudoir' },
                 { id: 'servicePages.family', title: 'Családi' },
@@ -43,7 +43,7 @@
         },
         {
             label: 'Galériák', items: [
-                { id: 'portfolioPages.portrait', title: 'Portfólió / Modell' },
+                { id: 'portfolioPages.portrait', title: 'Galéria / Modell' },
                 { id: 'portfolioPages.maternity', title: 'Kismama' },
                 { id: 'portfolioPages.boudoir', title: 'Boudoir' },
                 { id: 'portfolioPages.family', title: 'Családi' },

@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!row.length) return;
                 const gapsW = (row.length - 1) * GAP;
                 const available = totalWidth - gapsW;
-                const scale = (!isPartialLast || rowNaturalW >= available * 0.6)
-                    ? available / rowNaturalW : 1;
+                const fillScale = available / rowNaturalW;
+                const scale = isPartialLast
+                    ? (rowNaturalW >= available * 0.6 ? Math.min(fillScale, 1) : 1)
+                    : fillScale;
                 const h = Math.floor(targetRowH * scale);
                 row.forEach(({ item, ratio }) => {
                     item.style.width = Math.floor(h * ratio) + 'px';

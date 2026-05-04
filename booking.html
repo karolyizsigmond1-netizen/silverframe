@@ -411,7 +411,7 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     for(var d=1;d<=dim;d++){
       var dt=new Date(cy,cm,d);
       var past=dt<today;
-      var avail=isDayAvailable(dt);
+      var avail=cfg.type==='multiday'||isDayAvailable(dt);
       var busy=!past&&!avail;
       var isStart=selDate&&dt.toDateString()===selDate.toDateString();
       var isEnd=selEndDate&&dt.toDateString()===selEndDate.toDateString();
