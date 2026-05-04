@@ -240,10 +240,10 @@ function headerHtml(prefix, activePage, activeService) {
   return `    <header class="header" role="banner">
         <a href="${prefix}index.html" class="header-logo" aria-label="${g.siteName} — Főoldal">${g.siteName}</a>
         <nav class="header-nav" aria-label="Fő navigáció">
-            <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
-            <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             ${navDropdown(prefix, activeService)}
+            <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             <a href="${prefix}arak.html"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
+            <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
             <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
             <a href="${prefix}booking.html" class="header-cta">Időpontfoglalás</a>
         </nav>
@@ -258,9 +258,9 @@ function mobileNavHtml(prefix) {
 
             <div class="mn-main">
                 <a class="mn-link" href="${prefix}index.html">Főoldal</a>
-                <a class="mn-link" href="${prefix}about.html">Rólam</a>
                 <a class="mn-link" href="${prefix}portfolio.html">Galéria</a>
                 <a class="mn-link" href="${prefix}arak.html">Árak</a>
+                <a class="mn-link" href="${prefix}about.html">Rólam</a>
                 <a class="mn-link" href="${prefix}contact.html">Kapcsolat</a>
             </div>
 
@@ -316,7 +316,7 @@ function footerHtml(prefix) {
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; ${g.copyright} ${g.siteName}. Minden jog fenntartva.</span>
+                <span>&copy; ${g.copyright} ${g.siteName}. Minden jog fenntartva. <a href="${prefix}adatvedelem.html" class="footer-legal-link">Adatvédelem</a></span>
                 <div class="footer-social"><a href="${g.instagram}">Instagram</a><a href="${g.facebook}">Facebook</a></div>
             </div>
         </div>
@@ -541,7 +541,7 @@ ${p.beforeAfterPairs && p.beforeAfterPairs.length ? `        <section class="ba-
 
         <div class="section-divider reveal"></div>` : ''}
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
     </main>
 
 ${footerHtml('')}
@@ -683,7 +683,7 @@ ${p.highlights.map(h => `                    <a href="${h.href}" class="portfoli
             </div>
         </section>
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
     </main>
 
 ${footerHtml('')}
@@ -743,7 +743,7 @@ ${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `            
             </div>
         </section>
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
     </main>
 
 ${footerHtml('')}
@@ -945,7 +945,7 @@ ${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-g
             </div>
         </section>
 
-${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton)}
+${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../booking.html' : '../contact.html'), s.ctaButton)}
 
         <nav class="service-nav" aria-label="Szolgáltatás navigáció">
             ${prevNav}
@@ -1504,6 +1504,7 @@ function buildArakPage() {
     }
 
     const ctaLabel = isCustom ? 'Ajánlatot kérek' : 'Foglalj időpontot';
+    const ctaHref = isCustom ? 'contact.html' : 'booking.html';
 
     return `
                     <div class="price-card2${popularCls}" style="--i:${i}">
@@ -1524,7 +1525,7 @@ function buildArakPage() {
                             ${bodyContent}
                             ${cat.deliveryTime ? `<div class="pc-delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>${cat.deliveryTime} átadás</div>` : ''}
                             <div class="pc-actions">
-                                <a href="contact.html" class="btn btn-solid pc-cta"><span>${ctaLabel}</span>${arrowSvg}</a>
+                                <a href="${ctaHref}" class="btn btn-solid pc-cta"><span>${ctaLabel}</span>${arrowSvg}</a>
                                 <a href="portfolio/${galleryId}.html" class="btn pc-gallery-btn">${galleryIcon}<span>Galéria</span></a>
                             </div>
                         </div>
@@ -1717,7 +1718,7 @@ ${mobileNavHtml('')}
                 <h2>Foglald le a<br><em>szabad időpontod</em></h2>
                 <p>${p.ctaDesc}</p>
                 <div class="final-cta-btns">
-                    <a href="contact.html" class="btn btn-solid"><span>Időpontfoglalás</span>${arrowSvg}</a>
+                    <a href="booking.html" class="btn btn-solid"><span>Időpontfoglalás</span>${arrowSvg}</a>
                     <a href="portfolio.html" class="btn btn-outline"><span>Galéria megtekintése</span>${arrowSvg}</a>
                 </div>
                 <p class="no-hidden-fees">
