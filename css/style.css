@@ -1613,6 +1613,11 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     .masonry-item { max-width: 100%; }
 }
 
+/* Homepage services grid — show immediately on mobile (skip scroll-reveal delay) */
+@media (max-width: 768px) {
+    .services-grid-home.reveal { opacity: 1 !important; transform: none !important; }
+}
+
 /* ─────────────────────────────────────────────
    GLOBAL OVERFLOW SAFETY (all devices)
    ───────────────────────────────────────────── */
