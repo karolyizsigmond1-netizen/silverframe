@@ -347,7 +347,14 @@ button { font-family: inherit; cursor: pointer; }
 .footer {
     border-top: 1px solid rgba(255,255,255,0.05);
     padding: 5rem 0 3rem;
+    position: relative;
 }
+.footer-img-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.72);
+    pointer-events: none;
+}
+.footer .container { position: relative; z-index: 1; }
 .footer-grid {
     display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 3rem; margin-bottom: 4rem;
@@ -1718,14 +1725,17 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, li, td, th, dd, dt {
 
 /* ── Before/after slider ── */
 .ba-section { padding: 7rem 0; }
-.ba-wrap { max-width: 800px; margin: 3.5rem auto 0; }
+.ba-carousel { max-width: 800px; margin: 3.5rem auto 0; }
+.ba-track { position: relative; }
+.ba-pair { display: none; }
+.ba-pair.active { display: block; }
 .ba-slider {
     position: relative; overflow: hidden; border-radius: 2px;
     cursor: col-resize; user-select: none; touch-action: pan-y;
     aspect-ratio: 3/2;
 }
 .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ba-after { clip-path: inset(0 50% 0 0); transition: clip-path 0s; }
+.ba-after { clip-path: inset(0 0 0 50%); transition: clip-path 0s; }
 .ba-handle {
     position: absolute; top: 0; bottom: 0; left: 50%;
     width: 2px; background: var(--accent);
@@ -1744,10 +1754,33 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, li, td, th, dd, dt {
 }
 .ba-arrow svg { width: 14px; height: 14px; color: var(--bg); }
 .ba-labels {
-    display: flex; justify-content: space-between;
+    display: flex; justify-content: space-between; align-items: center;
     margin-top: 0.8rem; font-size: 0.68rem; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--text-muted);
 }
+.ba-pair-label { color: var(--accent); font-size: 0.7rem; letter-spacing: 0.12em; }
+.ba-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.2rem; margin-top: 1.8rem;
+}
+.ba-nav-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s, color .2s, background .2s;
+    flex-shrink: 0;
+}
+.ba-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.ba-nav-btn svg { width: 16px; height: 16px; }
+.ba-dots { display: flex; gap: 8px; align-items: center; }
+.ba-dot {
+    width: 7px; height: 7px; border-radius: 50%; padding: 0; border: none;
+    background: var(--text-muted); cursor: pointer;
+    transition: background .2s, transform .2s; opacity: 0.45;
+}
+.ba-dot.active { background: var(--accent); transform: scale(1.35); opacity: 1; }
+.ba-dot:hover:not(.active) { opacity: 0.8; }
 
 /* ── WhatsApp floating button ── */
 .wa-btn {

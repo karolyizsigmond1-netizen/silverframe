@@ -8,6 +8,7 @@
     "facebook": "https://www.facebook.com/silverframefoto/",
     "baseUrl": "https://www.silverframestudio.com",
     "footerDesc": "Professzionális fotózás Szegeden. Minden pillanat számít.",
+    "footerImage": "",
     "copyright": "2026",
     "buttonStyle": "rounded",
     "phone": "+3620/3799-814"
@@ -264,6 +265,20 @@
           "location": "Szeged",
           "service": "Boudoir",
           "avatar": ""
+        },
+        {
+          "text": "Istvánnal esküvőnkre nem is találhattunk volna jobb fotóst. Minden találkozón sokat nevettünk, ami az egész folyamatot igazán könnyeddé tette. A nagy napon lendülete és elkötelezettsége kiemelkedő volt – kellemessé és stresszmentessé tette az egész napunkat. Elképesztően hamar meglepett minket a képekkel, amiket egyszerűen imádunk. Rengeteg tökéletesen elkapott pillanat, amelyek teljesen visszaadják a nap hangulatát. Nem csak egy profi fotóst, de egy szuper embert is megismertünk benne!",
+          "author": "Réka & férje",
+          "location": "Szeged",
+          "service": "Esküvő",
+          "avatar": ""
+        },
+        {
+          "text": "Nagy élmény volt Istvánnal a fotózás. Kedves, jó a humora, és teljesen profi. Kiváló fotókat csinált, nagyon elégedett voltam. Bátran ajánlom!",
+          "author": "Péter",
+          "location": "Szeged",
+          "service": "Brand fotózás",
+          "avatar": ""
         }
       ],
       "howItWorks": {
@@ -289,9 +304,34 @@
       },
       "beforeAfterPairs": [
         {
-          "before": "uploads/8ded7bfc3b12-www.karolyifoto.hu__1_of_25_-topaz-sharpen.jpg",
-          "after": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
-          "label": "Retusálás előtt / után"
+          "before": "uploads/ba1-before.jpg",
+          "after": "uploads/ba1-after.jpg",
+          "label": ""
+        },
+        {
+          "before": "uploads/ba3-before.jpg",
+          "after": "uploads/ba3-after.jpg",
+          "label": ""
+        },
+        {
+          "before": "uploads/ba4-before.jpg",
+          "after": "uploads/ba4-after.jpg",
+          "label": ""
+        },
+        {
+          "before": "uploads/ba6-before.jpg",
+          "after": "uploads/ba6-after.jpg",
+          "label": ""
+        },
+        {
+          "before": "uploads/ba7-before.jpg",
+          "after": "uploads/ba7-after.jpg",
+          "label": ""
+        },
+        {
+          "before": "uploads/ba8-before.jpg",
+          "after": "uploads/ba8-after.jpg",
+          "label": ""
         }
       ],
       "ctaLabel": "Készen állsz?",

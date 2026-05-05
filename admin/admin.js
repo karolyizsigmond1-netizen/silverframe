@@ -482,6 +482,12 @@
         html += textField('Cím', 'global.address', data.address);
         html += '</div>';
 
+        // Footer settings
+        html += '<div class="field-section"><div class="field-section-title">Lábléc</div>';
+        html += textField('Lábléc leírás', 'global.footerDesc', data.footerDesc);
+        html += imageField('Lábléc háttérkép', 'global.footerImage', data.footerImage);
+        html += '</div>';
+
         // Design settings
         html += '<div class="field-section"><div class="field-section-title">Dizájn beállítások</div>';
         html += selectField('Gomb stílus', 'global.buttonStyle', data.buttonStyle || 'square', [
@@ -839,12 +845,43 @@
     }
 
     // ── Render remaining object fields generically ──
+    function renderBeforeAfterPairsEditor(pairs, basePath) {
+        let html = `<div class="field-section"><div class="field-section-title">&#128247; Előtt &amp; Után párok</div>`;
+        html += `<div class="array-list" data-array-path="${basePath}">`;
+        pairs.forEach((pair, i) => {
+            const label = pair.label || '';
+            html += `<div class="array-item" draggable="false" data-index="${i}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Pár #${i + 1}${label ? ' — ' + esc(label) : ''}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${basePath}" data-index="${i}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                <div class="ba-admin-pair-grid">
+                    ${imageField('Előtte kép', basePath + '.' + i + '.before', pair.before || '')}
+                    ${imageField('Utána kép', basePath + '.' + i + '.after', pair.after || '')}
+                </div>
+                ${textField('Felirat (opcionális, középen jelenik meg)', basePath + '.' + i + '.label', label)}
+            </div>`;
+        });
+        html += `</div>`;
+        html += `<button class="btn-add" data-add-array="${basePath}" data-template="beforeAfterPair">+ Új előtt–után pár hozzáadása</button>`;
+        html += `</div>`;
+        return html;
+    }
+
     function renderObjectFields(data, basePath, skip) {
         let html = '';
         for (const key of Object.keys(data)) {
             if (skip && skip.includes(key)) continue;
             const val = data[key];
             const path = basePath + '.' + key;
+
+            if (key === 'beforeAfterPairs' && Array.isArray(val)) {
+                html += renderBeforeAfterPairsEditor(val, path);
+                continue;
+            }
 
             if (val === null || val === undefined) continue;
 
@@ -1040,6 +1077,9 @@
                         break;
                     case 'packageItem':
                         newItem = { title: '', desc: '' };
+                        break;
+                    case 'beforeAfterPair':
+                        newItem = { before: '', after: '', label: '' };
                         break;
                     default:
                         newItem = '';

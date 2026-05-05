@@ -256,27 +256,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ── Before/After slider ──
-    const baSlider = document.getElementById('baSlider');
-    if (baSlider) {
-        const baAfter = baSlider.querySelector('.ba-after');
-        const baHandle = document.getElementById('baHandle');
+    // ── Before/After multi-pair carousel ──
+    const baTrack = document.querySelector('.ba-track');
+    if (baTrack) {
+        const pairs = Array.from(baTrack.querySelectorAll('.ba-pair'));
+        const dots  = Array.from(document.querySelectorAll('.ba-dot'));
+        let currentIdx = 0;
         let dragging = false;
 
-        const setPos = (x) => {
-            const rect = baSlider.getBoundingClientRect();
-            const pct = Math.min(Math.max((x - rect.left) / rect.width * 100, 2), 98);
-            baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-            baHandle.style.left = pct + '%';
-        };
+        function setSliderPos(slider, x) {
+            const after  = slider.querySelector('.ba-after');
+            const handle = slider.querySelector('.ba-handle');
+            const rect   = slider.getBoundingClientRect();
+            const pct    = Math.min(Math.max((x - rect.left) / rect.width * 100, 2), 98);
+            after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+            handle.style.left    = pct + '%';
+        }
 
-        baSlider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
-        window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
-        window.addEventListener('mouseup', () => { dragging = false; });
-        baSlider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
-        window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
-        window.addEventListener('touchend', () => { dragging = false; });
-        setPos(baSlider.getBoundingClientRect().left + baSlider.offsetWidth * 0.5);
+        function activeSlider() {
+            return pairs[currentIdx]?.querySelector('.ba-slider');
+        }
+
+        function resetActive() {
+            const s = activeSlider();
+            if (s) requestAnimationFrame(() => setSliderPos(s, s.getBoundingClientRect().left + s.offsetWidth * 0.5));
+        }
+
+        function goTo(idx) {
+            pairs[currentIdx]?.classList.remove('active');
+            dots[currentIdx]?.classList.remove('active');
+            currentIdx = (idx + pairs.length) % pairs.length;
+            pairs[currentIdx]?.classList.add('active');
+            dots[currentIdx]?.classList.add('active');
+            resetActive();
+        }
+
+        // Per-slider mousedown/touchstart to start drag
+        pairs.forEach(pair => {
+            const s = pair.querySelector('.ba-slider');
+            if (!s) return;
+            s.addEventListener('mousedown',  e => { dragging = true; setSliderPos(s, e.clientX); });
+            s.addEventListener('touchstart', e => { dragging = true; setSliderPos(s, e.touches[0].clientX); }, { passive: true });
+        });
+
+        window.addEventListener('mousemove',  e => { if (dragging) { const s = activeSlider(); if (s) setSliderPos(s, e.clientX); } });
+        window.addEventListener('mouseup',   () => { dragging = false; });
+        window.addEventListener('touchmove',  e => { if (dragging) { const s = activeSlider(); if (s) setSliderPos(s, e.touches[0].clientX); } }, { passive: true });
+        window.addEventListener('touchend',  () => { dragging = false; });
+
+        document.querySelector('.ba-prev-btn')?.addEventListener('click', () => goTo(currentIdx - 1));
+        document.querySelector('.ba-next-btn')?.addEventListener('click', () => goTo(currentIdx + 1));
+        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+        resetActive();
     }
 
     // ── Active nav link ──

@@ -279,7 +279,8 @@ function mobileNavHtml(prefix) {
 }
 
 function footerHtml(prefix) {
-  return `    <footer class="footer" role="contentinfo">
+  return `    <footer class="footer" role="contentinfo"${g.footerImage ? ` style="background-image:url('${prefix}${g.footerImage}'); background-size:cover; background-position:center;"` : ''}>
+        ${g.footerImage ? `<div class="footer-img-overlay"></div>` : ''}
         <div class="container">
             <div class="footer-grid">
                 <div>
@@ -415,20 +416,6 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
             <div class="home-hero-scroll"><span>Görgess</span><div class="scroll-line"></div></div>
         </section>
 
-        <section class="section" aria-label="A fotósról">
-            <div class="container intro-strip">
-                <div class="intro-img-wrap reveal">
-                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933">
-                </div>
-                <div class="intro-text reveal reveal-delay-1">
-                    <span class="section-label">${p.introLabel}</span>
-                    <h2 class="section-title">${p.introTitle}</h2>
-                    <p class="section-desc">${p.introDesc}</p>
-                    ${btn('about.html', 'Tovább')}
-                </div>
-            </div>
-        </section>
-
         <section class="section services-preview" aria-label="Fotózási szolgáltatások">
             <div class="container">
                 <div class="reveal" style="text-align:center;">
@@ -465,6 +452,50 @@ ${p.galleryImages.map(img => `                    <div class="gallery-preview-it
 
         <div class="section-divider reveal"></div>
 
+${p.beforeAfterPairs && p.beforeAfterPairs.length ? `        <section class="ba-section" aria-label="Retusálás előtt és után">
+            <div class="container">
+                <div class="reveal" style="text-align:center">
+                    <span class="section-label">Professzionális retusálás</span>
+                    <h2 class="section-title">Előtt & Után</h2>
+                    <p class="section-desc" style="margin:0 auto">Minden kép egyedi retusálást kap — természetes, de megkapó végeredménnyel.</p>
+                </div>
+                <div class="ba-carousel reveal reveal-delay-1">
+                    <div class="ba-track">
+${p.beforeAfterPairs.map((pair, i) => `                        <div class="ba-pair${i === 0 ? ' active' : ''}">
+                            <div class="ba-slider">
+                                <img class="ba-img ba-before" src="${pair.before}" alt="Előtte" loading="${i === 0 ? 'eager' : 'lazy'}">
+                                <img class="ba-img ba-after" src="${pair.after}" alt="Utána" loading="lazy">
+                                <div class="ba-handle">
+                                    <div class="ba-arrow">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ba-labels">
+                                <span>Előtte</span>
+                                <span class="ba-pair-label">${pair.label || ''}</span>
+                                <span>Utána</span>
+                            </div>
+                        </div>`).join('\n')}
+                    </div>
+${p.beforeAfterPairs.length > 1 ? `                    <div class="ba-controls">
+                        <button class="ba-nav-btn ba-prev-btn" aria-label="Előző">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <div class="ba-dots">
+${p.beforeAfterPairs.map((_, i) => `                            <button class="ba-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Pár ${i + 1}"></button>`).join('\n')}
+                        </div>
+                        <button class="ba-nav-btn ba-next-btn" aria-label="Következő">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                    </div>` : ''}
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider reveal"></div>` : ''}
+
         <section class="section testimonials-section" aria-label="Vélemények">
             <div class="container">
                 <div class="reveal">
@@ -498,6 +529,22 @@ ${p.testimonials.map((_, i) => `                        <button class="t-dot${i 
 
         <div class="section-divider reveal"></div>
 
+        <section class="section" aria-label="A fotósról">
+            <div class="container intro-strip">
+                <div class="intro-img-wrap reveal">
+                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933">
+                </div>
+                <div class="intro-text reveal reveal-delay-1">
+                    <span class="section-label">${p.introLabel}</span>
+                    <h2 class="section-title">${p.introTitle}</h2>
+                    <p class="section-desc">${p.introDesc}</p>
+                    ${btn('about.html', 'Tovább')}
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider reveal"></div>
+
 ${p.howItWorks ? `        <section class="hiw-section" aria-label="Hogy működik">
             <div class="container">
                 <div class="reveal" style="text-align:center">
@@ -510,31 +557,6 @@ ${p.howItWorks.steps.map(s => `                    <div class="hiw-step reveal">
                         <h3 class="hiw-step-title">${s.title}</h3>
                         <p class="hiw-step-desc">${s.desc}</p>
                     </div>`).join('\n')}
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider reveal"></div>` : ''}
-
-${p.beforeAfterPairs && p.beforeAfterPairs.length ? `        <section class="ba-section" aria-label="Retusálás előtt és után">
-            <div class="container">
-                <div class="reveal" style="text-align:center">
-                    <span class="section-label">Professzionális retusálás</span>
-                    <h2 class="section-title">Előtt & Után</h2>
-                    <p class="section-desc" style="margin:0 auto">Minden kép egyedi retusálást kap — természetes, de megkapó végeredménnyel.</p>
-                </div>
-                <div class="ba-wrap reveal reveal-delay-1">
-                    <div class="ba-slider" id="baSlider">
-                        <img class="ba-img ba-before" src="${p.beforeAfterPairs[0].before}" alt="Előtte" loading="lazy">
-                        <img class="ba-img ba-after" src="${p.beforeAfterPairs[0].after}" alt="Utána" loading="lazy">
-                        <div class="ba-handle" id="baHandle">
-                            <div class="ba-arrow">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ba-labels"><span>Előtte</span><span>Utána</span></div>
                 </div>
             </div>
         </section>
@@ -668,20 +690,6 @@ ${p.stats.map(s => `                    <div class="portfolio-stat"><span class=
             </div>
         </section>
 
-        <section class="section portfolio-highlights">
-            <div class="container">
-                <div class="reveal" style="text-align:center; margin-bottom: 3rem;">
-                    <span class="section-label">${p.highlightsLabel}</span>
-                    <h2 class="section-title">${p.highlightsTitle}</h2>
-                </div>
-                <div class="portfolio-highlight-grid reveal reveal-delay-1">
-${p.highlights.map(h => `                    <a href="${h.href}" class="portfolio-highlight-item${h.wide ? ' portfolio-highlight-wide' : ''}">
-                        <img src="${h.image}"${imgStyle(h.image)} alt="${h.alt}">
-                        <div class="portfolio-highlight-overlay"><span class="portfolio-highlight-cat">${h.cat}</span><h3>${h.title}</h3></div>
-                    </a>`).join('\n')}
-                </div>
-            </div>
-        </section>
 
 ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
     </main>
@@ -1617,6 +1625,7 @@ function buildArakPage() {
     .pc-actions { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:auto; padding-top:0.2rem; }
     .pc-cta { flex:1; justify-content:center; text-align:center; font-size:0.8rem; padding:0.75rem 1rem; gap:0.4rem; }
     .pc-gallery-btn { display:flex; align-items:center; gap:0.4rem; padding:0.75rem 0.9rem; border:1px solid rgba(201,169,110,0.25); color:var(--text-muted); font-size:0.78rem; border-radius:var(--btn-r,0); transition:border-color 0.25s,color 0.25s,background 0.25s; white-space:nowrap; flex-shrink:0; }
+    .pc-gallery-btn::before { content:none; }
     .pc-gallery-btn:hover { border-color:var(--accent); color:var(--accent); background:rgba(201,169,110,0.06); }
     .testi-section { padding:5rem 0; background:var(--bg-elevated); border-top:1px solid rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.04); }
     .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }

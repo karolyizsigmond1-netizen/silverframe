@@ -486,6 +486,16 @@ body {
     transition: opacity 0.2s, transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
+.ba-admin-pair-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .ba-admin-pair-grid { grid-template-columns: 1fr; }
+}
+
 .array-item-header {
     display: flex;
     justify-content: space-between;
