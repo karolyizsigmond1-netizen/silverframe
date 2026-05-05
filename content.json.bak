@@ -190,7 +190,7 @@
         "uploads/c2a7b66f129d-J_M_pocakfot_z_s__30_of_42_.jpg"
       ],
       "heroInterval": 5,
-      "introImage": "uploads/d028d4051f6f-ChatGPT_Image_2026.__pr._26._17_52_29.png",
+      "introImage": "uploads/d028d4051f6f-ChatGPT_Image_2026.__pr._26._17_52_29.jpg",
       "introLabel": "Rólam",
       "introTitle": "Történetek<br>fénnyel elmesélve",
       "introDesc": "Fotósként több mint tíz éve élem át, hogy minden pillanat számít. Amikor fotózom, nem csak látok, hanem érzek is: színeket, hangulatot, örömöt — olyan dolgokat, amiket szavakkal nehéz kifejezni.",
@@ -303,7 +303,7 @@
       "heroImage": "uploads/929d34151d25-chillart_product_374131_200717123627_645354.jpeg",
       "heroLabel": "Ismerd meg a fotóst",
       "heroTitle": "Rólam",
-      "aboutImage": "uploads/916a4e4dea8b-ChatGPT_Image_2026.__pr._22._13_24_06.png",
+      "aboutImage": "uploads/916a4e4dea8b-ChatGPT_Image_2026.__pr._22._13_24_06.jpg",
       "storyLabel": "Történetem",
       "storyTitle": "Károlyi István",
       "storyParagraphs": [
@@ -419,7 +419,7 @@
     "services": {
       "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
       "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros jegyes, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
-      "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
+      "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.jpg",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
       "sectionLabel": "Válaszd ki az élményt",
@@ -456,7 +456,7 @@
     "arak": {
       "title": "Árak — Silverframe Studio | Fotózás Szegeden",
       "metaDesc": "Silverframe Studio fotózás árak 45.000 Ft-tól. Portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, nincsenek rejtett díjak. Foglalj időpontot!",
-      "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.png",
+      "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.jpg",
       "heroLabel": "Silverframe Studio — Szeged",
       "heroTitle": "Árak & Csomagok",
       "ctaLabel": "Készen állsz?",
@@ -2307,10 +2307,6 @@
         }
       ],
       "gallery": [
-        {
-          "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80",
-          "alt": "Beltéri fotó"
-        },
         {
           "src": "uploads/0e5e31c9cf86-ingatlan-fotozas-szeged-kert__18_.jpg",
           "alt": ""
