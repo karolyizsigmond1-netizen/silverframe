@@ -36,7 +36,7 @@
       "arakTagline": "Mesebeli esküvői portrék",
       "arakBadge": "",
       "bookingType": "fullday",
-      "bookingDuration": 10,
+      "bookingDuration": 12,
       "deliveryTime": "3-4 hét"
     },
     {
@@ -62,7 +62,7 @@
       "arakTagline": "Profi képek, természetes kisugárzás",
       "arakBadge": "Legnépszerűbb",
       "bookingType": "hourly",
-      "bookingDuration": 2,
+      "bookingDuration": 1,
       "deliveryTime": "1-2 hét"
     },
     {
@@ -75,7 +75,7 @@
       "arakTagline": "Az anyaság szépségének megörökítése",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 2,
+      "bookingDuration": 1,
       "deliveryTime": "2-3 hét"
     },
     {
@@ -88,7 +88,7 @@
       "arakTagline": "Elegáns, bizalmas, magabiztos",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 3,
+      "bookingDuration": 1,
       "deliveryTime": "2-3 hét"
     },
     {
@@ -101,7 +101,7 @@
       "arakTagline": "Valódi pillanatok, örök emlékek",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 3,
+      "bookingDuration": 1,
       "deliveryTime": "2-3 hét"
     },
     {
@@ -114,7 +114,7 @@
       "arakTagline": "A szerelem pillanatai örökre",
       "arakBadge": "",
       "bookingType": "fullday",
-      "bookingDuration": 10,
+      "bookingDuration": 2,
       "deliveryTime": "2-3 hét"
     },
     {
@@ -127,7 +127,7 @@
       "arakTagline": "A négylábú barát örök emléke",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 2,
+      "bookingDuration": 1,
       "deliveryTime": "1-2 hét"
     },
     {
@@ -140,7 +140,7 @@
       "arakTagline": "Profi megjelenés minden platformon",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 2,
+      "bookingDuration": 1,
       "deliveryTime": "1-2 hét"
     },
     {
@@ -153,7 +153,7 @@
       "arakTagline": "Eladható ingatlanok, megnyerő képek",
       "arakBadge": "Legjobb ár",
       "bookingType": "hourly",
-      "bookingDuration": 2,
+      "bookingDuration": 1,
       "deliveryTime": "3-5 nap"
     },
     {
@@ -166,7 +166,7 @@
       "arakTagline": "Fotók, amik eladnak",
       "arakBadge": "",
       "bookingType": "hourly",
-      "bookingDuration": 3,
+      "bookingDuration": 1,
       "deliveryTime": "3-5 nap"
     }
   ],
