@@ -971,5 +971,160 @@
      END SILVERFRAME CHATBOT
      ============================================ -->
 
+<script>
+(function(){
+  var GA_ID = 'G-XKFQW9J2N0';
+  function gev(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+
+  // ── Click tracking via event delegation ──
+  document.addEventListener('click', function(e) {
+    var t = e.target;
+
+    // Walk up max 5 levels to find a meaningful ancestor
+    for (var i = 0; i < 5; i++) {
+      if (!t || t === document.body) break;
+
+      // WhatsApp button
+      if (t.classList && t.classList.contains('wa-btn')) {
+        gev('whatsapp_click', { event_category: 'engagement' }); break;
+      }
+      // Service card on home page
+      if (t.classList && t.classList.contains('service-card-home')) {
+        gev('service_card_click', { event_category: 'engagement', service_name: t.querySelector('h3') ? t.querySelector('h3').textContent.trim() : '' }); break;
+      }
+      // Portfolio grid tile
+      if (t.classList && t.classList.contains('portfolio-grid-tile')) {
+        gev('portfolio_photo_view', { event_category: 'engagement' }); break;
+      }
+      // Gallery preview item
+      if (t.classList && t.classList.contains('gallery-preview-item')) {
+        gev('gallery_preview_click', { event_category: 'engagement' }); break;
+      }
+      // Header CTA booking button
+      if (t.classList && t.classList.contains('header-cta') && t.href && t.href.indexOf('booking') !== -1) {
+        gev('booking_cta_click', { event_category: 'conversion', location: 'header' }); break;
+      }
+      // Mobile nav CTA booking
+      if (t.classList && t.classList.contains('mn-cta') && t.href && t.href.indexOf('booking') !== -1) {
+        gev('booking_cta_click', { event_category: 'conversion', location: 'mobile_nav' }); break;
+      }
+      // Any CTA banner button
+      if (t.classList && t.classList.contains('btn') && t.href && t.href.indexOf('booking') !== -1) {
+        gev('booking_cta_click', { event_category: 'conversion', location: 'cta_banner' }); break;
+      }
+      // Nav links
+      if (t.closest && t.closest('.header-nav a') && t.tagName === 'A') {
+        gev('nav_click', { event_category: 'navigation', link_text: t.textContent.trim() }); break;
+      }
+      // Footer links
+      if (t.closest && t.closest('.footer') && t.tagName === 'A') {
+        gev('footer_link_click', { event_category: 'navigation', link_text: t.textContent.trim() }); break;
+      }
+      // Mailto links
+      if (t.tagName === 'A' && t.href && t.href.indexOf('mailto:') === 0) {
+        gev('email_click', { event_category: 'contact', email: t.href.replace('mailto:', '') }); break;
+      }
+      // Tel links
+      if (t.tagName === 'A' && t.href && t.href.indexOf('tel:') === 0) {
+        gev('phone_click', { event_category: 'contact', phone: t.href.replace('tel:', '') }); break;
+      }
+      // Social media links
+      if (t.tagName === 'A' && t.href && (t.href.indexOf('instagram.com') !== -1 || t.href.indexOf('facebook.com') !== -1)) {
+        var platform = t.href.indexOf('instagram') !== -1 ? 'instagram' : 'facebook';
+        gev('social_click', { event_category: 'engagement', platform: platform }); break;
+      }
+      // Before/after slider handle
+      if (t.classList && (t.classList.contains('ba-handle') || t.classList.contains('ba-arrow'))) {
+        gev('before_after_interact', { event_category: 'engagement' }); break;
+      }
+      t = t.parentElement;
+    }
+  }, { passive: true });
+
+  // ── Scroll depth tracking ──
+  var scrollMarks = [25, 50, 75, 90];
+  var scrollFired = {};
+  function onScroll() {
+    var scrolled = window.scrollY || window.pageYOffset;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if (total <= 0) return;
+    var pct = Math.round((scrolled / total) * 100);
+    for (var i = 0; i < scrollMarks.length; i++) {
+      var mark = scrollMarks[i];
+      if (!scrollFired[mark] && pct >= mark) {
+        scrollFired[mark] = true;
+        gev('scroll_depth', { event_category: 'engagement', depth: mark, page: window.location.pathname });
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Booking form ──
+  var bkForm = document.getElementById('bkForm');
+  if (bkForm) {
+    var bkStarted = false;
+    bkForm.addEventListener('focusin', function() {
+      if (!bkStarted) { bkStarted = true; gev('booking_form_start', { event_category: 'conversion' }); }
+    }, { once: false, passive: true });
+    bkForm.addEventListener('submit', function() {
+      gev('booking_form_submit', { event_category: 'conversion' });
+    }, { passive: true });
+  }
+
+  // ── Contact form ──
+  var ctForm = document.querySelector('form.contact-form, form[action*="formspree"], .contact-form form');
+  if (ctForm) {
+    var ctStarted = false;
+    ctForm.addEventListener('focusin', function() {
+      if (!ctStarted) { ctStarted = true; gev('contact_form_start', { event_category: 'engagement' }); }
+    }, { once: false, passive: true });
+    ctForm.addEventListener('submit', function() {
+      gev('contact_form_submit', { event_category: 'engagement' });
+    }, { passive: true });
+  }
+
+  // ── Lightbox / photo view ──
+  var lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    var lbObserver = new MutationObserver(function(muts) {
+      muts.forEach(function(m) {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          if (lightbox.classList.contains('active')) {
+            var img = lightbox.querySelector('img');
+            gev('photo_lightbox_open', { event_category: 'engagement', image_src: img ? img.src : '' });
+          }
+        }
+      });
+    });
+    lbObserver.observe(lightbox, { attributes: true });
+  }
+
+  // ── Chat widget open ──
+  var chatObserver = new MutationObserver(function() {
+    var widget = document.querySelector('.n8n-chat-window, [class*="chat-window"], [class*="chatWindow"]');
+    if (widget && widget.style.display !== 'none' && !widget.dataset.gaTracked) {
+      widget.dataset.gaTracked = '1';
+      gev('chat_widget_open', { event_category: 'engagement' });
+    }
+  });
+  chatObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+
+  // ── Time on page ──
+  var pageStart = Date.now();
+  window.addEventListener('beforeunload', function() {
+    var seconds = Math.round((Date.now() - pageStart) / 1000);
+    gev('time_on_page', { event_category: 'engagement', seconds: seconds, page: window.location.pathname });
+  });
+
+  // ── Portfolio category visit ──
+  var pathStr = window.location.pathname;
+  if (pathStr.indexOf('/services/') !== -1) {
+    var catSlug = pathStr.split('/services/')[1].replace('.html', '');
+    gev('portfolio_category_view', { event_category: 'engagement', category: catSlug });
+  }
+})();
+</script>
 </body>
 </html>
