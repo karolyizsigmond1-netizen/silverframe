@@ -482,6 +482,11 @@
         html += textField('Cím', 'global.address', data.address);
         html += '</div>';
 
+        // Social sharing
+        html += '<div class="field-section"><div class="field-section-title">Közösségi megosztás (OG kép)</div>';
+        html += imageField('Megosztási kép (Messenger, Viber, Facebook)', 'global.ogImage', data.ogImage);
+        html += '</div>';
+
         // Footer settings
         html += '<div class="field-section"><div class="field-section-title">Lábléc</div>';
         html += textField('Lábléc leírás', 'global.footerDesc', data.footerDesc);

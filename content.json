@@ -9,6 +9,7 @@
     "baseUrl": "https://www.silverframestudio.com",
     "footerDesc": "Professzionális fotózás Szegeden. Minden pillanat számít.",
     "footerImage": "",
+    "ogImage": "uploads/og-image.png",
     "copyright": "2026",
     "buttonStyle": "rounded",
     "phone": "+3620/3799-814"

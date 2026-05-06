@@ -3,6 +3,7 @@ const path = require('path');
 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'content.json'), 'utf-8'));
 const g = data.global;
+const globalOgImage = g.ogImage ? (g.ogImage.startsWith('http') ? g.ogImage : g.baseUrl + '/' + g.ogImage) : null;
 const cats = data.serviceCategories;
 
 // ── Shared HTML helpers ──
@@ -382,7 +383,7 @@ function buildIndex() {
   }, null, 8);
 
   const heroPreload = p.heroImages && p.heroImages[0] ? p.heroImages[0] : null;
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=1200&q=80', 'css/style.css', jsonLd, heroPreload)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', globalOgImage, 'css/style.css', jsonLd, heroPreload)}
 ${bodyTag()}
 ${boilerplate()}
 
@@ -604,7 +605,7 @@ function buildAbout() {
     "sameAs": sameAs
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', null, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'about', null)}
@@ -652,7 +653,7 @@ function buildPortfolio() {
   const p = data.pages.portfolio;
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Galéria`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": g.baseUrl + "/portfolio.html" });
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', null, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'portfolio', null)}
@@ -718,7 +719,7 @@ function buildServices() {
     }))
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', null, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'services', null)}
@@ -779,7 +780,7 @@ function buildContact() {
     }
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', null, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'contact', null)}
@@ -996,7 +997,7 @@ function buildPortfolioPage(id) {
     ]
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, null, '../css/style.css', pgJsonLd, p.heroImage)}
+  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, p.heroImage ? (g.baseUrl + '/' + p.heroImage) : globalOgImage, '../css/style.css', pgJsonLd, p.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('../', 'portfolio', null)}
@@ -1064,11 +1065,8 @@ ${mobileNavHtml('')}
 .bk-svc-name{padding:.6rem .8rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:center;transition:color .25s}
 .bk-svc-card.selected .bk-svc-name,.bk-svc-card:hover .bk-svc-name{color:var(--accent)}
 /* Step 2 layout */
-.bk-datetime{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2rem;border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
-.bk-cal-panel{padding:1.8rem;border-right:1px solid rgba(255,255,255,.07)}
-.bk-slots-panel{padding:1.8rem}
-@media(max-width:640px){.bk-datetime{grid-template-columns:1fr}.bk-cal-panel{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}}
-@media(max-width:400px){.bk-cal-panel{padding:1.2rem 0.8rem}.bk-slots-panel{padding:1.2rem 0.8rem}}
+.bk-cal-wrap{max-width:480px;margin:0 auto 2rem;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1.8rem}
+@media(max-width:400px){.bk-cal-wrap{padding:1.2rem .8rem}}
 /* Calendar */
 .bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
 .bk-cal-nav button{background:none;border:none;color:rgba(255,255,255,.4);width:2.8rem;height:2.8rem;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s;border-radius:4px}
@@ -1080,7 +1078,7 @@ ${mobileNavHtml('')}
 .bk-day{position:relative;text-align:center;padding:.7rem .2rem;font-size:.88rem;border-radius:6px;cursor:pointer;color:rgba(255,255,255,.85);transition:background .15s,color .15s;user-select:none;font-weight:400;min-height:2.8rem;display:flex;align-items:center;justify-content:center}
 .bk-day:hover:not(.past):not(.busy){background:rgba(201,169,110,.12);color:var(--accent)}
 .bk-day.past{opacity:.18;cursor:default}
-.bk-day.busy{opacity:.18;cursor:default}
+.bk-day.busy{opacity:.18;cursor:default;text-decoration:line-through}
 .bk-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent)}
 .bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
 .bk-day.selected::after{display:none}
@@ -1089,21 +1087,8 @@ ${mobileNavHtml('')}
 .bk-day.range-start.range-end{border-radius:6px}
 .bk-day.in-range{background:rgba(201,169,110,.15);border-radius:0;color:var(--text)}
 .bk-day.range-start::after,.bk-day.range-end::after{display:none}
-.bk-cal-loading{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:rgba(255,255,255,.2);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
-/* Time slots */
-.bk-slots-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;font-weight:500}
-.bk-slots-date{font-family:var(--font-display);font-size:1rem;font-weight:300;color:var(--text);margin-bottom:1.2rem}
-.bk-time-hint{font-size:.85rem;color:rgba(255,255,255,.2);margin-top:2rem;text-align:center;line-height:1.6}
-.bk-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
-@media(max-width:400px){.bk-slots{grid-template-columns:repeat(2,1fr)}}
-.bk-slot{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.7rem .4rem;font-size:.9rem;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;text-align:center;font-weight:400;min-height:2.75rem}
-.bk-slot:hover:not(:disabled){border-color:rgba(201,169,110,.4);color:var(--accent);background:rgba(201,169,110,.05)}
-.bk-slot.selected{background:var(--accent);border-color:var(--accent);color:#0e0e0e;font-weight:600}
-.bk-slot:disabled{opacity:.15;cursor:default}
-.bk-no-slots{grid-column:1/-1;font-size:.85rem;color:rgba(255,255,255,.25);text-align:center;padding:1.5rem 0}
-.bk-fullday-info{background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:8px;padding:1.2rem;text-align:center;color:var(--text-muted);font-size:.9rem;line-height:1.6}
-.bk-fullday-info strong{display:block;color:var(--accent);font-size:1rem;margin-bottom:.3rem}
-.bk-range-hint{font-size:.8rem;color:rgba(255,255,255,.3);margin-top:.8rem;text-align:center;letter-spacing:.03em}
+.bk-sel-info{max-width:480px;margin:0 auto 1rem;background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:8px;padding:1rem 1.4rem;text-align:center;color:var(--text-muted);font-size:.9rem;line-height:1.6;min-height:3.5rem;display:flex;align-items:center;justify-content:center}
+.bk-sel-info strong{color:var(--accent)}
 /* Step nav */
 .bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
 /* Summary bar */
@@ -1145,29 +1130,22 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                     </div>
                 </div>
 
-                <!-- Step 2: Date & time -->
+                <!-- Step 2: Date -->
                 <div class="booking-step" id="bkstep2">
                     <h2 class="bk-step-title">Mikor szeretnéd?</h2>
-                    <div class="bk-datetime">
-                        <div class="bk-cal-panel">
-                            <div class="bk-cal-nav">
-                                <button type="button" id="bkCalPrev">&#8249;</button>
-                                <span class="bk-cal-month" id="bkCalLabel"></span>
-                                <button type="button" id="bkCalNext">&#8250;</button>
-                            </div>
-                            <div class="bk-cal-grid">
-                                <div class="bk-cal-dow">H</div><div class="bk-cal-dow">K</div><div class="bk-cal-dow">Sze</div>
-                                <div class="bk-cal-dow">Cs</div><div class="bk-cal-dow">P</div><div class="bk-cal-dow">Szo</div><div class="bk-cal-dow">V</div>
-                            </div>
-                            <div class="bk-cal-days" id="bkCalDays"></div>
+                    <div class="bk-cal-wrap">
+                        <div class="bk-cal-nav">
+                            <button type="button" id="bkCalPrev">&#8249;</button>
+                            <span class="bk-cal-month" id="bkCalLabel"></span>
+                            <button type="button" id="bkCalNext">&#8250;</button>
                         </div>
-                        <div class="bk-slots-panel">
-                            <div class="bk-slots-label">Időpont</div>
-                            <div class="bk-slots-date" id="bkSlotsDate">&nbsp;</div>
-                            <p class="bk-time-hint" id="bkTimeHint">Válassz egy napot<br>a szabad időpontok megtekintéséhez</p>
-                            <div class="bk-slots" id="bkSlots"></div>
+                        <div class="bk-cal-grid">
+                            <div class="bk-cal-dow">H</div><div class="bk-cal-dow">K</div><div class="bk-cal-dow">Sze</div>
+                            <div class="bk-cal-dow">Cs</div><div class="bk-cal-dow">P</div><div class="bk-cal-dow">Szo</div><div class="bk-cal-dow">V</div>
                         </div>
+                        <div class="bk-cal-days" id="bkCalDays"></div>
                     </div>
+                    <div class="bk-sel-info" id="bkSelInfo">Válassz egy napot a naptárban</div>
                     <div class="bk-step-nav">
                         <button class="btn" type="button" id="bkBack1">&#8592; Vissza</button>
                         <button class="btn btn-solid" type="button" id="bkNext2" disabled>Tovább &#8594;</button>
@@ -1209,43 +1187,22 @@ ${footerHtml('')}
 <script src="js/main.js" defer></script>
 <script>
 (function(){
-var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
+  var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
   var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
-  var SVC_CONFIG=${JSON.stringify(Object.fromEntries(cats.map(c=>[c.id,{type:c.bookingType||'hourly',duration:c.bookingDuration||2}])))};
-  var selSvc=null,selSvcName=null,selDate=null,selEndDate=null,selTime=null;
+  var SVC_CONFIG=${JSON.stringify(Object.fromEntries(cats.map(c=>[c.id,{type:c.bookingType||'fullday',duration:c.bookingDuration||2}])))};
+  var selSvc=null,selSvcName=null,selDate=null,selEndDate=null;
   var cy,cm;
   var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
-  var availableData={};
-  var suggestedSlot=null;
+  var busyDays={};
 
-  function getConfig(){return SVC_CONFIG[selSvc]||{type:'hourly',duration:2};}
-
+  function getConfig(){return SVC_CONFIG[selSvc]||{type:'fullday',duration:2};}
+  function isMultiday(){return getConfig().type==='multiday';}
   function pad(n){return String(n).padStart(2,'0');}
+  function dateKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function isDayBusy(d){return !!busyDays[dateKey(d)];}
 
-  function loadAvailability(year,month,cb){
-    document.getElementById('bkCalDays').innerHTML='<div class="bk-shimmer-wrap">'+Array(28).fill('<div class="bk-shimmer-line"></div>').join('')+'</div>';
-    var cfg=getConfig();
-    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||'')+'&duration='+cfg.duration+'&bookingType='+cfg.type)
-      .then(function(r){return r.json();})
-      .then(function(d){
-        availableData=d.availableDays||{};
-        suggestedSlot=d.suggested||null;
-        if(cb)cb();
-      })
-      .catch(function(){availableData={};suggestedSlot=null;if(cb)cb();});
-  }
-
-  function dateKey(date){
-    return date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate());
-  }
-
-  function isDayAvailable(date){
-    var k=dateKey(date);
-    return availableData[k]&&availableData[k].length>0;
-  }
-
-  function getSlotsForDay(date){
-    return availableData[dateKey(date)]||[];
+  function fmtDate(d){
+    return d.getFullYear()+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
   }
 
   function goStep(n){
@@ -1253,27 +1210,20 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
       var s=document.getElementById('bkstep'+i);
       var p=document.getElementById('bkprog'+i);
       if(s) s.classList.toggle('active',i===n);
-      if(p){
-        p.classList.toggle('active',i===n);
-        p.classList.toggle('done',i<n);
-      }
+      if(p){ p.classList.toggle('active',i===n); p.classList.toggle('done',i<n); }
     });
     var sec=document.querySelector('.bk-section');
     if(sec) window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
   }
 
-  // Step 1: service select
-  document.querySelectorAll('.bk-svc-card').forEach(function(c){
-    c.addEventListener('click',function(){
-      document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
-      c.classList.add('selected');
-      selSvc=c.dataset.id; selSvcName=c.dataset.name;
-      selDate=null; selEndDate=null; selTime=null;
-      setTimeout(function(){goStep(2);loadAvailability(cy,cm,renderCal);},220);
-    });
-  });
+  function loadBusy(year,month,cb){
+    document.getElementById('bkCalDays').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:rgba(255,255,255,.2);font-size:.8rem;letter-spacing:.1em">Betöltés...</div>';
+    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||'')+'&bookingType='+getConfig().type)
+      .then(function(r){return r.json();})
+      .then(function(d){ busyDays=d.busyDays||{}; if(cb)cb(); })
+      .catch(function(){ busyDays={}; if(cb)cb(); });
+  }
 
-  // Calendar
   function renderCal(){
     document.getElementById('bkCalLabel').textContent=MONTHS[cm]+' '+cy;
     var today=new Date(); today.setHours(0,0,0,0);
@@ -1282,12 +1232,10 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     var dim=new Date(cy,cm+1,0).getDate();
     var html='';
     for(var i=0;i<startDay;i++) html+='<div></div>';
-    var cfg=getConfig();
     for(var d=1;d<=dim;d++){
       var dt=new Date(cy,cm,d);
       var past=dt<today;
-      var avail=cfg.type==='multiday'||isDayAvailable(dt);
-      var busy=!past&&!avail;
+      var busy=!past&&isDayBusy(dt);
       var isStart=selDate&&dt.toDateString()===selDate.toDateString();
       var isEnd=selEndDate&&dt.toDateString()===selEndDate.toDateString();
       var inRange=selDate&&selEndDate&&dt>selDate&&dt<selEndDate;
@@ -1295,7 +1243,7 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
       var cls='bk-day';
       if(past) cls+=' past';
       else if(busy) cls+=' busy';
-      if(cfg.type==='multiday'){
+      if(isMultiday()){
         if(isStart) cls+=' range-start';
         if(isEnd) cls+=' range-end';
         if(inRange) cls+=' in-range';
@@ -1309,9 +1257,8 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
     document.querySelectorAll('.bk-day:not(.past):not(.busy)').forEach(function(el){
       el.addEventListener('click',function(){
         var clicked=new Date(parseInt(el.dataset.ts));
-        var cfg=getConfig();
-        if(cfg.type==='multiday'){
-          if(!selDate||selEndDate||(clicked<selDate)){
+        if(isMultiday()){
+          if(!selDate||selEndDate||clicked<=selDate){
             selDate=clicked; selEndDate=null;
             document.getElementById('bkNext2').disabled=true;
           } else {
@@ -1319,87 +1266,68 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
             document.getElementById('bkNext2').disabled=false;
           }
         } else {
-          selDate=clicked; selTime=null;
-          document.getElementById('bkNext2').disabled=(cfg.type==='hourly');
-          if(cfg.type==='fullday') document.getElementById('bkNext2').disabled=false;
+          selDate=clicked;
+          document.getElementById('bkNext2').disabled=false;
         }
-        renderCal(); renderSlots();
+        renderCal(); renderSelInfo();
       });
     });
   }
 
-  function renderSlots(){
-    var hint=document.getElementById('bkTimeHint');
-    var wrap=document.getElementById('bkSlots');
-    var dateEl=document.getElementById('bkSlotsDate');
-    var cfg=getConfig();
-    if(!selDate){wrap.innerHTML='';hint.style.display='block';if(dateEl)dateEl.innerHTML='&nbsp;';return;}
-    hint.style.display='none';
-    if(dateEl) dateEl.textContent=fmtDate(selDate);
-
-    if(cfg.type==='fullday'){
-      wrap.innerHTML='<div class="bk-fullday-info"><strong>Egész napos fotózás</strong>'+fmtDate(selDate)+'<br><span style="font-size:.8rem;opacity:.6">~'+cfg.duration+' óra</span></div>';
-      return;
-    }
-    if(cfg.type==='multiday'){
+  function renderSelInfo(){
+    var el=document.getElementById('bkSelInfo');
+    if(!el) return;
+    if(!selDate){ el.innerHTML='Válassz egy napot a naptárban'; return; }
+    if(isMultiday()){
       if(!selEndDate){
-        wrap.innerHTML='<div class="bk-fullday-info">Kezdő nap: <strong>'+fmtDate(selDate)+'</strong><br><span style="font-size:.8rem;opacity:.5">Válaszd ki a záró napot a naptárban</span></div>';
+        el.innerHTML='Kezdő nap: <strong>'+fmtDate(selDate)+'</strong> — válaszd ki a záró napot';
       } else {
-        wrap.innerHTML='<div class="bk-fullday-info"><strong>'+fmtDate(selDate)+' — '+fmtDate(selEndDate)+'</strong><br><span style="font-size:.8rem;opacity:.6">Többnapos rendezvény</span></div>';
+        el.innerHTML='<strong>'+fmtDate(selDate)+'</strong> &nbsp;→&nbsp; <strong>'+fmtDate(selEndDate)+'</strong>';
       }
-      return;
+    } else {
+      el.innerHTML='<strong>'+fmtDate(selDate)+'</strong>';
     }
-    var daySlots=getSlotsForDay(selDate);
-    if(!daySlots.length){
-      wrap.innerHTML='<div class="bk-no-slots">Ezen a napon nincs szabad időpont.</div>';
-      return;
-    }
-    wrap.innerHTML=daySlots.map(function(t){
-      return '<button type="button" class="bk-slot'+(selTime===t?' selected':'')+'" data-t="'+t+'">'+t+'</button>';
-    }).join('');
-    wrap.querySelectorAll('.bk-slot').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        selTime=btn.dataset.t;
-        document.getElementById('bkNext2').disabled=false;
-        renderSlots();
-      });
-    });
   }
 
   document.getElementById('bkCalPrev').addEventListener('click',function(){
-    cm--; if(cm<0){cm=11;cy--;} loadAvailability(cy,cm,renderCal);
+    cm--; if(cm<0){cm=11;cy--;} loadBusy(cy,cm,renderCal);
   });
   document.getElementById('bkCalNext').addEventListener('click',function(){
-    cm++; if(cm>11){cm=0;cy++;} loadAvailability(cy,cm,renderCal);
+    cm++; if(cm>11){cm=0;cy++;} loadBusy(cy,cm,renderCal);
   });
 
-  function fmtDate(d){
-    return d.getFullYear()+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
-  }
-
-  function showSummary(){
-    var el=document.getElementById('bkSummary');
-    if(!el) return;
-    el.style.display='flex';
-    var cfg=getConfig();
-    var dateStr=cfg.type==='multiday'&&selEndDate?fmtDate(selDate)+' — '+fmtDate(selEndDate):fmtDate(selDate);
-    var timeStr=cfg.type==='hourly'?'<span>🕐 '+selTime+'</span>':'<span>🌅 '+( cfg.type==='fullday'?'Egész napos':'Többnapos')+'</span>';
-    el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+dateStr+'</span>'+timeStr;
-  }
+  // Step 1
+  document.querySelectorAll('.bk-svc-card').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
+      c.classList.add('selected');
+      selSvc=c.dataset.id; selSvcName=c.dataset.name;
+      selDate=null; selEndDate=null;
+      setTimeout(function(){ goStep(2); loadBusy(cy,cm,renderCal); renderSelInfo(); },220);
+    });
+  });
 
   document.getElementById('bkBack1').addEventListener('click',function(){goStep(1);});
-  document.getElementById('bkNext2').addEventListener('click',function(){showSummary();goStep(3);});
+  document.getElementById('bkNext2').addEventListener('click',function(){
+    var el=document.getElementById('bkSummary');
+    if(el){
+      var dateStr=isMultiday()&&selEndDate?fmtDate(selDate)+' — '+fmtDate(selEndDate):fmtDate(selDate);
+      el.style.display='flex';
+      el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+dateStr+'</span>';
+    }
+    goStep(3);
+  });
   document.getElementById('bkBack2').addEventListener('click',function(){goStep(2);});
 
-  // Form submit → n8n
+  // Form submit
   document.getElementById('bkForm').addEventListener('submit',async function(e){
     e.preventDefault();
     var btn=document.getElementById('bkSubmit');
     var err=document.getElementById('bkError');
     btn.querySelector('span').textContent='Küldés...';
     btn.disabled=true; err.style.display='none';
-    var dateStr=selDate?fmtDate(selDate):'—';
     var isoDate=selDate?dateKey(selDate):'';
+    var dateStr=selDate?fmtDate(selDate):'—';
     try{
       var res=await fetch(N8N+'/book',{
         method:'POST',
@@ -1410,7 +1338,6 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
           bookingType:getConfig().type,
           date:isoDate,
           endDate:selEndDate?dateKey(selEndDate):null,
-          time:getConfig().type==='hourly'?selTime:null,
           duration:getConfig().duration,
           name:document.getElementById('bkName').value,
           email:document.getElementById('bkEmail').value,
@@ -1419,10 +1346,10 @@ var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
         })
       });
       if(res.ok){
+        var endStr=selEndDate?' → '+fmtDate(selEndDate):'';
         document.getElementById('bkSuccessDetails').innerHTML=
           '<div style="margin:.8rem 0;color:var(--text-muted);font-size:.9rem">'+
-          selSvcName+' &nbsp;·&nbsp; '+dateStr+' &nbsp;·&nbsp; '+selTime+
-          '</div>';
+          selSvcName+' &nbsp;·&nbsp; '+dateStr+endStr+'</div>';
         goStep(4);
       } else {
         btn.querySelector('span').textContent='Foglalás elküldése';
@@ -1573,7 +1500,7 @@ function buildArakPage() {
     "url": `${g.baseUrl}/arak.html`
   });
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/arak.html', p.title, p.metaDesc, 'website', g.baseUrl + '/arak.html', null, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/arak.html', p.title, p.metaDesc, 'website', g.baseUrl + '/arak.html', globalOgImage, 'css/style.css', jsonLd)}
     <style>
     .arak-hero-stats { display:flex; gap:2.5rem; justify-content:center; margin-top:2rem; flex-wrap:wrap; }
     .ahs-item { text-align:center; opacity:0; animation:fadeUp 0.7s var(--ease-dramatic) forwards; animation-delay:calc(var(--si)*150ms + 800ms); }
