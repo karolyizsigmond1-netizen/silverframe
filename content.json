@@ -12,7 +12,9 @@
     "ogImage": "uploads/og-image.png",
     "copyright": "2026",
     "buttonStyle": "rounded",
-    "phone": "+3620/3799-814"
+    "phone": "+3620/3799-814",
+    "oauthClientId": "1035859647139-oagj2o4llahv22rff7s2bera9ca13kvr.apps.googleusercontent.com",
+    "analyticsPassword": "silverframe"
   },
   "serviceCategories": [
     {
