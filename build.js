@@ -217,6 +217,8 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
     ${fonts()}
     <link rel="stylesheet" href="${cssPath}">
     ${jsonLd ? `<script type="application/ld+json">\n    ${jsonLd}\n    </script>` : ''}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XKFQW9J2N0');</script>
 </head>`;
 }
 
