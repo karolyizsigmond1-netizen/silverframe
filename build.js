@@ -2158,7 +2158,7 @@ function buildAnalyticsPage() {
       var v=parseInt(r.metricValues[0].value)||0;
       var s=parseInt(r.metricValues[1].value)||0;
       var pct=Math.round(v/max*100);
-      var name=p.replace(/^\//,'').replace(/\.html$/,'').replace(/^services\//,'').replace(/^portfolio\//,'').replace(/-/g,' ')||'Főoldal';
+      var name=p; if(name[0]==='/') name=name.slice(1); if(name.slice(-5)==='.html') name=name.slice(0,-5); if(name.indexOf('services/')===0) name=name.slice(9); if(name.indexOf('portfolio/')===0) name=name.slice(10); name=name.replace(/-/g,' ')||'Főoldal';
       html+='<tr><td><div class="bar-bg" style="width:'+pct+'%"></div>'+name+'</td><td class="num">'+v.toLocaleString('hu')+'</td><td class="num" style="color:var(--muted)">'+s.toLocaleString('hu')+'</td></tr>';
     });
     html+='</tbody></table>';
