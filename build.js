@@ -1836,10 +1836,13 @@ ${chatbotHtml()}
 // ── Analytics dashboard ──
 
 function buildAnalyticsPage() {
-  var tmpl = require('fs').readFileSync(require('path').join(__dirname, 'analytics-template.html'), 'utf-8');
+  const crypto = require('crypto');
+  const pass = g.analyticsPassword || 'silverframe';
+  const passHash = crypto.createHash('sha256').update(pass).digest('hex');
+  var tmpl = fs.readFileSync(path.join(__dirname, 'analytics-template.html'), 'utf-8');
   return tmpl
     .replace('__CLIENT_ID__', g.oauthClientId || 'REPLACE_WITH_OAUTH_CLIENT_ID')
-    .replace('__PASS__', g.analyticsPassword || 'silverframe')
+    .replace('__PASS_HASH__', passHash)
     .replace('__GA_PROP__', '536432576');
 }
 

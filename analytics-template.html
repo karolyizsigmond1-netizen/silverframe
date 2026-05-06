@@ -192,7 +192,7 @@
 (function(){
     var GA_PROP = '__GA_PROP__';
     var CLIENT_ID = '__CLIENT_ID__';
-    var PASS = '__PASS__';
+    var PASS_HASH = '__PASS_HASH__';
     var token = null;
     var days = 7;
     var charts = {};
@@ -251,8 +251,11 @@
     function eventInfo(name) { return EVENT_MAP[name] || { hu: name, emoji: '📊' }; }
 
     // ── Gate ──
-    function checkPass() {
-        if (document.getElementById('gatePass').value === PASS) {
+    async function checkPass() {
+        var val = document.getElementById('gatePass').value;
+        var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(val));
+        var hash = Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+        if (hash === PASS_HASH) {
             gateEl.style.display = 'none';
             token ? showDash() : showAuth();
         } else {
