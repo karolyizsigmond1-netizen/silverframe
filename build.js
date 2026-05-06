@@ -1993,8 +1993,12 @@ function buildAnalyticsPage() {
   // ── Google Auth ──
   function showAuth() {
     authSc.style.display = 'flex';
-    if (window.google && window.google.accounts) initAuth();
-    else document.querySelector('script[src*="gsi"]').onload = initAuth;
+    waitForGoogle(initAuth);
+  }
+
+  function waitForGoogle(cb) {
+    if (window.google && window.google.accounts && window.google.accounts.oauth2) { cb(); }
+    else { setTimeout(function(){ waitForGoogle(cb); }, 150); }
   }
 
   var tokenClient;
