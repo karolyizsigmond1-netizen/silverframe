@@ -115,6 +115,24 @@ button { font-family: inherit; cursor: pointer; }
     transition: background 0.4s, border-color 0.4s, color 0.4s;
 }
 .header-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.lang-toggle {
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted, var(--text-primary));
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    margin-left: 0.4rem;
+}
+.lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.lang-toggle::after { display: none !important; }
+.mn-lang-toggle {
+    margin-top: 0.6rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+}
 
 /* Hamburger */
 .menu-toggle {

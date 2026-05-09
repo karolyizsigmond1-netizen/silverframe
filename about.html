@@ -6,6 +6,9 @@
     <title>Rólam — Károlyi István | Silverframe Szeged</title>
     <meta name="description" content="Ismerd meg Károlyi Istvánt, a Silverframe Studio fotósát. Több mint 10 éves tapasztalat, professzionális fotózás Szegeden.">
     <link rel="canonical" href="https://www.silverframestudio.com/about.html">
+    <link rel="alternate" hreflang="hu" href="https://www.silverframestudio.com/about.html">
+    <link rel="alternate" hreflang="en" href="https://www.silverframestudio.com/en/about.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.silverframestudio.com/about.html">
     <meta property="og:title" content="Rólam — Károlyi István | Silverframe Szeged">
     <meta property="og:description" content="Ismerd meg Károlyi Istvánt, a Silverframe Studio fotósát. Több mint 10 éves tapasztalat, professzionális fotózás Szegeden.">
     <meta property="og:type" content="website">
@@ -61,6 +64,7 @@
             <a href="about.html" class="active">Rólam</a>
             <a href="contact.html">Kapcsolat</a>
             <a href="booking.html" class="header-cta">Időpontfoglalás</a>
+            <a href="en/about.html" class="lang-toggle" aria-label="Switch to English" rel="alternate" hreflang="en">EN</a>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
     </header>
@@ -74,6 +78,7 @@
                 <a class="mn-link" href="arak.html">Árak</a>
                 <a class="mn-link" href="about.html">Rólam</a>
                 <a class="mn-link" href="contact.html">Kapcsolat</a>
+                <a class="mn-link mn-lang-toggle" href="en/about.html" rel="alternate" hreflang="en">English</a>
             </div>
 
             <div class="mn-services">
@@ -513,17 +518,17 @@
   }
 
   function setFollowUp(lower) {
-    if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer')) {
+    if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer') || lower.includes('photography') || lower.includes('shoot') || lower.includes('what kind') || lower.includes('what types')) {
       showQuick(['Esküvő', 'Portré / Modell', 'Kismama fotózás', 'Rendezvényfotózás']);
     } else if (lower.includes('esküvő') || lower.includes('wedding')) {
       showQuick(['Mennyi ideig tart?', 'Mi van a csomagban?', 'Kreatív esküvői opció', 'Árajánlatot kérek']);
-    } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('üzleti') || lower.includes('céges')) {
+    } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('üzleti') || lower.includes('céges') || lower.includes('portrait') || lower.includes('model') || lower.includes('business') || lower.includes('corporate') || lower.includes('headshot')) {
       showQuick(['Mennyi ideig tart?', 'Hol lesz a fotózás?', 'Hány képet kapok?', 'Időpontot foglalnék']);
-    } else if (lower.includes('család') || lower.includes('pár') || lower.includes('kismama')) {
+    } else if (lower.includes('család') || lower.includes('pár') || lower.includes('kismama') || lower.includes('family') || lower.includes('couple') || lower.includes('maternity') || lower.includes('pregnan')) {
       showQuick(['Beltéri vagy kültéri?', 'Mennyi ideig tart?', 'Mik az árak?', 'Időpontot foglalnék']);
-    } else if (lower.includes('ár') || lower.includes('csomag') || lower.includes('mennyibe') || lower.includes('price')) {
+    } else if (lower.includes('ár') || lower.includes('csomag') || lower.includes('mennyibe') || lower.includes('price') || lower.includes('cost') || lower.includes('package') || lower.includes('how much')) {
       showQuick(['Esküvői csomagok', 'Portré szesszió', 'Rendezvényfotózás', 'Árajánlatot kérek']);
-    } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad')) {
+    } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad') || lower.includes('book') || lower.includes('available') || lower.includes('schedule')) {
       showQuick(['E-mailt küldök', 'Instagram üzenet', 'Milyen infóra van szükség?']);
     } else {
       showQuick(['Összes fotózás típus', 'Árinformáció', 'Időpontot foglalnék', 'Kapcsolat Istvánnal']);
@@ -534,41 +539,41 @@
   function getDemoReply(lower) {
     return new Promise(function(resolve) {
       setTimeout(function() {
-        if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer')) {
+        if (lower.includes('fotózás') || lower.includes('milyen') || lower.includes('típus') || lower.includes('kínál') || lower.includes('service') || lower.includes('offer') || lower.includes('photography') || lower.includes('shoot') || lower.includes('what kind') || lower.includes('what types')) {
           resolve('A Silverframe Stúdió számos fotózási típust kínál:\n\n• Portré és modellszesszió\n• Kismama fotózás és újszülött fotók\n• Boudoir\n• Családi portrék\n• Páros és jegyesi fotózás\n• Üzleti / céges arcképek\n• Ingatlan- és enteriőrfotózás\n• Esküvői fotózás (hagyományos és kreatív)\n• Rendezvény- és cégesfotózás\n• Kisállat fotózás\n• Termékfotózás\n\nMindent a te igényeidre szabunk. Melyik érdekel leginkább?');
         } else if ((lower.includes('esküvő') || lower.includes('wedding')) && (lower.includes('kreatív') || lower.includes('creative'))) {
           resolve('István kreatív esküvői fotózása messze túlmutat a szokványos képeken – ez valójában történetmesélés, hangulat és az igazi pillanatok megörökítése.\n\nDokumentarista stílus és művészi kompozíció keveréke. Kevesebb póz, több valódiság.\n\nSzeretnél példákat látni, vagy megbeszélni az elképzeléseidet? Keress minket: info@silverframe.hu vagy @silverframefoto Instagramon.');
         } else if (lower.includes('esküvő') || lower.includes('wedding')) {
           resolve('Az esküvői fotózás István egyik szakterülete – 10+ év tapasztalattal pontosan tudja, hogyan kell megragadni a nap érzelmeit anélkül, hogy állandóan a kamera előtt éreznéd magad.\n\nA lefedettség általában magában foglalja az öltöztetést, a ceremóniát és a bulit. Kreatív esküvői fotózás is elérhető azoknak a párnak, akik egyedibb megközelítést szeretnének.\n\nEllenőrizd a dátumodat: írj az info@silverframe.hu-ra a dátummal és a helyszínnel.');
-        } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('portfol')) {
+        } else if (lower.includes('portré') || lower.includes('modell') || lower.includes('portfol') || lower.includes('portrait') || lower.includes('model')) {
           resolve('A portré és modellszessziók kiválóak galéria építéséhez vagy megújításához. István olyan légkört teremt, amelyben természetesnek érzed magad – nem merev, hanem önmagad.\n\nA fotózás stúdióban vagy külső helyszínen is elvégezhető Szegeden és környékén.\n\nHány outfitet vagy beállítást tervezel? Ez segít a szesszió hosszát és a csomagot meghatározni.');
         } else if (lower.includes('boudoir')) {
           resolve('A boudoir szessziók intim és személyes élmények – István professzionálisan és diszkréten közelíti meg ezeket, hogy mindvégig kényelemben és magabiztosan érezd magad.\n\nA cél mindig az, hogy a legjobb formádat mutasd, hitelesen.\n\nRészletekért írj: info@silverframe.hu.');
-        } else if (lower.includes('kismama') || lower.includes('terhes') || lower.includes('várandós') || lower.includes('újszülött')) {
+        } else if (lower.includes('kismama') || lower.includes('terhes') || lower.includes('várandós') || lower.includes('újszülött') || lower.includes('maternity') || lower.includes('pregnan') || lower.includes('newborn')) {
           resolve('A kismama fotózásra ideális időpont a 28–34. terhességi hét – amikor a pocak gyönyörűen látszik, de még kényelmes minden.\n\nIstván meleg, érzelmes képeket készít, amelyeket egész életedben kincsként fogsz őrizni.\n\nSzeretné megbeszélni az időzítést? Keress minket: info@silverframe.hu.');
-        } else if (lower.includes('család') || lower.includes('gyerek') || lower.includes('gyermek')) {
+        } else if (lower.includes('család') || lower.includes('gyerek') || lower.includes('gyermek') || lower.includes('family') || lower.includes('kid') || lower.includes('child')) {
           resolve('A családi fotózások megörökítik a jelent – és ezek a pillanatok gyorsan változnak.\n\nIstván remekül dolgozik gyerekekkel – inkább játékos és laza légkört teremt, semmint merev pózokat erőltet.\n\nHány fős a család? Ez segít megtervezni a szesszió hosszát.');
-        } else if (lower.includes('páros') || lower.includes('jegyes') || lower.includes('pár')) {
+        } else if (lower.includes('páros') || lower.includes('jegyes') || lower.includes('pár') || lower.includes('couple') || lower.includes('engagement')) {
           resolve('Páros és jegyesi fotózás remek lehetőség arra, hogy megszokd a kamera előtt érzést – vagy hogy egyszerűen szép képeket kapjatok egymásról.\n\nIstván természetes pillanatokat és valódi kapcsolatot örökít meg, nem csak pózokat. A szesszió jellemzően 1–2 óráig tart.\n\nÍrjatok: info@silverframe.hu vagy @silverframefoto.');
-        } else if (lower.includes('üzleti') || lower.includes('céges') || lower.includes('vállalkozás') || lower.includes('fejlövés')) {
+        } else if (lower.includes('üzleti') || lower.includes('céges') || lower.includes('vállalkozás') || lower.includes('fejlövés') || lower.includes('business') || lower.includes('corporate') || lower.includes('headshot') || lower.includes('linkedin')) {
           resolve('Az üzleti portréfotózás gyors és hatékony – általában 30–60 perc. Profi, igényes fejlövésekkel távozhatsz, amelyek tökéletesek LinkedIn-hez, weboldalhoz vagy sajtóanyaghoz.\n\nIstván tiszta, semleges stílusban fényképez, hogy te kerülj a fókuszba.\n\nIdőpontot foglalnál? Írj az info@silverframe.hu-ra.');
-        } else if (lower.includes('ingatlan') || lower.includes('lakás') || lower.includes('enteriőr')) {
+        } else if (lower.includes('ingatlan') || lower.includes('lakás') || lower.includes('enteriőr') || lower.includes('real estate') || lower.includes('property') || lower.includes('interior') || lower.includes('apartment')) {
           resolve('Az ingatlanfotózás gyors átfutást és olyan képeket igényel, amelyek a legjobb fényben mutatják be az ingatlant.\n\nIstván belső tereket, külső homlokzatokat és részletfotókat is készít.\n\nHelyszínnel és időzítési igényekkel írj: info@silverframe.hu.');
         } else if (lower.includes('rendezvény') || lower.includes('esemény') || lower.includes('buli') || lower.includes('event')) {
           resolve('A rendezvényfotózás magában foglalja a céges eseményeket, bulikat, termékbemutatókat, konferenciákat és személyes ünnepléseket.\n\nIstván feltűnésmentesen dolgozik, megörökítve a kulcspillanatokat az esemény során.\n\nDátummal és helyszínnel írj: info@silverframe.hu.');
-        } else if (lower.includes('kisállat') || lower.includes('kutya') || lower.includes('macska') || lower.includes('állat')) {
+        } else if (lower.includes('kisállat') || lower.includes('kutya') || lower.includes('macska') || lower.includes('állat') || lower.includes('pet') || lower.includes('dog') || lower.includes('cat') || lower.includes('animal')) {
           resolve('A kisállat fotózással megörökítjük a négylábú barátod személyiségét – nem csak egy általános állatfotót készítünk.\n\nKutyák, macskák, lovak – mindenki szívesen látott.\n\nFoglalnál időpontot? Írj: info@silverframe.hu vagy @silverframefoto Instagramon.');
-        } else if (lower.includes('termék') || lower.includes('kereskedelm')) {
+        } else if (lower.includes('termék') || lower.includes('kereskedelm') || lower.includes('product') || lower.includes('e-commerce') || lower.includes('webshop')) {
           resolve('A termékfotózás a márkádra szabva készül – tiszta fehér hátteres e-kereskedelmi képektől a lifestyle fotókig.\n\nIstván szegedi és környékbeli kis- és egyéni vállalkozásokkal dolgozik együtt.\n\nA terméked megbeszéléséhez írj: info@silverframe.hu.');
-        } else if (lower.includes('ár') || lower.includes('mennyibe') || lower.includes('díj') || lower.includes('csomag') || lower.includes('ajánlat') || lower.includes('price') || lower.includes('cost')) {
+        } else if (lower.includes('ár') || lower.includes('mennyibe') || lower.includes('díj') || lower.includes('csomag') || lower.includes('ajánlat') || lower.includes('price') || lower.includes('cost') || lower.includes('how much') || lower.includes('quote') || lower.includes('package')) {
           resolve('Az árazás a szesszió típusától, hosszától és a tartalomtól függ.\n\nIstván szívesebben állít össze személyre szabott ajánlatot – így csak azért fizetsz, amire valóban szükséged van.\n\nAjánlatkérés: küldj e-mailt az info@silverframe.hu-ra a szesszió típusával. Általában aznap választ kapsz.');
-        } else if (lower.includes('hol') || lower.includes('helyszín') || lower.includes('stúdió') || lower.includes('szeged')) {
+        } else if (lower.includes('hol') || lower.includes('helyszín') || lower.includes('stúdió') || lower.includes('szeged') || lower.includes('where') || lower.includes('location') || lower.includes('studio')) {
           resolve('A Silverframe Stúdió Szegeden, Magyarországon működik.\n\nA fotózás elvégezhető stúdióban vagy külső helyszínen – parkokban, városi terekben, otthonodban, templomban esküvőkhöz.\n\nIstván esküvőkre és nagyobb eseményekre utazik is.');
-        } else if (lower.includes('mennyi') || lower.includes('meddig') || lower.includes('óra') || lower.includes('hosszú')) {
+        } else if (lower.includes('mennyi') || lower.includes('meddig') || lower.includes('óra') || lower.includes('hosszú') || lower.includes('how long') || lower.includes('duration') || lower.includes('hours')) {
           resolve('A szesszió hossza típusonként változik:\n\n• Üzleti arcképek: 30–60 perc\n• Páros / Családi: 1–2 óra\n• Kismama / Portré: 1–2 óra\n• Rendezvény: fél- vagy egész nap\n• Esküvő: általában 6–10 óra\n\nVan valamilyen konkrét szesszió a fejedben?');
-        } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad') || lower.includes('elérhetőség') || lower.includes('kapcsolat')) {
+        } else if (lower.includes('foglal') || lower.includes('időpont') || lower.includes('szabad') || lower.includes('elérhetőség') || lower.includes('kapcsolat') || lower.includes('book') || lower.includes('available') || lower.includes('schedule') || lower.includes('contact')) {
           resolve('A foglaláshoz vagy az elérhetőség ellenőrzéséhez lépj kapcsolatba Istvánnal:\n\n📧 info@silverframe.hu\n📸 @silverframefoto (Instagram)\n📘 silverframefoto (Facebook)\n\nCsak jelezd a fotózás típusát, a preferált dátumot és az egyéb részleteket – hamarosan visszajelez.');
-        } else if (lower.includes('istván') || lower.includes('fotós') || lower.includes('tapasztalat') || lower.includes('ki vagy') || lower.includes('rólad')) {
+        } else if (lower.includes('istván') || lower.includes('fotós') || lower.includes('tapasztalat') || lower.includes('ki vagy') || lower.includes('rólad') || lower.includes('photographer') || lower.includes('experience') || lower.includes('about you') || lower.includes('about him') || lower.includes('who are')) {
           resolve('István a Silverframe Stúdió mögötti fotós – szegedi, 10+ év szakmai tapasztalattal.\n\nMegközelítése laza és személyes. Az ügyfelek következetesen megemlítik, hogy kényelemben érezték magukat a fotózáson – és ez pontosan az oka, hogy a képek igaziak lesznek.\n\nSok különböző stílusban dolgozik – a csendes portréktól a dinamikus rendezvényfotózásig. Számára minden pillanat számít.');
         } else {
           resolve('Jó kérdés! István szívesen megbeszéli személyesen.\n\n📧 info@silverframe.hu\n📸 @silverframefoto Instagramon\n\nCsak jelezd, milyen fotózásra gondolsz, és hamarosan visszajelez.');

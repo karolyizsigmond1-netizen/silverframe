@@ -6,6 +6,55 @@ const g = data.global;
 const globalOgImage = g.ogImage ? (g.ogImage.startsWith('http') ? g.ogImage : g.baseUrl + '/' + g.ogImage) : null;
 const cats = data.serviceCategories;
 
+// ── i18n ──
+const i18n = JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n.json'), 'utf-8'));
+delete i18n._comment;
+let LANG = 'hu';                  // 'hu' | 'en'  (set per build pass)
+let ASSET_UP = '';                // bridge from language root to actual root: '' for hu, '../' for en
+const LANG_ROOT = { hu: '', en: 'en/' };
+
+// Apply HU→EN translation to a generated HTML string.
+// Uses placeholder tokens to avoid double-replacement when an EN value contains a HU key.
+function translateHtml(html) {
+  if (LANG !== 'en') return html;
+  const keys = Object.keys(i18n).sort((a, b) => b.length - a.length);
+  const placeholders = [];
+  keys.forEach((k, i) => {
+    const v = i18n[k];
+    if (!k || v === undefined || k === v) return;
+    if (html.indexOf(k) === -1) return;
+    const ph = 'TR' + i + '';
+    html = html.split(k).join(ph);
+    placeholders.push([ph, v]);
+  });
+  for (const [ph, en] of placeholders) html = html.split(ph).join(en);
+  return html;
+}
+
+// Build the URL of the language toggle for the current page.
+// pagePath is the file path relative to the language root (e.g. 'index.html', 'services/wedding.html').
+function langToggleHref(pagePath, prefix) {
+  if (LANG === 'hu') {
+    // HU page → EN page: from /<pagePath> (or /sub/<pagePath>) navigate up to root, then into /en/
+    return `${prefix}en/${pagePath}`;
+  }
+  // EN page → HU page: bridge up out of /en/ then navigate to /<pagePath>
+  return `${ASSET_UP}${prefix}${pagePath}`;
+}
+
+function langToggleHtml(pagePath, prefix) {
+  const href = langToggleHref(pagePath, prefix);
+  const label = LANG === 'hu' ? 'EN' : 'HU';
+  const aria = LANG === 'hu' ? 'Switch to English' : 'Magyar verzió';
+  return `<a href="${href}" class="lang-toggle" aria-label="${aria}" rel="alternate" hreflang="${LANG === 'hu' ? 'en' : 'hu'}">${label}</a>`;
+}
+
+function langToggleMobileHtml(pagePath, prefix) {
+  const href = langToggleHref(pagePath, prefix);
+  const label = LANG === 'hu' ? 'English' : 'Magyar';
+  return `<a class="mn-link mn-lang-toggle" href="${href}" rel="alternate" hreflang="${LANG === 'hu' ? 'en' : 'hu'}">${label}</a>`;
+}
+
 // ── Shared HTML helpers ──
 
 const arrowSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
@@ -19,7 +68,8 @@ function btn(href, text, solid = false) {
 function imgSrc(src, prefix) {
   if (!src) return '';
   if (src.startsWith('http://') || src.startsWith('https://')) return src;
-  return prefix + src;
+  if (src.startsWith('/')) return src;
+  return ASSET_UP + (prefix || '') + src;
 }
 
 // Read image dimensions from file header (JPEG/PNG). Returns {w,h} or null.
@@ -201,21 +251,40 @@ function fonts() {
 }
 
 function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImage, cssPath, jsonLd, preloadImg) {
+  // Convert HU canonical → EN canonical when building EN.
+  // canonical is like 'https://host.com/' or 'https://host.com/services/wedding.html'.
+  let canonicalUrl = canonical;
+  let huHref = canonical;
+  let enHref = canonical;
+  try {
+    const huU = new URL(canonical);
+    huHref = huU.toString();
+    const pathPart = huU.pathname === '/' ? '/' : huU.pathname;
+    const enU = new URL(huU.toString());
+    enU.pathname = pathPart === '/' ? '/en/' : '/en' + pathPart;
+    enHref = enU.toString();
+    canonicalUrl = LANG === 'en' ? enHref : huHref;
+  } catch (e) { /* keep defaults */ }
+
   const preload = preloadImg ? `\n    <link rel="preload" as="image" href="${preloadImg.startsWith('http') ? preloadImg : '/' + preloadImg}">` : '';
+  const cssHref = (cssPath && !/^https?:/.test(cssPath) && !cssPath.startsWith('/')) ? ASSET_UP + cssPath : cssPath;
   return `<!DOCTYPE html>
-<html lang="hu">
+<html lang="${LANG}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>${title}</title>
     <meta name="description" content="${desc}">
-    <link rel="canonical" href="${canonical}">
+    <link rel="canonical" href="${canonicalUrl}">
+    <link rel="alternate" hreflang="hu" href="${huHref}">
+    <link rel="alternate" hreflang="en" href="${enHref}">
+    <link rel="alternate" hreflang="x-default" href="${huHref}">
     <meta property="og:title" content="${ogTitle || title}">
     <meta property="og:description" content="${ogDesc || desc}">
     <meta property="og:type" content="${ogType || 'website'}">
-    <meta property="og:url" content="${ogUrl || canonical}">${ogImage ? `\n    <meta property="og:image" content="${ogImage}">` : ''}${preload}
+    <meta property="og:url" content="${ogUrl ? (LANG === 'en' && ogUrl === canonical ? canonicalUrl : ogUrl) : canonicalUrl}">${ogImage ? `\n    <meta property="og:image" content="${ogImage}">` : ''}${preload}
     ${fonts()}
-    <link rel="stylesheet" href="${cssPath}">
+    <link rel="stylesheet" href="${cssHref}">
     ${jsonLd ? `<script type="application/ld+json">\n    ${jsonLd}\n    </script>` : ''}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XKFQW9J2N0');</script>
@@ -239,7 +308,8 @@ function navDropdown(prefix, activeService) {
             </div>`;
 }
 
-function headerHtml(prefix, activePage, activeService) {
+function headerHtml(prefix, activePage, activeService, pagePath) {
+  const pp = pagePath || 'index.html';
   return `    <header class="header" role="banner">
         <a href="${prefix}index.html" class="header-logo" aria-label="${g.siteName} — Főoldal">${g.siteName}</a>
         <nav class="header-nav" aria-label="Fő navigáció">
@@ -249,12 +319,14 @@ function headerHtml(prefix, activePage, activeService) {
             <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
             <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
             <a href="${prefix}booking.html" class="header-cta">Időpontfoglalás</a>
+            ${langToggleHtml(pp, prefix)}
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
     </header>`;
 }
 
-function mobileNavHtml(prefix) {
+function mobileNavHtml(prefix, pagePath) {
+  const pp = pagePath || 'index.html';
   return `    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció">
         <div class="mn-inner">
             <div class="mn-logo">${g.siteName}</div>
@@ -265,6 +337,7 @@ function mobileNavHtml(prefix) {
                 <a class="mn-link" href="${prefix}arak.html">Árak</a>
                 <a class="mn-link" href="${prefix}about.html">Rólam</a>
                 <a class="mn-link" href="${prefix}contact.html">Kapcsolat</a>
+                ${langToggleMobileHtml(pp, prefix)}
             </div>
 
             <div class="mn-services">
@@ -555,8 +628,8 @@ ${boilerplate()}
         <div class="preloader-line"></div>
     </div>
 
-${headerHtml('', null, null)}
-${mobileNavHtml('')}
+${headerHtml('', null, null, 'index.html')}
+${mobileNavHtml('', 'index.html')}
 
     <main>
         <section class="home-hero" aria-label="Bemutatkozás">
@@ -588,7 +661,7 @@ ${data.serviceCategories.map(c => {
   const img = c.img || c.image || '';
   const alt = c.name + ' fotózás – Silverframe Studio, Szeged';
   return `                    <a href="services/${c.id}.html" class="service-card-home">
-                        <img src="${img}"${imgStyle(img)} alt="${alt}" width="500" height="667">
+                        <img src="${imgSrc(img, '')}"${imgStyle(img)} alt="${alt}" width="500" height="667">
                         <div class="overlay"><h3>${c.name}</h3></div>
                     </a>`;
 }).join('\n')}
@@ -603,7 +676,7 @@ ${data.serviceCategories.map(c => {
                     <h2 class="section-title">${p.galleryTitle}</h2>
                 </div>
                 <div class="gallery-preview-grid reveal reveal-delay-1">
-${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${img.src}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400"></div>`).join('\n')}
+${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${imgSrc(img.src, '')}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400"></div>`).join('\n')}
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
                     ${btn('portfolio.html', 'Teljes galéria')}
@@ -624,8 +697,8 @@ ${p.beforeAfterPairs && p.beforeAfterPairs.length ? `        <section class="ba-
                     <div class="ba-track">
 ${p.beforeAfterPairs.map((pair, i) => `                        <div class="ba-pair${i === 0 ? ' active' : ''}">
                             <div class="ba-slider">
-                                <img class="ba-img ba-before" src="${pair.before}" alt="Előtte" loading="${i === 0 ? 'eager' : 'lazy'}">
-                                <img class="ba-img ba-after" src="${pair.after}" alt="Utána" loading="lazy">
+                                <img class="ba-img ba-before" src="${imgSrc(pair.before, '')}" alt="Előtte" loading="${i === 0 ? 'eager' : 'lazy'}">
+                                <img class="ba-img ba-after" src="${imgSrc(pair.after, '')}" alt="Utána" loading="lazy">
                                 <div class="ba-handle">
                                     <div class="ba-arrow">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
@@ -667,7 +740,7 @@ ${p.beforeAfterPairs.map((_, i) => `                            <button class="b
 ${p.testimonials.map((t, i) => {
   const initials = (t.author || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('');
   const avatarHtml = t.avatar
-    ? `<img class="t-avatar" src="${t.avatar}" alt="${t.author}" loading="lazy">`
+    ? `<img class="t-avatar" src="${imgSrc(t.avatar, '')}" alt="${t.author}" loading="lazy">`
     : `<div class="t-avatar-initials">${initials}</div>`;
   return `                    <blockquote class="testimonial${i === 0 ? ' active' : ''}">
                         <p class="testimonial-text">${t.text}</p>
@@ -693,7 +766,7 @@ ${p.testimonials.map((_, i) => `                        <button class="t-dot${i 
         <section class="section" aria-label="A fotósról">
             <div class="container intro-strip">
                 <div class="intro-img-wrap reveal">
-                    <img src="${p.introImage}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933">
+                    <img src="${imgSrc(p.introImage, '')}"${imgStyle(p.introImage)} alt="${g.siteName} portré természetes fényben" width="700" height="933">
                 </div>
                 <div class="intro-text reveal reveal-delay-1">
                     <span class="section-label">${p.introLabel}</span>
@@ -729,7 +802,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
 ${lightboxHtml()}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
     <script>
     (function(){
         var slides = document.querySelectorAll('.home-hero-slide');
@@ -768,8 +841,8 @@ function buildAbout() {
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'about', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'about', null, 'about.html')}
+${mobileNavHtml('', 'about.html')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Rólam`)}
@@ -777,7 +850,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
         <section class="section">
             <div class="container about-content">
                 <div class="about-portrait reveal">
-                    <img src="${p.aboutImage}"${imgStyle(p.aboutImage)} alt="${g.photographer} fotós" width="700" height="933">
+                    <img src="${imgSrc(p.aboutImage, '')}"${imgStyle(p.aboutImage)} alt="${g.photographer} fotós" width="700" height="933">
                 </div>
                 <div class="about-body reveal reveal-delay-1">
                     <span class="section-label">${p.storyLabel}</span>
@@ -803,7 +876,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -816,8 +889,8 @@ function buildPortfolio() {
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'portfolio', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'portfolio', null, 'portfolio.html')}
+${mobileNavHtml('', 'portfolio.html')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Galéria`)}
@@ -831,7 +904,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 <div class="portfolio-grid reveal reveal-delay-1">
 ${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="portfolio/${c.portfolioId}.html" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="${cImg}"${imgStyle(cImg)} alt="${c.name} fotózás">
+                            <img src="${imgSrc(cImg, '')}"${imgStyle(cImg)} alt="${c.name} fotózás">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">${String(i + 1).padStart(2, '0')}</span>
@@ -857,7 +930,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
 ${lightboxHtml()}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -882,8 +955,8 @@ function buildServices() {
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'services', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'services', null, 'services.html')}
+${mobileNavHtml('', 'services.html')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Szolgáltatások`)}
@@ -899,7 +972,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 <div class="category-grid">
 ${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
                         <div class="category-card-img">
-                            <img src="${cImg}"${imgStyle(cImg)} alt="${c.name} fotózás" width="600" height="800">
+                            <img src="${imgSrc(cImg, '')}"${imgStyle(cImg)} alt="${c.name} fotózás" width="600" height="800">
                         </div>
                         <div class="category-card-body">
                             <span class="category-num">${c.num}</span>
@@ -916,7 +989,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -943,8 +1016,8 @@ function buildContact() {
   return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'contact', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'contact', null, 'contact.html')}
+${mobileNavHtml('', 'contact.html')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Kapcsolat`)}
@@ -1017,7 +1090,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
     </main>
 
 ${footerHtml('')}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -1074,8 +1147,8 @@ function buildServicePage(id) {
   return `${headHtml(s.title, s.metaDesc, `${g.baseUrl}/services/${id}.html`, s.title, s.metaDesc, 'website', `${g.baseUrl}/services/${id}.html`, s.ogImage, '../css/style.css', jsonLd, s.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml(prefix, null, id)}
-${mobileNavHtml(prefix)}
+${headerHtml(prefix, null, id, 'services/'+id+'.html')}
+${mobileNavHtml(prefix, (typeof id !== 'undefined') ? (typeof p !== 'undefined' && p && p.breadcrumb && data.portfolioPages[id] ? 'portfolio/'+id+'.html' : 'services/'+id+'.html') : '')}
 
     <main>
 ${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../services.html">Szolgáltatások</a> <span>/</span> ${s.breadcrumb}`, prefix)}
@@ -1124,7 +1197,7 @@ ${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../b
 
 ${footerHtml(prefix)}
 ${lightboxHtml()}
-    <script src="../js/main.js" defer></script>
+    <script src="${ASSET_UP}../js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -1160,8 +1233,8 @@ function buildPortfolioPage(id) {
   return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, p.heroImage ? (g.baseUrl + '/' + p.heroImage) : globalOgImage, '../css/style.css', pgJsonLd, p.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('../', 'portfolio', null)}
-${mobileNavHtml('../')}
+${headerHtml('../', 'portfolio', null, 'portfolio/'+id+'.html')}
+${mobileNavHtml('../', 'portfolio/'+id+'.html')}
 
     <main>
 ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Galéria</a> <span>/</span> ${p.breadcrumb}`, prefix)}
@@ -1177,7 +1250,7 @@ ${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', wit
 
 ${footerHtml(prefix)}
 ${lightboxHtml()}
-    <script src="../js/main.js" defer></script>
+    <script src="${ASSET_UP}../js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -1195,8 +1268,8 @@ function buildBookingPage() {
   )}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'booking', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'booking', null, 'booking.html')}
+${mobileNavHtml('', 'booking.html')}
 
 <style>
 .bk-section{padding:5rem 0 6rem;background:var(--bg)}
@@ -1284,7 +1357,7 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
                     <h2 class="bk-step-title">Milyen fotózást szeretnél?</h2>
                     <div class="bk-services">
                         ${cats.map(cat => `<div class="bk-svc-card" data-id="${cat.id}" data-name="${cat.name}">
-                            <div class="bk-svc-img"><img src="${cat.img || ''}" alt="${cat.name}" loading="lazy" width="320" height="240"></div>
+                            <div class="bk-svc-img"><img src="${imgSrc(cat.img || '', '')}" alt="${cat.name}" loading="lazy" width="320" height="240"></div>
                             <div class="bk-svc-name">${cat.name}</div>
                         </div>`).join('\n                        ')}
                     </div>
@@ -1344,7 +1417,7 @@ ${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — S
     </main>
 
 ${footerHtml('')}
-<script src="js/main.js" defer></script>
+<script src="${ASSET_UP}js/main.js" defer></script>
 <script>
 (function(){
   var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
@@ -1745,8 +1818,8 @@ function buildArakPage() {
     </style>
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'arak', null)}
-${mobileNavHtml('')}
+${headerHtml('', 'arak', null, 'arak.html')}
+${mobileNavHtml('', 'arak.html')}
 
     <main>
         <section class="page-hero">
@@ -1827,7 +1900,7 @@ ${mobileNavHtml('')}
 
 ${footerHtml('')}
 ${lightboxHtml()}
-    <script src="js/main.js" defer></script>
+    <script src="${ASSET_UP}js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -1858,15 +1931,22 @@ function writeFile(filePath, content) {
 // ── sitemap.xml ──
 function buildSitemap() {
   const today = new Date().toISOString().split('T')[0];
-  const urls = [
+  const huUrls = [
     { loc: `${g.baseUrl}/`,               priority: '1.0', freq: 'weekly'  },
     { loc: `${g.baseUrl}/about.html`,      priority: '0.7', freq: 'monthly' },
     { loc: `${g.baseUrl}/portfolio.html`,  priority: '0.8', freq: 'weekly'  },
     { loc: `${g.baseUrl}/services.html`,   priority: '0.8', freq: 'monthly' },
     { loc: `${g.baseUrl}/contact.html`,    priority: '0.7', freq: 'monthly' },
+    { loc: `${g.baseUrl}/adatvedelem.html`, priority: '0.3', freq: 'yearly' },
     ...cats.map(c => ({ loc: `${g.baseUrl}/services/${c.id}.html`, priority: '0.8', freq: 'monthly' })),
     ...Object.keys(data.portfolioPages).map(id => ({ loc: `${g.baseUrl}/portfolio/${id}.html`, priority: '0.7', freq: 'weekly' })),
   ];
+  const enUrls = huUrls.map(u => ({
+    ...u,
+    priority: (parseFloat(u.priority) - 0.1).toFixed(1),
+    loc: u.loc === `${g.baseUrl}/` ? `${g.baseUrl}/en/` : u.loc.replace(`${g.baseUrl}/`, `${g.baseUrl}/en/`),
+  }));
+  const urls = [...huUrls, ...enUrls];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
@@ -1888,28 +1968,49 @@ Sitemap: ${g.baseUrl}/sitemap.xml`;
 
 console.log('\n  Building Silverframe Studio...\n');
 
-// Root pages
-writeFile(path.join(__dirname, 'index.html'), buildIndex());
-writeFile(path.join(__dirname, 'about.html'), buildAbout());
-writeFile(path.join(__dirname, 'portfolio.html'), buildPortfolio());
-writeFile(path.join(__dirname, 'services.html'), buildServices());
-writeFile(path.join(__dirname, 'contact.html'), buildContact());
-writeFile(path.join(__dirname, 'arak.html'), buildArakPage());
-writeFile(path.join(__dirname, 'booking.html'), buildBookingPage());
-writeFile(path.join(__dirname, 'analytics.html'), buildAnalyticsPage());
+function buildAndWrite(outBase, builder) {
+  const html = builder();
+  writeFile(outBase, translateHtml(html));
+}
 
-// Service pages
-cats.forEach(c => {
-  writeFile(path.join(__dirname, 'services', `${c.id}.html`), buildServicePage(c.id));
-});
+function buildLang(lang) {
+  LANG = lang;
+  ASSET_UP = (lang === 'en') ? '../' : '';
+  const outRoot = (lang === 'en') ? path.join(__dirname, 'en') : __dirname;
+  console.log(`\n  → Building ${lang.toUpperCase()} → ${path.relative(__dirname, outRoot) || '.'}/\n`);
 
-// Portfolio pages
-Object.keys(data.portfolioPages).forEach(id => {
-  writeFile(path.join(__dirname, 'portfolio', `${id}.html`), buildPortfolioPage(id));
-});
+  // Root pages
+  buildAndWrite(path.join(outRoot, 'index.html'),     buildIndex);
+  buildAndWrite(path.join(outRoot, 'about.html'),     buildAbout);
+  buildAndWrite(path.join(outRoot, 'portfolio.html'), buildPortfolio);
+  buildAndWrite(path.join(outRoot, 'services.html'),  buildServices);
+  buildAndWrite(path.join(outRoot, 'contact.html'),   buildContact);
+  buildAndWrite(path.join(outRoot, 'arak.html'),      buildArakPage);
+  buildAndWrite(path.join(outRoot, 'booking.html'),   buildBookingPage);
+  if (lang === 'hu') {
+    writeFile(path.join(outRoot, 'analytics.html'), buildAnalyticsPage());
+  }
 
-// SEO files
+  // Service pages
+  cats.forEach(c => {
+    buildAndWrite(path.join(outRoot, 'services', `${c.id}.html`), () => buildServicePage(c.id));
+  });
+
+  // Portfolio pages
+  Object.keys(data.portfolioPages).forEach(id => {
+    buildAndWrite(path.join(outRoot, 'portfolio', `${id}.html`), () => buildPortfolioPage(id));
+  });
+}
+
+buildLang('hu');
+buildLang('en');
+
+// Reset language for sitemap/robots (irrelevant but tidy)
+LANG = 'hu'; ASSET_UP = '';
+
+// SEO files (single sitemap covering both languages)
 writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
 writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
-console.log(`\n  Done! ${7 + cats.length + Object.keys(data.portfolioPages).length} files generated.\n`);
+const total = 7 + cats.length + Object.keys(data.portfolioPages).length;
+console.log(`\n  Done! ${total} HU + ${total - 1} EN files generated (analytics.html is HU-only).\n`);
