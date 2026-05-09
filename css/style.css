@@ -113,8 +113,11 @@ button { font-family: inherit; cursor: pointer; }
     border: 1px solid var(--accent-dim);
     background: none; color: var(--text-primary);
     transition: background 0.4s, border-color 0.4s, color 0.4s;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 1;
 }
 .header-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.header-cta::after { display: none !important; }
 .lang-toggle {
     font-size: 0.65rem; font-weight: 500;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -123,6 +126,8 @@ button { font-family: inherit; cursor: pointer; }
     color: var(--text-muted, var(--text-primary));
     transition: color 0.3s, border-color 0.3s, background 0.3s;
     margin-left: 0.4rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 1;
 }
 .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
 .lang-toggle::after { display: none !important; }
