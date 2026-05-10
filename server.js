@@ -83,7 +83,10 @@ const server = http.createServer((req, res) => {
                     // Sync with GitHub — do this BEFORE responding so the client knows the outcome
                     let gitWarning = null;
                     try {
-                        try { execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
+                        // Pull first; if it merges remote changes that touched generated files,
+                        // re-run build.js so conflict markers in HTML get overwritten by clean output.
+                        try { execSync('git pull --no-rebase -X ours', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
+                        try { execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
                         execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
                         console.log('  ✓ GitHub push sikeres');
                     } catch (gitErr) {
