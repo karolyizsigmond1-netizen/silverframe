@@ -355,8 +355,8 @@ function mobileNavHtml(prefix, pagePath) {
 }
 
 function footerHtml(prefix) {
-  return `    <footer class="footer" role="contentinfo"${g.footerImage ? ` style="background-image:url('${prefix}${g.footerImage}'); background-size:cover; background-position:center;"` : ''}>
-        ${g.footerImage ? `<div class="footer-img-overlay"></div>` : ''}
+  return `    <footer class="footer" role="contentinfo">
+
         <div class="container">
             <div class="footer-grid">
                 <div>
@@ -572,9 +572,12 @@ function trackingScript() {
 </script>`;
 }
 
-function ctaBanner(label, title, href, btnText, solid = true) {
+function ctaBanner(label, title, href, btnText, solid = true, prefix = '') {
+  const bgStyleAttr = g.footerImage
+    ? ` style="background-image:url('${imgSrc(g.footerImage, prefix)}');background-size:cover;background-position:center;"`
+    : '';
   return `        <section class="cta-banner" aria-label="Időpontfoglalás">
-            <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"></div>
+            <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${bgStyleAttr}></div>
             <div class="container reveal">
                 <span class="section-label">${label}</span>
                 <h2 class="section-title">${title}</h2>
@@ -1187,7 +1190,7 @@ ${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-g
             </div>
         </section>
 
-${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../booking.html' : '../contact.html'), s.ctaButton)}
+${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../booking.html' : '../contact.html'), s.ctaButton, true, prefix)}
 
         <nav class="service-nav" aria-label="Szolgáltatás navigáció">
             ${prevNav}
@@ -1245,7 +1248,7 @@ ${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', wit
             </div>
         </section>
 
-        <section class="cta-banner" aria-label="Időpontfoglalás"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="../${p.ctaLink}" class="btn btn-solid"><span>${p.ctaButton}</span>${arrowSvg}</a></div></section>
+        <section class="cta-banner" aria-label="Időpontfoglalás"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${g.footerImage ? ` style="background-image:url('${imgSrc(g.footerImage, '../')}');background-size:cover;background-position:center;"` : ''}></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="../${p.ctaLink}" class="btn btn-solid"><span>${p.ctaButton}</span>${arrowSvg}</a></div></section>
     </main>
 
 ${footerHtml(prefix)}

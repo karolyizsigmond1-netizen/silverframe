@@ -490,7 +490,7 @@
         // Footer settings
         html += '<div class="field-section"><div class="field-section-title">Lábléc</div>';
         html += textField('Lábléc leírás', 'global.footerDesc', data.footerDesc);
-        html += imageField('Lábléc háttérkép', 'global.footerImage', data.footerImage);
+        html += imageField('CTA banner háttérkép (Készen állsz?)', 'global.footerImage', data.footerImage);
         html += '</div>';
 
         // Design settings
