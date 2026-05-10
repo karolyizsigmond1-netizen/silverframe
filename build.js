@@ -268,6 +268,34 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
 
   const preload = preloadImg ? `\n    <link rel="preload" as="image" href="${preloadImg.startsWith('http') ? preloadImg : '/' + preloadImg}">` : '';
   const cssHref = (cssPath && !/^https?:/.test(cssPath) && !cssPath.startsWith('/')) ? ASSET_UP + cssPath : cssPath;
+
+  // Build a robust set of og:image / twitter:card tags so Messenger, Facebook,
+  // WhatsApp, iMessage, Slack, Twitter all show a proper preview.
+  let ogImageTags = '';
+  if (ogImage) {
+    let ogDims = null;
+    try {
+      const localPath = ogImage.replace(g.baseUrl + '/', '');
+      ogDims = readImgSize(localPath);
+    } catch (e) { /* ignore */ }
+    const w = ogDims ? ogDims.w : 1200;
+    const h = ogDims ? ogDims.h : 630;
+    const ext = (ogImage.match(/\.([a-z0-9]+)(?:\?|$)/i) || [, 'jpg'])[1].toLowerCase();
+    const mime = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
+    ogImageTags = `\n    <meta property="og:image" content="${ogImage}">`
+      + `\n    <meta property="og:image:secure_url" content="${ogImage}">`
+      + `\n    <meta property="og:image:type" content="${mime}">`
+      + `\n    <meta property="og:image:width" content="${w}">`
+      + `\n    <meta property="og:image:height" content="${h}">`
+      + `\n    <meta property="og:image:alt" content="${(ogTitle || title).replace(/"/g, '&quot;')}">`
+      + `\n    <meta name="twitter:card" content="summary_large_image">`
+      + `\n    <meta name="twitter:image" content="${ogImage}">`;
+  }
+  const ogLocale = LANG === 'en' ? 'en_US' : 'hu_HU';
+  const ogLocaleAlt = LANG === 'en' ? 'hu_HU' : 'en_US';
+  const ogExtras = `\n    <meta property="og:site_name" content="${g.siteName.trim()}">`
+    + `\n    <meta property="og:locale" content="${ogLocale}">`
+    + `\n    <meta property="og:locale:alternate" content="${ogLocaleAlt}">`;
   return `<!DOCTYPE html>
 <html lang="${LANG}">
 <head>
@@ -282,7 +310,7 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
     <meta property="og:title" content="${ogTitle || title}">
     <meta property="og:description" content="${ogDesc || desc}">
     <meta property="og:type" content="${ogType || 'website'}">
-    <meta property="og:url" content="${ogUrl ? (LANG === 'en' && ogUrl === canonical ? canonicalUrl : ogUrl) : canonicalUrl}">${ogImage ? `\n    <meta property="og:image" content="${ogImage}">` : ''}${preload}
+    <meta property="og:url" content="${ogUrl ? (LANG === 'en' && ogUrl === canonical ? canonicalUrl : ogUrl) : canonicalUrl}">${ogExtras}${ogImageTags}${preload}
     ${fonts()}
     <link rel="stylesheet" href="${cssHref}">
     ${jsonLd ? `<script type="application/ld+json">\n    ${jsonLd}\n    </script>` : ''}
