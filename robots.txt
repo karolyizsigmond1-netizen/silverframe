@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.silverframestudio.com/sitemap.xml
+Sitemap: https://silverframe.hu/sitemap.xml
