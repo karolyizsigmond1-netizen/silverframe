@@ -153,14 +153,6 @@
             <div class="stat-card"><div class="loading"><div class="spinner"></div></div></div>
         </div>
 
-        <!-- Booking funnel -->
-        <div class="funnel-section">
-            <div class="section-title">Foglalási tölcsér — hány ember jut el a foglalásig?</div>
-            <div class="funnel" id="funnelEl">
-                <div class="loading"><div class="spinner"></div></div>
-            </div>
-        </div>
-
         <!-- Sessions chart + Devices -->
         <div class="charts-grid">
             <div class="card">
@@ -206,7 +198,7 @@
         '': 'Főoldal', '/': 'Főoldal', '/index.html': 'Főoldal',
         '/about.html': 'Rólam', '/portfolio.html': 'Galéria',
         '/services.html': 'Szolgáltatások', '/contact.html': 'Kapcsolat',
-        '/arak.html': 'Árak', '/booking.html': 'Időpontfoglalás',
+        '/arak.html': 'Árak',
         '/services/wedding.html': 'Esküvő', '/services/wedding-creative.html': 'Kreatív esküvő',
         '/services/boudoir.html': 'Boudoir', '/services/maternity.html': 'Kismama',
         '/services/family.html': 'Családi', '/services/portfolio-model.html': 'Portfólió / Modell',
@@ -218,7 +210,7 @@
         '': '🏠', '/': '🏠', '/index.html': '🏠',
         '/about.html': '👤', '/portfolio.html': '📸',
         '/services.html': '✨', '/contact.html': '✉️',
-        '/arak.html': '💰', '/booking.html': '📅'
+        '/arak.html': '💰'
     };
     function pageName(p) { return PAGE_NAMES[p] || p.replace('/services/', '').replace('/portfolio/', '').replace(/\.html$/, '').replace(/-/g, ' ') || 'Főoldal'; }
     function pageIcon(p) { return PAGE_ICONS[p] || (p.indexOf('/services/') !== -1 ? '📷' : p.indexOf('/portfolio/') !== -1 ? '🖼️' : '📄'); }
@@ -230,9 +222,6 @@
         'scroll_depth':         { hu: 'Görgetési mélység',       emoji: '📏' },
         'whatsapp_click':       { hu: 'WhatsApp üzenet',         emoji: '💬' },
         'service_card_click':   { hu: 'Szolgáltatás megtekintve',emoji: '✨' },
-        'booking_cta_click':    { hu: 'Foglalás gombra kattintás',emoji: '📅' },
-        'booking_form_start':   { hu: 'Foglalási űrlap megnyitva',emoji: '✏️' },
-        'booking_form_submit':  { hu: 'Foglalás elküldve',       emoji: '✅' },
         'contact_form_start':   { hu: 'Kapcsolatfelvétel megkezdve', emoji: '📝' },
         'contact_form_submit':  { hu: 'Kapcsolatfelvétel elküldve',  emoji: '📨' },
         'chat_widget_open':     { hu: 'Chatbot megnyitva',       emoji: '🤖' },
@@ -330,7 +319,6 @@
 
     function loadAll() {
         loadStats();
-        loadFunnel();
         loadSessionChart();
         loadDeviceChart();
         loadPages();
@@ -378,39 +366,6 @@
     }
 
     // ── Booking funnel ──
-    async function loadFunnel() {
-        var d = await api({
-            dateRanges: [{ startDate: sd(), endDate: 'today' }],
-            dimensions: [{ name: 'eventName' }],
-            metrics: [{ name: 'eventCount' }]
-        });
-        var evMap = {};
-        (d.rows || []).forEach(function(r) { evMap[r.dimensionValues[0].value] = parseInt(r.metricValues[0].value) || 0; });
-        var pv = evMap['page_view'] || 0;
-        var bkCta = evMap['booking_cta_click'] || 0;
-        var bkStart = evMap['booking_form_start'] || 0;
-        var bkDone = evMap['booking_form_submit'] || 0;
-        var chatOpen = evMap['chat_widget_open'] || 0;
-        var waClick = evMap['whatsapp_click'] || 0;
-
-        function pct(a, b) { return b ? ' <span class="funnel-pct">' + Math.round(a / b * 100) + '% továbblép</span>' : ''; }
-
-        document.getElementById('funnelEl').innerHTML =
-            step('👁️', fmt(pv), 'Oldalmegtekintés') + arrow() +
-            step('📅', fmt(bkCta), 'Foglalás gombra kattint' + pct(bkCta, pv)) + arrow() +
-            step('✏️', fmt(bkStart), 'Megnyitja az űrlapot' + pct(bkStart, bkCta)) + arrow() +
-            step('✅', fmt(bkDone), 'Elküldi a foglalást' + pct(bkDone, bkStart)) +
-            '<div style="flex-basis:100%;height:0"></div>' +
-            '<div style="background:var(--surface2);border-radius:10px;padding:.8rem 1rem;margin-top:.75rem;font-size:.8rem;color:var(--muted);display:flex;gap:2rem;flex-wrap:wrap">' +
-            '<span>🤖 Chatbot megnyitva: <strong style="color:var(--text)">' + fmt(chatOpen) + '</strong></span>' +
-            '<span>💬 WhatsApp üzenet: <strong style="color:var(--text)">' + fmt(waClick) + '</strong></span>' +
-            '</div>';
-    }
-    function step(icon, num, label) {
-        return '<div class="funnel-step"><div style="font-size:1.4rem">' + icon + '</div><div class="funnel-num">' + num + '</div><div class="funnel-label">' + label + '</div></div>';
-    }
-    function arrow() { return '<div class="funnel-arrow">→</div>'; }
-
     // ── Sessions chart ──
     async function loadSessionChart() {
         var d = await api({

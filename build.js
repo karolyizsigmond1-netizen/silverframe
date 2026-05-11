@@ -345,8 +345,7 @@ function headerHtml(prefix, activePage, activeService, pagePath) {
             <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             <a href="${prefix}arak.html"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
             <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
-            <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="active"' : ''}>Kapcsolat</a>
-            <a href="${prefix}booking.html" class="header-cta">Időpontfoglalás</a>
+            <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="header-cta active"' : ' class="header-cta"'}>Kapcsolat</a>
             ${langToggleHtml(pp, prefix)}
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
@@ -364,7 +363,6 @@ function mobileNavHtml(prefix, pagePath) {
                 <a class="mn-link" href="${prefix}portfolio.html">Galéria</a>
                 <a class="mn-link" href="${prefix}arak.html">Árak</a>
                 <a class="mn-link" href="${prefix}about.html">Rólam</a>
-                <a class="mn-link" href="${prefix}contact.html">Kapcsolat</a>
                 ${langToggleMobileHtml(pp, prefix)}
             </div>
 
@@ -377,7 +375,7 @@ function mobileNavHtml(prefix, pagePath) {
                 </div>
             </div>
 
-            <a href="${prefix}booking.html" class="mn-cta">Időpontfoglalás</a>
+            <a href="${prefix}contact.html" class="mn-cta">Kapcsolat</a>
         </div>
     </nav>`;
 }
@@ -474,18 +472,6 @@ function trackingScript() {
       if (t.classList && t.classList.contains('gallery-preview-item')) {
         gev('gallery_preview_click', { event_category: 'engagement' }); break;
       }
-      // Header CTA booking button
-      if (t.classList && t.classList.contains('header-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'header' }); break;
-      }
-      // Mobile nav CTA booking
-      if (t.classList && t.classList.contains('mn-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'mobile_nav' }); break;
-      }
-      // Any CTA banner button
-      if (t.classList && t.classList.contains('btn') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'cta_banner' }); break;
-      }
       // Nav links
       if (t.closest && t.closest('.header-nav a') && t.tagName === 'A') {
         gev('nav_click', { event_category: 'navigation', link_text: t.textContent.trim() }); break;
@@ -532,18 +518,6 @@ function trackingScript() {
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  // ── Booking form ──
-  var bkForm = document.getElementById('bkForm');
-  if (bkForm) {
-    var bkStarted = false;
-    bkForm.addEventListener('focusin', function() {
-      if (!bkStarted) { bkStarted = true; gev('booking_form_start', { event_category: 'conversion' }); }
-    }, { once: false, passive: true });
-    bkForm.addEventListener('submit', function() {
-      gev('booking_form_submit', { event_category: 'conversion' });
-    }, { passive: true });
-  }
 
   // ── Contact form ──
   var ctForm = document.querySelector('form.contact-form, form[action*="formspree"], .contact-form form');
@@ -604,7 +578,7 @@ function ctaBanner(label, title, href, btnText, solid = true, prefix = '') {
   const bgStyleAttr = g.footerImage
     ? ` style="background-image:url('${imgSrc(g.footerImage, prefix)}');background-size:cover;background-position:center;"`
     : '';
-  return `        <section class="cta-banner" aria-label="Időpontfoglalás">
+  return `        <section class="cta-banner" aria-label="Kapcsolatfelvétel">
             <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${bgStyleAttr}></div>
             <div class="container reveal">
                 <span class="section-label">${label}</span>
@@ -828,7 +802,7 @@ ${p.howItWorks.steps.map(s => `                    <div class="hiw-step reveal">
 
         <div class="section-divider reveal"></div>` : ''}
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -956,7 +930,7 @@ ${p.stats.map(s => `                    <div class="portfolio-stat"><span class=
         </section>
 
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -1016,7 +990,7 @@ ${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `            
             </div>
         </section>
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -1218,7 +1192,7 @@ ${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-g
             </div>
         </section>
 
-${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../booking.html' : '../contact.html'), s.ctaButton, true, prefix)}
+${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : s.ctaButton, true, prefix)}
 
         <nav class="service-nav" aria-label="Szolgáltatás navigáció">
             ${prevNav}
@@ -1276,7 +1250,7 @@ ${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', wit
             </div>
         </section>
 
-        <section class="cta-banner" aria-label="Időpontfoglalás"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${g.footerImage ? ` style="background-image:url('${imgSrc(g.footerImage, '../')}');background-size:cover;background-position:center;"` : ''}></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="../${p.ctaLink}" class="btn btn-solid"><span>${p.ctaButton}</span>${arrowSvg}</a></div></section>
+        <section class="cta-banner" aria-label="Kapcsolatfelvétel"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${g.footerImage ? ` style="background-image:url('${imgSrc(g.footerImage, '../')}');background-size:cover;background-position:center;"` : ''}></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="../contact.html" class="btn btn-solid"><span>${p.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : p.ctaButton}</span>${arrowSvg}</a></div></section>
     </main>
 
 ${footerHtml(prefix)}
@@ -1287,353 +1261,6 @@ ${chatbotHtml()}
 </html>`;
 }
 
-
-function buildBookingPage() {
-  const p = data.pages.booking || {};
-
-  return `${headHtml(
-    p.title || 'Időpontfoglalás — Silverframe Studio',
-    p.metaDesc || 'Foglalj időpontot online – válaszd ki a fotózás típusát, az időpontot, és küldd el kérelmedet.',
-    g.baseUrl + '/booking.html', p.title, p.metaDesc, 'website',
-    g.baseUrl + '/booking.html', null, 'css/style.css'
-  )}
-${bodyTag()}
-${boilerplate()}
-${headerHtml('', 'booking', null, 'booking.html')}
-${mobileNavHtml('', 'booking.html')}
-
-<style>
-.bk-section{padding:5rem 0 6rem;background:var(--bg)}
-.bk-container{max-width:900px;margin:0 auto;padding:0 1.5rem}
-.bk-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:3.5rem;flex-wrap:wrap;gap:.5rem}
-.bk-progress-step{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:.35;transition:opacity .3s}
-.bk-progress-step.active,.bk-progress-step.done{opacity:1}
-.bk-progress-step span{width:2.2rem;height:2.2rem;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--accent);font-family:var(--font-body);transition:background .3s,color .3s}
-.bk-progress-step.active span{background:var(--accent);color:#0e0e0e;font-weight:600}
-.bk-progress-step.done span{background:var(--accent);color:#0e0e0e}
-.bk-progress-step em{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-style:normal}
-.bk-progress-line{width:3rem;height:1px;background:rgba(201,169,110,.25);flex-shrink:0}
-.booking-step{display:none}.booking-step.active{display:block}
-.bk-step-title{font-family:var(--font-display);font-size:clamp(1.4rem,5vw,1.9rem);font-weight:300;color:var(--text);margin-bottom:2rem;text-align:center}
-/* Service cards */
-.bk-services{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1rem}
-@media(max-width:700px){.bk-services{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:480px){.bk-services{grid-template-columns:repeat(2,1fr);gap:0.6rem}}
-@media(max-width:320px){.bk-services{grid-template-columns:1fr}}
-.bk-svc-card{border:1px solid rgba(255,255,255,.07);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .2s;background:rgba(255,255,255,.03)}
-.bk-svc-card:hover{border-color:rgba(201,169,110,.5);transform:translateY(-2px)}
-.bk-svc-card.selected{border-color:var(--accent);background:rgba(201,169,110,.07)}
-.bk-svc-img{aspect-ratio:4/3;overflow:hidden}
-.bk-svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.bk-svc-card:hover .bk-svc-img img{transform:scale(1.05)}
-.bk-svc-name{padding:.6rem .8rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:center;transition:color .25s}
-.bk-svc-card.selected .bk-svc-name,.bk-svc-card:hover .bk-svc-name{color:var(--accent)}
-/* Step 2 layout */
-.bk-cal-wrap{max-width:480px;margin:0 auto 2rem;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1.8rem}
-@media(max-width:400px){.bk-cal-wrap{padding:1.2rem .8rem}}
-/* Calendar */
-.bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
-.bk-cal-nav button{background:none;border:none;color:rgba(255,255,255,.4);width:2.8rem;height:2.8rem;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s;border-radius:4px}
-.bk-cal-nav button:hover{color:var(--accent);background:rgba(201,169,110,.08)}
-.bk-cal-month{font-family:var(--font-display);font-size:1rem;font-weight:300;color:var(--text);letter-spacing:.03em}
-.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
-.bk-cal-dow{text-align:center;font-size:.65rem;letter-spacing:.08em;color:rgba(255,255,255,.25);padding:.5rem 0;text-transform:uppercase;font-weight:500}
-.bk-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.bk-day{position:relative;text-align:center;padding:.7rem .2rem;font-size:.88rem;border-radius:6px;cursor:pointer;color:rgba(255,255,255,.85);transition:background .15s,color .15s;user-select:none;font-weight:400;min-height:2.8rem;display:flex;align-items:center;justify-content:center}
-.bk-day:hover:not(.past):not(.busy){background:rgba(201,169,110,.12);color:var(--accent)}
-.bk-day.past{opacity:.18;cursor:default}
-.bk-day.busy{opacity:.18;cursor:default;text-decoration:line-through}
-.bk-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent)}
-.bk-day.selected{background:var(--accent);color:#0e0e0e;font-weight:600}
-.bk-day.selected::after{display:none}
-.bk-day.range-start{background:var(--accent);color:#0e0e0e;font-weight:600;border-radius:6px 0 0 6px}
-.bk-day.range-end{background:var(--accent);color:#0e0e0e;font-weight:600;border-radius:0 6px 6px 0}
-.bk-day.range-start.range-end{border-radius:6px}
-.bk-day.in-range{background:rgba(201,169,110,.15);border-radius:0;color:var(--text)}
-.bk-day.range-start::after,.bk-day.range-end::after{display:none}
-.bk-sel-info{max-width:480px;margin:0 auto 1rem;background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:8px;padding:1rem 1.4rem;text-align:center;color:var(--text-muted);font-size:.9rem;line-height:1.6;min-height:3.5rem;display:flex;align-items:center;justify-content:center}
-.bk-sel-info strong{color:var(--accent)}
-/* Step nav */
-.bk-step-nav{display:flex;gap:1rem;justify-content:flex-end;margin-top:2rem}
-/* Summary bar */
-.bk-summary{display:flex;gap:1.5rem;flex-wrap:wrap;background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.2);border-radius:4px;padding:.9rem 1.2rem;margin-bottom:2rem;font-size:.85rem;color:var(--text-muted)}
-.bk-summary span{display:flex;align-items:center;gap:.4rem}
-/* Success */
-.bk-success{text-align:center;padding:3rem 1rem}
-.bk-success-icon{width:5rem;height:5rem;border-radius:50%;background:rgba(201,169,110,.1);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--accent);margin:0 auto 1.5rem}
-.bk-success h2{font-family:var(--font-display);font-size:2.2rem;font-weight:300;margin-bottom:1rem}
-.bk-success p{color:var(--text-muted);margin-bottom:2rem}
-.bk-gcal-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem}
-</style>
-
-    <main>
-${pageHero(p.heroImage || cats[0]?.img, p.heroLabel || 'Silverframe Studio — Szeged', p.heroTitle || 'Időpontfoglalás', `<a href="index.html">Főoldal</a> <span>/</span> Időpontfoglalás`)}
-
-        <section class="bk-section">
-            <div class="bk-container">
-
-                <!-- Progress -->
-                <div class="bk-progress">
-                    <div class="bk-progress-step active" id="bkprog1"><span>1</span><em>Szolgáltatás</em></div>
-                    <div class="bk-progress-line"></div>
-                    <div class="bk-progress-step" id="bkprog2"><span>2</span><em>Időpont</em></div>
-                    <div class="bk-progress-line"></div>
-                    <div class="bk-progress-step" id="bkprog3"><span>3</span><em>Adatok</em></div>
-                    <div class="bk-progress-line"></div>
-                    <div class="bk-progress-step" id="bkprog4"><span>4</span><em>Kész</em></div>
-                </div>
-
-                <!-- Step 1: Service -->
-                <div class="booking-step active" id="bkstep1">
-                    <h2 class="bk-step-title">Milyen fotózást szeretnél?</h2>
-                    <div class="bk-services">
-                        ${cats.map(cat => `<div class="bk-svc-card" data-id="${cat.id}" data-name="${cat.name}">
-                            <div class="bk-svc-img"><img src="${imgSrc(cat.img || '', '')}" alt="${cat.name}" loading="lazy" width="320" height="240"></div>
-                            <div class="bk-svc-name">${cat.name}</div>
-                        </div>`).join('\n                        ')}
-                    </div>
-                </div>
-
-                <!-- Step 2: Date -->
-                <div class="booking-step" id="bkstep2">
-                    <h2 class="bk-step-title">Mikor szeretnéd?</h2>
-                    <div class="bk-cal-wrap">
-                        <div class="bk-cal-nav">
-                            <button type="button" id="bkCalPrev">&#8249;</button>
-                            <span class="bk-cal-month" id="bkCalLabel"></span>
-                            <button type="button" id="bkCalNext">&#8250;</button>
-                        </div>
-                        <div class="bk-cal-grid">
-                            <div class="bk-cal-dow">H</div><div class="bk-cal-dow">K</div><div class="bk-cal-dow">Sze</div>
-                            <div class="bk-cal-dow">Cs</div><div class="bk-cal-dow">P</div><div class="bk-cal-dow">Szo</div><div class="bk-cal-dow">V</div>
-                        </div>
-                        <div class="bk-cal-days" id="bkCalDays"></div>
-                    </div>
-                    <div class="bk-sel-info" id="bkSelInfo">Válassz egy napot a naptárban</div>
-                    <div class="bk-step-nav">
-                        <button class="btn" type="button" id="bkBack1">&#8592; Vissza</button>
-                        <button class="btn btn-solid" type="button" id="bkNext2" disabled>Tovább &#8594;</button>
-                    </div>
-                </div>
-
-                <!-- Step 3: Details -->
-                <div class="booking-step" id="bkstep3">
-                    <h2 class="bk-step-title">Adataid</h2>
-                    <div class="bk-summary" id="bkSummary" style="display:none"></div>
-                    <form class="contact-form" id="bkForm" style="max-width:520px;margin:0 auto">
-                        <div class="form-group"><input type="text" id="bkName" name="name" placeholder=" " required><label for="bkName">Neved *</label></div>
-                        <div class="form-group"><input type="email" id="bkEmail" name="email" placeholder=" " required><label for="bkEmail">E-mail *</label></div>
-                        <div class="form-group"><input type="tel" id="bkPhone" name="phone" placeholder=" "><label for="bkPhone">Telefonszám</label></div>
-                        <div class="form-group"><textarea id="bkNote" name="message" placeholder=" " rows="3"></textarea><label for="bkNote">Megjegyzés (opcionális)</label></div>
-                        <div class="bk-step-nav">
-                            <button class="btn" type="button" id="bkBack2">&#8592; Vissza</button>
-                            <button class="btn btn-solid" type="submit" id="bkSubmit"><span>Foglalás elküldése</span></button>
-                        </div>
-                        <p id="bkError" style="color:#e07070;margin-top:1rem;display:none;text-align:right"></p>
-                    </form>
-                </div>
-
-                <!-- Step 4: Pending -->
-                <div class="booking-step" id="bkstep4">
-                    <div class="bk-success">
-                        <div class="bk-success-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div>
-                        <h2>Foglalás beérkezve!</h2>
-                        <p>Hamarosan emailben visszaigazolom a foglalást.</p>
-                        <div id="bkSuccessDetails"></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-${footerHtml('')}
-<script src="${ASSET_UP}js/main.js" defer></script>
-<script>
-(function(){
-  var N8N='https://n8n-giez.srv1499541.hstgr.cloud/webhook';
-  var MONTHS=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
-  var SVC_CONFIG=${JSON.stringify(Object.fromEntries(cats.map(c=>[c.id,{type:c.bookingType||'fullday',duration:c.bookingDuration||2}])))};
-  var selSvc=null,selSvcName=null,selDate=null,selEndDate=null;
-  var cy,cm;
-  var now=new Date(); cy=now.getFullYear(); cm=now.getMonth();
-  var busyDays={};
-
-  function getConfig(){return SVC_CONFIG[selSvc]||{type:'fullday',duration:2};}
-  function isMultiday(){return getConfig().type==='multiday';}
-  function pad(n){return String(n).padStart(2,'0');}
-  function dateKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
-  function isDayBusy(d){return !!busyDays[dateKey(d)];}
-
-  function fmtDate(d){
-    return d.getFullYear()+'. '+MONTHS[d.getMonth()]+' '+d.getDate()+'.';
-  }
-
-  function goStep(n){
-    [1,2,3,4].forEach(function(i){
-      var s=document.getElementById('bkstep'+i);
-      var p=document.getElementById('bkprog'+i);
-      if(s) s.classList.toggle('active',i===n);
-      if(p){ p.classList.toggle('active',i===n); p.classList.toggle('done',i<n); }
-    });
-    var sec=document.querySelector('.bk-section');
-    if(sec) window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
-  }
-
-  function loadBusy(year,month,cb){
-    document.getElementById('bkCalDays').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:rgba(255,255,255,.2);font-size:.8rem;letter-spacing:.1em">Betöltés...</div>';
-    fetch(N8N+'/availability?year='+year+'&month='+month+'&service='+(selSvc||'')+'&bookingType='+getConfig().type)
-      .then(function(r){return r.json();})
-      .then(function(d){ busyDays=d.busyDays||{}; if(cb)cb(); })
-      .catch(function(){ busyDays={}; if(cb)cb(); });
-  }
-
-  function renderCal(){
-    document.getElementById('bkCalLabel').textContent=MONTHS[cm]+' '+cy;
-    var today=new Date(); today.setHours(0,0,0,0);
-    var first=new Date(cy,cm,1).getDay();
-    var startDay=first===0?6:first-1;
-    var dim=new Date(cy,cm+1,0).getDate();
-    var html='';
-    for(var i=0;i<startDay;i++) html+='<div></div>';
-    for(var d=1;d<=dim;d++){
-      var dt=new Date(cy,cm,d);
-      var past=dt<today;
-      var busy=!past&&isDayBusy(dt);
-      var isStart=selDate&&dt.toDateString()===selDate.toDateString();
-      var isEnd=selEndDate&&dt.toDateString()===selEndDate.toDateString();
-      var inRange=selDate&&selEndDate&&dt>selDate&&dt<selEndDate;
-      var tod=dt.toDateString()===today.toDateString();
-      var cls='bk-day';
-      if(past) cls+=' past';
-      else if(busy) cls+=' busy';
-      if(isMultiday()){
-        if(isStart) cls+=' range-start';
-        if(isEnd) cls+=' range-end';
-        if(inRange) cls+=' in-range';
-      } else {
-        if(isStart) cls+=' selected';
-      }
-      if(tod) cls+=' today';
-      html+='<div class="'+cls+'" data-ts="'+dt.getTime()+'">'+d+'</div>';
-    }
-    document.getElementById('bkCalDays').innerHTML=html;
-    document.querySelectorAll('.bk-day:not(.past):not(.busy)').forEach(function(el){
-      el.addEventListener('click',function(){
-        var clicked=new Date(parseInt(el.dataset.ts));
-        if(isMultiday()){
-          if(!selDate||selEndDate||clicked<=selDate){
-            selDate=clicked; selEndDate=null;
-            document.getElementById('bkNext2').disabled=true;
-          } else {
-            selEndDate=clicked;
-            document.getElementById('bkNext2').disabled=false;
-          }
-        } else {
-          selDate=clicked;
-          document.getElementById('bkNext2').disabled=false;
-        }
-        renderCal(); renderSelInfo();
-      });
-    });
-  }
-
-  function renderSelInfo(){
-    var el=document.getElementById('bkSelInfo');
-    if(!el) return;
-    if(!selDate){ el.innerHTML='Válassz egy napot a naptárban'; return; }
-    if(isMultiday()){
-      if(!selEndDate){
-        el.innerHTML='Kezdő nap: <strong>'+fmtDate(selDate)+'</strong> — válaszd ki a záró napot';
-      } else {
-        el.innerHTML='<strong>'+fmtDate(selDate)+'</strong> &nbsp;→&nbsp; <strong>'+fmtDate(selEndDate)+'</strong>';
-      }
-    } else {
-      el.innerHTML='<strong>'+fmtDate(selDate)+'</strong>';
-    }
-  }
-
-  document.getElementById('bkCalPrev').addEventListener('click',function(){
-    cm--; if(cm<0){cm=11;cy--;} loadBusy(cy,cm,renderCal);
-  });
-  document.getElementById('bkCalNext').addEventListener('click',function(){
-    cm++; if(cm>11){cm=0;cy++;} loadBusy(cy,cm,renderCal);
-  });
-
-  // Step 1
-  document.querySelectorAll('.bk-svc-card').forEach(function(c){
-    c.addEventListener('click',function(){
-      document.querySelectorAll('.bk-svc-card').forEach(function(x){x.classList.remove('selected');});
-      c.classList.add('selected');
-      selSvc=c.dataset.id; selSvcName=c.dataset.name;
-      selDate=null; selEndDate=null;
-      setTimeout(function(){ goStep(2); loadBusy(cy,cm,renderCal); renderSelInfo(); },220);
-    });
-  });
-
-  document.getElementById('bkBack1').addEventListener('click',function(){goStep(1);});
-  document.getElementById('bkNext2').addEventListener('click',function(){
-    var el=document.getElementById('bkSummary');
-    if(el){
-      var dateStr=isMultiday()&&selEndDate?fmtDate(selDate)+' — '+fmtDate(selEndDate):fmtDate(selDate);
-      el.style.display='flex';
-      el.innerHTML='<span>📷 '+selSvcName+'</span><span>📅 '+dateStr+'</span>';
-    }
-    goStep(3);
-  });
-  document.getElementById('bkBack2').addEventListener('click',function(){goStep(2);});
-
-  // Form submit
-  document.getElementById('bkForm').addEventListener('submit',async function(e){
-    e.preventDefault();
-    var btn=document.getElementById('bkSubmit');
-    var err=document.getElementById('bkError');
-    btn.querySelector('span').textContent='Küldés...';
-    btn.disabled=true; err.style.display='none';
-    var isoDate=selDate?dateKey(selDate):'';
-    var dateStr=selDate?fmtDate(selDate):'—';
-    try{
-      var res=await fetch(N8N+'/book',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          service:selSvc,
-          serviceName:selSvcName,
-          bookingType:getConfig().type,
-          date:isoDate,
-          endDate:selEndDate?dateKey(selEndDate):null,
-          duration:getConfig().duration,
-          name:document.getElementById('bkName').value,
-          email:document.getElementById('bkEmail').value,
-          phone:document.getElementById('bkPhone').value,
-          note:document.getElementById('bkNote').value
-        })
-      });
-      if(res.ok){
-        var endStr=selEndDate?' → '+fmtDate(selEndDate):'';
-        document.getElementById('bkSuccessDetails').innerHTML=
-          '<div style="margin:.8rem 0;color:var(--text-muted);font-size:.9rem">'+
-          selSvcName+' &nbsp;·&nbsp; '+dateStr+endStr+'</div>';
-        goStep(4);
-      } else {
-        btn.querySelector('span').textContent='Foglalás elküldése';
-        btn.disabled=false;
-        err.textContent='Hiba történt, kérlek próbáld újra.';
-        err.style.display='block';
-      }
-    } catch(ex){
-      btn.querySelector('span').textContent='Foglalás elküldése';
-      btn.disabled=false;
-      err.textContent='Kapcsolódási hiba.';
-      err.style.display='block';
-    }
-  });
-})();
-</script>
-${trackingScript()}
-</body>
-</html>`;
-}
 
 function buildArakPage() {
   const p = data.pages.arak;
@@ -1702,8 +1329,8 @@ function buildArakPage() {
       bodyContent = `<ul class="pc-features pc-features-single">${feats}</ul>`;
     }
 
-    const ctaLabel = isCustom ? 'Ajánlatot kérek' : 'Foglalj időpontot';
-    const ctaHref = isCustom ? 'contact.html' : 'booking.html';
+    const ctaLabel = isCustom ? 'Ajánlatot kérek' : 'Kapcsolatfelvétel';
+    const ctaHref = 'contact.html';
 
     return `
                     <div class="price-card2${popularCls}" style="--i:${i}">
@@ -1915,10 +1542,10 @@ ${mobileNavHtml('', 'arak.html')}
         <section class="final-cta">
             <div class="container">
                 <span class="final-cta-label">${p.ctaLabel}</span>
-                <h2>Foglald le a<br><em>szabad időpontod</em></h2>
+                <h2>Lépjünk<br><em>kapcsolatba</em></h2>
                 <p>${p.ctaDesc}</p>
                 <div class="final-cta-btns">
-                    <a href="booking.html" class="btn btn-solid"><span>Időpontfoglalás</span>${arrowSvg}</a>
+                    <a href="contact.html" class="btn btn-solid"><span>Kapcsolatfelvétel</span>${arrowSvg}</a>
                     <a href="portfolio.html" class="btn btn-outline"><span>Galéria megtekintése</span>${arrowSvg}</a>
                 </div>
                 <p class="no-hidden-fees">
@@ -2017,7 +1644,6 @@ function buildLang(lang) {
   buildAndWrite(path.join(outRoot, 'services.html'),  buildServices);
   buildAndWrite(path.join(outRoot, 'contact.html'),   buildContact);
   buildAndWrite(path.join(outRoot, 'arak.html'),      buildArakPage);
-  buildAndWrite(path.join(outRoot, 'booking.html'),   buildBookingPage);
   if (lang === 'hu') {
     writeFile(path.join(outRoot, 'analytics.html'), buildAnalyticsPage());
   }
@@ -2043,5 +1669,5 @@ LANG = 'hu'; ASSET_UP = '';
 writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
 writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
-const total = 7 + cats.length + Object.keys(data.portfolioPages).length;
+const total = 6 + cats.length + Object.keys(data.portfolioPages).length;
 console.log(`\n  Done! ${total} HU + ${total - 1} EN files generated (analytics.html is HU-only).\n`);

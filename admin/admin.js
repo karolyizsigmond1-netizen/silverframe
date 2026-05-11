@@ -22,7 +22,6 @@
                 { id: 'pages.services', title: 'Szolgáltatások' },
                 { id: 'pages.contact', title: 'Kapcsolat' },
                 { id: 'pages.arak', title: 'Árak' },
-                { id: 'pages.booking', title: 'Időpontfoglalás' },
             ]
         },
         {
@@ -514,12 +513,6 @@
                     ${textField('Név', 'serviceCategories.' + i + '.name', cat.name)}
                     ${textField('Link', 'serviceCategories.' + i + '.href', cat.href)}
                     ${imageField('Kép', 'serviceCategories.' + i + '.img', cat.img)}
-                    ${selectField('Foglalás típusa', 'serviceCategories.' + i + '.bookingType', cat.bookingType || 'hourly', [
-                        { value: 'hourly',   label: 'Óránkénti (időpont választás)' },
-                        { value: 'fullday',  label: 'Egész napos' },
-                        { value: 'multiday', label: 'Többnapos' }
-                    ])}
-                    ${numberField('Fotózás hossza (óra)', 'serviceCategories.' + i + '.bookingDuration', cat.bookingDuration || 2)}
                 </div>`;
             });
         }

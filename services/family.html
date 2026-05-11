@@ -102,8 +102,7 @@
             <a href="../portfolio.html">Galéria</a>
             <a href="../arak.html">Árak</a>
             <a href="../about.html">Rólam</a>
-            <a href="../contact.html">Kapcsolat</a>
-            <a href="../booking.html" class="header-cta">Időpontfoglalás</a>
+            <a href="../contact.html" class="header-cta">Kapcsolat</a>
             <a href="../en/services/family.html" class="lang-toggle" aria-label="Switch to English" rel="alternate" hreflang="en">EN</a>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
@@ -117,7 +116,6 @@
                 <a class="mn-link" href="../portfolio.html">Galéria</a>
                 <a class="mn-link" href="../arak.html">Árak</a>
                 <a class="mn-link" href="../about.html">Rólam</a>
-                <a class="mn-link" href="../contact.html">Kapcsolat</a>
                 <a class="mn-link mn-lang-toggle" href="../en/services/family.html" rel="alternate" hreflang="en">English</a>
             </div>
 
@@ -139,7 +137,7 @@
                 </div>
             </div>
 
-            <a href="../booking.html" class="mn-cta">Időpontfoglalás</a>
+            <a href="../contact.html" class="mn-cta">Kapcsolat</a>
         </div>
     </nav>
 
@@ -267,12 +265,12 @@
             </div>
         </section>
 
-        <section class="cta-banner" aria-label="Időpontfoglalás">
+        <section class="cta-banner" aria-label="Kapcsolatfelvétel">
             <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér" style="background-image:url('../uploads/4d804dfbf220-DSC_3198.jpg');background-size:cover;background-position:center;"></div>
             <div class="container reveal">
                 <span class="section-label">Családi fotózás</span>
                 <h2 class="section-title">Örökítsd meg a<br>közös pillanatokat</h2>
-                <a href="../booking.html" class="btn btn-solid"><span>Időpontfoglalás</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <a href="../contact.html" class="btn btn-solid"><span>Kapcsolatfelvétel</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
         </section>
 
@@ -759,18 +757,6 @@
       if (t.classList && t.classList.contains('gallery-preview-item')) {
         gev('gallery_preview_click', { event_category: 'engagement' }); break;
       }
-      // Header CTA booking button
-      if (t.classList && t.classList.contains('header-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'header' }); break;
-      }
-      // Mobile nav CTA booking
-      if (t.classList && t.classList.contains('mn-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'mobile_nav' }); break;
-      }
-      // Any CTA banner button
-      if (t.classList && t.classList.contains('btn') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'cta_banner' }); break;
-      }
       // Nav links
       if (t.closest && t.closest('.header-nav a') && t.tagName === 'A') {
         gev('nav_click', { event_category: 'navigation', link_text: t.textContent.trim() }); break;
@@ -817,18 +803,6 @@
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  // ── Booking form ──
-  var bkForm = document.getElementById('bkForm');
-  if (bkForm) {
-    var bkStarted = false;
-    bkForm.addEventListener('focusin', function() {
-      if (!bkStarted) { bkStarted = true; gev('booking_form_start', { event_category: 'conversion' }); }
-    }, { once: false, passive: true });
-    bkForm.addEventListener('submit', function() {
-      gev('booking_form_submit', { event_category: 'conversion' });
-    }, { passive: true });
-  }
 
   // ── Contact form ──
   var ctForm = document.querySelector('form.contact-form, form[action*="formspree"], .contact-form form');

@@ -93,8 +93,7 @@
             <a href="../portfolio.html" class="active">Gallery</a>
             <a href="../arak.html">Prices</a>
             <a href="../about.html">About</a>
-            <a href="../contact.html">Contact</a>
-            <a href="../booking.html" class="header-cta">Book now</a>
+            <a href="../contact.html" class="header-cta">Contact</a>
             <a href="../../portfolio/product.html" class="lang-toggle" aria-label="Magyar verzió" rel="alternate" hreflang="hu">HU</a>
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -108,7 +107,6 @@
                 <a class="mn-link" href="../portfolio.html">Gallery</a>
                 <a class="mn-link" href="../arak.html">Prices</a>
                 <a class="mn-link" href="../about.html">About</a>
-                <a class="mn-link" href="../contact.html">Contact</a>
                 <a class="mn-link mn-lang-toggle" href="../../portfolio/product.html" rel="alternate" hreflang="hu">Magyar</a>
             </div>
 
@@ -130,7 +128,7 @@
                 </div>
             </div>
 
-            <a href="../booking.html" class="mn-cta">Book now</a>
+            <a href="../contact.html" class="mn-cta">Contact</a>
         </div>
     </nav>
 
@@ -177,7 +175,7 @@
             </div>
         </section>
 
-        <section class="cta-banner" aria-label="Book now"><div class="cta-banner-bg" role="img" aria-label="Studio background" style="background-image:url('../../uploads/4d804dfbf220-DSC_3198.jpg');background-size:cover;background-position:center;"></div><div class="container reveal"><span class="section-label">Like what you see?</span><h2 class="section-title">Let's create photos<br>like this of your products too</h2><a href="../services/product.html" class="btn btn-solid"><span>Request a quote</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></section>
+        <section class="cta-banner" aria-label="Get in touch"><div class="cta-banner-bg" role="img" aria-label="Studio background" style="background-image:url('../../uploads/4d804dfbf220-DSC_3198.jpg');background-size:cover;background-position:center;"></div><div class="container reveal"><span class="section-label">Like what you see?</span><h2 class="section-title">Let's create photos<br>like this of your products too</h2><a href="../contact.html" class="btn btn-solid"><span>Request a quote</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></section>
     </main>
 
     <footer class="footer" role="contentinfo">
@@ -657,18 +655,6 @@
       if (t.classList && t.classList.contains('gallery-preview-item')) {
         gev('gallery_preview_click', { event_category: 'engagement' }); break;
       }
-      // Header CTA booking button
-      if (t.classList && t.classList.contains('header-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'header' }); break;
-      }
-      // Mobile nav CTA booking
-      if (t.classList && t.classList.contains('mn-cta') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'mobile_nav' }); break;
-      }
-      // Any CTA banner button
-      if (t.classList && t.classList.contains('btn') && t.href && t.href.indexOf('booking') !== -1) {
-        gev('booking_cta_click', { event_category: 'conversion', location: 'cta_banner' }); break;
-      }
       // Nav links
       if (t.closest && t.closest('.header-nav a') && t.tagName === 'A') {
         gev('nav_click', { event_category: 'navigation', link_text: t.textContent.trim() }); break;
@@ -715,18 +701,6 @@
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  // ── Booking form ──
-  var bkForm = document.getElementById('bkForm');
-  if (bkForm) {
-    var bkStarted = false;
-    bkForm.addEventListener('focusin', function() {
-      if (!bkStarted) { bkStarted = true; gev('booking_form_start', { event_category: 'conversion' }); }
-    }, { once: false, passive: true });
-    bkForm.addEventListener('submit', function() {
-      gev('booking_form_submit', { event_category: 'conversion' });
-    }, { passive: true });
-  }
 
   // ── Contact form ──
   var ctForm = document.querySelector('form.contact-form, form[action*="formspree"], .contact-form form');
