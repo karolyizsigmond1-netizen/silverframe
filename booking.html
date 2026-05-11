@@ -631,16 +631,6 @@
     lbObserver.observe(lightbox, { attributes: true });
   }
 
-  // ── Chat widget open ──
-  var chatObserver = new MutationObserver(function() {
-    var widget = document.querySelector('.n8n-chat-window, [class*="chat-window"], [class*="chatWindow"]');
-    if (widget && widget.style.display !== 'none' && !widget.dataset.gaTracked) {
-      widget.dataset.gaTracked = '1';
-      gev('chat_widget_open', { event_category: 'engagement' });
-    }
-  });
-  chatObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
-
   // ── Time on page ──
   var pageStart = Date.now();
   window.addEventListener('beforeunload', function() {

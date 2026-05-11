@@ -438,10 +438,6 @@ function lightboxHtml() {
     </div>`;
 }
 
-function chatbotHtml() {
-  return fs.readFileSync(path.join(__dirname, 'silverframe-chatbot-snippet.html'), 'utf-8') + '\n' + trackingScript();
-}
-
 function trackingScript() {
   return `<script>
 (function(){
@@ -572,16 +568,6 @@ function trackingScript() {
     });
     lbObserver.observe(lightbox, { attributes: true });
   }
-
-  // ── Chat widget open ──
-  var chatObserver = new MutationObserver(function() {
-    var widget = document.querySelector('.n8n-chat-window, [class*="chat-window"], [class*="chatWindow"]');
-    if (widget && widget.style.display !== 'none' && !widget.dataset.gaTracked) {
-      widget.dataset.gaTracked = '1';
-      gev('chat_widget_open', { event_category: 'engagement' });
-    }
-  });
-  chatObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
 
   // ── Time on page ──
   var pageStart = Date.now();
@@ -847,7 +833,7 @@ ${lightboxHtml()}
         }, interval);
     })();
     </script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -908,7 +894,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
 
 ${footerHtml('')}
     <script src="${ASSET_UP}js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -962,7 +948,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
 ${footerHtml('')}
 ${lightboxHtml()}
     <script src="${ASSET_UP}js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -1021,7 +1007,7 @@ ${ctaBanner(p.ctaLabel, p.ctaTitle, 'booking.html', 'Időpontfoglalás')}
 
 ${footerHtml('')}
     <script src="${ASSET_UP}js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -1122,7 +1108,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
 
 ${footerHtml('')}
     <script src="${ASSET_UP}js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -1229,7 +1215,7 @@ ${ctaBanner(s.ctaLabel, s.ctaTitle, (s.ctaButton === 'Időpontfoglalás' ? '../b
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="${ASSET_UP}../js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -1282,7 +1268,7 @@ ${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', wit
 ${footerHtml(prefix)}
 ${lightboxHtml()}
     <script src="${ASSET_UP}../js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
@@ -1932,7 +1918,7 @@ ${mobileNavHtml('', 'arak.html')}
 ${footerHtml('')}
 ${lightboxHtml()}
     <script src="${ASSET_UP}js/main.js" defer></script>
-${chatbotHtml()}
+${trackingScript()}
 </body>
 </html>`;
 }
