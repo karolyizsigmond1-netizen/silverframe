@@ -230,7 +230,10 @@ function bundleAttr(item, prefix) {
   if (!images.length) return '';
   const payload = images.map(im => {
     const dims = readImgSize(im.src);
-    return { src: imgSrc(im.src, prefix), alt: im.alt || '', w: dims ? dims.w : 0, h: dims ? dims.h : 0 };
+    // Translate alt before URL-encoding so the i18n pass (which runs on raw
+    // HTML after this) doesn't see Hungarian inside the encoded data-bundle.
+    const alt = translateHtml(im.alt || '');
+    return { src: imgSrc(im.src, prefix), alt, w: dims ? dims.w : 0, h: dims ? dims.h : 0 };
   });
   return ` data-bundle="${encodeURIComponent(JSON.stringify(payload))}"`;
 }
@@ -300,7 +303,7 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
 <html lang="${LANG}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <meta name="description" content="${desc}">
     <link rel="canonical" href="${canonicalUrl}">
@@ -616,7 +619,7 @@ function buildIndex() {
     "image": p.heroImage ? `${g.baseUrl}/${p.heroImage}` : undefined,
     "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
     "areaServed": { "@type": "City", "name": g.city },
-    "priceRange": "$$",
+    "priceRange": "45000 - 400000 HUF",
     "sameAs": sameAs
   }, null, 8);
 
@@ -1567,9 +1570,12 @@ ${chatbotHtml()}
 // ── Analytics dashboard ──
 
 function buildAnalyticsPage() {
+  // content.json now stores the SHA-256 hash directly (not the plaintext)
+  // so the publicly served content.json doesn't leak the password.
+  // Fall back to hashing a literal for legacy/dev only.
   const crypto = require('crypto');
-  const pass = g.analyticsPassword || 'silverframe';
-  const passHash = crypto.createHash('sha256').update(pass).digest('hex');
+  const passHash = g.analyticsPasswordHash
+    || crypto.createHash('sha256').update(g.analyticsPassword || 'silverframe').digest('hex');
   var tmpl = fs.readFileSync(path.join(__dirname, 'analytics-template.html'), 'utf-8');
   return tmpl
     .replace('__CLIENT_ID__', g.oauthClientId || 'REPLACE_WITH_OAUTH_CLIENT_ID')

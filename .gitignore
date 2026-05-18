@@ -2,3 +2,5 @@ node_modules/
 package-lock.json
 compress.js
 .env
+*.env
+content.json.seo-bak

@@ -14,7 +14,7 @@
     "buttonStyle": "rounded",
     "phone": "+3620/3799-814",
     "oauthClientId": "1035859647139-oagj2o4llahv22rff7s2bera9ca13kvr.apps.googleusercontent.com",
-    "analyticsPassword": "Dollar1973"
+    "analyticsPasswordHash": "d833847245ba829fd351a9c10a901eb86d8726e19a41cc70355d2c6868a9f16a"
   },
   "serviceCategories": [
     {
