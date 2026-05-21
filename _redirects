@@ -1,0 +1,4 @@
+# Normalize www → apex (single canonical host)
+https://www.silverframe.hu/*  https://silverframe.hu/:splat  301!
+
+# Trailing slash → no trailing slash for .html pages handled by Netlify automatically

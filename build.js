@@ -306,6 +306,11 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <meta name="description" content="${desc}">
+    <meta name="geo.region" content="HU-CS">
+    <meta name="geo.placename" content="Szeged">
+    <meta name="geo.position" content="46.2530;20.1414">
+    <meta name="ICBM" content="46.2530, 20.1414">
+    <meta name="author" content="${g.photographer || g.siteName.trim()}">
     <link rel="canonical" href="${canonicalUrl}">
     <link rel="alternate" hreflang="hu" href="${huHref}">
     <link rel="alternate" hreflang="en" href="${enHref}">
@@ -610,16 +615,41 @@ function buildIndex() {
   const sameAs = [g.instagram, g.facebook].filter(Boolean);
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@type": ["LocalBusiness", "ProfessionalService", "Photographer"],
     "name": g.siteName.trim(),
+    "alternateName": "Silverframe Studio",
     "description": g.footerDesc,
     "url": g.baseUrl,
     "telephone": g.phone,
     "email": g.email,
-    "image": p.heroImage ? `${g.baseUrl}/${p.heroImage}` : undefined,
+    "image": globalOgImage || (p.heroImage ? `${g.baseUrl}/${p.heroImage}` : undefined),
+    "logo": globalOgImage,
     "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
-    "areaServed": { "@type": "City", "name": g.city },
+    "geo": { "@type": "GeoCoordinates", "latitude": 46.2530, "longitude": 20.1414 },
+    "areaServed": [
+      { "@type": "City", "name": "Szeged" },
+      { "@type": "AdministrativeArea", "name": "Csongrád-Csanád megye" },
+      { "@type": "Country", "name": "Magyarország" }
+    ],
+    "knowsLanguage": ["hu", "en"],
+    "founder": { "@type": "Person", "name": g.photographer },
+    "currenciesAccepted": "HUF",
+    "paymentAccepted": "Cash, Bank Transfer",
     "priceRange": "45000 - 400000 HUF",
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    }],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Fotózási szolgáltatások",
+      "itemListElement": cats.map(c => ({
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": `${c.name} fotózás Szegeden`, "url": `${g.baseUrl}/services/${c.id}.html` }
+      }))
+    },
     "sameAs": sameAs
   }, null, 8);
 
@@ -832,6 +862,7 @@ ${chatbotHtml()}
 function buildAbout() {
   const p = data.pages.about;
   const sameAs = [g.instagram, g.facebook].filter(Boolean);
+  const personImage = p.portrait || p.heroImage ? `${g.baseUrl}/${p.portrait || p.heroImage}` : globalOgImage;
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
@@ -839,9 +870,12 @@ function buildAbout() {
     "jobTitle": "Fotós",
     "description": `Professzionális fotós ${g.city}en — ${g.siteName.trim()}`,
     "url": `${g.baseUrl}/about.html`,
+    "image": personImage,
     "email": g.email,
     "telephone": g.phone,
-    "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" },
+    "knowsLanguage": ["hu", "en"],
+    "knowsAbout": ["Esküvői fotózás", "Portrait fotózás", "Rendezvény fotózás", "Termékfotózás", "Ingatlan fotózás", "Boudoir fotózás", "Kismama fotózás"],
+    "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
     "worksFor": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl },
     "sameAs": sameAs
   }, null, 8);
@@ -1116,17 +1150,25 @@ function buildServicePage(id) {
     "@graph": [
       {
         "@type": "Service",
-        "name": s.heroTitle,
+        "name": `${s.heroTitle} Szegeden`,
         "description": s.metaDesc,
         "image": ogImg,
+        "serviceType": s.heroTitle,
+        "category": "Photography",
         "url": `${g.baseUrl}/services/${id}.html`,
-        "areaServed": { "@type": "City", "name": g.city },
+        "areaServed": [
+          { "@type": "City", "name": "Szeged" },
+          { "@type": "AdministrativeArea", "name": "Csongrád-Csanád megye" }
+        ],
         "provider": {
-          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@type": ["LocalBusiness", "ProfessionalService", "Photographer"],
           "name": g.siteName.trim(),
           "url": g.baseUrl,
           "telephone": g.phone,
-          "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressCountry": "HU" }
+          "email": g.email,
+          "image": globalOgImage,
+          "address": { "@type": "PostalAddress", "addressLocality": g.city, "addressRegion": "Csongrád-Csanád megye", "addressCountry": "HU" },
+          "geo": { "@type": "GeoCoordinates", "latitude": 46.2530, "longitude": 20.1414 }
         }
       },
       {
