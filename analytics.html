@@ -197,20 +197,26 @@
     var PAGE_NAMES = {
         '': 'Főoldal', '/': 'Főoldal', '/index.html': 'Főoldal',
         '/about.html': 'Rólam', '/portfolio.html': 'Galéria',
-        '/services.html': 'Szolgáltatások', '/contact.html': 'Kapcsolat',
-        '/arak.html': 'Árak',
-        '/services/wedding.html': 'Esküvő', '/services/wedding-creative.html': 'Kreatív esküvő',
-        '/services/boudoir.html': 'Boudoir', '/services/maternity.html': 'Kismama',
-        '/services/family.html': 'Családi', '/services/portfolio-model.html': 'Portfólió / Modell',
-        '/services/event.html': 'Rendezvény', '/services/couple.html': 'Pár',
-        '/services/pet.html': 'Kisállat', '/services/business.html': 'Üzleti',
-        '/services/real-estate.html': 'Ingatlan', '/services/product.html': 'Termék'
+        '/szolgaltatasok': 'Szolgáltatások', '/kapcsolat': 'Kapcsolat',
+        '/arak': 'Árak', '/rolam': 'Rólam', '/galeria': 'Galéria',
+        '/szolgaltatasok/eskuvoi-fotos-szeged': 'Esküvő',
+        '/szolgaltatasok/eskuvoi-kreativ-fotos-szeged': 'Kreatív esküvő',
+        '/szolgaltatasok/boudoir-fotos-szeged': 'Boudoir',
+        '/szolgaltatasok/kismama-fotos-szeged': 'Kismama',
+        '/szolgaltatasok/csaladi-fotos-szeged': 'Családi',
+        '/szolgaltatasok/portfolio-modell-fotos-szeged': 'Portfólió / Modell',
+        '/szolgaltatasok/rendezveny-fotos-szeged': 'Rendezvény',
+        '/szolgaltatasok/paros-jegyes-fotos-szeged': 'Pár',
+        '/szolgaltatasok/kisallat-fotos-szeged': 'Kisállat',
+        '/szolgaltatasok/uzleti-portre-fotos-szeged': 'Üzleti',
+        '/szolgaltatasok/ingatlan-fotos-szeged': 'Ingatlan',
+        '/szolgaltatasok/termekfotozas-szeged': 'Termék'
     };
     var PAGE_ICONS = {
-        '': '🏠', '/': '🏠', '/index.html': '🏠',
-        '/about.html': '👤', '/portfolio.html': '📸',
-        '/services.html': '✨', '/contact.html': '✉️',
-        '/arak.html': '💰'
+        '': '🏠', '/': '🏠',
+        '/rolam': '👤', '/galeria': '📸',
+        '/szolgaltatasok': '✨', '/kapcsolat': '✉️',
+        '/arak': '💰'
     };
     function pageName(p) { return PAGE_NAMES[p] || p.replace('/services/', '').replace('/portfolio/', '').replace(/\.html$/, '').replace(/-/g, ' ') || 'Főoldal'; }
     function pageIcon(p) { return PAGE_ICONS[p] || (p.indexOf('/services/') !== -1 ? '📷' : p.indexOf('/portfolio/') !== -1 ? '🖼️' : '📄'); }

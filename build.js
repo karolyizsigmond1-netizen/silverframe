@@ -13,6 +13,61 @@ let LANG = 'hu';                  // 'hu' | 'en'  (set per build pass)
 let ASSET_UP = '';                // bridge from language root to actual root: '' for hu, '../' for en
 const LANG_ROOT = { hu: '', en: 'en/' };
 
+// ── Pretty URL map (no .html, keyword-rich) ──
+// Values are paths relative to the language root (no leading slash, no extension).
+// On disk we write `<path>.html`; Netlify Pretty URLs serves it without the extension.
+const URL_MAP = {
+  page: {
+    index:        { hu: '',                en: '' },
+    about:        { hu: 'rolam',           en: 'about' },
+    portfolio:    { hu: 'galeria',         en: 'gallery' },
+    services:     { hu: 'szolgaltatasok',  en: 'services' },
+    contact:      { hu: 'kapcsolat',       en: 'contact' },
+    arak:         { hu: 'arak',            en: 'prices' },
+    adatvedelem:  { hu: 'adatvedelem',     en: 'privacy' },
+  },
+  service: {
+    'wedding':           { hu: 'szolgaltatasok/eskuvoi-fotos-szeged',           en: 'services/wedding-photographer-szeged' },
+    'wedding-creative':  { hu: 'szolgaltatasok/eskuvoi-kreativ-fotos-szeged',   en: 'services/creative-wedding-photographer-szeged' },
+    'maternity':         { hu: 'szolgaltatasok/kismama-fotos-szeged',           en: 'services/maternity-photographer-szeged' },
+    'boudoir':           { hu: 'szolgaltatasok/boudoir-fotos-szeged',           en: 'services/boudoir-photographer-szeged' },
+    'family':            { hu: 'szolgaltatasok/csaladi-fotos-szeged',           en: 'services/family-photographer-szeged' },
+    'couple':            { hu: 'szolgaltatasok/paros-jegyes-fotos-szeged',      en: 'services/engagement-photographer-szeged' },
+    'business':          { hu: 'szolgaltatasok/uzleti-portre-fotos-szeged',     en: 'services/business-portrait-szeged' },
+    'real-estate':       { hu: 'szolgaltatasok/ingatlan-fotos-szeged',          en: 'services/real-estate-photographer-szeged' },
+    'event':             { hu: 'szolgaltatasok/rendezveny-fotos-szeged',        en: 'services/event-photographer-szeged' },
+    'portfolio-model':   { hu: 'szolgaltatasok/portfolio-modell-fotos-szeged',  en: 'services/portfolio-model-photographer-szeged' },
+    'pet':               { hu: 'szolgaltatasok/kisallat-fotos-szeged',          en: 'services/pet-photographer-szeged' },
+    'product':           { hu: 'szolgaltatasok/termekfotozas-szeged',           en: 'services/product-photographer-szeged' },
+  },
+  portfolio: {
+    'wedding':           { hu: 'galeria/eskuvoi-fotok',           en: 'gallery/wedding-photos' },
+    'wedding-creative':  { hu: 'galeria/eskuvoi-kreativ-fotok',   en: 'gallery/creative-wedding-photos' },
+    'maternity':         { hu: 'galeria/kismama-fotok',           en: 'gallery/maternity-photos' },
+    'boudoir':           { hu: 'galeria/boudoir-fotok',           en: 'gallery/boudoir-photos' },
+    'family':            { hu: 'galeria/csaladi-fotok',           en: 'gallery/family-photos' },
+    'couple':            { hu: 'galeria/paros-jegyes-fotok',      en: 'gallery/engagement-photos' },
+    'business':          { hu: 'galeria/uzleti-portre-fotok',     en: 'gallery/business-portrait-photos' },
+    'real-estate':       { hu: 'galeria/ingatlan-fotok',          en: 'gallery/real-estate-photos' },
+    'event':             { hu: 'galeria/rendezveny-fotok',        en: 'gallery/event-photos' },
+    'portrait':          { hu: 'galeria/portfolio-modell-fotok',  en: 'gallery/portfolio-model-photos' },
+    'pet':               { hu: 'galeria/kisallat-fotok',          en: 'gallery/pet-photos' },
+    'product':           { hu: 'galeria/termek-fotok',            en: 'gallery/product-photos' },
+  }
+};
+
+// Path (no leading slash, no .html) relative to the current LANG root.
+function pathFor(kind, key) { return URL_MAP[kind][key][LANG]; }
+function pathForLang(kind, key, lang) { return URL_MAP[kind][key][lang]; }
+
+// Absolute canonical URL (with /en/ prefix where needed). For canonical / og:url / sitemap.
+function absUrl(kind, key, lang) {
+  const l = lang || LANG;
+  const p = URL_MAP[kind][key][l];
+  if (l === 'en') return g.baseUrl + '/en' + (p ? '/' + p : '/');
+  return g.baseUrl + (p ? '/' + p : '/');
+}
+
 // Apply HU→EN translation to a generated HTML string.
 // Uses placeholder tokens to avoid double-replacement when an EN value contains a HU key.
 function translateHtml(html) {
@@ -31,28 +86,35 @@ function translateHtml(html) {
   return html;
 }
 
-// Build the URL of the language toggle for the current page.
-// pagePath is the file path relative to the language root (e.g. 'index.html', 'services/wedding.html').
-function langToggleHref(pagePath, prefix) {
-  if (LANG === 'hu') {
-    // HU page → EN page: from /<pagePath> (or /sub/<pagePath>) navigate up to root, then into /en/
-    return `${prefix}en/${pagePath}`;
-  }
-  // EN page → HU page: bridge up out of /en/ then navigate to /<pagePath>
-  return `${ASSET_UP}${prefix}${pagePath}`;
+// Cross-language toggle: pass the urlKind+urlKey for the current page (e.g. 'page','about'
+// or 'service','wedding'); the helper picks the target-language slug from URL_MAP.
+function langToggleHref(urlKind, urlKey) {
+  const targetLang = LANG === 'hu' ? 'en' : 'hu';
+  const targetPath = (URL_MAP[urlKind] && URL_MAP[urlKind][urlKey]) ? URL_MAP[urlKind][urlKey][targetLang] : '';
+  const langPrefix = targetLang === 'en' ? '/en/' : '/';
+  return targetPath ? langPrefix + targetPath : langPrefix;
 }
 
-function langToggleHtml(pagePath, prefix) {
-  const href = langToggleHref(pagePath, prefix);
+function langToggleHtml(urlKind, urlKey, prefix) {
+  const href = langToggleHref(urlKind, urlKey, prefix);
   const label = LANG === 'hu' ? 'EN' : 'HU';
   const aria = LANG === 'hu' ? 'Switch to English' : 'Magyar verzió';
   return `<a href="${href}" class="lang-toggle" aria-label="${aria}" rel="alternate" hreflang="${LANG === 'hu' ? 'en' : 'hu'}">${label}</a>`;
 }
 
-function langToggleMobileHtml(pagePath, prefix) {
-  const href = langToggleHref(pagePath, prefix);
+function langToggleMobileHtml(urlKind, urlKey, prefix) {
+  const href = langToggleHref(urlKind, urlKey, prefix);
   const label = LANG === 'hu' ? 'English' : 'Magyar';
   return `<a class="mn-link mn-lang-toggle" href="${href}" rel="alternate" hreflang="${LANG === 'hu' ? 'en' : 'hu'}">${label}</a>`;
+}
+
+// Returns an absolute URL path (starting with /) for href= attributes.
+// `prefix` is ignored — kept in the signature so existing call sites don't need rewriting.
+// Empty paths (the index page) resolve to '/' (HU) or '/en/' (EN).
+function rel(_prefix, kind, key) {
+  const p = pathFor(kind, key);
+  const langPrefix = LANG === 'en' ? '/en/' : '/';
+  return p ? langPrefix + p : langPrefix;
 }
 
 // ── Shared HTML helpers ──
@@ -253,21 +315,20 @@ function fonts() {
     <noscript><link rel="stylesheet" href="${href}"></noscript>`;
 }
 
-function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImage, cssPath, jsonLd, preloadImg) {
-  // Convert HU canonical → EN canonical when building EN.
-  // canonical is like 'https://host.com/' or 'https://host.com/services/wedding.html'.
-  let canonicalUrl = canonical;
-  let huHref = canonical;
-  let enHref = canonical;
-  try {
-    const huU = new URL(canonical);
-    huHref = huU.toString();
-    const pathPart = huU.pathname === '/' ? '/' : huU.pathname;
-    const enU = new URL(huU.toString());
-    enU.pathname = pathPart === '/' ? '/en/' : '/en' + pathPart;
-    enHref = enU.toString();
+function headHtml(title, desc, urlKind, urlKey, ogTitle, ogDesc, ogType, ogImage, cssPath, jsonLd, preloadImg) {
+  // Resolve URLs from URL_MAP. For pages outside the map (e.g. analytics), pass urlKind=null
+  // and the canonical falls back to baseUrl + '/'.
+  let huHref, enHref, canonicalUrl;
+  if (urlKind && URL_MAP[urlKind] && URL_MAP[urlKind][urlKey]) {
+    huHref = absUrl(urlKind, urlKey, 'hu');
+    enHref = absUrl(urlKind, urlKey, 'en');
     canonicalUrl = LANG === 'en' ? enHref : huHref;
-  } catch (e) { /* keep defaults */ }
+  } else {
+    canonicalUrl = g.baseUrl + '/';
+    huHref = canonicalUrl;
+    enHref = canonicalUrl;
+  }
+  const ogUrl = canonicalUrl;
 
   const preload = preloadImg ? `\n    <link rel="preload" as="image" href="${preloadImg.startsWith('http') ? preloadImg : '/' + preloadImg}">` : '';
   const cssHref = (cssPath && !/^https?:/.test(cssPath) && !cssPath.startsWith('/')) ? ASSET_UP + cssPath : cssPath;
@@ -318,7 +379,7 @@ function headHtml(title, desc, canonical, ogTitle, ogDesc, ogType, ogUrl, ogImag
     <meta property="og:title" content="${ogTitle || title}">
     <meta property="og:description" content="${ogDesc || desc}">
     <meta property="og:type" content="${ogType || 'website'}">
-    <meta property="og:url" content="${ogUrl ? (LANG === 'en' && ogUrl === canonical ? canonicalUrl : ogUrl) : canonicalUrl}">${ogExtras}${ogImageTags}${preload}
+    <meta property="og:url" content="${ogUrl}">${ogExtras}${ogImageTags}${preload}
     ${fonts()}
     <link rel="stylesheet" href="${cssHref}">
     ${jsonLd ? `<script type="application/ld+json">\n    ${jsonLd}\n    </script>` : ''}
@@ -337,53 +398,54 @@ function boilerplate() {
 
 function navDropdown(prefix, activeService) {
   return `<div class="nav-dropdown">
-                <a href="${prefix}services.html"${activeService ? ' class="active"' : ''}>Szolgáltatások ${dropdownArrow}</a>
+                <a href="${rel(prefix,'page','services')}"${activeService ? ' class="active"' : ''}>Szolgáltatások ${dropdownArrow}</a>
                 <div class="dropdown-menu">${cats.map(c =>
-    `<a href="${prefix}services/${c.id}.html"${activeService === c.id ? ' class="active"' : ''}>${c.name}</a>`
+    `<a href="${rel(prefix,'service',c.id)}"${activeService === c.id ? ' class="active"' : ''}>${c.name}</a>`
   ).join('')}</div>
             </div>`;
 }
 
-function headerHtml(prefix, activePage, activeService, pagePath) {
-  const pp = pagePath || 'index.html';
+// activePageKey/activeServiceId determine the active nav state AND the lang-toggle target.
+// urlKind/urlKey identify what page is being rendered (used by lang-toggle to find the
+// counterpart slug).
+function headerHtml(prefix, activePage, activeService, urlKind, urlKey) {
   return `    <header class="header" role="banner">
-        <a href="${prefix}index.html" class="header-logo" aria-label="${g.siteName} — Főoldal">${g.siteName}</a>
+        <a href="${rel(prefix,'page','index')}" class="header-logo" aria-label="${g.siteName} — Főoldal">${g.siteName}</a>
         <nav class="header-nav" aria-label="Fő navigáció">
             ${navDropdown(prefix, activeService)}
-            <a href="${prefix}portfolio.html"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
-            <a href="${prefix}arak.html"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
-            <a href="${prefix}about.html"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
-            <a href="${prefix}contact.html"${activePage === 'contact' ? ' class="header-cta active"' : ' class="header-cta"'}>Kapcsolat</a>
-            ${langToggleHtml(pp, prefix)}
+            <a href="${rel(prefix,'page','portfolio')}"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
+            <a href="${rel(prefix,'page','arak')}"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
+            <a href="${rel(prefix,'page','about')}"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
+            <a href="${rel(prefix,'page','contact')}"${activePage === 'contact' ? ' class="header-cta active"' : ' class="header-cta"'}>Kapcsolat</a>
+            ${langToggleHtml(urlKind || 'page', urlKey || 'index', prefix)}
         </nav>
         <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása"><span></span><span></span><span></span></button>
     </header>`;
 }
 
-function mobileNavHtml(prefix, pagePath) {
-  const pp = pagePath || 'index.html';
+function mobileNavHtml(prefix, urlKind, urlKey) {
   return `    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil navigáció">
         <div class="mn-inner">
             <div class="mn-logo">${g.siteName}</div>
 
             <div class="mn-main">
-                <a class="mn-link" href="${prefix}index.html">Főoldal</a>
-                <a class="mn-link" href="${prefix}portfolio.html">Galéria</a>
-                <a class="mn-link" href="${prefix}arak.html">Árak</a>
-                <a class="mn-link" href="${prefix}about.html">Rólam</a>
-                ${langToggleMobileHtml(pp, prefix)}
+                <a class="mn-link" href="${rel(prefix,'page','index')}">Főoldal</a>
+                <a class="mn-link" href="${rel(prefix,'page','portfolio')}">Galéria</a>
+                <a class="mn-link" href="${rel(prefix,'page','arak')}">Árak</a>
+                <a class="mn-link" href="${rel(prefix,'page','about')}">Rólam</a>
+                ${langToggleMobileHtml(urlKind || 'page', urlKey || 'index', prefix)}
             </div>
 
             <div class="mn-services">
                 <div class="mn-services-label">Szolgáltatások</div>
                 <div class="mn-services-grid">
                     ${cats.map(c =>
-    `<a href="${prefix}services/${c.id}.html">${c.name}</a>`
+    `<a href="${rel(prefix,'service',c.id)}">${c.name}</a>`
   ).join('\n                    ')}
                 </div>
             </div>
 
-            <a href="${prefix}contact.html" class="mn-cta">Kapcsolat</a>
+            <a href="${rel(prefix,'page','contact')}" class="mn-cta">Kapcsolat</a>
         </div>
     </nav>`;
 }
@@ -400,21 +462,21 @@ function footerHtml(prefix) {
                 <div>
                     <h4 class="footer-heading">Navigáció</h4>
                     <ul class="footer-links">
-                        <li><a href="${prefix}index.html">Főoldal</a></li>
-                        <li><a href="${prefix}about.html">Rólam</a></li>
-                        <li><a href="${prefix}portfolio.html">Galéria</a></li>
-                        <li><a href="${prefix}services.html">Szolgáltatások</a></li>
-                        <li><a href="${prefix}contact.html">Kapcsolat</a></li>
+                        <li><a href="${rel(prefix,'page','index')}">Főoldal</a></li>
+                        <li><a href="${rel(prefix,'page','about')}">Rólam</a></li>
+                        <li><a href="${rel(prefix,'page','portfolio')}">Galéria</a></li>
+                        <li><a href="${rel(prefix,'page','services')}">Szolgáltatások</a></li>
+                        <li><a href="${rel(prefix,'page','contact')}">Kapcsolat</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="footer-heading">Szolgáltatások</h4>
                     <ul class="footer-links">
-                        <li><a href="${prefix}services/portfolio-model.html">Galéria / Modell</a></li>
-                        <li><a href="${prefix}services/maternity.html">Kismama</a></li>
-                        <li><a href="${prefix}services/boudoir.html">Boudoir</a></li>
-                        <li><a href="${prefix}services/wedding.html">Esküvő</a></li>
-                        <li><a href="${prefix}services/event.html">Rendezvény</a></li>
+                        <li><a href="${rel(prefix,'service','portfolio-model')}">Galéria / Modell</a></li>
+                        <li><a href="${rel(prefix,'service','maternity')}">Kismama</a></li>
+                        <li><a href="${rel(prefix,'service','boudoir')}">Boudoir</a></li>
+                        <li><a href="${rel(prefix,'service','wedding')}">Esküvő</a></li>
+                        <li><a href="${rel(prefix,'service','event')}">Rendezvény</a></li>
                     </ul>
                 </div>
                 <div>
@@ -427,7 +489,7 @@ function footerHtml(prefix) {
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; ${g.copyright} ${g.siteName}. Minden jog fenntartva. <a href="${prefix}adatvedelem.html" class="footer-legal-link">Adatvédelem</a></span>
+                <span>&copy; ${g.copyright} ${g.siteName}. Minden jog fenntartva. <a href="${rel(prefix,'page','adatvedelem')}" class="footer-legal-link">Adatvédelem</a></span>
                 <div class="footer-social"><a href="${g.instagram}">Instagram</a><a href="${g.facebook}">Facebook</a></div>
             </div>
         </div>
@@ -574,8 +636,9 @@ function trackingScript() {
 
   // ── Portfolio category visit ──
   var pathStr = window.location.pathname;
-  if (pathStr.indexOf('/services/') !== -1) {
-    var catSlug = pathStr.split('/services/')[1].replace('.html', '');
+  if (pathStr.indexOf('/szolgaltatasok/') !== -1 || pathStr.indexOf('/services/') !== -1) {
+    var sep = pathStr.indexOf('/szolgaltatasok/') !== -1 ? '/szolgaltatasok/' : '/services/';
+    var catSlug = pathStr.split(sep)[1].replace('.html', '').replace(/\/$/, '');
     gev('portfolio_category_view', { event_category: 'engagement', category: catSlug });
   }
 })();
@@ -647,14 +710,14 @@ function buildIndex() {
       "name": "Fotózási szolgáltatások",
       "itemListElement": cats.map(c => ({
         "@type": "Offer",
-        "itemOffered": { "@type": "Service", "name": `${c.name} fotózás Szegeden`, "url": `${g.baseUrl}/services/${c.id}.html` }
+        "itemOffered": { "@type": "Service", "name": `${c.name} fotózás Szegeden`, "url": absUrl('service', c.id) }
       }))
     },
     "sameAs": sameAs
   }, null, 8);
 
   const heroPreload = p.heroImages && p.heroImages[0] ? p.heroImages[0] : null;
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/', p.title, p.metaDesc, 'website', g.baseUrl + '/', globalOgImage, 'css/style.css', jsonLd, heroPreload)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'index', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd, heroPreload)}
 ${bodyTag()}
 ${boilerplate()}
 
@@ -666,8 +729,8 @@ ${boilerplate()}
         <div class="preloader-line"></div>
     </div>
 
-${headerHtml('', null, null, 'index.html')}
-${mobileNavHtml('', 'index.html')}
+${headerHtml('', null, null, 'page', 'index')}
+${mobileNavHtml('', 'page', 'index')}
 
     <main>
         <section class="home-hero" aria-label="Bemutatkozás">
@@ -683,7 +746,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
                     <span class="line"><span>${p.heroTitleLine1}</span></span>
                     <span class="line"><span>${p.heroTitleLine2}</span></span>
                 </h1>
-                ${btn('services.html', 'Szolgáltatások')}
+                ${btn(rel('','page','services'), 'Szolgáltatások')}
             </div>
             <div class="home-hero-scroll"><span>Görgess</span><div class="scroll-line"></div></div>
         </section>
@@ -698,7 +761,7 @@ ${(p.heroImages || ['https://images.unsplash.com/photo-1554080353-a576cf803bda?w
 ${data.serviceCategories.map(c => {
   const img = c.img || c.image || '';
   const alt = c.name + ' fotózás – Silverframe Studio, Szeged';
-  return `                    <a href="services/${c.id}.html" class="service-card-home">
+  return `                    <a href="${rel('','service',c.id)}" class="service-card-home">
                         <img src="${imgSrc(img, '')}"${imgStyle(img)} alt="${alt}" width="500" height="667">
                         <div class="overlay"><h3>${c.name}</h3></div>
                     </a>`;
@@ -717,7 +780,7 @@ ${data.serviceCategories.map(c => {
 ${p.galleryImages.map(img => `                    <div class="gallery-preview-item"><img src="${imgSrc(img.src, '')}"${imgStyle(img.src)} alt="${img.alt}" width="400" height="400"></div>`).join('\n')}
                 </div>
                 <div class="gallery-preview-cta reveal reveal-delay-2">
-                    ${btn('portfolio.html', 'Teljes galéria')}
+                    ${btn(rel('','page','portfolio'), 'Teljes galéria')}
                 </div>
             </div>
         </section>
@@ -810,7 +873,7 @@ ${p.testimonials.map((_, i) => `                        <button class="t-dot${i 
                     <span class="section-label">${p.introLabel}</span>
                     <h2 class="section-title">${p.introTitle}</h2>
                     <p class="section-desc">${p.introDesc}</p>
-                    ${btn('about.html', 'Tovább')}
+                    ${btn(rel('','page','about'), 'Tovább')}
                 </div>
             </div>
         </section>
@@ -835,7 +898,7 @@ ${p.howItWorks.steps.map(s => `                    <div class="hiw-step reveal">
 
         <div class="section-divider reveal"></div>` : ''}
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, rel('','page','contact'), 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -869,7 +932,7 @@ function buildAbout() {
     "name": g.photographer,
     "jobTitle": "Fotós",
     "description": `Professzionális fotós ${g.city}en — ${g.siteName.trim()}`,
-    "url": `${g.baseUrl}/about.html`,
+    "url": absUrl('page','about'),
     "image": personImage,
     "email": g.email,
     "telephone": g.phone,
@@ -880,14 +943,14 @@ function buildAbout() {
     "sameAs": sameAs
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/about.html', p.title, p.metaDesc, 'website', g.baseUrl + '/about.html', globalOgImage, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'about', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'about', null, 'about.html')}
-${mobileNavHtml('', 'about.html')}
+${headerHtml('', 'about', null, 'page', 'about')}
+${mobileNavHtml('', 'page', 'about')}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Rólam`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <span>/</span> Rólam`)}
 
         <section class="section">
             <div class="container about-content">
@@ -914,7 +977,7 @@ ${p.stats.map(s => `                        <div><div class="about-stat-num">${s
             </div>
         </section>
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, rel('','page','contact'), 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -926,16 +989,16 @@ ${chatbotHtml()}
 
 function buildPortfolio() {
   const p = data.pages.portfolio;
-  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Galéria`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": g.baseUrl + "/portfolio.html" });
+  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", "name": `${g.siteName} Galéria`, "description": "Válogatott fotómunkák a Silverframe Studiótól", "url": absUrl('page','portfolio') });
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/portfolio.html', p.title, p.metaDesc, 'website', g.baseUrl + '/portfolio.html', globalOgImage, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'portfolio', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'portfolio', null, 'portfolio.html')}
-${mobileNavHtml('', 'portfolio.html')}
+${headerHtml('', 'portfolio', null, 'page', 'portfolio')}
+${mobileNavHtml('', 'page', 'portfolio')}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Galéria`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <span>/</span> Galéria`)}
 
         <section class="section accordion-section">
             <div class="container">
@@ -944,7 +1007,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                     <h2 class="section-title">${p.accordionTitle}</h2>
                 </div>
                 <div class="portfolio-grid reveal reveal-delay-1">
-${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="portfolio/${c.portfolioId}.html" class="portfolio-grid-tile">
+${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="${rel('','portfolio',c.portfolioId)}" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
                             <img src="${imgSrc(cImg, '')}"${imgStyle(cImg)} alt="${c.name} fotózás">
                         </div>
@@ -967,7 +1030,7 @@ ${p.stats.map(s => `                    <div class="portfolio-stat"><span class=
         </section>
 
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, rel('','page','contact'), 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -985,23 +1048,23 @@ function buildServices() {
     "@type": "ItemList",
     "name": `Fotózási Szolgáltatások — ${g.siteName.trim()}`,
     "description": p.metaDesc,
-    "url": `${g.baseUrl}/services.html`,
+    "url": absUrl('page','services'),
     "itemListElement": cats.map((c, i) => ({
       "@type": "ListItem",
       "position": i + 1,
       "name": c.name + " Fotózás",
-      "url": `${g.baseUrl}/services/${c.id}.html`
+      "url": absUrl('service',c.id)
     }))
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/services.html', p.title, p.metaDesc, 'website', g.baseUrl + '/services.html', globalOgImage, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'services', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'services', null, 'services.html')}
-${mobileNavHtml('', 'services.html')}
+${headerHtml('', 'services', null, 'page', 'services')}
+${mobileNavHtml('', 'page', 'services')}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Szolgáltatások`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <span>/</span> Szolgáltatások`)}
 
         <section class="section">
             <div class="container">
@@ -1012,7 +1075,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal
                 </div>
 
                 <div class="category-grid">
-${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="services/${c.id}.html" class="category-card reveal" style="--i:${i}">
+${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `                    <a href="${rel('','service',c.id)}" class="category-card reveal" style="--i:${i}">
                         <div class="category-card-img">
                             <img src="${imgSrc(cImg, '')}"${imgStyle(cImg)} alt="${c.name} fotózás" width="600" height="800">
                         </div>
@@ -1027,7 +1090,7 @@ ${cats.map((c, i) => { const cImg = c.img || c.image || ''; return `            
             </div>
         </section>
 
-${ctaBanner(p.ctaLabel, p.ctaTitle, 'contact.html', 'Kapcsolatfelvétel')}
+${ctaBanner(p.ctaLabel, p.ctaTitle, rel('','page','contact'), 'Kapcsolatfelvétel')}
     </main>
 
 ${footerHtml('')}
@@ -1044,7 +1107,7 @@ function buildContact() {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": `Kapcsolat — ${g.siteName.trim()}`,
-    "url": `${g.baseUrl}/contact.html`,
+    "url": absUrl('page','contact'),
     "mainEntity": {
       "@type": ["LocalBusiness", "ProfessionalService"],
       "name": g.siteName.trim(),
@@ -1055,14 +1118,14 @@ function buildContact() {
     }
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/contact.html', p.title, p.metaDesc, 'website', g.baseUrl + '/contact.html', globalOgImage, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'contact', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'contact', null, 'contact.html')}
-${mobileNavHtml('', 'contact.html')}
+${headerHtml('', 'contact', null, 'page', 'contact')}
+${mobileNavHtml('', 'page', 'contact')}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="index.html">Főoldal</a> <span>/</span> Kapcsolat`)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <span>/</span> Kapcsolat`)}
 
         <section class="section">
             <div class="container contact-content">
@@ -1155,7 +1218,7 @@ function buildServicePage(id) {
         "image": ogImg,
         "serviceType": s.heroTitle,
         "category": "Photography",
-        "url": `${g.baseUrl}/services/${id}.html`,
+        "url": absUrl('service',id),
         "areaServed": [
           { "@type": "City", "name": "Szeged" },
           { "@type": "AdministrativeArea", "name": "Csongrád-Csanád megye" }
@@ -1174,9 +1237,9 @@ function buildServicePage(id) {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Főoldal",        "item": `${g.baseUrl}/` },
-          { "@type": "ListItem", "position": 2, "name": "Szolgáltatások", "item": `${g.baseUrl}/services.html` },
-          { "@type": "ListItem", "position": 3, "name": s.heroTitle,      "item": `${g.baseUrl}/services/${id}.html` }
+          { "@type": "ListItem", "position": 1, "name": "Főoldal",        "item": absUrl('page','index') },
+          { "@type": "ListItem", "position": 2, "name": "Szolgáltatások", "item": absUrl('page','services') },
+          { "@type": "ListItem", "position": 3, "name": s.heroTitle,      "item": absUrl('service',id) }
         ]
       }
     ]
@@ -1184,24 +1247,24 @@ function buildServicePage(id) {
 
   let prevNav, nextNav;
   if (s.prevService) {
-    prevNav = `<a href="${s.prevService}.html" class="service-nav-link prev"><span class="service-nav-label">${s.prevLabel || 'Előző'}</span><span class="service-nav-title">${s.prevTitle}</span></a>`;
+    prevNav = `<a href="${rel(prefix, 'service', s.prevService)}" class="service-nav-link prev"><span class="service-nav-label">${s.prevLabel || 'Előző'}</span><span class="service-nav-title">${s.prevTitle}</span></a>`;
   } else {
-    prevNav = `<a href="../services.html" class="service-nav-link prev"><span class="service-nav-label">${s.prevLabel || 'Összes szolgáltatás'}</span><span class="service-nav-title">${s.prevTitle}</span></a>`;
+    prevNav = `<a href="${rel(prefix,'page','services')}" class="service-nav-link prev"><span class="service-nav-label">${s.prevLabel || 'Összes szolgáltatás'}</span><span class="service-nav-title">${s.prevTitle}</span></a>`;
   }
   if (s.nextService) {
-    nextNav = `<a href="${s.nextService}.html" class="service-nav-link next"><span class="service-nav-label">Következő</span><span class="service-nav-title">${s.nextTitle}</span></a>`;
+    nextNav = `<a href="${rel(prefix,'service', s.nextService)}" class="service-nav-link next"><span class="service-nav-label">Következő</span><span class="service-nav-title">${s.nextTitle}</span></a>`;
   } else {
-    nextNav = `<a href="../services.html" class="service-nav-link next"><span class="service-nav-label">${s.nextLabel || 'Összes szolgáltatás'}</span><span class="service-nav-title">${s.nextTitle}</span></a>`;
+    nextNav = `<a href="${rel(prefix,'page','services')}" class="service-nav-link next"><span class="service-nav-label">${s.nextLabel || 'Összes szolgáltatás'}</span><span class="service-nav-title">${s.nextTitle}</span></a>`;
   }
 
-  return `${headHtml(s.title, s.metaDesc, `${g.baseUrl}/services/${id}.html`, s.title, s.metaDesc, 'website', `${g.baseUrl}/services/${id}.html`, s.ogImage, '../css/style.css', jsonLd, s.heroImage)}
+  return `${headHtml(s.title, s.metaDesc, 'service', id, s.title, s.metaDesc, 'website', s.ogImage, '../css/style.css', jsonLd, s.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml(prefix, null, id, 'services/'+id+'.html')}
-${mobileNavHtml(prefix, (typeof id !== 'undefined') ? (typeof p !== 'undefined' && p && p.breadcrumb && data.portfolioPages[id] ? 'portfolio/'+id+'.html' : 'services/'+id+'.html') : '')}
+${headerHtml(prefix, null, id, 'service', id)}
+${mobileNavHtml(prefix, 'service', id)}
 
     <main>
-${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../services.html">Szolgáltatások</a> <span>/</span> ${s.breadcrumb}`, prefix)}
+${pageHero(s.heroImage, s.heroLabel, s.heroTitle, `<a href="${rel(prefix,'page','index')}">Főoldal</a> <span>/</span> <a href="${rel(prefix,'page','services')}">Szolgáltatások</a> <span>/</span> ${s.breadcrumb}`, prefix)}
 
         <section class="section service-detail">
             <div class="container">
@@ -1231,13 +1294,13 @@ ${pkg.items.map((item, i) => `                            <div class="service-in
                     <h3 class="service-includes-title">Válogatott munkák</h3>
 ${renderGallerySections(s.gallery, prefix, { tag: 'div', extraClass: ' service-gallery-item', withOverlay: false })}
                     <div style="text-align:center; margin-top: 2.5rem;">
-                        <a href="../portfolio/${cat ? cat.portfolioId : id}.html" class="btn"><span>Galéria megtekintése</span>${arrowSvg}</a>
+                        <a href="${rel(prefix,'portfolio', cat ? cat.portfolioId : id)}" class="btn"><span>Galéria megtekintése</span>${arrowSvg}</a>
                     </div>
                 </div>
             </div>
         </section>
 
-${ctaBanner(s.ctaLabel, s.ctaTitle, '../contact.html', s.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : s.ctaButton, true, prefix)}
+${ctaBanner(s.ctaLabel, s.ctaTitle, rel(prefix,'page','contact'), s.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : s.ctaButton, true, prefix)}
 
         <nav class="service-nav" aria-label="Szolgáltatás navigáció">
             ${prevNav}
@@ -1265,29 +1328,29 @@ function buildPortfolioPage(id) {
         "@type": "ImageGallery",
         "name": p.title,
         "description": p.metaDesc,
-        "url": `${g.baseUrl}/portfolio/${id}.html`,
-        "author": { "@type": "Person", "name": g.photographer, "url": `${g.baseUrl}/about.html` },
+        "url": absUrl('portfolio',id),
+        "author": { "@type": "Person", "name": g.photographer, "url": absUrl('page','about') },
         "publisher": { "@type": "Organization", "name": g.siteName.trim(), "url": g.baseUrl }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Főoldal",   "item": `${g.baseUrl}/` },
-          { "@type": "ListItem", "position": 2, "name": "Galéria", "item": `${g.baseUrl}/portfolio.html` },
-          { "@type": "ListItem", "position": 3, "name": p.title,     "item": `${g.baseUrl}/portfolio/${id}.html` }
+          { "@type": "ListItem", "position": 1, "name": "Főoldal",   "item": absUrl('page','index') },
+          { "@type": "ListItem", "position": 2, "name": "Galéria", "item": absUrl('page','portfolio') },
+          { "@type": "ListItem", "position": 3, "name": p.title,     "item": absUrl('portfolio',id) }
         ]
       }
     ]
   }, null, 8);
 
-  return `${headHtml(p.title, p.metaDesc, `${g.baseUrl}/portfolio/${id}.html`, p.title, p.metaDesc, 'website', `${g.baseUrl}/portfolio/${id}.html`, p.heroImage ? (g.baseUrl + '/' + p.heroImage) : globalOgImage, '../css/style.css', pgJsonLd, p.heroImage)}
+  return `${headHtml(p.title, p.metaDesc, 'portfolio', id, p.title, p.metaDesc, 'website', p.heroImage ? (g.baseUrl + '/' + p.heroImage) : globalOgImage, '../css/style.css', pgJsonLd, p.heroImage)}
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('../', 'portfolio', null, 'portfolio/'+id+'.html')}
-${mobileNavHtml('../', 'portfolio/'+id+'.html')}
+${headerHtml('../', 'portfolio', null, 'portfolio', id)}
+${mobileNavHtml('../', 'portfolio', id)}
 
     <main>
-${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="../index.html">Főoldal</a> <span>/</span> <a href="../portfolio.html">Galéria</a> <span>/</span> ${p.breadcrumb}`, prefix)}
+${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="${rel(prefix,'page','index')}">Főoldal</a> <span>/</span> <a href="${rel(prefix,'page','portfolio')}">Galéria</a> <span>/</span> ${p.breadcrumb}`, prefix)}
 
         <section class="section">
             <div class="container">
@@ -1295,7 +1358,7 @@ ${renderGallerySections(p.gallery, prefix, { tag: 'article', extraClass: '', wit
             </div>
         </section>
 
-        <section class="cta-banner" aria-label="Kapcsolatfelvétel"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${g.footerImage ? ` style="background-image:url('${imgSrc(g.footerImage, '../')}');background-size:cover;background-position:center;"` : ''}></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="../contact.html" class="btn btn-solid"><span>${p.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : p.ctaButton}</span>${arrowSvg}</a></div></section>
+        <section class="cta-banner" aria-label="Kapcsolatfelvétel"><div class="cta-banner-bg" role="img" aria-label="Stúdió háttér"${g.footerImage ? ` style="background-image:url('${imgSrc(g.footerImage, '../')}');background-size:cover;background-position:center;"` : ''}></div><div class="container reveal"><span class="section-label">${p.ctaLabel}</span><h2 class="section-title">${p.ctaTitle}</h2><a href="${rel(prefix,'page','contact')}" class="btn btn-solid"><span>${p.ctaButton === 'Időpontfoglalás' ? 'Kapcsolatfelvétel' : p.ctaButton}</span>${arrowSvg}</a></div></section>
     </main>
 
 ${footerHtml(prefix)}
@@ -1375,7 +1438,7 @@ function buildArakPage() {
     }
 
     const ctaLabel = isCustom ? 'Ajánlatot kérek' : 'Kapcsolatfelvétel';
-    const ctaHref = 'contact.html';
+    const ctaHref = rel('','page','contact');
 
     return `
                     <div class="price-card2${popularCls}" style="--i:${i}">
@@ -1397,7 +1460,7 @@ function buildArakPage() {
                             ${cat.deliveryTime ? `<div class="pc-delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>${cat.deliveryTime} átadás</div>` : ''}
                             <div class="pc-actions">
                                 <a href="${ctaHref}" class="btn btn-solid pc-cta"><span>${ctaLabel}</span>${arrowSvg}</a>
-                                <a href="portfolio/${galleryId}.html" class="btn pc-gallery-btn">${galleryIcon}<span>Galéria</span></a>
+                                <a href="${rel('','portfolio', galleryId)}" class="btn pc-gallery-btn">${galleryIcon}<span>Galéria</span></a>
                             </div>
                         </div>
                     </div>`;
@@ -1433,10 +1496,10 @@ function buildArakPage() {
     "@type": "WebPage",
     "name": p.title,
     "description": p.metaDesc,
-    "url": `${g.baseUrl}/arak.html`
+    "url": absUrl('page','arak')
   });
 
-  return `${headHtml(p.title, p.metaDesc, g.baseUrl + '/arak.html', p.title, p.metaDesc, 'website', g.baseUrl + '/arak.html', globalOgImage, 'css/style.css', jsonLd)}
+  return `${headHtml(p.title, p.metaDesc, 'page', 'arak', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
     <style>
     .arak-hero-stats { display:flex; gap:2.5rem; justify-content:center; margin-top:2rem; flex-wrap:wrap; }
     .ahs-item { text-align:center; opacity:0; animation:fadeUp 0.7s var(--ease-dramatic) forwards; animation-delay:calc(var(--si)*150ms + 800ms); }
@@ -1521,8 +1584,8 @@ function buildArakPage() {
     </style>
 ${bodyTag()}
 ${boilerplate()}
-${headerHtml('', 'arak', null, 'arak.html')}
-${mobileNavHtml('', 'arak.html')}
+${headerHtml('', 'arak', null, 'page', 'arak')}
+${mobileNavHtml('', 'page', 'arak')}
 
     <main>
         <section class="page-hero">
@@ -1530,7 +1593,7 @@ ${mobileNavHtml('', 'arak.html')}
             <div class="page-hero-content">
                 <span class="page-hero-label">${p.heroLabel}</span>
                 <h1 class="page-hero-title">${p.heroTitle}</h1>
-                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Főoldal</a> <span>/</span> Árak</nav>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Főoldal</a> <span>/</span> Árak</nav>
                 <div class="arak-hero-stats">${statsHtml}
                 </div>
             </div>
@@ -1577,8 +1640,8 @@ ${mobileNavHtml('', 'arak.html')}
                         <p>${p.customBandDesc}</p>
                     </div>
                     <div class="custom-band-btns">
-                        <a href="contact.html" class="btn btn-solid"><span>Ajánlatot kérek</span>${arrowSvg}</a>
-                        <a href="services/wedding.html" class="btn btn-outline"><span>Esküvői részletek</span>${arrowSvg}</a>
+                        <a href="${rel('','page','contact')}" class="btn btn-solid"><span>Ajánlatot kérek</span>${arrowSvg}</a>
+                        <a href="${rel('','service','wedding')}" class="btn btn-outline"><span>Esküvői részletek</span>${arrowSvg}</a>
                     </div>
                 </div>
             </div>
@@ -1590,8 +1653,8 @@ ${mobileNavHtml('', 'arak.html')}
                 <h2>Lépjünk<br><em>kapcsolatba</em></h2>
                 <p>${p.ctaDesc}</p>
                 <div class="final-cta-btns">
-                    <a href="contact.html" class="btn btn-solid"><span>Kapcsolatfelvétel</span>${arrowSvg}</a>
-                    <a href="portfolio.html" class="btn btn-outline"><span>Galéria megtekintése</span>${arrowSvg}</a>
+                    <a href="${rel('','page','contact')}" class="btn btn-solid"><span>Kapcsolatfelvétel</span>${arrowSvg}</a>
+                    <a href="${rel('','page','portfolio')}" class="btn btn-outline"><span>Galéria megtekintése</span>${arrowSvg}</a>
                 </div>
                 <p class="no-hidden-fees">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1637,21 +1700,19 @@ function writeFile(filePath, content) {
 // ── sitemap.xml ──
 function buildSitemap() {
   const today = new Date().toISOString().split('T')[0];
-  const huUrls = [
-    { loc: `${g.baseUrl}/`,               priority: '1.0', freq: 'weekly'  },
-    { loc: `${g.baseUrl}/about.html`,      priority: '0.7', freq: 'monthly' },
-    { loc: `${g.baseUrl}/portfolio.html`,  priority: '0.8', freq: 'weekly'  },
-    { loc: `${g.baseUrl}/services.html`,   priority: '0.8', freq: 'monthly' },
-    { loc: `${g.baseUrl}/contact.html`,    priority: '0.7', freq: 'monthly' },
-    { loc: `${g.baseUrl}/adatvedelem.html`, priority: '0.3', freq: 'yearly' },
-    ...cats.map(c => ({ loc: `${g.baseUrl}/services/${c.id}.html`, priority: '0.8', freq: 'monthly' })),
-    ...Object.keys(data.portfolioPages).map(id => ({ loc: `${g.baseUrl}/portfolio/${id}.html`, priority: '0.7', freq: 'weekly' })),
+  const pageSpecs = [
+    { kind: 'page', key: 'index',       priority: '1.0', freq: 'weekly'  },
+    { kind: 'page', key: 'about',       priority: '0.7', freq: 'monthly' },
+    { kind: 'page', key: 'portfolio',   priority: '0.8', freq: 'weekly'  },
+    { kind: 'page', key: 'services',    priority: '0.8', freq: 'monthly' },
+    { kind: 'page', key: 'contact',     priority: '0.7', freq: 'monthly' },
+    { kind: 'page', key: 'arak',        priority: '0.7', freq: 'monthly' },
+    { kind: 'page', key: 'adatvedelem', priority: '0.3', freq: 'yearly'  },
+    ...cats.map(c => ({ kind: 'service', key: c.id, priority: '0.9', freq: 'monthly' })),
+    ...Object.keys(data.portfolioPages).map(id => ({ kind: 'portfolio', key: id, priority: '0.7', freq: 'weekly' })),
   ];
-  const enUrls = huUrls.map(u => ({
-    ...u,
-    priority: (parseFloat(u.priority) - 0.1).toFixed(1),
-    loc: u.loc === `${g.baseUrl}/` ? `${g.baseUrl}/en/` : u.loc.replace(`${g.baseUrl}/`, `${g.baseUrl}/en/`),
-  }));
+  const huUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'hu'), priority: s.priority, freq: s.freq }));
+  const enUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'en'), priority: (parseFloat(s.priority) - 0.1).toFixed(1), freq: s.freq }));
   const urls = [...huUrls, ...enUrls];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1685,25 +1746,28 @@ function buildLang(lang) {
   const outRoot = (lang === 'en') ? path.join(__dirname, 'en') : __dirname;
   console.log(`\n  → Building ${lang.toUpperCase()} → ${path.relative(__dirname, outRoot) || '.'}/\n`);
 
+  // Helper: convert URL_MAP path to disk file path (adds .html)
+  const fileFor = (kind, key) => path.join(outRoot, pathFor(kind, key) + '.html');
+
   // Root pages
-  buildAndWrite(path.join(outRoot, 'index.html'),     buildIndex);
-  buildAndWrite(path.join(outRoot, 'about.html'),     buildAbout);
-  buildAndWrite(path.join(outRoot, 'portfolio.html'), buildPortfolio);
-  buildAndWrite(path.join(outRoot, 'services.html'),  buildServices);
-  buildAndWrite(path.join(outRoot, 'contact.html'),   buildContact);
-  buildAndWrite(path.join(outRoot, 'arak.html'),      buildArakPage);
+  buildAndWrite(path.join(outRoot, 'index.html'),        buildIndex);  // URL_MAP gives '' for index → just 'index.html'
+  buildAndWrite(fileFor('page', 'about'),                buildAbout);
+  buildAndWrite(fileFor('page', 'portfolio'),            buildPortfolio);
+  buildAndWrite(fileFor('page', 'services'),             buildServices);
+  buildAndWrite(fileFor('page', 'contact'),              buildContact);
+  buildAndWrite(fileFor('page', 'arak'),                 buildArakPage);
   if (lang === 'hu') {
     writeFile(path.join(outRoot, 'analytics.html'), buildAnalyticsPage());
   }
 
   // Service pages
   cats.forEach(c => {
-    buildAndWrite(path.join(outRoot, 'services', `${c.id}.html`), () => buildServicePage(c.id));
+    buildAndWrite(fileFor('service', c.id), () => buildServicePage(c.id));
   });
 
   // Portfolio pages
   Object.keys(data.portfolioPages).forEach(id => {
-    buildAndWrite(path.join(outRoot, 'portfolio', `${id}.html`), () => buildPortfolioPage(id));
+    buildAndWrite(fileFor('portfolio', id), () => buildPortfolioPage(id));
   });
 }
 
