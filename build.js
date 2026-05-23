@@ -24,6 +24,7 @@ const URL_MAP = {
     services:     { hu: 'szolgaltatasok',  en: 'services' },
     contact:      { hu: 'kapcsolat',       en: 'contact' },
     arak:         { hu: 'arak',            en: 'prices' },
+    blog:         { hu: 'blog',            en: 'blog' },
     adatvedelem:  { hu: 'adatvedelem',     en: 'privacy' },
   },
   service: {
@@ -415,6 +416,7 @@ function headerHtml(prefix, activePage, activeService, urlKind, urlKey) {
             ${navDropdown(prefix, activeService)}
             <a href="${rel(prefix,'page','portfolio')}"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             <a href="${rel(prefix,'page','arak')}"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
+            <a href="${rel(prefix,'page','blog')}"${activePage === 'blog' ? ' class="active"' : ''}>Blog</a>
             <a href="${rel(prefix,'page','about')}"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
             <a href="${rel(prefix,'page','contact')}"${activePage === 'contact' ? ' class="header-cta active"' : ' class="header-cta"'}>Kapcsolat</a>
             ${langToggleHtml(urlKind || 'page', urlKey || 'index', prefix)}
@@ -432,6 +434,7 @@ function mobileNavHtml(prefix, urlKind, urlKey) {
                 <a class="mn-link" href="${rel(prefix,'page','index')}">Főoldal</a>
                 <a class="mn-link" href="${rel(prefix,'page','portfolio')}">Galéria</a>
                 <a class="mn-link" href="${rel(prefix,'page','arak')}">Árak</a>
+                <a class="mn-link" href="${rel(prefix,'page','blog')}">Blog</a>
                 <a class="mn-link" href="${rel(prefix,'page','about')}">Rólam</a>
                 ${langToggleMobileHtml(urlKind || 'page', urlKey || 'index', prefix)}
             </div>
@@ -466,6 +469,7 @@ function footerHtml(prefix) {
                         <li><a href="${rel(prefix,'page','about')}">Rólam</a></li>
                         <li><a href="${rel(prefix,'page','portfolio')}">Galéria</a></li>
                         <li><a href="${rel(prefix,'page','services')}">Szolgáltatások</a></li>
+                        <li><a href="${rel(prefix,'page','blog')}">Blog</a></li>
                         <li><a href="${rel(prefix,'page','contact')}">Kapcsolat</a></li>
                     </ul>
                 </div>
@@ -1672,6 +1676,56 @@ ${chatbotHtml()}
 </html>`;
 }
 
+// ── Blog page (Soro widget embed) ──
+
+function buildBlog() {
+  const p = (data.pages && data.pages.blog) || {};
+  const title = p.title || `Blog — ${g.siteName.trim()} | Fotózási tippek és inspiráció`;
+  const desc = p.metaDesc || 'Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.';
+  const heroLabel = p.heroLabel || 'Silverframe Studio — Szeged';
+  const heroTitle = p.heroTitle || 'Blog';
+  const heroImage = p.heroImage || globalOgImage;
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": `${g.siteName.trim()} Blog`,
+    "description": desc,
+    "url": absUrl('page','blog'),
+    "publisher": {
+      "@type": ["LocalBusiness", "ProfessionalService", "Photographer"],
+      "name": g.siteName.trim(),
+      "url": g.baseUrl,
+      "image": globalOgImage
+    },
+    "inLanguage": LANG === 'en' ? 'en' : 'hu-HU'
+  }, null, 8);
+
+  return `${headHtml(title, desc, 'page', 'blog', title, desc, 'website', globalOgImage, 'css/style.css', jsonLd)}
+${bodyTag()}
+${boilerplate()}
+${headerHtml('', 'blog', null, 'page', 'blog')}
+${mobileNavHtml('', 'page', 'blog')}
+
+    <main>
+${pageHero(heroImage, heroLabel, heroTitle, `<a href="/">Főoldal</a> <span>/</span> Blog`)}
+
+        <section class="section">
+            <div class="container">
+                <div id="soro-blog"></div>
+                <script src="https://app.trysoro.com/api/embed/08e2f2b4-d5a7-461c-ad1d-d2f52b70c74d?theme=dark" defer></script>
+            </div>
+        </section>
+
+${ctaBanner(p.ctaLabel || 'Készen állsz?', p.ctaTitle || 'Alkossunk együtt valami<br>maradandót', rel('','page','contact'), 'Kapcsolatfelvétel')}
+    </main>
+
+${footerHtml('')}
+    <script src="${ASSET_UP}js/main.js" defer></script>
+${chatbotHtml()}
+</body>
+</html>`;
+}
+
 // ── Analytics dashboard ──
 
 function buildAnalyticsPage() {
@@ -1707,6 +1761,7 @@ function buildSitemap() {
     { kind: 'page', key: 'services',    priority: '0.8', freq: 'monthly' },
     { kind: 'page', key: 'contact',     priority: '0.7', freq: 'monthly' },
     { kind: 'page', key: 'arak',        priority: '0.7', freq: 'monthly' },
+    { kind: 'page', key: 'blog',        priority: '0.8', freq: 'weekly'  },
     { kind: 'page', key: 'adatvedelem', priority: '0.3', freq: 'yearly'  },
     ...cats.map(c => ({ kind: 'service', key: c.id, priority: '0.9', freq: 'monthly' })),
     ...Object.keys(data.portfolioPages).map(id => ({ kind: 'portfolio', key: id, priority: '0.7', freq: 'weekly' })),
@@ -1756,6 +1811,7 @@ function buildLang(lang) {
   buildAndWrite(fileFor('page', 'services'),             buildServices);
   buildAndWrite(fileFor('page', 'contact'),              buildContact);
   buildAndWrite(fileFor('page', 'arak'),                 buildArakPage);
+  buildAndWrite(fileFor('page', 'blog'),                 buildBlog);
   if (lang === 'hu') {
     writeFile(path.join(outRoot, 'analytics.html'), buildAnalyticsPage());
   }

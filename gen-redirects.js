@@ -11,6 +11,7 @@ const URL_MAP = {
     services:     { hu: 'szolgaltatasok',  en: 'services',      oldHu: 'services',     oldEn: 'services' },
     contact:      { hu: 'kapcsolat',       en: 'contact',       oldHu: 'contact',      oldEn: 'contact' },
     arak:         { hu: 'arak',            en: 'prices',        oldHu: 'arak',         oldEn: 'arak' },
+    blog:         { hu: 'blog',            en: 'blog',          oldHu: 'blog',         oldEn: 'blog' },
     adatvedelem:  { hu: 'adatvedelem',     en: 'privacy',       oldHu: 'adatvedelem',  oldEn: 'adatvedelem' },
   },
   service: {
