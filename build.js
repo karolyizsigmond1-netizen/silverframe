@@ -224,7 +224,10 @@ function bgStyle(src, prefix) {
 
 function bodyTag() {
   const cls = g.buttonStyle === 'rounded' ? ' class="rounded-buttons"' : '';
-  return `<body${cls}>`;
+  return `<body${cls}>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVKG5M3H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->`;
 }
 
 // Encode a bundle's inner images as a data-bundle attribute value.
@@ -366,6 +369,9 @@ function headHtml(title, desc, urlKind, urlKey, ogTitle, ogDesc, ogType, ogImage
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TVKG5M3H');</script>
+    <!-- End Google Tag Manager -->
     <title>${title}</title>
     <meta name="description" content="${desc}">
     <meta name="geo.region" content="HU-CS">
@@ -1173,6 +1179,8 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <spa
                         });
                         const data = await res.json();
                         if (res.ok) {
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({ event: 'form_success', form_id: 'contactForm' });
                             btnSpan.textContent = 'Elküldve!';
                             status.style.color = '#7ec47e';
                             status.textContent = 'Üzeneted megérkezett, hamarosan felveszem veled a kapcsolatot!';
