@@ -1144,6 +1144,7 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <spa
                     <h2 class="section-title">${p.formTitle}</h2>
                     <p class="section-desc" style="margin-bottom:3rem;">${p.formDesc}</p>
                     <div class="contact-detail"><label>E-mail</label><a href="mailto:${g.email}">${g.email}</a></div>
+                    <div class="contact-detail"><label>Telefon</label><a href="tel:${(g.phone || '').replace(/[^0-9+]/g, '')}">${g.phone}</a></div>
                     <div class="contact-detail"><label>Helyszín</label><span>${g.city}</span></div>
                     <div class="contact-detail"><label>Elérhetőség</label><span>${p.availability}</span></div>
                 </div>
