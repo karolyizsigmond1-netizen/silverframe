@@ -1187,6 +1187,9 @@ ${pageHero(p.heroImage, p.heroLabel, p.heroTitle, `<a href="/">Főoldal</a> <spa
                         if (res.ok) {
                             window.dataLayer = window.dataLayer || [];
                             window.dataLayer.push({ event: 'form_success', form_id: 'contactForm' });
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'conversion_event_submit_lead_form');
+                            }
                             btnSpan.textContent = 'Elküldve!';
                             status.style.color = '#7ec47e';
                             status.textContent = 'Üzeneted megérkezett, hamarosan felveszem veled a kapcsolatot!';
