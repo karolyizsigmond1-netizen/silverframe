@@ -1545,6 +1545,58 @@
         {
           "src": "uploads/e500cf08f96b-karolyifoto_glamour__229_of_240_.jpg",
           "alt": ""
+        },
+        {
+          "src": "uploads/1b0d3d390222-silverframe__1_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/8831ba1031d4-silverframe__10_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/18377e7d2ca7-silverframe__9_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/6abcde115179-silverframe__21_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b4af01ce1f05-silverframe__24_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d141e65fe5c8-silverframe__27_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/e2c83491f386-silverframe__28_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/b723fbb3ae9b-silverframe__30_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/63049eb6daf4-silverframe__31_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4d8154573c7c-silverframe__34_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/957c8dcd7c91-silverframe__36_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/4ed50712333b-silverframe__39_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f3d4616199e3-silverframe__45_.jpg",
+          "alt": ""
         }
       ],
       "ctaLabel": "Fedezd fel magad!",
@@ -8531,6 +8583,195 @@
             },
             {
               "src": "uploads/6d9fa2999662-glamour-fotozas-studio-noi-szeged__99_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
+          "cover": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
+          "alt": "",
+          "title": "Zsuzsi",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/2d350362f93d-silverframe__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/136aebf38b3d-silverframe__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cb03458c6d4a-silverframe__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ee8ddc244685-silverframe__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c380b9b33049-silverframe__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a13e791fd312-silverframe__6_.png",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3e6d8aeb8c1-silverframe__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1e4c0b70ec09-silverframe__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/18377e7d2ca7-silverframe__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8831ba1031d4-silverframe__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2686bc941aa4-silverframe__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cdef854db9e3-silverframe__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2c8eb7f29342-silverframe__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba6e74dd52c0-silverframe__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0eaff1e3849-silverframe__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/27e5d2b50b24-silverframe__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/57f81a6e2a8d-silverframe__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fd9c360ca1d7-silverframe__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c015c3d4a8f9-silverframe__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aebaf6b646af-silverframe__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6abcde115179-silverframe__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f5b4fcbca932-silverframe__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e490962aa35-silverframe__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b4af01ce1f05-silverframe__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6d95a019a504-silverframe__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/185872f0aa26-silverframe__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d141e65fe5c8-silverframe__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e2c83491f386-silverframe__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1bb1713437b1-silverframe__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b723fbb3ae9b-silverframe__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/63049eb6daf4-silverframe__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c3350ca022a8-silverframe__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2cb3a925f912-silverframe__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d8154573c7c-silverframe__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/957c8dcd7c91-silverframe__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a0e293ae34d2-silverframe__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fd0d166cef6c-silverframe__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4ed50712333b-silverframe__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45c92c5b6f8f-silverframe__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/92edf81eaf93-silverframe__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f3c72d6bb77d-silverframe__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/39c612af1df1-silverframe__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ee841af12607-silverframe__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f3d4616199e3-silverframe__45_.jpg",
               "alt": ""
             }
           ]
