@@ -1731,13 +1731,6 @@ function buildGiftCardPage() {
                     </div>`;
   }).join('');
 
-  const stepsHtml = (p.steps || []).map((s, i) => `
-                    <div class="gc-step reveal" style="--i:${i}">
-                        <span class="gc-step-num">0${i + 1}</span>
-                        <h3>${s.title}</h3>
-                        <p>${s.desc}</p>
-                    </div>`).join('');
-
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -1770,16 +1763,7 @@ function buildGiftCardPage() {
     .gc-pkg-actions { width:100%; margin-top:0.6rem; display:flex; flex-direction:column; gap:0.7rem; align-items:center; }
     .gc-link { font-size:0.78rem; letter-spacing:0.08em; color:var(--text-muted); border-bottom:1px solid transparent; transition:color 0.25s,border-color 0.25s; }
     .gc-link:hover { color:var(--accent); border-color:var(--accent); }
-    .gc-steps-section { padding:1rem 0 5rem; }
-    .gc-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-top:1rem; }
-    @media(max-width:760px){ .gc-steps { grid-template-columns:1fr; max-width:460px; margin-inline:auto; } }
-    .gc-step { background:var(--bg-elevated); border:1px solid rgba(255,255,255,0.05); padding:2rem 1.6rem; border-radius:2px; }
-    .gc-step-num { font-family:var(--serif); font-size:1.6rem; font-weight:300; color:var(--accent); opacity:0.6; display:block; margin-bottom:0.6rem; }
-    .gc-step h3 { font-family:var(--serif); font-size:1.05rem; font-weight:400; margin-bottom:0.5rem; }
-    .gc-step p { font-size:0.84rem; color:var(--text-body); line-height:1.6; }
-    .gc-validity { margin-top:2.5rem; text-align:center; font-size:0.8rem; color:var(--text-muted); display:flex; align-items:center; justify-content:center; gap:0.5rem; max-width:560px; margin-inline:auto; }
-    .gc-validity svg { color:var(--accent); flex-shrink:0; }
-    .gc-final { padding:6rem 0; text-align:center; position:relative; overflow:hidden; }
+    .gc-final { padding:5rem 0 6rem; text-align:center; position:relative; overflow:hidden; }
     .gc-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,169,110,0.07) 0%,transparent 70%); pointer-events:none; }
     .gc-final-label { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:1.2rem; }
     .gc-final h2 { font-family:var(--serif); font-size:clamp(2.2rem,5vw,3.4rem); font-weight:300; line-height:1.1; margin-bottom:1.2rem; }
@@ -1821,21 +1805,6 @@ ${mobileNavHtml('', 'page', 'giftcard')}
                     <div class="gc-grid">${pkgCards}
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="gc-steps-section">
-            <div class="container">
-                <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
-                    <span class="section-label">${p.stepsLabel}</span>
-                    <h2 class="section-title">${p.stepsTitle}</h2>
-                </div>
-                <div class="gc-steps">${stepsHtml}
-                </div>
-                <p class="gc-validity">
-                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    ${p.validityNote}
-                </p>
             </div>
         </section>
 
