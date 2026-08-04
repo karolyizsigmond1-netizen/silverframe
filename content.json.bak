@@ -506,7 +506,29 @@
       "ctaTitle": "Foglald le a szabad időpontod",
       "ctaDesc": "Egy rövid egyeztetés elég — elmondom, mire számíthatsz, és megtaláljuk a legjobb időpontot. Semmi kötelezettség.",
       "customBandTitle": "Egyedi ajánlatot szeretnél?",
-      "customBandDesc": "Az esküvői és rendezvény fotózás minden esetben személyre szabott — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
+      "customBandDesc": "A rendezvényfotózás és az egyedi kérések minden esetben személyre szabottak — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
+    },
+    "giftcard": {
+      "title": "Ajándékutalvány — Silverframe Studio | Fotózás Szegeden",
+      "metaDesc": "Ajándékozz fotózást! Silverframe Studio ajándékutalvány Szegeden — fix összegben vagy konkrét csomagra, bármelyik szolgáltatásra beváltható.",
+      "heroImage": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Ajándékutalvány",
+      "introLabel": "Ajándékozz élményt",
+      "introTitle": "A tökéletes ajándék<br>egy különleges emberednek",
+      "introDesc": "Lepd meg a szeretteidet egy fotózással. Az ajándékutalvány kérhető fix összegben vagy egy konkrét csomagra, és bármelyik szolgáltatásomra beváltható.",
+      "amountsLabel": "Fix összegű utalványok",
+      "amounts": [
+        { "value": "20.000 Ft", "note": "Kisebb fotózáshoz, vagy kiegészítő ajándéknak." },
+        { "value": "50.000 Ft", "note": "A legnépszerűbb — a legtöbb portré és páros fotózáshoz elég." },
+        { "value": "100.000 Ft", "note": "Prémium élményhez vagy nagyobb csomaghoz." }
+      ],
+      "packagesLabel": "Csomag utalványok",
+      "packageIds": ["couple", "maternity", "portfolio-model"],
+      "ctaLabel": "Ajándékoznál?",
+      "ctaTitle": "Kérd az utalványt<br><em>néhány kattintással</em>",
+      "ctaDesc": "Írj egy üzenetet, és 24 órán belül visszajelzek minden részlettel. Ugyanaz az egyszerű folyamat, mint bármelyik érdeklődésnél.",
+      "ctaButton": "Utalványt kérek"
     }
   },
   "servicePages": {
@@ -2691,7 +2713,7 @@
     },
     "wedding": {
       "title": "Esküvői Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Esküvői fotózás Szegeden. Dokumentarista stílusú esküvői fotózás. Kérj egyedi ajánlatot!",
+      "metaDesc": "Esküvői fotózás Szegeden 300.000 Ft-tól. ESSENCE, INFINITY és PRESTIGE csomagok — dokumentarista stílus, természetes pillanatok.",
       "ogImage": "uploads/10339c4bcb3f-www.karolyifoto.hu__2_of_25_-topaz-sharpen-face.jpg",
       "heroImage": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
       "heroLabel": "Szolgáltatások / 08",
@@ -2709,32 +2731,126 @@
       },
       "packages": [
         {
-          "name": "Mit tartalmaz — Egyedi ajánlat",
-          "desc": "Minden esküvő egyedi, ezért az árazás is személyre szabott.",
+          "name": "ESSENCE — 300.000 Ft",
+          "desc": "8 órás rendelkezésre állás — a nap legszebb pillanatai, természetes stílusban megörökítve.",
           "items": [
             {
-              "title": "Egyeztetés",
-              "desc": "Személyes találkozó a részletek és elvárások megbeszélésére."
+              "title": "Kreatív fotózás",
+              "desc": "Kreatív páros fotózás az esküvő napján."
             },
             {
-              "title": "Egész napos fotózás készülődés, szertartás(ok), csoportképek, kreatív fotózás (akár külön napon is), vacsora, hangulatképek a buliból (max. 1:30-ig)",
-              "desc": "A készülődéstől a menyecsketánc végig ott vagyok."
+              "title": "Előkészületek",
+              "desc": "A készülődés meghitt, izgatott pillanatai."
             },
             {
-              "title": "600+ szerkesztett kép",
-              "desc": "Professzionálisan szerkesztett képek digitális galériában."
+              "title": "Szertartások",
+              "desc": "A polgári és/vagy egyházi szertartás megörökítése."
             },
             {
-              "title": "Igény esetén egyedi esküvői album",
-              "desc": "Opcionálisan rendelhető, egyedi tervezésű fotóalbum."
+              "title": "Csoportképek",
+              "desc": "Közös képek a családdal és a vendégekkel."
             },
             {
-              "title": "Fadobozos pendrive",
-              "desc": ""
+              "title": "Lakodalom",
+              "desc": "A vacsora és a buli legjobb hangulatképei."
             },
             {
-              "title": "Online galléria",
-              "desc": ""
+              "title": "Maximum 400 db retusált kép",
+              "desc": "Gondosan válogatott, professzionálisan szerkesztett képek."
+            },
+            {
+              "title": "Rendelkezésre állás 8 óra időtartamban",
+              "desc": "Végig veletek vagyok a nap folyamán."
+            }
+          ]
+        },
+        {
+          "name": "INFINITY — 350.000 Ft",
+          "desc": "12 órás rendelkezésre állás — a kreatív fotózás akár külön napon is.",
+          "items": [
+            {
+              "title": "Kreatív fotózás (külön napon is)",
+              "desc": "A kreatív páros fotózás akár egy külön, előre egyeztetett napon."
+            },
+            {
+              "title": "Előkészületek",
+              "desc": "A készülődés meghitt, izgatott pillanatai."
+            },
+            {
+              "title": "Szertartások",
+              "desc": "A polgári és/vagy egyházi szertartás megörökítése."
+            },
+            {
+              "title": "Csoportképek",
+              "desc": "Közös képek a családdal és a vendégekkel."
+            },
+            {
+              "title": "Lakodalom",
+              "desc": "A vacsora és a buli legjobb hangulatképei."
+            },
+            {
+              "title": "Maximum 700 db retusált kép",
+              "desc": "Gondosan válogatott, professzionálisan szerkesztett képek."
+            },
+            {
+              "title": "Rendelkezésre állás 12 óra időtartamban",
+              "desc": "Több idő a nap minden fontos eseményére."
+            }
+          ]
+        },
+        {
+          "name": "PRESTIGE — 400.000 Ft",
+          "desc": "Korlátlan rendelkezésre állás és online galéria — a teljes élmény, kompromisszumok nélkül.",
+          "items": [
+            {
+              "title": "Kreatív fotózás (külön napon is)",
+              "desc": "A kreatív páros fotózás akár egy külön, előre egyeztetett napon."
+            },
+            {
+              "title": "Előkészületek",
+              "desc": "A készülődés meghitt, izgatott pillanatai."
+            },
+            {
+              "title": "Szertartások",
+              "desc": "A polgári és/vagy egyházi szertartás megörökítése."
+            },
+            {
+              "title": "Csoportképek",
+              "desc": "Közös képek a családdal és a vendégekkel."
+            },
+            {
+              "title": "Lakodalom",
+              "desc": "A vacsora és a buli legjobb hangulatképei."
+            },
+            {
+              "title": "Online galéria",
+              "desc": "Privát online galéria a képek megtekintéséhez és letöltéséhez."
+            },
+            {
+              "title": "Maximum 1000 db retusált kép",
+              "desc": "Gondosan válogatott, professzionálisan szerkesztett képek."
+            },
+            {
+              "title": "Korlátlan rendelkezésre állás",
+              "desc": "Végig veletek maradok, ameddig a történet tart."
+            }
+          ]
+        },
+        {
+          "name": "Választható szolgáltatások",
+          "desc": "Bármelyik csomag bővíthető az alábbi kiegészítőkkel.",
+          "items": [
+            {
+              "title": "Külön napi kreatív fotózás — 70.000 Ft",
+              "desc": "Kb. 2 órás fotózás, előre egyeztetett helyszínen."
+            },
+            {
+              "title": "Második fotós — 100.000 Ft",
+              "desc": "Az esküvő teljes időtartamára, több nézőpontból."
+            },
+            {
+              "title": "Kiszállási költség — 110 Ft/km",
+              "desc": "A Szegedről számított oda-vissza távolság alapján."
             }
           ]
         }
@@ -8016,6 +8132,195 @@
       "gallery": [
         {
           "type": "bundle",
+          "cover": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
+          "alt": "",
+          "title": "Zsuzsi",
+          "subtitle": "",
+          "images": [
+            {
+              "src": "uploads/2d350362f93d-silverframe__2_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/136aebf38b3d-silverframe__3_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cb03458c6d4a-silverframe__4_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ee8ddc244685-silverframe__5_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c380b9b33049-silverframe__6_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a13e791fd312-silverframe__6_.png",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b3e6d8aeb8c1-silverframe__7_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1e4c0b70ec09-silverframe__8_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/18377e7d2ca7-silverframe__9_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/8831ba1031d4-silverframe__10_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2686bc941aa4-silverframe__11_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/cdef854db9e3-silverframe__12_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2c8eb7f29342-silverframe__13_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ba6e74dd52c0-silverframe__14_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c0eaff1e3849-silverframe__15_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/27e5d2b50b24-silverframe__16_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/57f81a6e2a8d-silverframe__17_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fd9c360ca1d7-silverframe__18_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c015c3d4a8f9-silverframe__19_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/aebaf6b646af-silverframe__20_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6abcde115179-silverframe__21_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f5b4fcbca932-silverframe__22_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6e490962aa35-silverframe__23_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b4af01ce1f05-silverframe__24_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/6d95a019a504-silverframe__25_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/185872f0aa26-silverframe__26_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/d141e65fe5c8-silverframe__27_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/e2c83491f386-silverframe__28_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/1bb1713437b1-silverframe__29_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/b723fbb3ae9b-silverframe__30_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/63049eb6daf4-silverframe__31_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/c3350ca022a8-silverframe__32_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/2cb3a925f912-silverframe__33_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4d8154573c7c-silverframe__34_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/957c8dcd7c91-silverframe__36_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/a0e293ae34d2-silverframe__37_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/fd0d166cef6c-silverframe__38_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/4ed50712333b-silverframe__39_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/45c92c5b6f8f-silverframe__40_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/92edf81eaf93-silverframe__41_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f3c72d6bb77d-silverframe__42_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/39c612af1df1-silverframe__43_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/ee841af12607-silverframe__44_.jpg",
+              "alt": ""
+            },
+            {
+              "src": "uploads/f3d4616199e3-silverframe__45_.jpg",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "type": "bundle",
           "cover": "uploads/ba657b49ff60-glamour-fotozas-studio-noi-szeged__117_.jpg",
           "alt": "",
           "title": "Viki",
@@ -8583,195 +8888,6 @@
             },
             {
               "src": "uploads/6d9fa2999662-glamour-fotozas-studio-noi-szeged__99_.jpg",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "type": "bundle",
-          "cover": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
-          "alt": "",
-          "title": "Zsuzsi",
-          "subtitle": "",
-          "images": [
-            {
-              "src": "uploads/2d350362f93d-silverframe__2_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/136aebf38b3d-silverframe__3_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/cb03458c6d4a-silverframe__4_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/ee8ddc244685-silverframe__5_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/c380b9b33049-silverframe__6_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/a13e791fd312-silverframe__6_.png",
-              "alt": ""
-            },
-            {
-              "src": "uploads/b3e6d8aeb8c1-silverframe__7_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/1e4c0b70ec09-silverframe__8_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/18377e7d2ca7-silverframe__9_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/8831ba1031d4-silverframe__10_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/2686bc941aa4-silverframe__11_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/cdef854db9e3-silverframe__12_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/2c8eb7f29342-silverframe__13_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/ba6e74dd52c0-silverframe__14_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/c0eaff1e3849-silverframe__15_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/27e5d2b50b24-silverframe__16_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/57f81a6e2a8d-silverframe__17_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/fd9c360ca1d7-silverframe__18_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/c015c3d4a8f9-silverframe__19_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/aebaf6b646af-silverframe__20_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/6abcde115179-silverframe__21_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/f5b4fcbca932-silverframe__22_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/6e490962aa35-silverframe__23_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/b4af01ce1f05-silverframe__24_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/6d95a019a504-silverframe__25_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/185872f0aa26-silverframe__26_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/d141e65fe5c8-silverframe__27_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/e2c83491f386-silverframe__28_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/1bb1713437b1-silverframe__29_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/b723fbb3ae9b-silverframe__30_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/63049eb6daf4-silverframe__31_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/c3350ca022a8-silverframe__32_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/2cb3a925f912-silverframe__33_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/4d8154573c7c-silverframe__34_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/7c0cfe36a3c4-silverframe__35_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/957c8dcd7c91-silverframe__36_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/a0e293ae34d2-silverframe__37_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/fd0d166cef6c-silverframe__38_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/4ed50712333b-silverframe__39_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/45c92c5b6f8f-silverframe__40_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/92edf81eaf93-silverframe__41_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/f3c72d6bb77d-silverframe__42_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/39c612af1df1-silverframe__43_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/ee841af12607-silverframe__44_.jpg",
-              "alt": ""
-            },
-            {
-              "src": "uploads/f3d4616199e3-silverframe__45_.jpg",
               "alt": ""
             }
           ]
