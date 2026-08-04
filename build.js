@@ -24,6 +24,7 @@ const URL_MAP = {
     services:     { hu: 'szolgaltatasok',  en: 'services' },
     contact:      { hu: 'kapcsolat',       en: 'contact' },
     arak:         { hu: 'arak',            en: 'prices' },
+    giftcard:     { hu: 'ajandekutalvany', en: 'gift-card' },
     blog:         { hu: 'blog',            en: 'blog' },
     adatvedelem:  { hu: 'adatvedelem',     en: 'privacy' },
   },
@@ -427,6 +428,7 @@ function headerHtml(prefix, activePage, activeService, urlKind, urlKey) {
             ${navDropdown(prefix, activeService)}
             <a href="${rel(prefix,'page','portfolio')}"${activePage === 'portfolio' ? ' class="active"' : ''}>Galéria</a>
             <a href="${rel(prefix,'page','arak')}"${activePage === 'arak' ? ' class="active"' : ''}>Árak</a>
+            <a href="${rel(prefix,'page','giftcard')}"${activePage === 'giftcard' ? ' class="active"' : ''}>Ajándékutalvány</a>
             <a href="${rel(prefix,'page','blog')}"${activePage === 'blog' ? ' class="active"' : ''}>Blog</a>
             <a href="${rel(prefix,'page','about')}"${activePage === 'about' ? ' class="active"' : ''}>Rólam</a>
             <a href="${rel(prefix,'page','contact')}"${activePage === 'contact' ? ' class="header-cta active"' : ' class="header-cta"'}>Kapcsolat</a>
@@ -445,6 +447,7 @@ function mobileNavHtml(prefix, urlKind, urlKey) {
                 <a class="mn-link" href="${rel(prefix,'page','index')}">Főoldal</a>
                 <a class="mn-link" href="${rel(prefix,'page','portfolio')}">Galéria</a>
                 <a class="mn-link" href="${rel(prefix,'page','arak')}">Árak</a>
+                <a class="mn-link" href="${rel(prefix,'page','giftcard')}">Ajándékutalvány</a>
                 <a class="mn-link" href="${rel(prefix,'page','blog')}">Blog</a>
                 <a class="mn-link" href="${rel(prefix,'page','about')}">Rólam</a>
                 ${langToggleMobileHtml(urlKind || 'page', urlKey || 'index', prefix)}
@@ -480,6 +483,7 @@ function footerHtml(prefix) {
                         <li><a href="${rel(prefix,'page','about')}">Rólam</a></li>
                         <li><a href="${rel(prefix,'page','portfolio')}">Galéria</a></li>
                         <li><a href="${rel(prefix,'page','services')}">Szolgáltatások</a></li>
+                        <li><a href="${rel(prefix,'page','giftcard')}">Ajándékutalvány</a></li>
                         <li><a href="${rel(prefix,'page','blog')}">Blog</a></li>
                         <li><a href="${rel(prefix,'page','contact')}">Kapcsolat</a></li>
                     </ul>
@@ -1693,6 +1697,166 @@ ${chatbotHtml()}
 </html>`;
 }
 
+// ── Gift Card info page (Ajándékutalvány) ──
+function buildGiftCardPage() {
+  const p = data.pages.giftcard;
+  if (!p) return '';
+
+  const contactHref = rel('', 'page', 'contact');
+
+  const amountsHtml = (p.amounts || []).map((a, i) => `
+                    <div class="gc-card reveal" style="--i:${i}">
+                        <span class="gc-kicker">Ajándékutalvány</span>
+                        <span class="gc-amount">${a.value}</span>
+                        <p class="gc-note">${a.note}</p>
+                        <a href="${contactHref}" class="btn btn-solid gc-cta"><span>${p.ctaButton}</span>${arrowSvg}</a>
+                    </div>`).join('');
+
+  const pkgCards = (p.packageIds || []).map((id, i) => {
+    const cat = cats.find(c => c.id === id);
+    const sp = data.servicePages[id] || {};
+    const firstPkg = (sp.packages || [])[0] || {};
+    const pm = (firstPkg.name || '').match(/[\d.,]+\.?\d*\s*Ft/);
+    const price = pm ? pm[0] : '';
+    const name = cat ? cat.name : id;
+    return `
+                    <div class="gc-card gc-pkg reveal" style="--i:${i}">
+                        <span class="gc-kicker">Csomag utalvány</span>
+                        <span class="gc-pkg-name">${name}</span>
+                        <span class="gc-amount gc-amount-sm">${price}</span>
+                        <div class="gc-pkg-actions">
+                            <a href="${contactHref}" class="btn btn-solid gc-cta"><span>${p.ctaButton}</span>${arrowSvg}</a>
+                            <a href="${rel('', 'service', id)}" class="gc-link">Részletek</a>
+                        </div>
+                    </div>`;
+  }).join('');
+
+  const stepsHtml = (p.steps || []).map((s, i) => `
+                    <div class="gc-step reveal" style="--i:${i}">
+                        <span class="gc-step-num">0${i + 1}</span>
+                        <h3>${s.title}</h3>
+                        <p>${s.desc}</p>
+                    </div>`).join('');
+
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": p.title,
+    "description": p.metaDesc,
+    "url": absUrl('page', 'giftcard')
+  });
+
+  return `${headHtml(p.title, p.metaDesc, 'page', 'giftcard', p.title, p.metaDesc, 'website', globalOgImage, 'css/style.css', jsonLd)}
+    <style>
+    .gc-section { padding:5rem 0 2rem; }
+    .gc-intro { text-align:center; max-width:640px; margin:0 auto 3.5rem; }
+    .gc-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.9rem; }
+    .gc-intro p { color:var(--text-body); font-size:0.92rem; line-height:1.75; }
+    .gc-group { margin-bottom:3.5rem; }
+    .gc-group-head { display:flex; align-items:center; gap:1.5rem; margin-bottom:2rem; }
+    .gc-group-head .gc-label { font-size:0.68rem; font-weight:400; letter-spacing:0.4em; text-transform:uppercase; color:var(--accent); white-space:nowrap; flex-shrink:0; }
+    .gc-group-head .gc-line { flex:1; height:1px; background:rgba(201,169,110,0.18); }
+    .gc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+    @media(max-width:900px){ .gc-grid { grid-template-columns:1fr; max-width:460px; margin-inline:auto; } }
+    .gc-card { position:relative; background:var(--bg-card); border:1px solid rgba(255,255,255,0.07); border-top:2px solid rgba(201,169,110,0.35); border-radius:2px; padding:2.2rem 1.8rem; display:flex; flex-direction:column; align-items:flex-start; gap:0.7rem; opacity:0; transform:translateY(28px); animation:gcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*80ms + 100ms); transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; }
+    @keyframes gcIn { to { opacity:1; transform:translateY(0); } }
+    .gc-card:hover { transform:translateY(-6px); box-shadow:0 24px 50px rgba(0,0,0,0.45),0 0 0 1px rgba(201,169,110,0.2); }
+    .gc-kicker { font-size:0.64rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); }
+    .gc-amount { font-family:var(--serif); font-size:clamp(2.2rem,5vw,2.8rem); font-weight:300; color:var(--accent-light); line-height:1; }
+    .gc-amount-sm { font-size:clamp(1.6rem,4vw,2rem); }
+    .gc-pkg-name { font-family:var(--serif); font-size:1.25rem; font-weight:400; color:var(--text-primary); line-height:1.2; }
+    .gc-note { font-size:0.83rem; color:var(--text-body); line-height:1.55; flex:1; }
+    .gc-cta { width:100%; justify-content:center; text-align:center; font-size:0.8rem; padding:0.8rem 1rem; margin-top:0.6rem; gap:0.4rem; }
+    .gc-pkg-actions { width:100%; margin-top:0.6rem; display:flex; flex-direction:column; gap:0.7rem; align-items:center; }
+    .gc-link { font-size:0.78rem; letter-spacing:0.08em; color:var(--text-muted); border-bottom:1px solid transparent; transition:color 0.25s,border-color 0.25s; }
+    .gc-link:hover { color:var(--accent); border-color:var(--accent); }
+    .gc-steps-section { padding:1rem 0 5rem; }
+    .gc-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-top:1rem; }
+    @media(max-width:760px){ .gc-steps { grid-template-columns:1fr; max-width:460px; margin-inline:auto; } }
+    .gc-step { background:var(--bg-elevated); border:1px solid rgba(255,255,255,0.05); padding:2rem 1.6rem; border-radius:2px; }
+    .gc-step-num { font-family:var(--serif); font-size:1.6rem; font-weight:300; color:var(--accent); opacity:0.6; display:block; margin-bottom:0.6rem; }
+    .gc-step h3 { font-family:var(--serif); font-size:1.05rem; font-weight:400; margin-bottom:0.5rem; }
+    .gc-step p { font-size:0.84rem; color:var(--text-body); line-height:1.6; }
+    .gc-validity { margin-top:2.5rem; text-align:center; font-size:0.8rem; color:var(--text-muted); display:flex; align-items:center; justify-content:center; gap:0.5rem; max-width:560px; margin-inline:auto; }
+    .gc-validity svg { color:var(--accent); flex-shrink:0; }
+    .gc-final { padding:6rem 0; text-align:center; position:relative; overflow:hidden; }
+    .gc-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,169,110,0.07) 0%,transparent 70%); pointer-events:none; }
+    .gc-final-label { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:1.2rem; }
+    .gc-final h2 { font-family:var(--serif); font-size:clamp(2.2rem,5vw,3.4rem); font-weight:300; line-height:1.1; margin-bottom:1.2rem; }
+    .gc-final h2 em { font-style:italic; color:var(--accent-light); }
+    .gc-final p { color:var(--text-body); font-size:0.9rem; max-width:460px; margin:0 auto 2.5rem; line-height:1.8; }
+    .gc-final .btn { font-size:0.85rem; padding:0.95rem 2rem; }
+    </style>
+${bodyTag()}
+${boilerplate()}
+${headerHtml('', 'giftcard', null, 'page', 'giftcard')}
+${mobileNavHtml('', 'page', 'giftcard')}
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-bg" style="${bgStyle(p.heroImage, '')}"></div>
+            <div class="page-hero-content">
+                <span class="page-hero-label">${p.heroLabel}</span>
+                <h1 class="page-hero-title">${p.heroTitle}</h1>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Főoldal</a> <span>/</span> Ajándékutalvány</nav>
+            </div>
+        </section>
+
+        <section class="gc-section">
+            <div class="container">
+                <div class="gc-intro reveal">
+                    <span class="section-label">${p.introLabel}</span>
+                    <h2>${p.introTitle}</h2>
+                    <p>${p.introDesc}</p>
+                </div>
+
+                <div class="gc-group">
+                    <div class="gc-group-head"><span class="gc-label">${p.amountsLabel}</span><span class="gc-line"></span></div>
+                    <div class="gc-grid">${amountsHtml}
+                    </div>
+                </div>
+
+                <div class="gc-group">
+                    <div class="gc-group-head"><span class="gc-label">${p.packagesLabel}</span><span class="gc-line"></span></div>
+                    <div class="gc-grid">${pkgCards}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gc-steps-section">
+            <div class="container">
+                <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
+                    <span class="section-label">${p.stepsLabel}</span>
+                    <h2 class="section-title">${p.stepsTitle}</h2>
+                </div>
+                <div class="gc-steps">${stepsHtml}
+                </div>
+                <p class="gc-validity">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    ${p.validityNote}
+                </p>
+            </div>
+        </section>
+
+        <section class="gc-final">
+            <div class="container">
+                <span class="gc-final-label">${p.ctaLabel}</span>
+                <h2>${p.ctaTitle}</h2>
+                <p>${p.ctaDesc}</p>
+                <a href="${contactHref}" class="btn btn-solid"><span>${p.ctaButton}</span>${arrowSvg}</a>
+            </div>
+        </section>
+    </main>
+
+${footerHtml('')}
+${lightboxHtml()}
+    <script src="${ASSET_UP}js/main.js" defer></script>
+${chatbotHtml()}
+</body>
+</html>`;
+}
+
 // ── Blog page (Soro widget embed) ──
 
 function buildBlog() {
@@ -1778,6 +1942,7 @@ function buildSitemap() {
     { kind: 'page', key: 'services',    priority: '0.8', freq: 'monthly' },
     { kind: 'page', key: 'contact',     priority: '0.7', freq: 'monthly' },
     { kind: 'page', key: 'arak',        priority: '0.7', freq: 'monthly' },
+    { kind: 'page', key: 'giftcard',    priority: '0.6', freq: 'monthly' },
     { kind: 'page', key: 'blog',        priority: '0.8', freq: 'weekly'  },
     { kind: 'page', key: 'adatvedelem', priority: '0.3', freq: 'yearly'  },
     ...cats.map(c => ({ kind: 'service', key: c.id, priority: '0.9', freq: 'monthly' })),
@@ -1828,6 +1993,7 @@ function buildLang(lang) {
   buildAndWrite(fileFor('page', 'services'),             buildServices);
   buildAndWrite(fileFor('page', 'contact'),              buildContact);
   buildAndWrite(fileFor('page', 'arak'),                 buildArakPage);
+  buildAndWrite(fileFor('page', 'giftcard'),             buildGiftCardPage);
   buildAndWrite(fileFor('page', 'blog'),                 buildBlog);
   if (lang === 'hu') {
     writeFile(path.join(outRoot, 'analytics.html'), buildAnalyticsPage());
@@ -1854,5 +2020,5 @@ LANG = 'hu'; ASSET_UP = '';
 writeFile(path.join(__dirname, 'sitemap.xml'), buildSitemap());
 writeFile(path.join(__dirname, 'robots.txt'), buildRobots());
 
-const total = 6 + cats.length + Object.keys(data.portfolioPages).length;
+const total = 7 + cats.length + Object.keys(data.portfolioPages).length;
 console.log(`\n  Done! ${total} HU + ${total - 1} EN files generated (analytics.html is HU-only).\n`);

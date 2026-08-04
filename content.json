@@ -507,6 +507,36 @@
       "ctaDesc": "Egy rövid egyeztetés elég — elmondom, mire számíthatsz, és megtaláljuk a legjobb időpontot. Semmi kötelezettség.",
       "customBandTitle": "Egyedi ajánlatot szeretnél?",
       "customBandDesc": "A rendezvényfotózás és az egyedi kérések minden esetben személyre szabottak — a helyszíntől, időtartamtól és az igényektől függően. Írj egy üzenetet, és 24 órán belül visszajelzek részletes árajánlattal."
+    },
+    "giftcard": {
+      "title": "Ajándékutalvány — Silverframe Studio | Fotózás Szegeden",
+      "metaDesc": "Ajándékozz fotózást! Silverframe Studio ajándékutalvány Szegeden — fix összegben vagy konkrét csomagra, bármelyik szolgáltatásra beváltható.",
+      "heroImage": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Ajándékutalvány",
+      "introLabel": "Ajándékozz élményt",
+      "introTitle": "A tökéletes ajándék<br>egy különleges emberednek",
+      "introDesc": "Lepd meg a szeretteidet egy fotózással. Az ajándékutalvány kérhető fix összegben vagy egy konkrét csomagra, és bármelyik szolgáltatásomra beváltható.",
+      "amountsLabel": "Fix összegű utalványok",
+      "amounts": [
+        { "value": "20.000 Ft", "note": "Kisebb fotózáshoz, vagy kiegészítő ajándéknak." },
+        { "value": "50.000 Ft", "note": "A legnépszerűbb — a legtöbb portré és páros fotózáshoz elég." },
+        { "value": "100.000 Ft", "note": "Prémium élményhez vagy nagyobb csomaghoz." }
+      ],
+      "packagesLabel": "Csomag utalványok",
+      "packageIds": ["couple", "maternity", "portfolio-model"],
+      "stepsLabel": "Hogyan működik",
+      "stepsTitle": "Egyszerű,<br>mint bármelyik érdeklődés",
+      "steps": [
+        { "title": "Kapcsolatfelvétel", "desc": "Írj egy üzenetet a kapcsolati űrlapon: melyik utalványt szeretnéd, és kinek." },
+        { "title": "Fizetés", "desc": "Elküldöm az átutalási adatokat. A beérkezés után elkészítem az utalványt." },
+        { "title": "Megkapod az utalványt", "desc": "Emailben küldöm a nyomtatható, egyedi kódos ajándékutalványt." }
+      ],
+      "validityNote": "Az ajándékutalvány a vásárlástól számított 1 évig érvényes, és bármelyik szabad időpontra beváltható.",
+      "ctaLabel": "Ajándékoznál?",
+      "ctaTitle": "Kérd az utalványt<br><em>néhány kattintással</em>",
+      "ctaDesc": "Írj egy üzenetet, és 24 órán belül visszajelzek minden részlettel. Ugyanaz az egyszerű folyamat, mint bármelyik érdeklődésnél.",
+      "ctaButton": "Utalványt kérek"
     }
   },
   "servicePages": {
