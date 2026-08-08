@@ -22,6 +22,7 @@
                 { id: 'pages.services', title: 'Szolgáltatások' },
                 { id: 'pages.contact', title: 'Kapcsolat' },
                 { id: 'pages.arak', title: 'Árak' },
+                { id: 'pages.giftcard', title: 'Ajándékutalvány' },
             ]
         },
         {
@@ -66,6 +67,8 @@
         if (pageId === 'pages.portfolio') return '/portfolio.html';
         if (pageId === 'pages.services') return '/services.html';
         if (pageId === 'pages.contact') return '/contact.html';
+        if (pageId === 'pages.arak') return '/arak.html';
+        if (pageId === 'pages.giftcard') return '/ajandekutalvany.html';
         if (pageId.startsWith('servicePages.')) return '/services/' + pageId.split('.')[1] + '.html';
         if (pageId.startsWith('portfolioPages.')) return '/portfolio/' + pageId.split('.')[1] + '.html';
         return '/';
@@ -261,6 +264,8 @@
             area.innerHTML = renderGaleriaEditor(data, pageId);
         } else if (pageId === 'pages.arak') {
             area.innerHTML = renderArakEditor(data, pageId);
+        } else if (pageId === 'pages.giftcard') {
+            area.innerHTML = renderGiftCardEditor(data, pageId);
         } else {
             area.innerHTML = renderGenericPageEditor(data, pageId);
         }
@@ -465,6 +470,84 @@
         html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
         html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
         html += textareaField('CTA bekezdés', pageId + '.ctaDesc', data.ctaDesc);
+        html += '</div>';
+
+        return html;
+    }
+
+    // ── Ajándékutalvány page editor ──
+    function renderGiftCardEditor(data, pageId) {
+        let html = '';
+
+        // SEO
+        html += '<div class="field-section"><div class="field-section-title">SEO & Meta</div>';
+        html += textField('Oldal cím', pageId + '.title', data.title);
+        html += textareaField('Meta leírás', pageId + '.metaDesc', data.metaDesc);
+        html += '</div>';
+
+        // Hero
+        html += '<div class="field-section"><div class="field-section-title">Hero szekció</div>';
+        html += imageField('Hero háttérkép', pageId + '.heroImage', data.heroImage);
+        html += textField('Hero felső szöveg', pageId + '.heroLabel', data.heroLabel);
+        html += textField('Hero cím', pageId + '.heroTitle', data.heroTitle);
+        html += '</div>';
+
+        // Intro
+        html += '<div class="field-section"><div class="field-section-title">Bevezető szekció</div>';
+        html += textField('Felső szöveg', pageId + '.introLabel', data.introLabel);
+        html += textField('Cím', pageId + '.introTitle', data.introTitle);
+        html += textareaField('Leírás', pageId + '.introDesc', data.introDesc);
+        html += '</div>';
+
+        // Fixed amounts
+        html += '<div class="field-section"><div class="field-section-title">Fix összegű utalványok</div>';
+        html += textField('Szekció felirat', pageId + '.amountsLabel', data.amountsLabel);
+        html += '<div class="array-list" data-array-path="' + pageId + '.amounts">';
+        (data.amounts || []).forEach((a, i) => {
+            html += `<div class="array-item" draggable="false" data-index="${i}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Utalvány #${i + 1}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${pageId}.amounts" data-index="${i}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                ${textField('Összeg', pageId + '.amounts.' + i + '.value', a.value)}
+                ${textField('Megjegyzés', pageId + '.amounts.' + i + '.note', a.note)}
+            </div>`;
+        });
+        html += '</div>';
+        html += `<button class="btn-add" data-add-array="${pageId}.amounts" data-template="amount">+ Összeg hozzáadása</button>`;
+        html += '</div>';
+
+        // Package vouchers (choose which services appear; price is pulled automatically)
+        const catOpts = (contentData.serviceCategories || []).map(c => ({ value: c.id, label: c.name }));
+        html += '<div class="field-section"><div class="field-section-title">Csomag utalványok</div>';
+        html += textField('Szekció felirat', pageId + '.packagesLabel', data.packagesLabel);
+        html += '<div class="field-hint" style="margin-bottom:1rem;">Válaszd ki, mely szolgáltatások jelenjenek meg csomag utalványként. Az ár automatikusan a szolgáltatás első csomagjának ára lesz.</div>';
+        html += '<div class="array-list" data-array-path="' + pageId + '.packageIds">';
+        (data.packageIds || []).forEach((pid, i) => {
+            html += `<div class="array-item" draggable="false" data-index="${i}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Csomag #${i + 1}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${pageId}.packageIds" data-index="${i}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                ${selectField('Szolgáltatás', pageId + '.packageIds.' + i, pid, catOpts)}
+            </div>`;
+        });
+        html += '</div>';
+        html += `<button class="btn-add" data-add-array="${pageId}.packageIds" data-template="string">+ Szolgáltatás hozzáadása</button>`;
+        html += '</div>';
+
+        // Final CTA
+        html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
+        html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
+        html += textField('CTA cím', pageId + '.ctaTitle', data.ctaTitle);
+        html += textareaField('CTA bekezdés', pageId + '.ctaDesc', data.ctaDesc);
+        html += textField('CTA gomb felirat', pageId + '.ctaButton', data.ctaButton);
         html += '</div>';
 
         return html;
@@ -1075,6 +1158,9 @@
                         break;
                     case 'packageItem':
                         newItem = { title: '', desc: '' };
+                        break;
+                    case 'amount':
+                        newItem = { value: '', note: '' };
                         break;
                     case 'beforeAfterPair':
                         newItem = { before: '', after: '', label: '' };
