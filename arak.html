@@ -63,7 +63,7 @@
     .pc-intro { text-align:center; margin-bottom:4rem; }
     .pc-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.8rem; }
     .pc-intro p { color:var(--text-body); font-size:0.9rem; max-width:480px; margin:0 auto; }
-    .pc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+    .pc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; align-items:start; }
     @media(max-width:1100px){.pc-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.pc-grid{grid-template-columns:1fr}}
     .price-card2 { background:var(--bg-card); border:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; overflow:hidden; transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; opacity:0; transform:translateY(36px); animation:pcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*70ms + 100ms); border-radius:2px; }
@@ -95,6 +95,7 @@
     .pkg-block.pkg-highlight .pkg-block-name { color:var(--accent); }
     .pkg-block-price { font-family:var(--serif); font-size:1.15rem; font-weight:300; color:var(--accent-light); white-space:nowrap; line-height:1; }
     .pkg-block .pc-features { flex:none; }
+    .pkg-block-desc { font-size:0.8rem; color:var(--text-body); line-height:1.5; margin:0.1rem 0 0; }
     .pc-actions { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:auto; padding-top:0.2rem; }
     .pc-cta { flex:1; justify-content:center; text-align:center; font-size:0.8rem; padding:0.75rem 1rem; gap:0.4rem; }
     .pc-gallery-btn { display:flex; align-items:center; gap:0.4rem; padding:0.75rem 0.9rem; border:1px solid rgba(201,169,110,0.25); color:var(--text-muted); font-size:0.78rem; border-radius:var(--btn-r,0); transition:border-color 0.25s,color 0.25s,background 0.25s; white-space:nowrap; flex-shrink:0; }
@@ -258,25 +259,25 @@
                                 <span class="pkg-block-name">ESSENCE</span>
                                 <span class="pkg-block-price">300.000 Ft</span>
                             </div>
-                            <ul class="pc-features"><li>Kreatív fotózás</li><li>Előkészületek</li><li>Szertartások</li><li>Csoportképek</li><li>Lakodalom</li><li>Maximum 400 db retusált kép</li><li>Rendelkezésre állás 8 óra időtartamban</li></ul>
+                            <p class="pkg-block-desc">8 órás rendelkezésre állás — a nap legszebb pillanatai, természetes stílusban megörökítve.</p>
                         </div><div class="pkg-block pkg-highlight">
                             <div class="pkg-block-header">
                                 <span class="pkg-block-name">INFINITY</span>
                                 <span class="pkg-block-price">350.000 Ft</span>
                             </div>
-                            <ul class="pc-features"><li>Kreatív fotózás (külön napon is)</li><li>Előkészületek</li><li>Szertartások</li><li>Csoportképek</li><li>Lakodalom</li><li>Maximum 700 db retusált kép</li><li>Rendelkezésre állás 12 óra időtartamban</li></ul>
+                            <p class="pkg-block-desc">12 órás rendelkezésre állás — a kreatív fotózás akár külön napon is.</p>
                         </div><div class="pkg-block pkg-highlight">
                             <div class="pkg-block-header">
                                 <span class="pkg-block-name">PRESTIGE</span>
                                 <span class="pkg-block-price">400.000 Ft</span>
                             </div>
-                            <ul class="pc-features"><li>Kreatív fotózás (külön napon is)</li><li>Előkészületek</li><li>Szertartások</li><li>Csoportképek</li><li>Lakodalom</li><li>Online galéria</li><li>Maximum 1000 db retusált kép</li><li>Korlátlan rendelkezésre állás</li></ul>
+                            <p class="pkg-block-desc">Korlátlan rendelkezésre állás és online galéria — a teljes élmény, kompromisszumok nélkül.</p>
                         </div><div class="pkg-block pkg-highlight">
                             <div class="pkg-block-header">
                                 <span class="pkg-block-name">Választható szolgáltatások</span>
                                 <span class="pkg-block-price"></span>
                             </div>
-                            <ul class="pc-features"><li>Külön napi kreatív fotózás — 70.000 Ft</li><li>Második fotós — 100.000 Ft</li><li>Kiszállási költség — 110 Ft/km</li></ul>
+                            <p class="pkg-block-desc">Bármelyik csomag bővíthető az alábbi kiegészítőkkel.</p>
                         </div></div>
                             <div class="pc-delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>4-6 hét átadás</div>
                             <div class="pc-actions">

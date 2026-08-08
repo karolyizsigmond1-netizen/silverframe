@@ -1442,18 +1442,24 @@ function buildArakPage() {
 
     let bodyContent;
     if (hasMultiPkg) {
+      // Cards with many tiers (e.g. wedding) get a compact summary line per
+      // package instead of a full feature list, so they don't tower over the
+      // other cards in the same row.
+      const compact = pkgs.length > 2;
       const pkgBlocks = pkgs.map((pkg, pi) => {
         const pm = pkg.name.match(/[\d.,]+\.?\d*\s*Ft|Egyedi ajánlat/);
         const pkgPrice = pm ? pm[0] : '';
         const pkgName = pkg.name.replace(/\s*—\s*[\d.,]+\.?\d*\s*Ft/, '').replace(/\s*—\s*Egyedi ajánlat/, '');
         const hlCls = pi > 0 ? ' pkg-highlight' : '';
-        const feats = (pkg.items || []).map(it => `<li>${it.title}</li>`).join('');
+        const body = compact
+          ? (pkg.desc ? `<p class="pkg-block-desc">${pkg.desc}</p>` : '')
+          : `<ul class="pc-features">${(pkg.items || []).map(it => `<li>${it.title}</li>`).join('')}</ul>`;
         return `<div class="pkg-block${hlCls}">
                             <div class="pkg-block-header">
                                 <span class="pkg-block-name">${pkgName}</span>
                                 <span class="pkg-block-price">${pkgPrice}</span>
                             </div>
-                            <ul class="pc-features">${feats}</ul>
+                            ${body}
                         </div>`;
       }).join('');
       bodyContent = `<div class="pkg-list">${pkgBlocks}</div>`;
@@ -1541,7 +1547,7 @@ function buildArakPage() {
     .pc-intro { text-align:center; margin-bottom:4rem; }
     .pc-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.8rem; }
     .pc-intro p { color:var(--text-body); font-size:0.9rem; max-width:480px; margin:0 auto; }
-    .pc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+    .pc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; align-items:start; }
     @media(max-width:1100px){.pc-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.pc-grid{grid-template-columns:1fr}}
     .price-card2 { background:var(--bg-card); border:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; overflow:hidden; transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; opacity:0; transform:translateY(36px); animation:pcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*70ms + 100ms); border-radius:2px; }
@@ -1573,6 +1579,7 @@ function buildArakPage() {
     .pkg-block.pkg-highlight .pkg-block-name { color:var(--accent); }
     .pkg-block-price { font-family:var(--serif); font-size:1.15rem; font-weight:300; color:var(--accent-light); white-space:nowrap; line-height:1; }
     .pkg-block .pc-features { flex:none; }
+    .pkg-block-desc { font-size:0.8rem; color:var(--text-body); line-height:1.5; margin:0.1rem 0 0; }
     .pc-actions { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:auto; padding-top:0.2rem; }
     .pc-cta { flex:1; justify-content:center; text-align:center; font-size:0.8rem; padding:0.75rem 1rem; gap:0.4rem; }
     .pc-gallery-btn { display:flex; align-items:center; gap:0.4rem; padding:0.75rem 0.9rem; border:1px solid rgba(201,169,110,0.25); color:var(--text-muted); font-size:0.78rem; border-radius:var(--btn-r,0); transition:border-color 0.25s,color 0.25s,background 0.25s; white-space:nowrap; flex-shrink:0; }
