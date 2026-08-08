@@ -542,6 +542,16 @@
         html += `<button class="btn-add" data-add-array="${pageId}.packageIds" data-template="string">+ Szolgáltatás hozzáadása</button>`;
         html += '</div>';
 
+        // Gift card image (printable design)
+        html += '<div class="field-section"><div class="field-section-title">Utalvány kép (nyomtatható)</div>';
+        html += '<div class="field-hint" style="margin-bottom:1rem;">Töltsd fel az ajándékutalvány képét. Ez a szekció csak akkor jelenik meg az oldalon, ha van feltöltött kép.</div>';
+        html += imageField('Utalvány kép', pageId + '.cardImage', data.cardImage || '');
+        html += textField('Felső szöveg', pageId + '.cardLabel', data.cardLabel);
+        html += textField('Cím', pageId + '.cardTitle', data.cardTitle);
+        html += textareaField('Leírás', pageId + '.cardDesc', data.cardDesc);
+        html += textField('Gomb felirat', pageId + '.cardButton', data.cardButton);
+        html += '</div>';
+
         // Final CTA
         html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
         html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);

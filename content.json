@@ -538,6 +538,11 @@
         "maternity",
         "portfolio-model"
       ],
+      "cardImage": "",
+      "cardLabel": "Az utalvány",
+      "cardTitle": "Így néz ki, amit átadsz",
+      "cardDesc": "Minden ajándékutalvány igényes, egyedi kivitelben készül — nyomtatva vagy digitálisan is átadható.",
+      "cardButton": "Nyomtatható változat megtekintése",
       "ctaLabel": "Ajándékoznál?",
       "ctaTitle": "Kérd az utalványt<br><em>néhány kattintással</em>",
       "ctaDesc": "Írj egy üzenetet, és 24 órán belül visszajelzek minden részlettel. Ugyanaz az egyszerű folyamat, mint bármelyik érdeklődésnél.",

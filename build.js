@@ -1731,6 +1731,24 @@ function buildGiftCardPage() {
                     </div>`;
   }).join('');
 
+  const cardHref = p.cardImage ? (p.cardImage.startsWith('http') ? p.cardImage : '/' + p.cardImage) : '';
+  const cardSection = p.cardImage ? `
+        <section class="gc-showcase">
+            <div class="container">
+                <div class="gc-showcase-inner reveal">
+                    <div class="gc-showcase-img">
+                        <img src="${imgSrc(p.cardImage, '')}"${imgStyle(p.cardImage)} alt="${p.cardTitle || 'Ajándékutalvány'}" loading="lazy">
+                    </div>
+                    <div class="gc-showcase-text">
+                        <span class="section-label">${p.cardLabel || ''}</span>
+                        <h2>${p.cardTitle || ''}</h2>
+                        <p>${p.cardDesc || ''}</p>
+                        ${p.cardButton ? `<a href="${cardHref}" target="_blank" rel="noopener" class="btn btn-outline"><span>${p.cardButton}</span>${arrowSvg}</a>` : ''}
+                    </div>
+                </div>
+            </div>
+        </section>` : '';
+
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -1770,6 +1788,13 @@ function buildGiftCardPage() {
     .gc-final h2 em { font-style:italic; color:var(--accent-light); }
     .gc-final p { color:var(--text-body); font-size:0.9rem; max-width:460px; margin:0 auto 2.5rem; line-height:1.8; }
     .gc-final .btn { font-size:0.85rem; padding:0.95rem 2rem; }
+    .gc-showcase { padding:2rem 0 5rem; }
+    .gc-showcase-inner { display:grid; grid-template-columns:1.1fr 0.9fr; gap:3rem; align-items:center; background:var(--bg-card); border:1px solid rgba(201,169,110,0.15); border-radius:2px; padding:2.5rem; }
+    @media(max-width:820px){ .gc-showcase-inner { grid-template-columns:1fr; gap:2rem; padding:1.8rem; } }
+    .gc-showcase-img { border-radius:2px; overflow:hidden; background:var(--bg-elevated); }
+    .gc-showcase-img img { display:block; width:100%; height:auto; }
+    .gc-showcase-text h2 { font-family:var(--serif); font-size:clamp(1.6rem,3vw,2.3rem); font-weight:300; line-height:1.15; margin:0.3rem 0 0.8rem; }
+    .gc-showcase-text p { color:var(--text-body); font-size:0.9rem; line-height:1.75; margin-bottom:1.6rem; }
     </style>
 ${bodyTag()}
 ${boilerplate()}
@@ -1808,6 +1833,7 @@ ${mobileNavHtml('', 'page', 'giftcard')}
             </div>
         </section>
 
+${cardSection}
         <section class="gc-final">
             <div class="container">
                 <span class="gc-final-label">${p.ctaLabel}</span>
