@@ -395,6 +395,12 @@ const server = http.createServer((req, res) => {
         res.writeHead(403); res.end('Forbidden'); return;
     }
 
+    // Pretty URLs: a path with no file extension maps to its .html file
+    // (mirrors Netlify's Pretty URLs so local preview matches production).
+    if (!path.extname(filePath) && !fs.existsSync(filePath)) {
+        filePath += '.html';
+    }
+
     const ext = path.extname(filePath);
     const contentType = MIME[ext] || 'application/octet-stream';
 
