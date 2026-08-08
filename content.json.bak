@@ -498,7 +498,7 @@
     },
     "arak": {
       "title": "Árak — Silverframe Studio | Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio fotózás árak 45.000 Ft-tól. Portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, nincsenek rejtett díjak. Foglalj időpontot!",
+      "metaDesc": "Silverframe Studio fotózás árak 50.000 Ft-tól. Portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, nincsenek rejtett díjak. Foglalj időpontot!",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.jpg",
       "heroLabel": "Silverframe Studio — Szeged",
       "heroTitle": "Árak & Csomagok",
@@ -519,12 +519,30 @@
       "introDesc": "Lepd meg a szeretteidet egy fotózással. Az ajándékutalvány kérhető fix összegben vagy egy konkrét csomagra, és bármelyik szolgáltatásomra beváltható.",
       "amountsLabel": "Fix összegű utalványok",
       "amounts": [
-        { "value": "20.000 Ft", "note": "Kisebb fotózáshoz, vagy kiegészítő ajándéknak." },
-        { "value": "50.000 Ft", "note": "A legnépszerűbb — a legtöbb portré és páros fotózáshoz elég." },
-        { "value": "100.000 Ft", "note": "Prémium élményhez vagy nagyobb csomaghoz." }
+        {
+          "value": "20.000 Ft",
+          "note": "Kisebb fotózáshoz, vagy kiegészítő ajándéknak."
+        },
+        {
+          "value": "50.000 Ft",
+          "note": "A legnépszerűbb — a legtöbb portré és páros fotózáshoz elég."
+        },
+        {
+          "value": "100.000 Ft",
+          "note": "Prémium élményhez vagy nagyobb csomaghoz."
+        }
       ],
       "packagesLabel": "Csomag utalványok",
-      "packageIds": ["couple", "maternity", "portfolio-model"],
+      "packageIds": [
+        "couple",
+        "maternity",
+        "portfolio-model"
+      ],
+      "cardImage": "",
+      "cardLabel": "Az utalvány",
+      "cardTitle": "Így néz ki, amit átadsz",
+      "cardDesc": "Minden ajándékutalvány igényes, egyedi kivitelben készül — nyomtatva vagy digitálisan is átadható.",
+      "cardButton": "Nyomtatható változat megtekintése",
       "ctaLabel": "Ajándékoznál?",
       "ctaTitle": "Kérd az utalványt<br><em>néhány kattintással</em>",
       "ctaDesc": "Írj egy üzenetet, és 24 órán belül visszajelzek minden részlettel. Ugyanaz az egyszerű folyamat, mint bármelyik érdeklődésnél.",
