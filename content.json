@@ -520,11 +520,11 @@
       "amountsLabel": "Fix összegű utalványok",
       "amounts": [
         {
-          "value": "20.000 Ft",
+          "value": "50.000 Ft",
           "note": "Kisebb fotózáshoz, vagy kiegészítő ajándéknak."
         },
         {
-          "value": "50.000 Ft",
+          "value": "80.000 Ft",
           "note": "A legnépszerűbb — a legtöbb portré és páros fotózáshoz elég."
         },
         {
