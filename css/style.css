@@ -1500,6 +1500,21 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     object-fit: cover;
     display: block;
 }
+/* Wide/landscape package image: full-width banner above the text, shown uncropped */
+.service-includes.has-banner {
+    display: block;
+}
+.service-includes-banner {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.service-includes-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 .service-includes.has-image .service-includes-title {
     text-align: left;
 }

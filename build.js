@@ -1321,8 +1321,18 @@ ${s.introDesc.map(p => `                        <p class="section-desc">${p}</p>
                     </div>
                 </div>
 
-${s.packages.map(pkg => `                <div class="service-includes reveal${pkg.image ? ' has-image img-' + (pkg.imageSide || 'left') : ''}">
-${pkg.image ? `                    <div class="service-includes-img"><img src="${imgSrc(pkg.image, prefix)}"${imgStyle(pkg.image)} alt="${pkg.name}" width="500" height="667"></div>` : ''}
+${s.packages.map(pkg => {
+  // Landscape package images (e.g. 16:9) render as a full-width banner above the
+  // text instead of the narrow portrait side panel — so wide photos aren't cropped.
+  const dim = pkg.image ? readImgSize(pkg.image) : null;
+  const isWide = dim && (dim.w / dim.h) >= 1.25;
+  const wrapClass = pkg.image ? (isWide ? ' has-banner' : ' has-image img-' + (pkg.imageSide || 'left')) : '';
+  const imgHtml = !pkg.image ? ''
+    : isWide
+      ? `                    <div class="service-includes-banner"><img src="${imgSrc(pkg.image, prefix)}"${imgStyle(pkg.image)} alt="${pkg.name}" ${imgDims(pkg.image, 1920, 1080)} loading="lazy"></div>`
+      : `                    <div class="service-includes-img"><img src="${imgSrc(pkg.image, prefix)}"${imgStyle(pkg.image)} alt="${pkg.name}" width="500" height="667"></div>`;
+  return `                <div class="service-includes reveal${wrapClass}">
+${imgHtml}
                     <div class="service-includes-content">
                         <h3 class="service-includes-title">${pkg.name}</h3>
 ${pkg.desc ? `                        <p style="margin-bottom:2rem;opacity:.7;">${pkg.desc}</p>` : ''}
@@ -1330,7 +1340,8 @@ ${pkg.desc ? `                        <p style="margin-bottom:2rem;opacity:.7;">
 ${pkg.items.map((item, i) => `                            <div class="service-include-item"><span class="include-num">0${i + 1}</span><h4>${item.title}</h4><p>${item.desc}</p></div>`).join('\n')}
                         </div>
                     </div>
-                </div>`).join('\n\n')}
+                </div>`;
+}).join('\n\n')}
 
                 <div class="service-gallery">
                     <h3 class="service-includes-title">Válogatott munkák</h3>
