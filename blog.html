@@ -6,7 +6,7 @@
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TVKG5M3H');</script>
     <!-- End Google Tag Manager -->
-    <title>Blog — Silverframe | Fotózási tippek és inspiráció</title>
+    <title>Blog — Silverframe Studio | Fotózási tippek és inspiráció</title>
     <meta name="description" content="Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
@@ -22,7 +22,7 @@
     <link rel="alternate" hreflang="hu" href="https://silverframe.hu/blog">
     <link rel="alternate" hreflang="en" href="https://silverframe.hu/en/blog">
     <link rel="alternate" hreflang="x-default" href="https://silverframe.hu/blog">
-    <meta property="og:title" content="Blog — Silverframe | Fotózási tippek és inspiráció">
+    <meta property="og:title" content="Blog — Silverframe Studio | Fotózási tippek és inspiráció">
     <meta property="og:description" content="Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://silverframe.hu/blog">
@@ -34,7 +34,7 @@
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1623">
     <meta property="og:image:height" content="1080">
-    <meta property="og:image:alt" content="Blog — Silverframe | Fotózási tippek és inspiráció">
+    <meta property="og:image:alt" content="Blog — Silverframe Studio | Fotózási tippek és inspiráció">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://silverframe.hu/uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +64,28 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XKFQW9J2N0');</script>
 </head>
+    <style>
+    .blog-intro { text-align:center; max-width:640px; margin:0 auto 3.5rem; }
+    .blog-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.9rem; }
+    .blog-intro p { color:var(--text-body); font-size:0.92rem; line-height:1.75; }
+    .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; align-items:start; }
+    @media(max-width:900px){ .blog-grid { grid-template-columns:1fr; max-width:480px; margin-inline:auto; } }
+    .blog-card { background:var(--bg-card); border:1px solid rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; opacity:0; transform:translateY(28px); animation:gcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*80ms + 100ms); transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 24px 50px rgba(0,0,0,0.45),0 0 0 1px rgba(201,169,110,0.2); }
+    .blog-card-link { display:flex; flex-direction:column; height:100%; }
+    .blog-card-img { aspect-ratio:3/2; overflow:hidden; background:var(--bg-elevated); }
+    .blog-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease-smooth); }
+    .blog-card:hover .blog-card-img img { transform:scale(1.05); }
+    .blog-card-body { padding:1.6rem 1.5rem 1.8rem; display:flex; flex-direction:column; gap:0.7rem; flex:1; }
+    .blog-card-meta { display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); }
+    .blog-card-cat { color:var(--accent); }
+    .blog-card-dot { opacity:0.4; }
+    .blog-card-title { font-family:var(--serif); font-size:1.3rem; font-weight:400; line-height:1.25; color:var(--text-primary); }
+    .blog-card-excerpt { font-size:0.86rem; color:var(--text-body); line-height:1.65; flex:1; }
+    .blog-card-more { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-top:0.3rem; }
+    .blog-card-more svg { width:15px; height:15px; transition:transform 0.3s; }
+    .blog-card:hover .blog-card-more svg { transform:translateX(4px); }
+    </style>
 <body class="rounded-buttons">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVKG5M3H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -127,7 +149,7 @@
 
     <main>
         <section class="page-hero">
-            <div class="page-hero-bg" style="background-image:url('https://silverframe.hu/uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg')"></div>
+            <div class="page-hero-bg" style="background-image:url('uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg');background-position:47% 30%"></div>
             <div class="page-hero-content">
                 <span class="page-hero-label">Silverframe Studio — Szeged</span>
                 <h1 class="page-hero-title">Blog</h1>
@@ -137,8 +159,68 @@
 
         <section class="section">
             <div class="container">
-                <div id="soro-blog"></div>
-                <script src="https://app.trysoro.com/api/embed/08e2f2b4-d5a7-461c-ad1d-d2f52b70c74d?theme=dark" defer></script>
+                <div class="blog-intro reveal">
+                    <span class="section-label">Írások</span>
+                    <h2>Tippek, inspiráció és kulisszatitkok</h2>
+                    <p>Gondolatok a fotózásról — hogyan készülj a nagy napra, mitől lesz igazán jó egy kép, és miért marad meg egy pillanat örökre.</p>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card reveal" style="--i:0">
+                        <a href="/blog/csaladi-fotozas-felkeszules" class="blog-card-link">
+                            <div class="blog-card-img"><img src="uploads/a09ed00bba9d-csaladi-fotozas-szeged___73_of_108_.jpg" alt="Így készülj fel a családi fotózásra: 6 tipp a természetes képekért" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">Családi</span><span class="blog-card-dot">•</span><span>2026. augusztus 18.</span><span class="blog-card-dot">•</span><span>4 perc olvasás</span></div>
+                                <h2 class="blog-card-title">Így készülj fel a családi fotózásra: 6 tipp a természetes képekért</h2>
+                                <p class="blog-card-excerpt">A legszebb családi képek akkor születnek, amikor mindenki felszabadult. Néhány tipp, hogy a fotózás napja gördülékeny és élvezetes legyen.</p>
+                                <span class="blog-card-more">Tovább olvasom<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="blog-card reveal" style="--i:1">
+                        <a href="/blog/eskuvoi-fotozas-5-tipp" class="blog-card-link">
+                            <div class="blog-card-img"><img src="uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg" alt="5 tipp a felejthetetlen esküvői fotókhoz" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">Esküvő</span><span class="blog-card-dot">•</span><span>2026. július 22.</span><span class="blog-card-dot">•</span><span>5 perc olvasás</span></div>
+                                <h2 class="blog-card-title">5 tipp a felejthetetlen esküvői fotókhoz</h2>
+                                <p class="blog-card-excerpt">Az esküvő napja repül. Ezzel az 5 tippel segítesz, hogy a fotókon minden fontos pillanat megmaradjon — stressz nélkül.</p>
+                                <span class="blog-card-more">Tovább olvasom<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="blog-card reveal" style="--i:2">
+                        <a href="/blog/miert-erdemes-profi-fotos" class="blog-card-link">
+                            <div class="blog-card-img"><img src="uploads/ffed4964762c-_DSC9007.jpg" alt="Miért érdemes profi fotóst választani?" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">Tippek</span><span class="blog-card-dot">•</span><span>2026. június 15.</span><span class="blog-card-dot">•</span><span>4 perc olvasás</span></div>
+                                <h2 class="blog-card-title">Miért érdemes profi fotóst választani?</h2>
+                                <p class="blog-card-excerpt">A telefonok kamerái egyre jobbak — mégis van, amit csak egy tapasztalt fotós tud hozzáadni. Nézzük, mi az.</p>
+                                <span class="blog-card-more">Tovább olvasom<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="blog-card reveal" style="--i:3">
+                        <a href="/blog/arany-ora-termeszetes-feny" class="blog-card-link">
+                            <div class="blog-card-img"><img src="uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg" alt="Az arany óra: miért a naplemente a legjobb fény" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">Tippek</span><span class="blog-card-dot">•</span><span>2026. május 20.</span><span class="blog-card-dot">•</span><span>3 perc olvasás</span></div>
+                                <h2 class="blog-card-title">Az arany óra: miért a naplemente a legjobb fény</h2>
+                                <p class="blog-card-excerpt">Ha valaha csodáltad, milyen meleg és lágy a fény napnyugta előtt — nos, ezt hívjuk arany órának. Íme, miért szeretjük.</p>
+                                <span class="blog-card-more">Tovább olvasom<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="blog-card reveal" style="--i:4">
+                        <a href="/blog/fotozas-mint-ajandek" class="blog-card-link">
+                            <div class="blog-card-img"><img src="uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg" alt="Ajándékozz élményt: a fotózás, ami örökre megmarad" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">Ajándék</span><span class="blog-card-dot">•</span><span>2026. április 16.</span><span class="blog-card-dot">•</span><span>3 perc olvasás</span></div>
+                                <h2 class="blog-card-title">Ajándékozz élményt: a fotózás, ami örökre megmarad</h2>
+                                <p class="blog-card-excerpt">A legszebb ajándékok nem tárgyak, hanem emlékek. Egy fotózás olyan élmény, amit évek múlva is újra átélhettek.</p>
+                                <span class="blog-card-more">Tovább olvasom<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -146,7 +228,7 @@
             <div class="cta-banner-bg" role="img" aria-label="Stúdió háttér" style="background-image:url('uploads/4d804dfbf220-DSC_3198.jpg');background-size:cover;background-position:center;"></div>
             <div class="container reveal">
                 <span class="section-label">Készen állsz?</span>
-                <h2 class="section-title">Alkossunk együtt valami<br>maradandót</h2>
+                <h2 class="section-title">Alkossunk együtt<br>valami maradandót</h2>
                 <a href="/kapcsolat" class="btn btn-solid"><span>Kapcsolatfelvétel</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
         </section>

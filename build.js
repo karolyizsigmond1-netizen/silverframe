@@ -58,6 +58,23 @@ const URL_MAP = {
   }
 };
 
+// Register blog posts into URL_MAP so rel()/absUrl()/langToggle resolve their URLs.
+((data.pages && data.pages.blog && data.pages.blog.posts) || []).forEach(post => {
+  URL_MAP.blogpost = URL_MAP.blogpost || {};
+  URL_MAP.blogpost[post.slug] = { hu: 'blog/' + post.slug, en: 'blog/' + post.slug };
+});
+
+// Localized date formatting for blog posts.
+const HU_MONTHS = ['január','február','március','április','május','június','július','augusztus','szeptember','október','november','december'];
+const EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function formatBlogDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
+  if (!m) return iso || '';
+  const y = +m[1], mo = +m[2] - 1, d = +m[3];
+  if (LANG === 'en') return `${EN_MONTHS[mo]} ${d}, ${y}`;
+  return `${y}. ${HU_MONTHS[mo]} ${d}.`;
+}
+
 // Path (no leading slash, no .html) relative to the current LANG root.
 function pathFor(kind, key) { return URL_MAP[kind][key][LANG]; }
 function pathForLang(kind, key, lang) { return URL_MAP[kind][key][lang]; }
@@ -1738,23 +1755,28 @@ function buildGiftCardPage() {
                     </div>`;
   }).join('');
 
-  const cardHref = p.cardImage ? (p.cardImage.startsWith('http') ? p.cardImage : '/' + p.cardImage) : '';
-  const cardSection = p.cardImage ? `
+  const showcase = (img, label, cardTitle, cardDesc, button) => {
+    if (!img) return '';
+    const href = img.startsWith('http') ? img : '/' + img;
+    return `
         <section class="gc-showcase">
             <div class="container">
                 <div class="gc-showcase-inner reveal">
                     <div class="gc-showcase-img">
-                        <img src="${imgSrc(p.cardImage, '')}"${imgStyle(p.cardImage)} alt="${p.cardTitle || 'Ajándékutalvány'}" loading="lazy">
+                        <img src="${imgSrc(img, '')}"${imgStyle(img)} alt="${cardTitle || 'Ajándékutalvány'}" loading="lazy">
                     </div>
                     <div class="gc-showcase-text">
-                        <span class="section-label">${p.cardLabel || ''}</span>
-                        <h2>${p.cardTitle || ''}</h2>
-                        <p>${p.cardDesc || ''}</p>
-                        ${p.cardButton ? `<a href="${cardHref}" target="_blank" rel="noopener" class="btn btn-outline"><span>${p.cardButton}</span>${arrowSvg}</a>` : ''}
+                        <span class="section-label">${label || ''}</span>
+                        <h2>${cardTitle || ''}</h2>
+                        <p>${cardDesc || ''}</p>
+                        ${button ? `<a href="${href}" target="_blank" rel="noopener" class="btn btn-outline"><span>${button}</span>${arrowSvg}</a>` : ''}
                     </div>
                 </div>
             </div>
-        </section>` : '';
+        </section>`;
+  };
+  const cardSection = showcase(p.cardImage, p.cardLabel, p.cardTitle, p.cardDesc, p.cardButton)
+                    + showcase(p.cardImage2, p.cardLabel2, p.cardTitle2, p.cardDesc2, p.cardButton2);
 
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -1883,19 +1905,67 @@ function buildBlog() {
     "inLanguage": LANG === 'en' ? 'en' : 'hu-HU'
   }, null, 8);
 
+  const readLabel = LANG === 'en' ? 'min read' : 'perc olvasás';
+  const moreLabel = LANG === 'en' ? 'Read more' : 'Tovább olvasom';
+
+  const posts = (p.posts || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const cardsHtml = posts.map((post, i) => {
+    const c = post[LANG] || post.hu || {};
+    const href = rel('', 'blogpost', post.slug);
+    return `
+                    <article class="blog-card reveal" style="--i:${i}">
+                        <a href="${href}" class="blog-card-link">
+                            <div class="blog-card-img"><img src="${imgSrc(post.image, '')}"${imgStyle(post.image)} alt="${c.title || ''}" loading="lazy"></div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta"><span class="blog-card-cat">${post.category || ''}</span><span class="blog-card-dot">•</span><span>${formatBlogDate(post.date)}</span><span class="blog-card-dot">•</span><span>${post.readTime || 3} ${readLabel}</span></div>
+                                <h2 class="blog-card-title">${c.title || ''}</h2>
+                                <p class="blog-card-excerpt">${c.excerpt || ''}</p>
+                                <span class="blog-card-more">${moreLabel}${arrowSvg}</span>
+                            </div>
+                        </a>
+                    </article>`;
+  }).join('');
+
   return `${headHtml(title, desc, 'page', 'blog', title, desc, 'website', globalOgImage, 'css/style.css', jsonLd)}
+    <style>
+    .blog-intro { text-align:center; max-width:640px; margin:0 auto 3.5rem; }
+    .blog-intro h2 { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.1; margin-bottom:0.9rem; }
+    .blog-intro p { color:var(--text-body); font-size:0.92rem; line-height:1.75; }
+    .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; align-items:start; }
+    @media(max-width:900px){ .blog-grid { grid-template-columns:1fr; max-width:480px; margin-inline:auto; } }
+    .blog-card { background:var(--bg-card); border:1px solid rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; opacity:0; transform:translateY(28px); animation:gcIn 0.6s var(--ease-dramatic) forwards; animation-delay:calc(var(--i,0)*80ms + 100ms); transition:transform 0.4s var(--ease-smooth),box-shadow 0.4s; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 24px 50px rgba(0,0,0,0.45),0 0 0 1px rgba(201,169,110,0.2); }
+    .blog-card-link { display:flex; flex-direction:column; height:100%; }
+    .blog-card-img { aspect-ratio:3/2; overflow:hidden; background:var(--bg-elevated); }
+    .blog-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease-smooth); }
+    .blog-card:hover .blog-card-img img { transform:scale(1.05); }
+    .blog-card-body { padding:1.6rem 1.5rem 1.8rem; display:flex; flex-direction:column; gap:0.7rem; flex:1; }
+    .blog-card-meta { display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); }
+    .blog-card-cat { color:var(--accent); }
+    .blog-card-dot { opacity:0.4; }
+    .blog-card-title { font-family:var(--serif); font-size:1.3rem; font-weight:400; line-height:1.25; color:var(--text-primary); }
+    .blog-card-excerpt { font-size:0.86rem; color:var(--text-body); line-height:1.65; flex:1; }
+    .blog-card-more { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-top:0.3rem; }
+    .blog-card-more svg { width:15px; height:15px; transition:transform 0.3s; }
+    .blog-card:hover .blog-card-more svg { transform:translateX(4px); }
+    </style>
 ${bodyTag()}
 ${boilerplate()}
 ${headerHtml('', 'blog', null, 'page', 'blog')}
 ${mobileNavHtml('', 'page', 'blog')}
 
     <main>
-${pageHero(heroImage, heroLabel, heroTitle, `<a href="/">Főoldal</a> <span>/</span> Blog`)}
+${pageHero(heroImage, heroLabel, heroTitle, `<a href="${rel('','page','index')}">Főoldal</a> <span>/</span> Blog`)}
 
         <section class="section">
             <div class="container">
-                <div id="soro-blog"></div>
-                <script src="https://app.trysoro.com/api/embed/08e2f2b4-d5a7-461c-ad1d-d2f52b70c74d?theme=dark" defer></script>
+                <div class="blog-intro reveal">
+                    <span class="section-label">${p.introLabel || 'Írások'}</span>
+                    <h2>${p.introTitle || 'Tippek, inspiráció és kulisszatitkok'}</h2>
+                    <p>${p.introDesc || ''}</p>
+                </div>
+                <div class="blog-grid">${cardsHtml}
+                </div>
             </div>
         </section>
 
@@ -1904,6 +1974,85 @@ ${ctaBanner(p.ctaLabel || 'Készen állsz?', p.ctaTitle || 'Alkossunk együtt va
 
 ${footerHtml('')}
     <script src="${ASSET_UP}js/main.js" defer></script>
+${chatbotHtml()}
+</body>
+</html>`;
+}
+
+// ── Individual blog post page ──
+
+function buildBlogPost(post) {
+  if (!post) return '';
+  const prefix = '../';
+  const c = post[LANG] || post.hu || {};
+  const p = (data.pages && data.pages.blog) || {};
+  const title = `${c.title} — ${g.siteName.trim()} | Blog`;
+  const desc = c.excerpt || '';
+  const ogImg = post.image ? `${g.baseUrl}/${post.image}` : globalOgImage;
+  const readLabel = LANG === 'en' ? 'min read' : 'perc olvasás';
+  const backLabel = LANG === 'en' ? 'All posts' : 'Összes írás';
+
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": c.title,
+    "description": desc,
+    "image": ogImg,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "author": { "@type": "Person", "name": g.photographer, "url": absUrl('page', 'about') },
+    "publisher": {
+      "@type": ["LocalBusiness", "ProfessionalService", "Photographer"],
+      "name": g.siteName.trim(),
+      "url": g.baseUrl,
+      "image": globalOgImage
+    },
+    "mainEntityOfPage": absUrl('blogpost', post.slug),
+    "inLanguage": LANG === 'en' ? 'en' : 'hu-HU'
+  }, null, 8);
+
+  const bodyHtml = (c.body || []).map(block => {
+    if (block.type === 'h2') return `                    <h2 class="blog-article-h2">${block.text}</h2>`;
+    return `                    <p>${block.text}</p>`;
+  }).join('\n');
+
+  const breadcrumb = `<a href="${rel(prefix,'page','index')}">Főoldal</a> <span>/</span> <a href="${rel(prefix,'page','blog')}">Blog</a> <span>/</span> ${c.title}`;
+
+  return `${headHtml(title, desc, 'blogpost', post.slug, c.title, desc, 'article', ogImg, '../css/style.css', jsonLd, post.image)}
+    <style>
+    .blog-article { max-width:720px; margin:0 auto; }
+    .blog-article-meta { display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:2.5rem; }
+    .blog-article-meta .cat { color:var(--accent); }
+    .blog-article-meta .dot { opacity:0.4; }
+    .blog-article p { color:var(--text-body); font-size:1rem; line-height:1.85; margin-bottom:1.5rem; }
+    .blog-article-h2 { font-family:var(--serif); font-size:clamp(1.5rem,3vw,2rem); font-weight:400; line-height:1.2; color:var(--text-primary); margin:2.8rem 0 1.1rem; }
+    .blog-article-back { display:inline-flex; align-items:center; gap:0.5rem; margin-top:3rem; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); transition:color 0.25s; }
+    .blog-article-back:hover { color:var(--accent); }
+    .blog-article-back svg { width:16px; height:16px; transform:rotate(180deg); }
+    </style>
+${bodyTag()}
+${boilerplate()}
+${headerHtml(prefix, 'blog', null, 'blogpost', post.slug)}
+${mobileNavHtml(prefix, 'blogpost', post.slug)}
+
+    <main>
+${pageHero(post.image, post.category || 'Blog', c.title, breadcrumb, prefix)}
+
+        <section class="section">
+            <div class="container">
+                <article class="blog-article reveal">
+                    <div class="blog-article-meta"><span class="cat">${post.category || ''}</span><span class="dot">•</span><span>${formatBlogDate(post.date)}</span><span class="dot">•</span><span>${post.readTime || 3} ${readLabel}</span></div>
+${bodyHtml}
+                    <a href="${rel(prefix,'page','blog')}" class="blog-article-back">${arrowSvg}<span>${backLabel}</span></a>
+                </article>
+            </div>
+        </section>
+
+${ctaBanner(p.ctaLabel || 'Készen állsz?', p.ctaTitle || 'Alkossunk együtt valami<br>maradandót', rel(prefix,'page','contact'), 'Kapcsolatfelvétel', true, prefix)}
+    </main>
+
+${footerHtml(prefix)}
+    <script src="${ASSET_UP}../js/main.js" defer></script>
 ${chatbotHtml()}
 </body>
 </html>`;
@@ -1949,6 +2098,7 @@ function buildSitemap() {
     { kind: 'page', key: 'adatvedelem', priority: '0.3', freq: 'yearly'  },
     ...cats.map(c => ({ kind: 'service', key: c.id, priority: '0.9', freq: 'monthly' })),
     ...Object.keys(data.portfolioPages).map(id => ({ kind: 'portfolio', key: id, priority: '0.7', freq: 'weekly' })),
+    ...(((data.pages && data.pages.blog && data.pages.blog.posts) || []).map(post => ({ kind: 'blogpost', key: post.slug, priority: '0.6', freq: 'monthly' }))),
   ];
   const huUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'hu'), priority: s.priority, freq: s.freq }));
   const enUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'en'), priority: (parseFloat(s.priority) - 0.1).toFixed(1), freq: s.freq }));
@@ -2009,6 +2159,11 @@ function buildLang(lang) {
   // Portfolio pages
   Object.keys(data.portfolioPages).forEach(id => {
     buildAndWrite(fileFor('portfolio', id), () => buildPortfolioPage(id));
+  });
+
+  // Blog post pages
+  ((data.pages && data.pages.blog && data.pages.blog.posts) || []).forEach(post => {
+    buildAndWrite(path.join(outRoot, 'blog', post.slug + '.html'), () => buildBlogPost(post));
   });
 }
 
