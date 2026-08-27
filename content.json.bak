@@ -511,7 +511,7 @@
     "giftcard": {
       "title": "Ajándékutalvány — Silverframe Studio | Fotózás Szegeden",
       "metaDesc": "Ajándékozz fotózást! Silverframe Studio ajándékutalvány Szegeden — fix összegben vagy konkrét csomagra, bármelyik szolgáltatásra beváltható.",
-      "heroImage": "uploads/eeb2a132bc36-www.karolyifoto.hu__3_of_25_-topaz-sharpen-face.jpg",
+      "heroImage": "uploads/8efed72b0d41-Aj_nd_kutalv_ny_kar_csonyra.jpg",
       "heroLabel": "Silverframe Studio — Szeged",
       "heroTitle": "Ajándékutalvány",
       "introLabel": "Ajándékozz élményt",
@@ -538,15 +538,191 @@
         "maternity",
         "portfolio-model"
       ],
-      "cardImage": "uploads/64b968a1c96c-Silverframe_aj_nd_kutalv_ny.png",
+      "cardImage": "uploads/64b968a1c96c-Silverframe_aj_nd_kutalv_ny.jpg",
       "cardLabel": "Az utalvány",
       "cardTitle": "Így néz ki, amit átadsz",
       "cardDesc": "Minden ajándékutalvány igényes, egyedi kivitelben készül — nyomtatva vagy digitálisan is átadható.",
       "cardButton": "Nyomtatható változat megtekintése",
+      "cardImage2": "uploads/8efed72b0d41-Aj_nd_kutalv_ny_kar_csonyra.jpg",
+      "cardLabel2": "Karácsonyi kiadás",
+      "cardTitle2": "Ünnepi ajándékutalvány karácsonyra",
+      "cardDesc2": "Az ünnepi szezonra karácsonyi kivitelben is elérhető — tökéletes ajándék a fa alá, szeretteidnek.",
+      "cardButton2": "Nyomtatható változat megtekintése",
       "ctaLabel": "Ajándékoznál?",
       "ctaTitle": "Kérd az utalványt<br><em>néhány kattintással</em>",
       "ctaDesc": "Írj egy üzenetet, és 24 órán belül visszajelzek minden részlettel. Ugyanaz az egyszerű folyamat, mint bármelyik érdeklődésnél.",
       "ctaButton": "Utalványt kérek"
+    },
+    "blog": {
+      "title": "Blog — Silverframe Studio | Fotózási tippek és inspiráció",
+      "metaDesc": "Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.",
+      "heroLabel": "Silverframe Studio — Szeged",
+      "heroTitle": "Blog",
+      "heroImage": "uploads/12a0cafa5e21-paros-fotozas-termeszetben__6_.jpg",
+      "introLabel": "Írások",
+      "introTitle": "Tippek, inspiráció és kulisszatitkok",
+      "introDesc": "Gondolatok a fotózásról — hogyan készülj a nagy napra, mitől lesz igazán jó egy kép, és miért marad meg egy pillanat örökre.",
+      "listLabel": "Legfrissebb írások",
+      "ctaLabel": "Készen állsz?",
+      "ctaTitle": "Alkossunk együtt<br>valami maradandót",
+      "ctaButton": "Kapcsolatfelvétel",
+      "posts": [
+        {
+          "slug": "csaladi-fotozas-felkeszules",
+          "date": "2026-08-18",
+          "category": "Családi",
+          "image": "uploads/a09ed00bba9d-csaladi-fotozas-szeged___73_of_108_.jpg",
+          "readTime": 4,
+          "hu": {
+            "title": "Így készülj fel a családi fotózásra: 6 tipp a természetes képekért",
+            "excerpt": "A legszebb családi képek akkor születnek, amikor mindenki felszabadult. Néhány tipp, hogy a fotózás napja gördülékeny és élvezetes legyen.",
+            "body": [
+              { "type": "p", "text": "Egy családi fotózás nem a tökéletes pózokról szól, hanem a valódi pillanatokról: a gyerekek nevetéséről, egy ölelésről, a köztetek lévő kapcsolatról. Néhány apró előkészülettel sokat tehetsz azért, hogy ezek a pillanatok szabadon megszülethessenek." },
+              { "type": "h2", "text": "Öltözzetek összhangban, de ne egyformán" },
+              { "type": "p", "text": "A legjobb, ha a család tagjai néhány közös színben, de nem teljesen egyforma ruhában jelennek meg. A visszafogott, természetes árnyalatok — bézs, tört fehér, meleg földszínek — időtállóbbak, mint a rikító minták, és nem vonják el a figyelmet az arcokról." },
+              { "type": "h2", "text": "Válasszatok a gyerekekhez igazodó időpontot" },
+              { "type": "p", "text": "Kisgyerekeknél az étkezés és a pihenés utáni időszak a legjobb — ilyenkor kiegyensúlyozottabbak. Egy kis snack és a kedvenc játék is sokat segít a hangulaton." },
+              { "type": "p", "text": "A legfontosabb tipp mégis ez: lazuljatok el, és bízzatok a folyamatban. Az én dolgom, hogy a háttérben maradjak, és elkapjam azokat a pillanatokat, amikor épp önmagatok vagytok." }
+            ]
+          },
+          "en": {
+            "title": "How to prepare for a family photo session: 6 tips for natural photos",
+            "excerpt": "The best family photos happen when everyone feels relaxed. A few tips to make the shoot day smooth and enjoyable.",
+            "body": [
+              { "type": "p", "text": "A family photo session isn't about perfect poses — it's about real moments: the children's laughter, a hug, the bond between you. With a little preparation, you can help those moments happen naturally." },
+              { "type": "h2", "text": "Dress in harmony, not in uniform" },
+              { "type": "p", "text": "It works best when the family wears a few shared colours without being dressed identically. Soft, natural tones — beige, off-white, warm earthy shades — age better than loud patterns and keep the focus on your faces." },
+              { "type": "h2", "text": "Pick a time that suits the children" },
+              { "type": "p", "text": "With little ones, the window after a meal and some rest is ideal — that's when they're most settled. A small snack and a favourite toy also work wonders for the mood." },
+              { "type": "p", "text": "But the most important tip is this: relax and trust the process. My job is to stay in the background and catch the moments when you're simply being yourselves." }
+            ]
+          }
+        },
+        {
+          "slug": "eskuvoi-fotozas-5-tipp",
+          "date": "2026-07-22",
+          "category": "Esküvő",
+          "image": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
+          "readTime": 5,
+          "hu": {
+            "title": "5 tipp a felejthetetlen esküvői fotókhoz",
+            "excerpt": "Az esküvő napja repül. Ezzel az 5 tippel segítesz, hogy a fotókon minden fontos pillanat megmaradjon — stressz nélkül.",
+            "body": [
+              { "type": "p", "text": "Az esküvői fotózás nem a nagy napon kezdődik, hanem jóval előtte: a jó tervezéssel. Íme öt dolog, amivel a képek — és maga a nap — is nyugodtabbak lesznek." },
+              { "type": "h2", "text": "1. Tervezzetek időt a fotózásra" },
+              { "type": "p", "text": "A legszebb páros képekhez elég 20–30 nyugodt perc, lehetőleg a késő délutáni, lágy fényben. Egy jól beosztott napirend a legjobb ajándék, amit magatoknak adhattok." },
+              { "type": "h2", "text": "2. Az arany óra a barátotok" },
+              { "type": "p", "text": "A naplemente előtti egy óra fénye meleg és hízelgő. Ha tehetitek, erre az időszakra tegyétek a kettesben töltött fotózást." },
+              { "type": "h2", "text": "3. Bízzatok a fotósban" },
+              { "type": "p", "text": "Minél jobban ellazultok, annál őszintébbek lesznek a képek. A legjobb fotók nem a beállított pózokból, hanem a köztetek lévő valódi pillanatokból születnek." },
+              { "type": "p", "text": "Végül: ne feledkezzetek meg az apró részletekről — a gyűrűkről, a csokorról, a meghívóról. Ezek mesélik el a nap teljes történetét." }
+            ]
+          },
+          "en": {
+            "title": "5 tips for unforgettable wedding photos",
+            "excerpt": "The wedding day flies by. These 5 tips help every important moment live on in your photos — stress-free.",
+            "body": [
+              { "type": "p", "text": "Wedding photography doesn't start on the big day — it starts long before, with good planning. Here are five things that make both the photos and the day itself calmer." },
+              { "type": "h2", "text": "1. Plan time for photos" },
+              { "type": "p", "text": "The most beautiful couple portraits need just 20–30 unhurried minutes, ideally in the soft late-afternoon light. A well-planned schedule is the best gift you can give yourselves." },
+              { "type": "h2", "text": "2. Golden hour is your friend" },
+              { "type": "p", "text": "The light in the hour before sunset is warm and flattering. If you can, save your couple session for that window." },
+              { "type": "h2", "text": "3. Trust your photographer" },
+              { "type": "p", "text": "The more you relax, the more honest the photos become. The best shots come not from staged poses but from the real moments between you." },
+              { "type": "p", "text": "Finally, don't forget the small details — the rings, the bouquet, the invitation. They tell the full story of your day." }
+            ]
+          }
+        },
+        {
+          "slug": "miert-erdemes-profi-fotos",
+          "date": "2026-06-15",
+          "category": "Tippek",
+          "image": "uploads/ffed4964762c-_DSC9007.jpg",
+          "readTime": 4,
+          "hu": {
+            "title": "Miért érdemes profi fotóst választani?",
+            "excerpt": "A telefonok kamerái egyre jobbak — mégis van, amit csak egy tapasztalt fotós tud hozzáadni. Nézzük, mi az.",
+            "body": [
+              { "type": "p", "text": "Egy jó fénykép nem a drága gépről szól. A profi fotós értéke a szemében, a tapasztalatában és abban a nyugalomban van, amivel a megfelelő pillanatra vár." },
+              { "type": "h2", "text": "A fény és a pillanat ismerete" },
+              { "type": "p", "text": "A tapasztalt fotós tudja, mikor és honnan esik a legszebben a fény, hogyan pozícionáljon, és mikor kell csak várni, amíg megszületik a valódi mosoly. Ezt egy automatika nem tudja pótolni." },
+              { "type": "h2", "text": "Utómunka, ami időtállóvá teszi a képet" },
+              { "type": "p", "text": "A fotózás fele a kép elkészülte után történik: a gondos válogatás és a visszafogott, ízléses retusálás teszi véglegessé a hangulatot — anélkül, hogy mesterkéltté válna." },
+              { "type": "p", "text": "Egy profi fotózásból nem csupán fájlok maradnak, hanem olyan képek, amelyekhez évek múlva is szívesen térsz vissza." }
+            ]
+          },
+          "en": {
+            "title": "Why is it worth choosing a professional photographer?",
+            "excerpt": "Phone cameras keep getting better — yet there's something only an experienced photographer can add. Let's see what.",
+            "body": [
+              { "type": "p", "text": "A good photograph isn't about the expensive camera. A professional's value lies in their eye, their experience, and the calm with which they wait for the right moment." },
+              { "type": "h2", "text": "Knowing light and timing" },
+              { "type": "p", "text": "An experienced photographer knows when and where the light falls most beautifully, how to position you, and when to simply wait for a genuine smile to appear. Automation can't replace that." },
+              { "type": "h2", "text": "Editing that makes a photo timeless" },
+              { "type": "p", "text": "Half of photography happens after the shot: careful selection and restrained, tasteful retouching finalise the mood — without ever making it look artificial." },
+              { "type": "p", "text": "A professional session leaves you not just with files, but with images you'll happily return to years from now." }
+            ]
+          }
+        },
+        {
+          "slug": "arany-ora-termeszetes-feny",
+          "date": "2026-05-20",
+          "category": "Tippek",
+          "image": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
+          "readTime": 3,
+          "hu": {
+            "title": "Az arany óra: miért a naplemente a legjobb fény",
+            "excerpt": "Ha valaha csodáltad, milyen meleg és lágy a fény napnyugta előtt — nos, ezt hívjuk arany órának. Íme, miért szeretjük.",
+            "body": [
+              { "type": "p", "text": "Az arany óra a napkelte utáni és a napnyugta előtti nagyjából egy óra, amikor a nap alacsonyan jár. Ilyenkor a fény meleg, aranyló és puha — a fotósok egyik legnagyobb kedvence." },
+              { "type": "h2", "text": "Miért ilyen hízelgő?" },
+              { "type": "p", "text": "A lágy, oldalról érkező fény finoman formálja az arcvonásokat, elsimítja az árnyékokat, és meleg ragyogást ad a bőrnek. A háttér gyakran aranyszínű fénypöttyökké olvad — ezt hívják bokehnek." },
+              { "type": "h2", "text": "Hogyan használd ki?" },
+              { "type": "p", "text": "Szabadtéri páros, jegyes vagy családi fotózáshoz érdemes erre az időszakra tervezni. A pontos időpont évszakonként változik, ezért mindig előre egyeztetünk, hogy elkapjuk a legszebb pillanatot." }
+            ]
+          },
+          "en": {
+            "title": "Golden hour: why sunset is the best light",
+            "excerpt": "If you've ever admired how warm and soft the light is before sunset — that's golden hour. Here's why we love it.",
+            "body": [
+              { "type": "p", "text": "Golden hour is the roughly one hour after sunrise and before sunset, when the sun sits low. The light then is warm, golden and soft — one of every photographer's favourites." },
+              { "type": "h2", "text": "Why is it so flattering?" },
+              { "type": "p", "text": "The soft, side-on light gently shapes facial features, smooths shadows and gives skin a warm glow. The background often melts into golden points of light — what we call bokeh." },
+              { "type": "h2", "text": "How to make the most of it" },
+              { "type": "p", "text": "For outdoor couple, engagement or family sessions it's worth planning for this window. The exact time shifts with the seasons, so we always agree on it in advance to catch the most beautiful moment." }
+            ]
+          }
+        },
+        {
+          "slug": "fotozas-mint-ajandek",
+          "date": "2026-04-16",
+          "category": "Ajándék",
+          "image": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
+          "readTime": 3,
+          "hu": {
+            "title": "Ajándékozz élményt: a fotózás, ami örökre megmarad",
+            "excerpt": "A legszebb ajándékok nem tárgyak, hanem emlékek. Egy fotózás olyan élmény, amit évek múlva is újra átélhettek.",
+            "body": [
+              { "type": "p", "text": "Egy ajándék akkor igazán különleges, ha nem a polcon köt ki, hanem emlékként megmarad. Egy fotózás pontosan ilyen: közös élmény, aminek a végén kézzelfogható, időtálló képek maradnak." },
+              { "type": "h2", "text": "Kinek jó ajándék?" },
+              { "type": "p", "text": "Egy kismamának, egy párnak évfordulóra, a nagyszülőknek egy közös családi képhez, vagy bárkinek, aki szeretné megállítani egy pillanatra az időt. Az ajándékutalvány bármelyik szolgáltatásomra beváltható." },
+              { "type": "h2", "text": "Egyszerű folyamat" },
+              { "type": "p", "text": "Az utalvány kérhető fix összegben vagy egy konkrét csomagra, és igényes, nyomtatható kivitelben adom át. Írj egy üzenetet, és 24 órán belül minden részlettel visszajelzek." }
+            ]
+          },
+          "en": {
+            "title": "Give an experience: photography that lasts forever",
+            "excerpt": "The best gifts aren't objects but memories. A photo session is an experience you can relive years later.",
+            "body": [
+              { "type": "p", "text": "A gift is truly special when it doesn't end up on a shelf but stays with you as a memory. A photo session is exactly that: a shared experience that leaves you with tangible, lasting images." },
+              { "type": "h2", "text": "Who is it a good gift for?" },
+              { "type": "p", "text": "For an expectant mother, for a couple on their anniversary, for grandparents wanting a family portrait together — or for anyone who'd like to pause time for a moment. The gift voucher can be redeemed for any of my services." },
+              { "type": "h2", "text": "A simple process" },
+              { "type": "p", "text": "The voucher can be requested for a fixed amount or a specific package, and I hand it over in an elegant, printable form. Send a message and I'll reply within 24 hours with every detail." }
+            ]
+          }
+        }
+      ]
     }
   },
   "servicePages": {
@@ -1686,6 +1862,28 @@
             {
               "title": "Spontán pillanatok",
               "desc": "Semmi erőltetett pózolás, csak ti és az igazi érzelmek."
+            }
+          ]
+        },
+        {
+          "name": "Családi események — 70.000 Ft",
+          "desc": "„Minden fontos pillanat megérdemel egy fényképet.” Keresztelő, elsőáldozás, bérmálás, születésnap vagy házassági évforduló — az ár az esemény jellegétől függetlenül egységes.",
+          "items": [
+            {
+              "title": "Egységes ár minden alkalomra",
+              "desc": "Keresztelő, elsőáldozás, bérmálás, születésnap vagy házassági évforduló — az ár az esemény jellegétől független."
+            },
+            {
+              "title": "100–200 kidolgozott kép",
+              "desc": "Professzionálisan retusált képek digitális átadással, az esemény teljes ívéről."
+            },
+            {
+              "title": "Minden fontos családi pillanat",
+              "desc": "A gyerekek mérföldkövei, az ünnepek és az évfordulók megörökítése természetes stílusban."
+            },
+            {
+              "title": "Rugalmas helyszín",
+              "desc": "Otthon, templomban, rendezvényhelyszínen vagy a szabadban."
             }
           ]
         }
