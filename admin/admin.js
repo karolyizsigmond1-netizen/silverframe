@@ -23,6 +23,7 @@
                 { id: 'pages.contact', title: 'Kapcsolat' },
                 { id: 'pages.arak', title: 'Árak' },
                 { id: 'pages.giftcard', title: 'Ajándékutalvány' },
+                { id: 'pages.blog', title: 'Blog' },
             ]
         },
         {
@@ -69,6 +70,7 @@
         if (pageId === 'pages.contact') return '/contact.html';
         if (pageId === 'pages.arak') return '/arak.html';
         if (pageId === 'pages.giftcard') return '/ajandekutalvany.html';
+        if (pageId === 'pages.blog') return '/blog.html';
         if (pageId.startsWith('servicePages.')) return '/services/' + pageId.split('.')[1] + '.html';
         if (pageId.startsWith('portfolioPages.')) return '/portfolio/' + pageId.split('.')[1] + '.html';
         return '/';
@@ -266,6 +268,8 @@
             area.innerHTML = renderArakEditor(data, pageId);
         } else if (pageId === 'pages.giftcard') {
             area.innerHTML = renderGiftCardEditor(data, pageId);
+        } else if (pageId === 'pages.blog') {
+            area.innerHTML = renderBlogEditor(data, pageId);
         } else {
             area.innerHTML = renderGenericPageEditor(data, pageId);
         }
@@ -552,11 +556,108 @@
         html += textField('Gomb felirat', pageId + '.cardButton', data.cardButton);
         html += '</div>';
 
+        // Second gift card image (e.g. Christmas / seasonal edition)
+        html += '<div class="field-section"><div class="field-section-title">Második utalvány kép (pl. karácsonyi)</div>';
+        html += '<div class="field-hint" style="margin-bottom:1rem;">Egy második, szezonális utalványkép (pl. karácsonyi). Csak akkor jelenik meg az oldalon, ha van feltöltött kép — hagyd üresen, ha nem kell. Szezon után egyszerűen töröld a képet.</div>';
+        html += imageField('Utalvány kép', pageId + '.cardImage2', data.cardImage2 || '');
+        html += textField('Felső szöveg', pageId + '.cardLabel2', data.cardLabel2);
+        html += textField('Cím', pageId + '.cardTitle2', data.cardTitle2);
+        html += textareaField('Leírás', pageId + '.cardDesc2', data.cardDesc2);
+        html += textField('Gomb felirat', pageId + '.cardButton2', data.cardButton2);
+        html += '</div>';
+
         // Final CTA
         html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
         html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
         html += textField('CTA cím', pageId + '.ctaTitle', data.ctaTitle);
         html += textareaField('CTA bekezdés', pageId + '.ctaDesc', data.ctaDesc);
+        html += textField('CTA gomb felirat', pageId + '.ctaButton', data.ctaButton);
+        html += '</div>';
+
+        return html;
+    }
+
+    // ── Blog editor ──
+    function renderBlogEditor(data, pageId) {
+        let html = '';
+
+        // SEO & Meta
+        html += '<div class="field-section"><div class="field-section-title">SEO & Meta</div>';
+        html += textField('Oldal cím', pageId + '.title', data.title);
+        html += textareaField('Meta leírás', pageId + '.metaDesc', data.metaDesc);
+        html += '</div>';
+
+        // Hero
+        html += '<div class="field-section"><div class="field-section-title">Hero szekció</div>';
+        html += imageField('Hero háttérkép', pageId + '.heroImage', data.heroImage);
+        html += textField('Hero felső szöveg', pageId + '.heroLabel', data.heroLabel);
+        html += textField('Hero cím', pageId + '.heroTitle', data.heroTitle);
+        html += '</div>';
+
+        // Intro
+        html += '<div class="field-section"><div class="field-section-title">Bevezető szekció</div>';
+        html += textField('Felső szöveg', pageId + '.introLabel', data.introLabel);
+        html += textField('Cím', pageId + '.introTitle', data.introTitle);
+        html += textareaField('Leírás', pageId + '.introDesc', data.introDesc);
+        html += '</div>';
+
+        // Posts
+        html += '<div class="field-section"><div class="field-section-title">Blogbejegyzések</div>';
+        html += '<div class="field-hint" style="margin-bottom:1rem;">Minden bejegyzésnek van magyar és angol változata is — töltsd ki mindkettőt. A „Slug" a webcím vége (pl. eskuvoi-tippek): csak kisbetű, ékezet nélkül, kötőjelekkel. A dátum formátuma: ÉÉÉÉ-HH-NN (pl. 2026-08-27).</div>';
+        html += '<div class="array-list" data-array-path="' + pageId + '.posts">';
+        (data.posts || []).forEach((post, pi) => {
+            const base = pageId + '.posts.' + pi;
+            html += `<div class="array-item" draggable="false" data-index="${pi}">
+                <div class="drag-handle" title="Húzza az áthelyezéshez">&#8942;&#8942;</div>
+                <div class="array-item-header">
+                    <span class="array-item-number">Bejegyzés #${pi + 1}${post.hu && post.hu.title ? ' — ' + esc(post.hu.title) : ''}</span>
+                    <div class="array-item-actions">
+                        <button class="btn-icon danger" data-remove-array="${pageId}.posts" data-index="${pi}" title="Törlés">&#10005;</button>
+                    </div>
+                </div>
+                ${imageField('Borítókép', base + '.image', post.image || '')}
+                ${textField('Slug (webcím vége)', base + '.slug', post.slug)}
+                ${textField('Dátum (ÉÉÉÉ-HH-NN)', base + '.date', post.date)}
+                ${textField('Kategória', base + '.category', post.category)}
+                ${textField('Olvasási idő (perc)', base + '.readTime', post.readTime)}`;
+
+            ['hu', 'en'].forEach(lang => {
+                const langLabel = lang === 'hu' ? 'Magyar tartalom' : 'Angol tartalom (English)';
+                const lc = post[lang] || {};
+                html += `<div class="nested-array"><label class="field-label">${langLabel}</label>`;
+                html += textField('Cím', base + '.' + lang + '.title', lc.title);
+                html += textareaField('Rövid leírás (kártyán jelenik meg)', base + '.' + lang + '.excerpt', lc.excerpt);
+                html += '<label class="field-label">Tartalom</label>';
+                (lc.body || []).forEach((block, bi) => {
+                    const bp = base + '.' + lang + '.body.' + bi;
+                    html += `<div class="nested-item">
+                        <div class="array-item-header">
+                            <span class="array-item-number">Blokk #${bi + 1}</span>
+                            <div class="array-item-actions">
+                                <button class="btn-icon danger" data-remove-array="${base}.${lang}.body" data-index="${bi}" title="Törlés">&#10005;</button>
+                            </div>
+                        </div>
+                        ${selectField('Típus', bp + '.type', block.type || 'p', [
+                            { value: 'p', label: 'Bekezdés' },
+                            { value: 'h2', label: 'Alcím' }
+                        ])}
+                        ${textareaField('Szöveg', bp + '.text', block.text)}
+                    </div>`;
+                });
+                html += `<button class="btn-add" data-add-array="${base}.${lang}.body" data-template="bodyBlock">+ Bekezdés / alcím hozzáadása</button>`;
+                html += '</div>';
+            });
+
+            html += '</div>';
+        });
+        html += '</div>';
+        html += `<button class="btn-add" data-add-array="${pageId}.posts" data-template="blogPost">+ Bejegyzés hozzáadása</button>`;
+        html += '</div>';
+
+        // Final CTA
+        html += '<div class="field-section"><div class="field-section-title">Lezáró CTA szekció</div>';
+        html += textField('CTA felső szöveg', pageId + '.ctaLabel', data.ctaLabel);
+        html += textField('CTA cím', pageId + '.ctaTitle', data.ctaTitle);
         html += textField('CTA gomb felirat', pageId + '.ctaButton', data.ctaButton);
         html += '</div>';
 
@@ -1171,6 +1272,20 @@
                         break;
                     case 'amount':
                         newItem = { value: '', note: '' };
+                        break;
+                    case 'blogPost':
+                        newItem = {
+                            slug: 'uj-bejegyzes-' + (arr.length + 1),
+                            date: '',
+                            category: '',
+                            image: '',
+                            readTime: 3,
+                            hu: { title: '', excerpt: '', body: [{ type: 'p', text: '' }] },
+                            en: { title: '', excerpt: '', body: [{ type: 'p', text: '' }] }
+                        };
+                        break;
+                    case 'bodyBlock':
+                        newItem = { type: 'p', text: '' };
                         break;
                     case 'beforeAfterPair':
                         newItem = { before: '', after: '', label: '' };
