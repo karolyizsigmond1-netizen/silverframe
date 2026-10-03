@@ -21032,6 +21032,22 @@
           ]
         },
         {
+          "type": "bundle",
+          "cover": "",
+          "alt": "",
+          "title": "",
+          "subtitle": "",
+          "images": []
+        },
+        {
+          "type": "bundle",
+          "cover": "",
+          "alt": "",
+          "title": "",
+          "subtitle": "",
+          "images": []
+        },
+        {
           "src": "uploads/silverframe_esk-v_015.jpg",
           "alt": "",
           "title": "",
@@ -21541,6 +21557,38 @@
         },
         {
           "src": "uploads/26fd3a5a96f7-esk_v__fot_zas_eger_szeged__73_of_328_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c55ce718c384-Silverframe_eskuvo_wedding_hungary__25_..jpeg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/76fede42e1d9-Silverframe_eskuvo_wedding_hungary__26_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3140ddc3b825-Silverframe_eskuvo_wedding_hungary__28_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/f993559c49be-Silverframe_eskuvo_wedding_hungary__30_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/c1b23bcad881-Silverframe_eskuvo_wedding_hungary__31_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d2c4aad035e2-Silverframe_eskuvo_wedding_hungary__32_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/d4f396b1cf16-Silverframe_eskuvo_wedding_hungary__34_.jpg",
+          "alt": ""
+        },
+        {
+          "src": "uploads/3e55918bd959-Silverframe_eskuvo_wedding_hungary__35_.jpg",
           "alt": ""
         }
       ],
