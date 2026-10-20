@@ -111,42 +111,57 @@ document.addEventListener('DOMContentLoaded', () => {
     let justifyMasonry = null;
 
     const justifyOne = (grid) => {
-        const totalWidth = grid.offsetWidth;
+        // Floor so rounding never makes a row wider than the grid (which would wrap it).
+        const totalWidth = Math.floor(grid.getBoundingClientRect().width);
         if (!totalWidth) return;
         const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
         const items = Array.from(grid.querySelectorAll(':scope > .masonry-item'))
-            .filter(el => el.style.display !== 'none');
+            .filter(el => el.style.display !== 'none' && el.querySelector('img'));
         if (!items.length) return;
 
-        let row = [], rowNaturalW = 0;
-
-        const flushRow = (isPartialLast) => {
-            if (!row.length) return;
-            const gapsW = (row.length - 1) * GAP;
-            const available = totalWidth - gapsW;
-            const fillScale = available / rowNaturalW;
-            const scale = isPartialLast
-                ? (rowNaturalW >= available * 0.6 ? Math.min(fillScale, 1) : 1)
-                : fillScale;
-            const h = Math.floor(targetRowH * scale);
-            row.forEach(({ item, ratio }) => {
-                item.style.width = Math.floor(h * ratio) + 'px';
-                item.style.height = h + 'px';
-            });
-            row = []; rowNaturalW = 0;
-        };
-
-        items.forEach((item, idx) => {
+        // Split into rows of roughly the target height.
+        const rows = [];
+        let row = [], ratioSum = 0;
+        items.forEach(item => {
             const img = item.querySelector('img');
-            if (!img) return;
-            const w = parseInt(img.getAttribute('width')) || 3;
-            const h = parseInt(img.getAttribute('height')) || 2;
-            const ratio = w / h;
+            const ratio = (parseInt(img.getAttribute('width')) || 3) / (parseInt(img.getAttribute('height')) || 2);
             row.push({ item, ratio });
-            rowNaturalW += targetRowH * ratio;
-            const gapsW = (row.length - 1) * GAP;
-            const isLast = idx === items.length - 1;
-            if (rowNaturalW + gapsW >= totalWidth || isLast) flushRow(isLast);
+            ratioSum += ratio;
+            if (targetRowH * ratioSum + (row.length - 1) * GAP >= totalWidth) {
+                rows.push({ row, ratioSum });
+                row = []; ratioSum = 0;
+            }
+        });
+        if (row.length) rows.push({ row, ratioSum, partial: true });
+
+        // A short last row would leave a gap: stretch it, or merge it into the row above —
+        // whichever keeps its height closer to the target.
+        const scaleOf = r => (totalWidth - (r.row.length - 1) * GAP) / (targetRowH * r.ratioSum);
+        const last = rows[rows.length - 1];
+        if (last.partial) {
+            if (rows.length > 1) {
+                const prev = rows[rows.length - 2];
+                const merged = { row: prev.row.concat(last.row), ratioSum: prev.ratioSum + last.ratioSum };
+                if (Math.abs(Math.log(scaleOf(merged))) < Math.abs(Math.log(scaleOf(last)))) rows.splice(-2, 2, merged);
+                else last.partial = false;
+            } else if (scaleOf(last) <= 1.6) {
+                last.partial = false;   // a lone short row (tiny set): stretch only if it stays reasonable
+            }
+        }
+
+        rows.forEach(r => {
+            const available = totalWidth - (r.row.length - 1) * GAP;
+            const h = r.partial ? targetRowH : Math.round(available / r.ratioSum);
+            const rowW = r.partial ? targetRowH * r.ratioSum : available;
+            // Cumulative rounding: widths add up to exactly the row width, so the right edge is flush.
+            let acc = 0, prevEdge = 0;
+            r.row.forEach(({ item, ratio }) => {
+                acc += rowW * ratio / r.ratioSum;
+                const edge = Math.round(acc);
+                item.style.width = (edge - prevEdge) + 'px';
+                item.style.height = h + 'px';
+                prevEdge = edge;
+            });
         });
     };
 
