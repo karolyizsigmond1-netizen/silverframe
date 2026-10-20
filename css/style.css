@@ -1224,6 +1224,51 @@ a.img-accordion-item { display: block; color: inherit; text-decoration: none; }
     .lightbox-next { right: 0.5rem; }
 }
 
+/* Bundle album — every photo of a set in a justified grid (sits under the lightbox) */
+.album {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    z-index: 8900;
+    overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+.album.open { opacity: 1; visibility: visible; }
+.album-header {
+    position: sticky; top: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(11,12,16,0.92);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.album-heading { display: flex; align-items: baseline; gap: 1rem; min-width: 0; }
+.album-title {
+    font-family: var(--serif); font-weight: 400; font-size: 1.6rem;
+    color: var(--text-primary); margin: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.album-count {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); white-space: nowrap;
+}
+.album-close {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 0;
+    background: none; color: var(--text-primary);
+    font-size: 1.4rem; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: border-color 0.3s;
+}
+.album-close:hover { border-color: var(--accent); }
+.album-body { padding: 1.5rem 1.5rem 0; }
+@media (max-width: 600px) {
+    .album-header { padding: 0.8rem 1rem; }
+    .album-title { font-size: 1.25rem; }
+    .album-close { width: 42px; height: 42px; }
+    .album-body { padding: 1rem 1rem 0; }
+}
+
 
 /* ═══════════════════════════════════════════
    SERVICES PAGE

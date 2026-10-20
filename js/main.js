@@ -110,47 +110,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const GAP = 6;
     let justifyMasonry = null;
 
-    if (masonryGrids.length) {
-        const justifyOne = (grid) => {
-            const totalWidth = grid.offsetWidth;
-            if (!totalWidth) return;
-            const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
-            const items = Array.from(grid.querySelectorAll(':scope > .masonry-item'))
-                .filter(el => el.style.display !== 'none');
-            if (!items.length) return;
+    const justifyOne = (grid) => {
+        const totalWidth = grid.offsetWidth;
+        if (!totalWidth) return;
+        const targetRowH = window.innerWidth < 600 ? 180 : window.innerWidth < 900 ? 240 : 300;
+        const items = Array.from(grid.querySelectorAll(':scope > .masonry-item'))
+            .filter(el => el.style.display !== 'none');
+        if (!items.length) return;
 
-            let row = [], rowNaturalW = 0;
+        let row = [], rowNaturalW = 0;
 
-            const flushRow = (isPartialLast) => {
-                if (!row.length) return;
-                const gapsW = (row.length - 1) * GAP;
-                const available = totalWidth - gapsW;
-                const fillScale = available / rowNaturalW;
-                const scale = isPartialLast
-                    ? (rowNaturalW >= available * 0.6 ? Math.min(fillScale, 1) : 1)
-                    : fillScale;
-                const h = Math.floor(targetRowH * scale);
-                row.forEach(({ item, ratio }) => {
-                    item.style.width = Math.floor(h * ratio) + 'px';
-                    item.style.height = h + 'px';
-                });
-                row = []; rowNaturalW = 0;
-            };
-
-            items.forEach((item, idx) => {
-                const img = item.querySelector('img');
-                if (!img) return;
-                const w = parseInt(img.getAttribute('width')) || 3;
-                const h = parseInt(img.getAttribute('height')) || 2;
-                const ratio = w / h;
-                row.push({ item, ratio });
-                rowNaturalW += targetRowH * ratio;
-                const gapsW = (row.length - 1) * GAP;
-                const isLast = idx === items.length - 1;
-                if (rowNaturalW + gapsW >= totalWidth || isLast) flushRow(isLast);
+        const flushRow = (isPartialLast) => {
+            if (!row.length) return;
+            const gapsW = (row.length - 1) * GAP;
+            const available = totalWidth - gapsW;
+            const fillScale = available / rowNaturalW;
+            const scale = isPartialLast
+                ? (rowNaturalW >= available * 0.6 ? Math.min(fillScale, 1) : 1)
+                : fillScale;
+            const h = Math.floor(targetRowH * scale);
+            row.forEach(({ item, ratio }) => {
+                item.style.width = Math.floor(h * ratio) + 'px';
+                item.style.height = h + 'px';
             });
+            row = []; rowNaturalW = 0;
         };
 
+        items.forEach((item, idx) => {
+            const img = item.querySelector('img');
+            if (!img) return;
+            const w = parseInt(img.getAttribute('width')) || 3;
+            const h = parseInt(img.getAttribute('height')) || 2;
+            const ratio = w / h;
+            row.push({ item, ratio });
+            rowNaturalW += targetRowH * ratio;
+            const gapsW = (row.length - 1) * GAP;
+            const isLast = idx === items.length - 1;
+            if (rowNaturalW + gapsW >= totalWidth || isLast) flushRow(isLast);
+        });
+    };
+
+    if (masonryGrids.length) {
         justifyMasonry = () => masonryGrids.forEach(justifyOne);
         justifyMasonry();
         let rTimer;
@@ -217,28 +217,101 @@ document.addEventListener('DOMContentLoaded', () => {
             if (counter) counter.style.display = many ? '' : 'none';
         };
 
+        const openLb = () => {
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // ── Bundle album: all photos of a set in a justified grid ──
+        const isEn = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+        const album = document.createElement('div');
+        album.className = 'album';
+        album.setAttribute('role', 'dialog');
+        album.setAttribute('aria-label', isEn ? 'Photo set' : 'Képsorozat');
+        album.innerHTML = `<div class="album-header"><div class="album-heading"><h2 class="album-title"></h2><span class="album-count"></span></div><button class="album-close" aria-label="${isEn ? 'Close' : 'Bezárás'}">&times;</button></div><div class="album-body"><div class="album-grid masonry"></div></div>`;
+        document.body.appendChild(album);
+        const albumGrid = album.querySelector('.album-grid');
+        let albumList = [];
+
+        const openAlbum = (item, bundle) => {
+            albumList = bundle;
+            const h3 = item.querySelector('.bundle-caption h3');
+            const coverImg = item.querySelector('img');
+            album.querySelector('.album-title').textContent = (h3 && h3.textContent) || (coverImg && coverImg.alt) || '';
+            album.querySelector('.album-count').textContent = `${bundle.length} ${isEn ? (bundle.length === 1 ? 'photo' : 'photos') : 'kép'}`;
+            albumGrid.innerHTML = '';
+            bundle.forEach((entry, i) => {
+                const tile = document.createElement('div');
+                tile.className = 'masonry-item no-title';
+                const img = document.createElement('img');
+                img.src = entry.src;
+                img.alt = entry.alt || '';
+                img.loading = 'lazy';
+                img.setAttribute('width', entry.w || 3);
+                img.setAttribute('height', entry.h || 2);
+                tile.appendChild(img);
+                tile.addEventListener('click', () => {
+                    currentList = albumList;
+                    showAt(i);
+                    openLb();
+                });
+                albumGrid.appendChild(tile);
+            });
+            album.scrollTop = 0;
+            album.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            justifyOne(albumGrid);
+            history.pushState({ sfAlbum: true }, '');
+        };
+
+        const closeAlbum = (fromPopState) => {
+            if (!album.classList.contains('open')) return;
+            album.classList.remove('open');
+            document.body.style.overflow = '';
+            albumGrid.innerHTML = '';
+            if (!fromPopState && history.state && history.state.sfAlbum) history.back();
+        };
+
+        album.querySelector('.album-close').addEventListener('click', () => closeAlbum(false));
+        window.addEventListener('popstate', () => {
+            if (!album.classList.contains('open')) return;
+            if (lightbox.classList.contains('open')) closeLb();
+            closeAlbum(true);
+        });
+        let aTimer;
+        window.addEventListener('resize', () => {
+            if (!album.classList.contains('open')) return;
+            clearTimeout(aTimer); aTimer = setTimeout(() => justifyOne(albumGrid), 120);
+        }, { passive: true });
+        // Registered before the lightbox key handler: Esc closes the lightbox first, then the album.
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && album.classList.contains('open') && !lightbox.classList.contains('open')) closeAlbum(false);
+        });
+
         document.querySelectorAll(itemSelectors).forEach(item => {
             item.addEventListener('click', () => {
                 const bundle = parseBundle(item);
                 if (bundle) {
-                    currentList = bundle;
-                    showAt(0);
-                } else {
-                    const container = item.closest(containerSelectors) || document;
-                    const siblings = Array.from(container.querySelectorAll(itemSelectors))
-                        .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
-                    currentList = siblings.map(itemToEntry);
-                    showAt(siblings.indexOf(item));
+                    openAlbum(item, bundle);
+                    return;
                 }
-                lightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
+                const container = item.closest(containerSelectors) || document;
+                const siblings = Array.from(container.querySelectorAll(itemSelectors))
+                    .filter(el => el.style.display !== 'none' && !el.hasAttribute('data-bundle'));
+                currentList = siblings.map(itemToEntry);
+                showAt(siblings.indexOf(item));
+                openLb();
             });
         });
 
         if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex - 1); });
         if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); showAt(currentIndex + 1); });
 
-        const closeLb = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; };
+        function closeLb() {
+            lightbox.classList.remove('open');
+            if (!album.classList.contains('open')) document.body.style.overflow = '';
+            lbImg.src = '';
+        }
         lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLb(); });
         document.addEventListener('keydown', e => {
             if (!lightbox.classList.contains('open')) return;
