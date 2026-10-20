@@ -79,14 +79,14 @@ const server = http.createServer((req, res) => {
                 fs.writeFileSync(CONTENT_FILE, JSON.stringify(json, null, 2), 'utf-8');
                 // Run build
                 try {
-                    execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+                    execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 600000 });
                     // Sync with GitHub — do this BEFORE responding so the client knows the outcome
                     let gitWarning = null;
                     try {
                         // Pull first; if it merges remote changes that touched generated files,
                         // re-run build.js so conflict markers in HTML get overwritten by clean output.
                         try { execSync('git pull --no-rebase -X ours', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
-                        try { execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
+                        try { execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 600000 }); } catch(e) {}
                         execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
                         console.log('  ✓ GitHub push sikeres');
                     } catch (gitErr) {

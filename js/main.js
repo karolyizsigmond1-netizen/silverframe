@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const itemToEntry = (el) => {
             const img = el.querySelector('img');
-            return { src: img ? img.src : '', alt: img ? (img.alt || '') : '' };
+            return { src: img ? (img.dataset.full || img.src) : '', alt: img ? (img.alt || '') : '' };
         };
 
         const showAt = (i) => {
@@ -244,9 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tile = document.createElement('div');
                 tile.className = 'masonry-item no-title';
                 const img = document.createElement('img');
-                img.src = entry.src;
-                img.alt = entry.alt || '';
                 img.loading = 'lazy';
+                img.src = entry.t || entry.src;
+                img.alt = entry.alt || '';
                 img.setAttribute('width', entry.w || 3);
                 img.setAttribute('height', entry.h || 2);
                 tile.appendChild(img);
