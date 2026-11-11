@@ -8,6 +8,7 @@
     <!-- End Google Tag Manager -->
     <title>Portfolio — Silverframe Studio | Curated work</title>
     <meta name="description" content="Silverframe Studio portfolio – portrait, wedding and lifestyle photos in one place. Curated work from over 500 projects. Browse our style and get inspired!">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -42,7 +43,34 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap"></noscript>
     <link rel="stylesheet" href="../css/style.css?v=a17854d5">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"CollectionPage","name":"Silverframe  Gallery","description":"Curated photography by Silverframe Studio","url":"https://silverframe.hu/en/gallery"}
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+                {
+                        "@type": "CollectionPage",
+                        "name": "Silverframe  Gallery",
+                        "description": "Curated photography by Silverframe Studio",
+                        "url": "https://silverframe.hu/en/gallery"
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Home",
+                                        "item": "https://silverframe.hu/en/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Gallery",
+                                        "item": "https://silverframe.hu/en/gallery"
+                                }
+                        ]
+                }
+        ]
+}
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XKFQW9J2N0');</script>
@@ -136,7 +164,7 @@
                     </a>
                     <a href="/en/gallery/creative-wedding-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg" style="object-position:76% 52%" alt="Creative wedding photography">
+                            <img src="../thumbs/6bd7f00ae340-eskuvoi-fotozas-szeged__121_.jpg" style="object-position:76% 52%" alt="Creative wedding photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">02</span>
@@ -145,7 +173,7 @@
                     </a>
                     <a href="/en/gallery/event-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg" alt="Event photography">
+                            <img src="../thumbs/71b85ff30c71-rendezveny-fotozas-szeged-ceges__126_.jpg" alt="Event photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">03</span>
@@ -154,7 +182,7 @@
                     </a>
                     <a href="/en/gallery/portfolio-model-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg" alt="Portfolio / Model photography">
+                            <img src="../thumbs/3e083de6f13a-modell-fotozas-studio-divat-szeged.jpg__743_.jpg" alt="Portfolio / Model photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">04</span>
@@ -163,7 +191,7 @@
                     </a>
                     <a href="/en/gallery/maternity-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg" style="object-position:38% 19%" alt="Maternity photography">
+                            <img src="../thumbs/64586114dde5-kismama-fotozas-szeged-studio__707_.jpg" style="object-position:38% 19%" alt="Maternity photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">05</span>
@@ -172,7 +200,7 @@
                     </a>
                     <a href="/en/gallery/boudoir-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg" style="object-position:48% 33%" alt="Boudoir photography">
+                            <img src="../thumbs/03727f996d33-glamour-fotozas-studio-noi-szeged__108_.jpg" style="object-position:48% 33%" alt="Boudoir photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">06</span>
@@ -181,7 +209,7 @@
                     </a>
                     <a href="/en/gallery/family-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg" alt="Family photography">
+                            <img src="../thumbs/4c8fcd4d7363-csaladi-fotozas-szeged___207_.jpg" alt="Family photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">07</span>
@@ -190,7 +218,7 @@
                     </a>
                     <a href="/en/gallery/engagement-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg" alt="Engagement photography">
+                            <img src="../thumbs/e29299d83c97-jegyes-fotozas-naplemente-par__97_.jpg" alt="Engagement photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">08</span>
@@ -199,7 +227,7 @@
                     </a>
                     <a href="/en/gallery/pet-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/9f208a7abf55-kutya-fotozas-termeszetben__29_.jpg" alt="Pet photography">
+                            <img src="../thumbs/9f208a7abf55-kutya-fotozas-termeszetben__29_.jpg" alt="Pet photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">09</span>
@@ -208,7 +236,7 @@
                     </a>
                     <a href="/en/gallery/business-portrait-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/015b522c5a9c-_DSC6748.jpg" alt="Corporate branding photography photography">
+                            <img src="../thumbs/015b522c5a9c-_DSC6748.jpg" alt="Corporate branding photography photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">10</span>
@@ -217,7 +245,7 @@
                     </a>
                     <a href="/en/gallery/real-estate-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg" alt="Real estate photography">
+                            <img src="../thumbs/efd8700e8494-ingatlan-fotozas-szeged-kert__20_.jpg" alt="Real estate photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">11</span>
@@ -226,7 +254,7 @@
                     </a>
                     <a href="/en/gallery/product-photos" class="portfolio-grid-tile">
                         <div class="portfolio-grid-img-wrap">
-                            <img src="../thumbs/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg" style="object-position:66% 42%" alt="Product photo photography">
+                            <img src="../thumbs/05685bb01e5a-termekfoto-webshop-termek-kep__23_.jpg" style="object-position:66% 42%" alt="Product photo photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-grid-meta">
                             <span class="portfolio-grid-num">12</span>

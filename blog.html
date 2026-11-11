@@ -8,6 +8,7 @@
     <!-- End Google Tag Manager -->
     <title>Blog — Silverframe Studio | Fotózási tippek és inspiráció</title>
     <meta name="description" content="Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -44,21 +45,44 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "Silverframe Blog",
-        "description": "Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.",
-        "url": "https://silverframe.hu/blog",
-        "publisher": {
-                "@type": [
-                        "LocalBusiness",
-                        "ProfessionalService",
-                        "Photographer"
-                ],
-                "name": "Silverframe",
-                "url": "https://silverframe.hu",
-                "image": "https://silverframe.hu/uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg"
-        },
-        "inLanguage": "hu-HU"
+        "@graph": [
+                {
+                        "@type": "Blog",
+                        "name": "Silverframe Blog",
+                        "description": "Fotózási tippek, inspiráció és kulisszatitkok a Silverframe Studio blogján — esküvő, portré, családi és üzleti fotózásról Szegeden.",
+                        "url": "https://silverframe.hu/blog",
+                        "publisher": {
+                                "@type": [
+                                        "LocalBusiness",
+                                        "ProfessionalService",
+                                        "Photographer"
+                                ],
+                                "name": "Silverframe",
+                                "url": "https://silverframe.hu",
+                                "image": "https://silverframe.hu/uploads/6f1a10e468d4-paros-fotozas-termeszetben__53_.jpg",
+                                "@id": "https://silverframe.hu/#business",
+                                "logo": "https://silverframe.hu/favicon-512.png"
+                        },
+                        "inLanguage": "hu-HU"
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://silverframe.hu/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Blog",
+                                        "item": "https://silverframe.hu/blog"
+                                }
+                        ]
+                }
+        ]
 }
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>

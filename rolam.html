@@ -8,6 +8,7 @@
     <!-- End Google Tag Manager -->
     <title>Rólam — Károlyi István | Silverframe Szeged</title>
     <meta name="description" content="Ismerd meg Károlyi Istvánt, a Silverframe Studio fotósát. Több mint 10 éves tapasztalat, professzionális fotózás Szegeden.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -44,41 +45,62 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Károlyi István",
-        "jobTitle": "Fotós",
-        "description": "Professzionális fotós Szegeden — Silverframe",
-        "url": "https://silverframe.hu/rolam",
-        "image": "https://silverframe.hu/uploads/929d34151d25-chillart_product_374131_200717123627_645354.jpeg",
-        "email": "info@silverframe.hu",
-        "telephone": "+3620/3799-814",
-        "knowsLanguage": [
-                "hu",
-                "en"
-        ],
-        "knowsAbout": [
-                "Esküvői fotózás",
-                "Portrait fotózás",
-                "Rendezvény fotózás",
-                "Termékfotózás",
-                "Ingatlan fotózás",
-                "Boudoir fotózás",
-                "Kismama fotózás"
-        ],
-        "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Szeged",
-                "addressRegion": "Csongrád-Csanád megye",
-                "addressCountry": "HU"
-        },
-        "worksFor": {
-                "@type": "Organization",
-                "name": "Silverframe",
-                "url": "https://silverframe.hu"
-        },
-        "sameAs": [
-                "https://www.instagram.com/silverframefoto/",
-                "https://www.facebook.com/silverframefoto/"
+        "@graph": [
+                {
+                        "@type": "Person",
+                        "name": "Károlyi István",
+                        "jobTitle": "Fotós",
+                        "description": "Professzionális fotós Szegeden — Silverframe",
+                        "url": "https://silverframe.hu/rolam",
+                        "image": "https://silverframe.hu/uploads/929d34151d25-chillart_product_374131_200717123627_645354.jpeg",
+                        "email": "info@silverframe.hu",
+                        "telephone": "+36203799814",
+                        "knowsLanguage": [
+                                "hu",
+                                "en"
+                        ],
+                        "knowsAbout": [
+                                "Esküvői fotózás",
+                                "Portrait fotózás",
+                                "Rendezvény fotózás",
+                                "Termékfotózás",
+                                "Ingatlan fotózás",
+                                "Boudoir fotózás",
+                                "Kismama fotózás"
+                        ],
+                        "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Szeged",
+                                "addressRegion": "Csongrád-Csanád megye",
+                                "addressCountry": "HU"
+                        },
+                        "worksFor": {
+                                "@type": "Organization",
+                                "name": "Silverframe",
+                                "url": "https://silverframe.hu"
+                        },
+                        "sameAs": [
+                                "https://www.instagram.com/silverframefoto/",
+                                "https://www.facebook.com/silverframefoto/"
+                        ]
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://silverframe.hu/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Rólam",
+                                        "item": "https://silverframe.hu/rolam"
+                                }
+                        ]
+                }
         ]
 }
     </script>

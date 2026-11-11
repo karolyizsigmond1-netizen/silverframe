@@ -177,7 +177,7 @@
   "pages": {
     "index": {
       "title": "Silverframe Studio — Professzionális Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio — professzionális fotós Szegeden. Portfólió, kismama, boudoir, családi, páros jegyes, esküvői és rendezvényfotózás,ingatlan. Foglalj időpontot még ma!",
+      "metaDesc": "Professzionális fotós Szegeden – esküvő, kismama, családi, páros, boudoir, portré, rendezvény és ingatlan fotózás. Foglalj időpontot még ma!",
       "heroSub": "Professzionális Fotózás Szegeden",
       "heroTitleLine1": "Megörökítjük",
       "heroTitleLine2": "a pillanatokat",
@@ -460,8 +460,8 @@
       "ctaTitle": "Alkossunk együtt<br>valami különlegeset"
     },
     "services": {
-      "title": "Fotózási Szolgáltatások — Silverframe Studio | 12 Kategória",
-      "metaDesc": "Silverframe Studio fotózási szolgáltatások: portfólió, kismama, boudoir, családi, páros jegyes, üzleti, ingatlan, esküvő, esküvői kreatív, rendezvény, kisállat és termékfotózás Szegeden.",
+      "title": "Fotózási Szolgáltatások Szegeden | Silverframe",
+      "metaDesc": "Fotózás Szegeden 12 kategóriában: esküvő, kismama, családi, páros, boudoir, portré, üzleti, ingatlan, rendezvény, kisállat és termékfotó.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.jpg",
       "heroLabel": "Amit kínálunk",
       "heroTitle": "Szolgáltatások",
@@ -497,8 +497,8 @@
       "availability": " Tel: +3620/3799-814"
     },
     "arak": {
-      "title": "Árak — Silverframe Studio | Fotózás Szegeden",
-      "metaDesc": "Silverframe Studio fotózás árak 50.000 Ft-tól. Portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, nincsenek rejtett díjak. Foglalj időpontot!",
+      "title": "Fotózás Árak Szegeden — Csomagok 50.000 Ft-tól | Silverframe",
+      "metaDesc": "Fotózás árak Szegeden 50.000 Ft-tól: portré, kismama, esküvő, boudoir és még 8 kategória. Átlátható csomagok, rejtett díjak nélkül.",
       "heroImage": "uploads/fe1a7f6f78f4-ChatGPT_Image_2026.__pr._20._11_06_19.jpg",
       "heroLabel": "Silverframe Studio — Szeged",
       "heroTitle": "Árak & Csomagok",
@@ -575,7 +575,7 @@
           "readTime": 6,
           "hu": {
             "title": "Fotós Szegeden – Silverframe Studio",
-            "seoTitle": "Fotós Szegeden – Esküvői, Családi és Portré Fotózás | Silverframe",
+            "seoTitle": "Fotós Szegeden – Esküvő, Család, Portré | Silverframe",
             "metaDesc": "Fotóst keresel Szegeden? Károlyi István – Silverframe Studio. Esküvői, családi, páros, rendezvény-, portré, glamour és céges fotózás Szegeden és környékén.",
             "excerpt": "Károlyi István vagyok, a Silverframe Studio fotósa: 15+ éve fotózom Szegeden és környékén – esküvőt, családot, párokat, rendezvényeket, portrét és céges fotókat.",
             "body": [
@@ -910,8 +910,8 @@
           },
           "en": {
             "title": "Photographer in Szeged – Silverframe Studio",
-            "seoTitle": "Photographer in Szeged – Wedding, Family & Portrait Photography | Silverframe",
-            "metaDesc": "Looking for a photographer in Szeged? István Károlyi – Silverframe Studio. Wedding, family, couple, event, portrait, glamour and corporate photography in Szeged and nearby.",
+            "seoTitle": "Photographer in Szeged: Wedding, Family & Portrait",
+            "metaDesc": "Looking for a photographer in Szeged? István Károlyi of Silverframe Studio shoots weddings, families, couples, events, portraits and corporate photos.",
             "excerpt": "I'm István Károlyi, the photographer of Silverframe Studio: 15+ years photographing weddings, families, couples, events, portraits and businesses in Szeged and nearby.",
             "body": [
               {
@@ -1278,7 +1278,8 @@
                 "type": "p",
                 "text": "A legfontosabb tipp mégis ez: lazuljatok el, és bízzatok a folyamatban. Az én dolgom, hogy a háttérben maradjak, és elkapjam azokat a pillanatokat, amikor épp önmagatok vagytok."
               }
-            ]
+            ],
+            "seoTitle": "Családi fotózás: 6 tipp a természetes képekért | Silverframe"
           },
           "en": {
             "title": "How to prepare for a family photo session: 6 tips for natural photos",
@@ -1308,7 +1309,8 @@
                 "type": "p",
                 "text": "But the most important tip is this: relax and trust the process. My job is to stay in the background and catch the moments when you're simply being yourselves."
               }
-            ]
+            ],
+            "seoTitle": "Family photo session: 6 tips for natural photos"
           }
         },
         {
@@ -3401,7 +3403,7 @@
     },
     "business": {
       "title": "Üzleti Portré Fotózás — Silverframe Studio | Szeged",
-      "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden. 60.000 Ft.",
+      "metaDesc": "Üzleti portré és munkahelyi portfólió fotózás Szegeden, 60.000 Ft. Professzionális képek LinkedInre, weboldalra és személyes márkaépítéshez.",
       "ogImage": "uploads/015b522c5a9c-_DSC6748.jpg",
       "heroImage": "uploads/12cdccd47540-www.silverframe.hu__640_of_869_.jpg",
       "heroLabel": "Szolgáltatások / 06",
@@ -5012,8 +5014,8 @@
   },
   "portfolioPages": {
     "portrait": {
-      "title": "Portfólió / Modell Galéria — Silverframe Studio",
-      "metaDesc": "Portfólió és modell fotózás galéria — válogatott munkák a Silverframe Studiótól.",
+      "title": "Portfólió és Modell Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott portfólió és modell fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/ca3dfff1de14-modell-fotozas-kulter-divat-szegedjpg__190_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Portfólió / Modell",
@@ -7864,8 +7866,8 @@
       "ctaLink": "services/portfolio-model.html"
     },
     "maternity": {
-      "title": "Kismama Galéria — Silverframe Studio",
-      "metaDesc": "Kismama fotózás galéria.",
+      "title": "Kismama Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott kismama fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/650bd0e5ba12-kismama-fotozas-szeged-studio__15_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Kismama",
@@ -9221,8 +9223,8 @@
       "ctaLink": "services/maternity.html"
     },
     "boudoir": {
-      "title": "Boudoir Galéria — Silverframe Studio",
-      "metaDesc": "Boudoir fotózás galéria.",
+      "title": "Boudoir Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott boudoir fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/eafef756bc28-glamour-fotozas-studio-noi-szeged__19_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Boudoir",
@@ -10137,8 +10139,8 @@
       "ctaLink": "services/boudoir.html"
     },
     "family": {
-      "title": "Családi Galéria — Silverframe Studio",
-      "metaDesc": "Családi fotózás galéria.",
+      "title": "Családi Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott családi fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/52c7cb46bf88-csaladi-fotozas-szeged___220_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Családi",
@@ -10391,8 +10393,8 @@
       "ctaLink": "services/family.html"
     },
     "couple": {
-      "title": "Páros jegyes Galéria — Silverframe Studio",
-      "metaDesc": "Páros jegyes fotózás galéria.",
+      "title": "Páros és Jegyes Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott páros és jegyes fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/17376ac6a0d8-jegyes-fotozas-naplemente-par__84_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Páros jegyes",
@@ -12577,8 +12579,8 @@
       "ctaLink": "services/couple.html"
     },
     "business": {
-      "title": "Üzleti Portré Galéria — Silverframe Studio",
-      "metaDesc": "Üzleti portré galéria. Brand  személyes márka fotózás (Personal Branding)",
+      "title": "Üzleti Portré Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott üzleti portré és brand fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/015b522c5a9c-_DSC6748.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Üzleti Brand márka fotózás",
@@ -12927,8 +12929,8 @@
       "ctaLink": "services/business.html"
     },
     "real-estate": {
-      "title": "Ingatlan Galéria — Silverframe Studio",
-      "metaDesc": "Ingatlan fotózás galéria.",
+      "title": "Ingatlan Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott ingatlan fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/e487d484da2e-ingatlan-fotozas-szeged-kert__19_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Ingatlan",
@@ -13607,8 +13609,8 @@
       "ctaLink": "services/real-estate.html"
     },
     "wedding": {
-      "title": "Esküvői Galéria — Silverframe Studio",
-      "metaDesc": "Esküvői fotózás galéria.",
+      "title": "Esküvői Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott esküvői fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/9ce728db0e65-eskuvoi-fotozas-szeged__7_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Esküvő",
@@ -22556,8 +22558,8 @@
       "ctaLink": "services/wedding.html"
     },
     "wedding-creative": {
-      "title": "Esküvői Kreatív Galéria — Silverframe Studio",
-      "metaDesc": "Esküvői kreatív fotózás galéria.",
+      "title": "Kreatív Esküvői Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott kreatív esküvői fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/1fd18e532a78-eskuvo-kreativ-fotozas-szeged-balaton-budapest__9_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Esküvői kreatív",
@@ -24616,8 +24618,8 @@
       "ctaLink": "services/wedding-creative.html"
     },
     "event": {
-      "title": "Rendezvény Galéria — Silverframe Studio",
-      "metaDesc": "Rendezvény fotózás galéria.",
+      "title": "Rendezvény Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott rendezvény fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/2203724322cb-rendezveny-fotozas-szeged-ceges__147_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Rendezvény",
@@ -25258,8 +25260,8 @@
       "ctaLink": "services/event.html"
     },
     "pet": {
-      "title": "Kisállat Galéria — Silverframe Studio",
-      "metaDesc": "Kisállat fotózás galéria.",
+      "title": "Kisállat Fotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott kisállat fotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=80",
       "heroLabel": "Portfólió",
       "heroTitle": "Kisállat",
@@ -26052,8 +26054,8 @@
       "ctaLink": "services/pet.html"
     },
     "product": {
-      "title": "Termékfotó Galéria — Silverframe Studio",
-      "metaDesc": "Termékfotózás galéria.",
+      "title": "Termékfotók Szeged — Galéria | Silverframe",
+      "metaDesc": "Válogatott termékfotók Szegedről a Silverframe Studio galériájában. Nézd meg a munkáimat, és foglalj időpontot fotózásra!",
       "heroImage": "uploads/c19bcd601601-termekfoto-webshop-termek-kep__34_.jpg",
       "heroLabel": "Portfólió",
       "heroTitle": "Termékfotó",

@@ -8,6 +8,7 @@
     <!-- End Google Tag Manager -->
     <title>Kapcsolat — Silverframe Studio | Fotózás Szeged</title>
     <meta name="description" content="Lépj kapcsolatba a Silverframe Studióval! Érdeklődj fotózási szolgáltatásainkról és kérj egyedi ajánlatot. Szeged.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -44,28 +45,51 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ContactPage",
-        "name": "Kapcsolat — Silverframe",
-        "url": "https://silverframe.hu/kapcsolat",
-        "mainEntity": {
-                "@type": [
-                        "LocalBusiness",
-                        "ProfessionalService"
-                ],
-                "name": "Silverframe",
-                "telephone": "+3620/3799-814",
-                "email": "info@silverframe.hu",
-                "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Szeged",
-                        "addressRegion": "Csongrád-Csanád megye",
-                        "addressCountry": "HU"
+        "@graph": [
+                {
+                        "@type": "ContactPage",
+                        "name": "Kapcsolat — Silverframe",
+                        "url": "https://silverframe.hu/kapcsolat",
+                        "mainEntity": {
+                                "@type": [
+                                        "LocalBusiness",
+                                        "ProfessionalService"
+                                ],
+                                "name": "Silverframe",
+                                "telephone": "+36203799814",
+                                "email": "info@silverframe.hu",
+                                "address": {
+                                        "@type": "PostalAddress",
+                                        "addressLocality": "Szeged",
+                                        "addressRegion": "Csongrád-Csanád megye",
+                                        "addressCountry": "HU"
+                                },
+                                "sameAs": [
+                                        "https://www.instagram.com/silverframefoto/",
+                                        "https://www.facebook.com/silverframefoto/"
+                                ],
+                                "@id": "https://silverframe.hu/#business",
+                                "logo": "https://silverframe.hu/favicon-512.png"
+                        }
                 },
-                "sameAs": [
-                        "https://www.instagram.com/silverframefoto/",
-                        "https://www.facebook.com/silverframefoto/"
-                ]
-        }
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Főoldal",
+                                        "item": "https://silverframe.hu/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Kapcsolat",
+                                        "item": "https://silverframe.hu/kapcsolat"
+                                }
+                        ]
+                }
+        ]
 }
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKFQW9J2N0"></script>
