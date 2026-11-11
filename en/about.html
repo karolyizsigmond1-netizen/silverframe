@@ -8,6 +8,7 @@
     <!-- End Google Tag Manager -->
     <title>About — István Károlyi | Silverframe Szeged</title>
     <meta name="description" content="Meet István Károlyi, the photographer of Silverframe Studio. Over 10 years of experience, professional photography in Szeged.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -44,41 +45,62 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Károlyi István",
-        "jobTitle": "Photographer",
-        "description": "Professzionális photographer Szegeden — Silverframe",
-        "url": "https://silverframe.hu/en/about",
-        "image": "https://silverframe.hu/uploads/929d34151d25-chillart_product_374131_200717123627_645354.jpeg",
-        "email": "info@silverframe.hu",
-        "telephone": "+3620/3799-814",
-        "knowsLanguage": [
-                "hu",
-                "en"
-        ],
-        "knowsAbout": [
-                "Wedding photography",
-                "Portrait photography",
-                "Event photography",
-                "Product photography",
-                "Real estate photography",
-                "Boudoir photography",
-                "Maternity photography"
-        ],
-        "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Szeged",
-                "addressRegion": "Csongrád-Csanád County",
-                "addressCountry": "HU"
-        },
-        "worksFor": {
-                "@type": "Organization",
-                "name": "Silverframe",
-                "url": "https://silverframe.hu"
-        },
-        "sameAs": [
-                "https://www.instagram.com/silverframefoto/",
-                "https://www.facebook.com/silverframefoto/"
+        "@graph": [
+                {
+                        "@type": "Person",
+                        "name": "Károlyi István",
+                        "jobTitle": "Photographer",
+                        "description": "Professzionális photographer Szegeden — Silverframe",
+                        "url": "https://silverframe.hu/en/about",
+                        "image": "https://silverframe.hu/uploads/929d34151d25-chillart_product_374131_200717123627_645354.jpeg",
+                        "email": "info@silverframe.hu",
+                        "telephone": "+36203799814",
+                        "knowsLanguage": [
+                                "hu",
+                                "en"
+                        ],
+                        "knowsAbout": [
+                                "Wedding photography",
+                                "Portrait photography",
+                                "Event photography",
+                                "Product photography",
+                                "Real estate photography",
+                                "Boudoir photography",
+                                "Maternity photography"
+                        ],
+                        "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Szeged",
+                                "addressRegion": "Csongrád-Csanád County",
+                                "addressCountry": "HU"
+                        },
+                        "worksFor": {
+                                "@type": "Organization",
+                                "name": "Silverframe",
+                                "url": "https://silverframe.hu"
+                        },
+                        "sameAs": [
+                                "https://www.instagram.com/silverframefoto/",
+                                "https://www.facebook.com/silverframefoto/"
+                        ]
+                },
+                {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                                {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Home",
+                                        "item": "https://silverframe.hu/en/"
+                                },
+                                {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "About",
+                                        "item": "https://silverframe.hu/en/about"
+                                }
+                        ]
+                }
         ]
 }
     </script>

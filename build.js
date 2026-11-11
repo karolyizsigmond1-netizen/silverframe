@@ -345,7 +345,74 @@ function fonts() {
     <noscript><link rel="stylesheet" href="${href}"></noscript>`;
 }
 
+// ── SEO helpers ──
+// Make any site-relative path ("uploads/x.jpg", "../uploads/x.jpg", "/uploads/x.jpg") absolute.
+function absAsset(src) {
+  if (!src || /^https?:\/\//.test(src) || src.startsWith('data:')) return src;
+  return g.baseUrl + '/' + src.replace(/^(\.\.\/|\.\/)+/, '').replace(/^\/+/, '');
+}
+// "+3620/3799-814" → "+36203799814" (E.164, what Google expects in structured data)
+function phoneE164(p) {
+  let d = String(p || '').replace(/[^0-9+]/g, '');
+  if (d.startsWith('06')) d = '+36' + d.slice(2);
+  else if (d && !d.startsWith('+')) d = '+' + d;
+  return d;
+}
+const LOGO_URL = g.baseUrl + '/favicon-512.png';
+const BUSINESS_ID = g.baseUrl + '/#business';
+const CRUMB_NAMES = {
+  index:       { hu: 'Főoldal',          en: 'Home' },
+  about:       { hu: 'Rólam',            en: 'About' },
+  portfolio:   { hu: 'Galéria',          en: 'Gallery' },
+  services:    { hu: 'Szolgáltatások',   en: 'Services' },
+  contact:     { hu: 'Kapcsolat',        en: 'Contact' },
+  arak:        { hu: 'Árak',             en: 'Prices' },
+  giftcard:    { hu: 'Ajándékutalvány',  en: 'Gift card' },
+  blog:        { hu: 'Blog',             en: 'Blog' },
+  adatvedelem: { hu: 'Adatvédelem',      en: 'Privacy' },
+};
+// Normalize structured data: absolute image URLs, E.164 phone, logo, a stable @id for the
+// business, and a BreadcrumbList on every page that doesn't already have one.
+function enhanceJsonLd(jsonLd, urlKind, urlKey, title) {
+  let obj;
+  try { obj = JSON.parse(jsonLd); } catch (e) { return jsonLd; }
+  const URL_KEYS = ['image', 'logo', 'contentUrl', 'thumbnailUrl'];
+  (function walk(o) {
+    if (Array.isArray(o)) return o.forEach(walk);
+    if (!o || typeof o !== 'object') return;
+    const types = [].concat(o['@type'] || []);
+    if (types.includes('Photographer') || types.includes('LocalBusiness')) {
+      if (!o['@id']) o['@id'] = BUSINESS_ID;
+      o.logo = LOGO_URL;
+    }
+    for (const k of Object.keys(o)) {
+      const v = o[k];
+      if (k === 'telephone' && typeof v === 'string') o[k] = phoneE164(v);
+      else if (URL_KEYS.includes(k) && typeof v === 'string') o[k] = absAsset(v);
+      else if (URL_KEYS.includes(k) && Array.isArray(v)) o[k] = v.map(x => typeof x === 'string' ? absAsset(x) : (walk(x), x));
+      else walk(v);
+    }
+  })(obj);
+  if (urlKind && !(urlKind === 'page' && urlKey === 'index') && !jsonLd.includes('BreadcrumbList')) {
+    const L = LANG === 'en' ? 'en' : 'hu';
+    const items = [{ name: CRUMB_NAMES.index[L], item: absUrl('page', 'index') }];
+    if (urlKind === 'page' && CRUMB_NAMES[urlKey]) items.push({ name: CRUMB_NAMES[urlKey][L], item: absUrl('page', urlKey) });
+    else if (urlKind === 'blogpost') {
+      items.push({ name: 'Blog', item: absUrl('page', 'blog') });
+      items.push({ name: String(title || '').split(/ [—|–] /)[0], item: absUrl(urlKind, urlKey) });
+    }
+    if (items.length > 1) {
+      const crumbs = { "@type": "BreadcrumbList", "itemListElement": items.map((it, i) => ({ "@type": "ListItem", "position": i + 1, "name": it.name, "item": it.item })) };
+      if (Array.isArray(obj['@graph'])) obj['@graph'].push(crumbs);
+      else { const ctx = obj['@context'] || 'https://schema.org'; delete obj['@context']; obj = { "@context": ctx, "@graph": [obj, crumbs] }; }
+    }
+  }
+  return JSON.stringify(obj, null, 8);
+}
+
 function headHtml(title, desc, urlKind, urlKey, ogTitle, ogDesc, ogType, ogImage, cssPath, jsonLd, preloadImg) {
+  ogImage = absAsset(ogImage);
+  if (jsonLd) jsonLd = enhanceJsonLd(jsonLd, urlKind, urlKey, ogTitle || title);
   // Resolve URLs from URL_MAP. For pages outside the map (e.g. analytics), pass urlKind=null
   // and the canonical falls back to baseUrl + '/'.
   let huHref, enHref, canonicalUrl;
@@ -400,6 +467,7 @@ function headHtml(title, desc, urlKind, urlKey, ogTitle, ogDesc, ogType, ogImage
     <!-- End Google Tag Manager -->
     <title>${title}</title>
     <meta name="description" content="${desc}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="geo.region" content="HU-CS">
     <meta name="geo.placename" content="Szeged">
     <meta name="geo.position" content="46.2530;20.1414">
@@ -2005,7 +2073,7 @@ function buildBlogPost(post) {
   const prefix = '../';
   const c = post[LANG] || post.hu || {};
   const p = (data.pages && data.pages.blog) || {};
-  const title = c.seoTitle || `${c.title} — ${g.siteName.trim()} | Blog`;
+  const title = c.seoTitle || ((c.title + ' | ' + g.siteName.trim()).length <= 60 ? `${c.title} | ${g.siteName.trim()}` : c.title);
   const desc = c.metaDesc || c.excerpt || '';
   const ogImg = post.image ? `${g.baseUrl}/${post.image}` : globalOgImage;
   const readLabel = LANG === 'en' ? 'min read' : 'perc olvasás';
@@ -2135,10 +2203,59 @@ function versionAssets(html) {
   });
 }
 
+// Fill empty alt texts (Google Images can't index photos without them) and lazy-load
+// images below the first one. Purely invisible changes.
+function seoImages(html) {
+  const h1 = (html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1];
+  const t = (html.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '';
+  const base = String(h1 || t.split(/ [—|–] /)[0]).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/"/g, '&quot;').trim();
+  let n = 0, seen = 0;
+  return html.replace(/<img\b[^>]*>/g, tag => {
+    if (/\ssrc=""/.test(tag)) return tag;               // lightbox placeholder
+    if (!/\salt="[^"]+"/.test(tag) && base) {
+      n++;
+      const alt = `${base} – ${g.siteName.trim()}, ${g.city || 'Szeged'} (${n})`;
+      tag = /\salt=""/.test(tag) ? tag.replace(/\salt=""/, ` alt="${alt}"`) : tag.replace(/<img\b/, `<img alt="${alt}"`);
+    }
+    seen++;
+    if (seen > 1 && !/\sloading=/.test(tag)) tag = tag.replace(/\s*\/?>$/, m => ` loading="lazy" decoding="async"${m}`);
+    return tag;
+  });
+}
+
+// Per-URL info gathered while writing pages, used by the sitemap.
+const PAGE_INFO = {};
+const LASTMOD_FILE = path.join(__dirname, 'lastmod.json');
+let LASTMOD = {}; try { LASTMOD = JSON.parse(fs.readFileSync(LASTMOD_FILE, 'utf-8')); } catch (e) {}
+
 function writeFile(filePath, content) {
-  if (filePath.endsWith('.html')) content = versionAssets(content);
+  if (filePath.endsWith('.html')) {
+    content = seoImages(versionAssets(content));
+    const canon = (content.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+    if (canon && !/noindex/.test(content)) {
+      const imgs = [];
+      content.replace(/<img\b[^>]*>/g, tag => {
+        const src = (tag.match(/\sdata-full="([^"]+)"/) || tag.match(/\ssrc="([^"]+)"/) || [])[1];
+        const alt = (tag.match(/\salt="([^"]*)"/) || [])[1] || '';
+        if (src && /uploads\//.test(src)) {
+          const loc = absAsset(src.replace(/^(\.\.\/)+/, '').replace(/^thumbs\//, 'uploads/'));
+          if (!imgs.some(i => i.loc === loc)) imgs.push({ loc, alt });
+        }
+        return tag;
+      });
+      // lastmod only moves when the page's text/images actually change
+      const hash = require('crypto').createHash('md5').update(content.replace(/\?v=[0-9a-f]+/g, '')).digest('hex');
+      const today = new Date().toISOString().split('T')[0];
+      if (!LASTMOD[canon] || LASTMOD[canon].hash !== hash) LASTMOD[canon] = { hash, date: today };
+      PAGE_INFO[canon] = { imgs: imgs.slice(0, 1000), lastmod: LASTMOD[canon].date };
+    }
+  }
   const dir = path.dirname(filePath);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf-8') === content) {
+    console.log(`  = ${path.relative(__dirname, filePath)}`);
+    return;
+  }
   fs.writeFileSync(filePath, content, 'utf-8');
   console.log(`  ✓ ${path.relative(__dirname, filePath)}`);
 }
@@ -2162,15 +2279,29 @@ function buildSitemap() {
   ];
   const huUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'hu'), priority: s.priority, freq: s.freq }));
   const enUrls = pageSpecs.map(s => ({ loc: absUrl(s.kind, s.key, 'en'), priority: (parseFloat(s.priority) - 0.1).toFixed(1), freq: s.freq }));
+  const alt = {};
+  pageSpecs.forEach(s => { const hu = absUrl(s.kind, s.key, 'hu'), en = absUrl(s.kind, s.key, 'en'); alt[hu] = alt[en] = { hu, en }; });
   const urls = [...huUrls, ...enUrls];
+  const esc = t => String(t).replace(/&(?!amp;|lt;|gt;|quot;|apos;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  fs.writeFileSync(LASTMOD_FILE, JSON.stringify(LASTMOD, null, 1) + '\n', 'utf-8');
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(u => `  <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${urls.map(u => {
+    const info = PAGE_INFO[u.loc] || {};
+    const a = alt[u.loc];
+    const links = a ? `
+    <xhtml:link rel="alternate" hreflang="hu" href="${a.hu}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${a.en}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${a.hu}"/>` : '';
+    const imgs = (info.imgs || []).map(i => `
+    <image:image><image:loc>${esc(i.loc)}</image:loc></image:image>`).join('');
+    return `  <url>
     <loc>${u.loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${info.lastmod || today}</lastmod>
     <changefreq>${u.freq}</changefreq>
-    <priority>${u.priority}</priority>
-  </url>`).join('\n')}
+    <priority>${u.priority}</priority>${links}${imgs}
+  </url>`;
+  }).join('\n')}
 </urlset>`;
 }
 
@@ -2178,6 +2309,8 @@ ${urls.map(u => `  <url>
 function buildRobots() {
   return `User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /analytics
 
 Sitemap: ${g.baseUrl}/sitemap.xml`;
 }
