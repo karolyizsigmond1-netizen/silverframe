@@ -2,7 +2,56 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
+
+// ---- Git helpers -----------------------------------------------------------
+// Never let git open an editor or ask for a password in the background: with
+// piped stdio that blocks invisibly until the timeout kills it (ETIMEDOUT).
+const GIT_ENV = Object.assign({}, process.env, {
+    GIT_TERMINAL_PROMPT: '0',
+    GIT_EDITOR: 'true',
+    GIT_MERGE_AUTOEDIT: 'no',
+    GCM_INTERACTIVE: 'never'
+});
+
+function git(args, timeout = 60000) {
+    return execFileSync('git', args, {
+        cwd: __dirname, env: GIT_ENV, stdio: 'pipe', timeout, windowsHide: true, encoding: 'utf-8'
+    });
+}
+
+function gitErrText(e) {
+    if (e && e.code === 'ETIMEDOUT') return 'időtúllépés (hálózat vagy GitHub bejelentkezés?)';
+    const out = ((e && e.stderr) || '') + ((e && e.stdout) || '');
+    return (out.trim() || (e && e.message) || String(e)).split('\n').filter(Boolean).slice(-3).join(' | ');
+}
+
+// Clean up state left behind by an interrupted git command (stale lock, half-done merge).
+function gitRepair() {
+    const gitDir = path.join(__dirname, '.git');
+    const lock = path.join(gitDir, 'index.lock');
+    try {
+        if (fs.existsSync(lock) && Date.now() - fs.statSync(lock).mtimeMs > 60000) fs.unlinkSync(lock);
+    } catch (e) {}
+    if (fs.existsSync(path.join(gitDir, 'MERGE_HEAD'))) {
+        try {
+            const conflicts = git(['diff', '--name-only', '--diff-filter=U']).trim();
+            if (conflicts) git(['merge', '--abort']);
+            else git(['commit', '--no-edit', '-m', 'Merge']);
+        } catch (e) { try { git(['merge', '--abort']); } catch (e2) {} }
+    }
+}
+
+function gitCommitAll(message) {
+    git(['add', '-A']);
+    const staged = git(['diff', '--cached', '--name-only']).trim();
+    if (staged) git(['commit', '-m', message]);
+    return !!staged;
+}
+
+function gitPull() {
+    git(['pull', '--no-rebase', '--no-edit', '-X', 'ours'], 120000);
+}
 
 // Load .env
 const envPath = path.join(__dirname, '.env');
@@ -83,19 +132,26 @@ const server = http.createServer((req, res) => {
                     // Sync with GitHub — do this BEFORE responding so the client knows the outcome
                     let gitWarning = null;
                     try {
-                        // Pull first; if it merges remote changes that touched generated files,
-                        // re-run build.js so conflict markers in HTML get overwritten by clean output.
-                        try { execSync('git pull --no-rebase -X ours', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch(e) {}
-                        try { execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 600000 }); } catch(e) {}
-                        execSync('git add -A && git commit -m "Tartalom frissítés" && git push', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+                        gitRepair();
+                        // Commit local work first so the pull can merge cleanly.
+                        gitCommitAll('Tartalom frissítés');
+                        let pulled = true;
+                        try { gitPull(); } catch (e) {
+                            pulled = false;
+                            try { git(['merge', '--abort']); } catch (e2) {}
+                            console.log('  ⚠ Git pull hiba:', gitErrText(e));
+                        }
+                        if (pulled) {
+                            // Remote changes may have touched generated files — rebuild and commit the clean output.
+                            try { execSync('node build.js', { cwd: ROOT, stdio: 'pipe', timeout: 600000 }); } catch (e) {}
+                            gitCommitAll('Tartalom frissítés (újraépítés)');
+                        }
+                        git(['push', '-u', 'origin', 'HEAD'], 120000);
                         console.log('  ✓ GitHub push sikeres');
                     } catch (gitErr) {
-                        const msg = gitErr.message || '';
-                        // "nothing to commit" is not an error
-                        if (!msg.includes('nothing to commit') && !msg.includes('nothing added')) {
-                            gitWarning = 'GitHub push hiba – az oldal esetleg nem frissült. Részletek: ' + msg.split('\n')[0];
-                            console.log('  ⚠ GitHub push hiba:', msg.split('\n')[0]);
-                        }
+                        const msg = gitErrText(gitErr);
+                        gitWarning = 'GitHub push hiba – az oldal esetleg nem frissült. Részletek: ' + msg;
+                        console.log('  ⚠ GitHub push hiba:', msg);
                     }
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({
@@ -462,10 +518,13 @@ function parseMultipart(buffer, boundary) {
 // Auto-pull latest changes from GitHub on startup
 try {
     console.log('\n  ⏳ GitHub szinkronizálás...');
-    execSync('git pull --no-rebase', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+    gitRepair();
+    gitCommitAll('Helyi változások mentése');
+    gitPull();
     console.log('  ✓ Legfrissebb verzió letöltve');
 } catch (pullErr) {
-    console.log('  ⚠ Git pull hiba:', pullErr.message.split('\n')[0]);
+    try { git(['merge', '--abort']); } catch (e) {}
+    console.log('  ⚠ Git pull hiba:', gitErrText(pullErr));
 }
 
 server.listen(PORT, () => {
